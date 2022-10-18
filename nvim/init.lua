@@ -1,0 +1,24 @@
+HOME = os.getenv("HOME")
+
+-- Required for NvimTree
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
+-- Editor Settings
+vim.opt.tabstop = 2
+vim.opt.shiftwidth = 2
+vim.opt.termguicolors = true
+vim.opt.number = true
+vim.opt.relativenumber = true
+vim.opt.numberwidth = 2
+vim.opt.backupdir = HOME .. "/.vim/backup"
+vim.opt.dir = HOME .. "/.vim/swapfiles"
+vim.cmd("let mapleader = ' '")
+vim.opt.guicursor = "n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50"
+vim.opt.mouse = "a"
+
+require("plugins")
+vim.cmd([[colorscheme tokyonight-night]])
+
+require("plugin-config")
+require("keybindings")
