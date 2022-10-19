@@ -44,6 +44,14 @@ require('lspconfig')['astro'].setup{
 require('lspconfig')['tsserver'].setup{
     on_attach = on_attach,
     flags = lsp_flags,
+    init_options = {
+      preferences = {
+        implicitProjectConfiguration = {
+          checkJs = true,
+          noImplicitAny = true
+      },
+    }
+  }
 }
 require('lspconfig')['svelte'].setup{
     on_attach = on_attach,

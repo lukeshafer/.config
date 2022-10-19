@@ -1,4 +1,7 @@
 local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
+local null_ls = require("null-ls")
+local b = null_ls.builtins
+
 require("null-ls").setup({
 	-- you can reuse a shared lspconfig on_attach callback here
 	on_attach = function(client, bufnr)
@@ -15,6 +18,9 @@ require("null-ls").setup({
 		end
 	end,
 	sources = {
-		require("null-ls").builtins.formatting.stylua,
+		b.formatting.stylua,
+		b.diagnostics.tsc,
+		b.code_actions.xo,
+		b.completion.luasnip,
 	},
 })
