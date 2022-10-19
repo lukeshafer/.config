@@ -17,7 +17,7 @@ map("n", "<C-k>", ":m -2<CR>")
 map("n", "<C-Down>", ":m +1<CR>")
 map("n", "<C-j>", ":m +1<CR>")
 -- ESC also clears highlighting
-map("n", "<Esc>", "<Esc>:noh<CR>")
+map("n", "<Esc><Esc>", ":noh<cr>")
 -- SPACE Up/Down/Left/Right moves to other window
 map("n", "<leader>k", "<C-w>k")
 map("n", "<leader>j", "<C-w>j")
