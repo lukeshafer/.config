@@ -1,5 +1,5 @@
 require("plugin-config.mason")
-require("plugin-config.lspconfig")
+--require("plugin-config.lspconfig")
 require("plugin-config.cmp")
 require("plugin-config.nvim-lint")
 
