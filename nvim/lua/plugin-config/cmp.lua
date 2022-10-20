@@ -30,7 +30,25 @@ local on_attach = function(client, bufnr)
 end
 
 -- Enable some language servers with the additional completion capabilities offered by nvim-cmp
-local servers = { "svelte", "luau_lsp", "astro", "tsserver" }
+local servers = {
+	"svelte",
+	"luau_lsp",
+	"astro",
+	"tsserver",
+	"tailwindcss",
+	"emmet_ls",
+	"eslint",
+	"vimls",
+	"cssls",
+	"html",
+	"jsonls",
+	"grammarly",
+	"yamlls",
+	"stylelint_lsp",
+	"pyright",
+	"prismals",
+}
+
 for _, lsp in ipairs(servers) do
 	lspconfig[lsp].setup({
 		on_attach = on_attach,

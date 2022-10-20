@@ -35,6 +35,12 @@ map("n", "<leader>w", ":bd<cr>")
 -- Semicolon is also Colon
 map("n", ";", ":")
 
+local opts = { noremap = true, silent = true }
+vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts)
+vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
+vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
+vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, opts)
+
 --------INSERT MODE---------
 map("i", "<C-h>", "<Left>")
 map("i", "<C-k>", "<Up>")
