@@ -3,6 +3,13 @@ local null_ls = require("null-ls")
 local b = null_ls.builtins
 
 require("null-ls").setup({
+	sources = {
+		b.formatting.stylua,
+		b.diagnostics.tsc,
+		b.code_actions.xo,
+		b.completion.luasnip,
+		b.diagnostics.cfn_lint,
+	},
 	-- you can reuse a shared lspconfig on_attach callback here
 	on_attach = function(client, bufnr)
 		if client.supports_method("textDocument/formatting") then
@@ -17,10 +24,4 @@ require("null-ls").setup({
 			})
 		end
 	end,
-	sources = {
-		b.formatting.stylua,
-		b.diagnostics.tsc,
-		b.code_actions.xo,
-		b.completion.luasnip,
-	},
 })

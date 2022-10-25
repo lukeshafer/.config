@@ -1,7 +1,14 @@
 return require("packer").startup(function(use)
 	use("wbthomason/packer.nvim")
 
+	-- Color themes 
 	use("folke/tokyonight.nvim")
+	use("EdenEast/nightfox.nvim")
+	use("shaunsingh/moonlight.nvim")
+	use("frenzyexists/aquarium-vim")
+	use("sainnhe/sonokai")
+
+	-- Status Line
 	use({
 		"nvim-lualine/lualine.nvim",
 		requires = { "kyazdani42/nvim-web-devicons", opt = true },
@@ -25,8 +32,6 @@ return require("packer").startup(function(use)
 	use("hrsh7th/cmp-nvim-lsp") -- LSP source for nvim-cmp
 	use("saadparwaiz1/cmp_luasnip") -- Snippets source for nvim-cmp
 	use("L3MON4D3/LuaSnip") -- Snippets plugin
-	--use("mhartington/formatter.nvim")
-	--use("sbdchd/neoformat")
 	use("mfussenegger/nvim-lint")
 
 	use("jose-elias-alvarez/null-ls.nvim")

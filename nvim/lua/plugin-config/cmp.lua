@@ -34,8 +34,8 @@ local servers = {
 	"svelte",
 	"luau_lsp",
 	"astro",
-	"tsserver",
-	"tailwindcss",
+	--"tsserver", -- TSServer has its own checks
+	--"tailwindcss",
 	"emmet_ls",
 	"eslint",
 	"vimls",
@@ -43,7 +43,7 @@ local servers = {
 	"html",
 	"jsonls",
 	"grammarly",
-	"yamlls",
+	--"yamlls",
 	"stylelint_lsp",
 	"pyright",
 	"prismals",
@@ -53,8 +53,22 @@ for _, lsp in ipairs(servers) do
 	lspconfig[lsp].setup({
 		on_attach = on_attach,
 		capabilities = capabilities,
+		--root_dir = require('nvim_lsp').util.root_pattern('.git');
 	})
 end
+
+require("lspconfig")["tsserver"].setup({
+	on_attach = on_attach,
+	capabilities = capabilities,
+	--init_options = {
+		--preferences = {
+			--implicitProjectConfiguration = {
+				--checkJs = true,
+				--strict = true,
+			--},
+		--},
+	--},
+})
 
 -- luasnip setup
 local luasnip = require("luasnip")

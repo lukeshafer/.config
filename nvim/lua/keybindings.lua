@@ -34,6 +34,8 @@ map("n", "<S-Tab>", ":bp<cr>")
 map("n", "<leader>w", ":bd<cr>")
 -- Semicolon is also Colon
 map("n", ";", ":")
+-- Leader+Y copies to system clipboard
+map("n", "<leader>y", '"+y')
 
 local opts = { noremap = true, silent = true }
 vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts)
@@ -52,6 +54,10 @@ map("i", "<C-j>", "<Down>")
 -- CTRL + BRACKET wraps selected text in the bracket
 map("v", "<C-9>", "c()<Esc>hp")
 map("v", "<C-(>", "c()<Esc>hp")
+-- Indenting keeps previous highlight
+map("v", ">", ">gv")
+map("v", "<", "<gv")
+
 
 -- nvim terminal mappings
 -- Escape gets out of insert (in terminal)

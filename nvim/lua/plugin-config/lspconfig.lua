@@ -49,7 +49,7 @@ require("lspconfig")["tsserver"].setup({
 		preferences = {
 			implicitProjectConfiguration = {
 				checkJs = true,
-				noImplicitAny = true,
+				strict = true,
 			},
 		},
 	},
