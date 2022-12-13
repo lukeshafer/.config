@@ -21,5 +21,6 @@ require("mason-lspconfig").setup({
 		"tailwindcss",
 		"vimls",
 		"bashls",
+		"rust_analyzer",
 	},
 })

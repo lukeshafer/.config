@@ -47,6 +47,7 @@ local servers = {
 	"stylelint_lsp",
 	"pyright",
 	"prismals",
+	"rust_analyzer",
 }
 
 for _, lsp in ipairs(servers) do

@@ -35,4 +35,11 @@ require("null-ls").setup({
 			})
 		end
 	end,
+	sources = {
+		b.formatting.stylua,
+		b.diagnostics.tsc,
+		b.code_actions.xo,
+		b.completion.luasnip,
+		b.formatting.rustfmt,
+	},
 })

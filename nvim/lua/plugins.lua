@@ -86,6 +86,7 @@ return require("packer").startup(function(use)
 		end,
 	})
 	use("preservim/nerdcommenter") -- auto comment CTRL+/
+	use("mvolkmann/vim-tag-comment")
 
 	use({
 		"lewis6991/hover.nvim",
@@ -105,8 +106,8 @@ return require("packer").startup(function(use)
 			})
 
 			-- Setup keymaps
-			vim.keymap.set("n", "K", require("hover").hover, { desc = "hover.nvim" })
-			vim.keymap.set("n", "gK", require("hover").hover_select, { desc = "hover.nvim (select)" })
+			--vim.keymap.set("n", "K", require("hover").hover, { desc = "hover.nvim" })
+			--vim.keymap.set("n", "gK", require("hover").hover_select, { desc = "hover.nvim (select)" })
 		end,
 	})
 
