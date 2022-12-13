@@ -1,7 +1,7 @@
 return require("packer").startup(function(use)
 	use("wbthomason/packer.nvim")
 
-	-- Color themes 
+	-- Color themes
 	use("folke/tokyonight.nvim")
 	use("EdenEast/nightfox.nvim")
 	use("shaunsingh/moonlight.nvim")
@@ -111,4 +111,7 @@ return require("packer").startup(function(use)
 	})
 
 	use("brenoprata10/nvim-highlight-colors")
+	use("APZelos/blamer.nvim")
+	use({ "ckipp01/nvim-jenkinsfile-linter", requires = { "nvim-lua/plenary.nvim" } })
+	use("lankavitharana/ballerina-vim")
 end)

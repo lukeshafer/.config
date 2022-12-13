@@ -17,7 +17,7 @@ map("n", "<C-k>", ":m -2<CR>")
 map("n", "<C-Down>", ":m +1<CR>")
 map("n", "<C-j>", ":m +1<CR>")
 -- ESC also clears highlighting
-map("n", "<Esc><Esc>", ":noh<cr>")
+map("n", "<leader><Esc>", ":noh<cr>")
 -- SPACE Up/Down/Left/Right moves to other window
 map("n", "<leader>k", "<C-w>k")
 map("n", "<leader>j", "<C-w>j")
@@ -31,11 +31,13 @@ map("v", "<leader>/", "<Plug>NERDCommenterToggle<CR>gv")
 -- TAB/SHIFT TAB changes buffer
 map("n", "<Tab>", ":bn<cr>")
 map("n", "<S-Tab>", ":bp<cr>")
-map("n", "<leader>w", ":bd<cr>")
+map("n", "<leader>x", ":bd<cr>")
+map("n", "<leader>XX", ":bd!<cr>")
 -- Semicolon is also Colon
 map("n", ";", ":")
 -- Leader+Y copies to system clipboard
 map("n", "<leader>y", '"+y')
+map("v", "<leader>y", '"+y')
 
 local opts = { noremap = true, silent = true }
 vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts)
@@ -57,7 +59,6 @@ map("v", "<C-(>", "c()<Esc>hp")
 -- Indenting keeps previous highlight
 map("v", ">", ">gv")
 map("v", "<", "<gv")
-
 
 -- nvim terminal mappings
 -- Escape gets out of insert (in terminal)

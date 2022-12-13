@@ -1,7 +1,7 @@
 local prettier = require("prettier")
 
 prettier.setup({
-	bin = "prettier", -- or `'prettierd'` (v0.22+)
+	bin = "prettierd", -- or `'prettierd'` (v0.22+)
 	filetypes = {
 		"astro",
 		"css",
@@ -37,7 +37,6 @@ prettier.setup({
 		embedded_language_formatting = "auto",
 		end_of_line = "lf",
 		html_whitespace_sensitivity = "css",
-		-- jsx_bracket_same_line = false,
 		jsx_single_quote = false,
 		print_width = 80,
 		prose_wrap = "preserve",
@@ -45,7 +44,7 @@ prettier.setup({
 		semi = true,
 		single_attribute_per_line = false,
 		single_quote = false,
-		tab_width = 2,
+		tab_width = 4,
 		trailing_comma = "es5",
 		use_tabs = true,
 		plugins = "prettier-plugin-tailwindcss",
