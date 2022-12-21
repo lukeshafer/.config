@@ -24,6 +24,9 @@ local on_attach = function(client, bufnr)
 	vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, bufopts)
 	vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, bufopts)
 	vim.keymap.set("n", "gr", vim.lsp.buf.references, bufopts)
+	vim.keymap.set("n", "<Leader>f", function()
+		vim.lsp.buf.format({ bufnr = vim.api.nvim_get_current_buf() })
+	end, { buffer = bufnr, desc = "[lsp] format" })
 	--vim.keymap.set("n", "<space>f", function()
 	--vim.lsp.buf.format({ async = true })
 	--end, bufopts)
@@ -44,7 +47,7 @@ local servers = {
 	"jsonls",
 	"grammarly",
 	--"yamlls",
-	"stylelint_lsp",
+	--"stylelint_lsp",
 	"pyright",
 	"prismals",
 	"rust_analyzer",
@@ -62,15 +65,15 @@ require("lspconfig")["tsserver"].setup({
 	on_attach = on_attach,
 	capabilities = capabilities,
 	--cmd = { "typescript-language-server", "--checkJs", "--strict", "--stdio" },
-	--init_options = {
-	--preferences = {
-	----disableSuggestions = true,
-	----implicitProjectConfiguration = {
-	----checkJs = true,
-	----strict = true,
-	----},
-	--},
-	--},
+	init_options = {
+		preferences = {
+			disableSuggestions = true,
+			--implicitProjectConfiguration = {
+			--checkJs = true,
+			--strict = true,
+			--},
+		},
+	},
 })
 
 -- luasnip setup

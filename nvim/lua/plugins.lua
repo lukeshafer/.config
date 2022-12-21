@@ -35,7 +35,7 @@ return require("packer").startup(function(use)
 	use("mfussenegger/nvim-lint")
 
 	use("jose-elias-alvarez/null-ls.nvim")
-	use("MunifTanjim/prettier.nvim")
+	--use("MunifTanjim/prettier.nvim")
 
 	use({
 		"nvim-treesitter/nvim-treesitter",

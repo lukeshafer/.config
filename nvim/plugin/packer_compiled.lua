@@ -234,11 +234,6 @@ _G.packer_plugins = {
     path = "/Users/shafer.361/.local/share/nvim/site/pack/packer/start/plenary.nvim",
     url = "https://github.com/nvim-lua/plenary.nvim"
   },
-  ["prettier.nvim"] = {
-    loaded = true,
-    path = "/Users/shafer.361/.local/share/nvim/site/pack/packer/start/prettier.nvim",
-    url = "https://github.com/MunifTanjim/prettier.nvim"
-  },
   sonokai = {
     loaded = true,
     path = "/Users/shafer.361/.local/share/nvim/site/pack/packer/start/sonokai",
@@ -277,22 +272,22 @@ time([[Defining packer_plugins]], false)
 time([[Config for nvim-ts-autotag]], true)
 try_loadstring("\27LJ\2\n=\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\20nvim-ts-autotag\frequire\0", "config", "nvim-ts-autotag")
 time([[Config for nvim-ts-autotag]], false)
--- Config for: todo-comments.nvim
-time([[Config for todo-comments.nvim]], true)
-try_loadstring("\27LJ\2\n?\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\18todo-comments\frequire\0", "config", "todo-comments.nvim")
-time([[Config for todo-comments.nvim]], false)
 -- Config for: nvim-surround
 time([[Config for nvim-surround]], true)
 try_loadstring("\27LJ\2\n;\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\18nvim-surround\frequire\0", "config", "nvim-surround")
 time([[Config for nvim-surround]], false)
--- Config for: nvim-autopairs
-time([[Config for nvim-autopairs]], true)
-try_loadstring("\27LJ\2\n<\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\19nvim-autopairs\frequire\0", "config", "nvim-autopairs")
-time([[Config for nvim-autopairs]], false)
 -- Config for: hover.nvim
 time([[Config for hover.nvim]], true)
 try_loadstring("\27LJ\2\n3\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\24hover.providers.lsp\frequirew\1\0\4\0\b\0\v6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\4\0003\3\3\0=\3\5\0025\3\6\0=\3\a\2B\0\2\1K\0\1\0\17preview_opts\1\0\0\tinit\1\0\2\ntitle\2\19preview_window\1\0\nsetup\nhover\frequire\0", "config", "hover.nvim")
 time([[Config for hover.nvim]], false)
+-- Config for: nvim-autopairs
+time([[Config for nvim-autopairs]], true)
+try_loadstring("\27LJ\2\n<\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\19nvim-autopairs\frequire\0", "config", "nvim-autopairs")
+time([[Config for nvim-autopairs]], false)
+-- Config for: todo-comments.nvim
+time([[Config for todo-comments.nvim]], true)
+try_loadstring("\27LJ\2\n?\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\18todo-comments\frequire\0", "config", "todo-comments.nvim")
+time([[Config for todo-comments.nvim]], false)
 
 _G._packer.inside_compile = false
 if _G._packer.needs_bufread == true then

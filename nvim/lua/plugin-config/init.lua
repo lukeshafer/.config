@@ -8,7 +8,7 @@ require("plugin-config.nvim-tree")
 require("plugin-config.bufferline")
 require("plugin-config.treesitter")
 require("plugin-config.null-ls")
-require("plugin-config.prettier")
+--require("plugin-config.prettier")
 require("plugin-config.packer")
 require("lualine").setup()
 require("penvim").setup({

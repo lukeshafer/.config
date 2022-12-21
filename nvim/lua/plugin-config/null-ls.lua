@@ -3,14 +3,10 @@ local null_ls = require("null-ls")
 local b = null_ls.builtins
 
 require("null-ls").setup({
+	debug = true,
 	sources = {
+		b.formatting.prettier.with({ extra_args = { "--tab-width", "4" } }),
 		b.formatting.stylua,
-		b.formatting.prettier.with({ extra_args = { "--tab-width", "4", "--quote-props", "consistent" } }),
-		b.diagnostics.tsc.with({
-			args = { "--pretty", "--noEmit" },
-			extra_args = { "--allowJs", "--checkJs", "--alwaysStrict", "--strict" },
-			extra_filetypes = { "javascript" },
-		}),
 		b.code_actions.xo,
 		b.completion.luasnip,
 		b.diagnostics.cfn_lint,
