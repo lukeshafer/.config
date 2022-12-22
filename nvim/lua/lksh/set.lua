@@ -18,19 +18,3 @@ vim.cmd("let mapleader = ' '")
 vim.opt.guicursor = "n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50"
 vim.opt.mouse = "a"
 --vim.opt.wrap = false
-
--- options: default, atlantis, andromeda, shusia, maia, espresso
-vim.g.sonokai_better_performance = 1
-
-local dir = vim.fn.getcwd()
-
-vim.cmd([[colorscheme tokyonight]])
-if dir == HOME .. "/repos/crmi-common" then
-	vim.cmd([[colorscheme carbonfox]])
-elseif dir == HOME .. "/repos/contact-integrations" then
-	vim.cmd([[colorscheme nightfox]])
-elseif dir == HOME .. "/repos/crmi-web-to-case" then
-	vim.cmd([[colorscheme terafox]])
-elseif dir == HOME .. "/.config" then
-	vim.cmd([[colorscheme darkblue]])
-end

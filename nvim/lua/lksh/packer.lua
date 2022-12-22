@@ -4,7 +4,7 @@ return require("packer").startup(function(use)
 	vim.cmd([[
 	  augroup packer_user_config
 		autocmd!
-		autocmd BufWritePost plugins.lua source <afile> | PackerSync
+		autocmd BufWritePost packer.lua source <afile> | PackerSync
 	  augroup end
 	]])
 	--
@@ -18,6 +18,15 @@ return require("packer").startup(function(use)
 	use("shaunsingh/moonlight.nvim")
 	use("frenzyexists/aquarium-vim")
 	use("sainnhe/sonokai")
+	use("sainnhe/everforest")
+	use("sainnhe/edge")
+	use("rebelot/kanagawa.nvim")
+	use("mhartington/oceanic-next")
+	use({ "rose-pine/neovim", as = "rose-pine" })
+	use("savq/melange")
+	use("Mofiqul/vscode.nvim")
+
+	use("rktjmp/lush.nvim") -- colorscheme MAKER
 	------------------
 	--
 
@@ -50,16 +59,17 @@ return require("packer").startup(function(use)
 	------------------
 	--     TOOLS    --
 	------------------
+	use("github/copilot.vim") -- ai pair programmer
 	use("abstract-ide/penvim") -- sets working dir to project root
 	use("preservim/nerdcommenter") -- comment line with <leader>/
 	use("mvolkmann/vim-tag-comment") -- html tag comments
 
 	use({ -- floating file explorer
 		"nvim-tree/nvim-tree.lua",
+		tag = "nightly", -- optional, updated every week. (see issue #1193)
 		requires = {
 			"nvim-tree/nvim-web-devicons", -- optional, for file icons
 		},
-		tag = "nightly", -- optional, updated every week. (see issue #1193)
 	})
 
 	use({ -- auto-create brackets/parentheses
@@ -125,11 +135,10 @@ return require("packer").startup(function(use)
 		},
 	})
 	------------------
+	--vim.cmd([[
+	--augroup packer_user_config
+	--autocmd!
+	--autocmd BufWritePost packer.lua source <afile> | PackerSync
+	--augroup end
+	--]])
 end)
-
---vim.cmd([[
---augroup packer_user_config
---autocmd!
---autocmd BufWritePost packer.lua source <afile> | PackerSync
---augroup end
---]])
