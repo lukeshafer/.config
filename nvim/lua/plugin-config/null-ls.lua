@@ -3,23 +3,17 @@ local null_ls = require("null-ls")
 local b = null_ls.builtins
 
 require("null-ls").setup({
-	debug = true,
 	sources = {
-		b.formatting.prettier.with({ extra_args = { "--tab-width", "4" } }),
 		b.formatting.stylua,
+		b.diagnostics.tsc,
 		b.code_actions.xo,
 		b.completion.luasnip,
 		b.diagnostics.cfn_lint,
+		b.formatting.rustfmt,
 	},
 	-- you can reuse a shared lspconfig on_attach callback here
 	on_attach = function(client, bufnr)
 		if client.supports_method("textDocument/formatting") then
-			-- SPACE F to format
-			vim.keymap.set("n", "<Leader>f", function()
-				vim.lsp.buf.format({ bufnr = vim.api.nvim_get_current_buf() })
-			end, { buffer = bufnr, desc = "[lsp] format" })
-
-			-- format on save
 			vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
 			vim.api.nvim_create_autocmd("BufWritePre", {
 				group = augroup,
@@ -31,11 +25,4 @@ require("null-ls").setup({
 			})
 		end
 	end,
-	sources = {
-		b.formatting.stylua,
-		b.diagnostics.tsc,
-		b.code_actions.xo,
-		b.completion.luasnip,
-		b.formatting.rustfmt,
-	},
 })

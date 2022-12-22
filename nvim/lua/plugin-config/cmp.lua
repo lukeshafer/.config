@@ -14,43 +14,45 @@ local on_attach = function(client, bufnr)
 	vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
 	vim.keymap.set("n", "K", vim.lsp.buf.hover, bufopts)
 	vim.keymap.set("n", "gi", vim.lsp.buf.implementation, bufopts)
-	vim.keymap.set("n", "<leader>i", vim.lsp.buf.signature_help, bufopts)
-	vim.keymap.set("n", "<leader>wa", vim.lsp.buf.add_workspace_folder, bufopts)
-	vim.keymap.set("n", "<leader>wr", vim.lsp.buf.remove_workspace_folder, bufopts)
-	vim.keymap.set("n", "<leader>wl", function()
+	vim.keymap.set("n", "<M-k>", vim.lsp.buf.signature_help, bufopts)
+	vim.keymap.set("n", "<space>wa", vim.lsp.buf.add_workspace_folder, bufopts)
+	vim.keymap.set("n", "<space>wr", vim.lsp.buf.remove_workspace_folder, bufopts)
+	vim.keymap.set("n", "<space>wl", function()
 		print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
 	end, bufopts)
-	vim.keymap.set("n", "<leader>D", vim.lsp.buf.type_definition, bufopts)
-	vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, bufopts)
-	vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, bufopts)
+	vim.keymap.set("n", "<space>D", vim.lsp.buf.type_definition, bufopts)
+	vim.keymap.set("n", "<space>rn", vim.lsp.buf.rename, bufopts)
+	vim.keymap.set("n", "<space>ca", vim.lsp.buf.code_action, bufopts)
 	vim.keymap.set("n", "gr", vim.lsp.buf.references, bufopts)
-	vim.keymap.set("n", "<Leader>f", function()
-		vim.lsp.buf.format({ bufnr = vim.api.nvim_get_current_buf() })
-	end, { buffer = bufnr, desc = "[lsp] format" })
-	--vim.keymap.set("n", "<space>f", function()
-	--vim.lsp.buf.format({ async = true })
-	--end, bufopts)
+	vim.keymap.set("n", "<space>f", function()
+		vim.lsp.buf.format({ async = true })
+	end, bufopts)
+	--vim.opt.tabstop = 2
+	--vim.opt.shiftwidth = 2
 end
 
 -- Enable some language servers with the additional completion capabilities offered by nvim-cmp
 local servers = {
 	"svelte",
 	"luau_lsp",
-	"astro",
-	--"tsserver", -- TSServer has its own checks
-	--"tailwindcss",
+	"tailwindcss",
 	"emmet_ls",
 	"eslint",
 	"vimls",
 	"cssls",
-	"html",
 	"jsonls",
 	"grammarly",
 	--"yamlls",
-	--"stylelint_lsp",
+	"stylelint_lsp",
 	"pyright",
 	"prismals",
 	"rust_analyzer",
+	"tsserver", -- TSServer has its own checks
+	"astro",
+	"html",
+	"marksman",
+	"clangd",
+	--"yammls",
 }
 
 for _, lsp in ipairs(servers) do
@@ -60,21 +62,6 @@ for _, lsp in ipairs(servers) do
 		--root_dir = require('nvim_lsp').util.root_pattern('.git');
 	})
 end
-
-require("lspconfig")["tsserver"].setup({
-	on_attach = on_attach,
-	capabilities = capabilities,
-	--cmd = { "typescript-language-server", "--checkJs", "--strict", "--stdio" },
-	init_options = {
-		preferences = {
-			disableSuggestions = true,
-			--implicitProjectConfiguration = {
-			--checkJs = true,
-			--strict = true,
-			--},
-		},
-	},
-})
 
 -- luasnip setup
 local luasnip = require("luasnip")

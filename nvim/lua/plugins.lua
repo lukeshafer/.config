@@ -35,7 +35,7 @@ return require("packer").startup(function(use)
 	use("mfussenegger/nvim-lint")
 
 	use("jose-elias-alvarez/null-ls.nvim")
-	--use("MunifTanjim/prettier.nvim")
+	use("MunifTanjim/prettier.nvim")
 
 	use({
 		"nvim-treesitter/nvim-treesitter",
@@ -112,7 +112,6 @@ return require("packer").startup(function(use)
 	})
 
 	use("brenoprata10/nvim-highlight-colors")
-	use("APZelos/blamer.nvim")
-	use({ "ckipp01/nvim-jenkinsfile-linter", requires = { "nvim-lua/plenary.nvim" } })
-	use("lankavitharana/ballerina-vim")
+	use("jxnblk/vim-mdx-js")
+	--use("smithbm2316/centerpad.nvim")
 end)

@@ -6,7 +6,6 @@ require("mason").setup({
 			package_uninstalled = "✗",
 		},
 	},
-	log_level = vim.log.levels.DEBUG,
 })
 require("mason-lspconfig").setup({
 	--lspconfig-server-configurations
