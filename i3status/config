@@ -1,0 +1,42 @@
+general {
+  output_format = "i3bar"
+  markup = "pango"
+	colors = true
+	color_good = "#a3be8c"
+  color_degraded = "#ebcb8b"
+  color_bad = "#bf616a"
+  interval = 1
+  separator = "|"
+}
+
+order += "disk /"
+order += "ethernet _first_"
+order += "memory"
+order += "volume master"
+order += "tztime local"
+
+disk "/" {
+  format = "disk: %percentage_used"
+}
+
+memory {
+        format = "RAM in use: %used / %total"
+        threshold_degraded = "1G"
+        format_degraded = "MEMORY < %available"
+}
+
+ethernet _first_ {
+  format_up = "E: %ip (%speed)"
+  format_down = "E: down"
+} 
+
+volume master {
+        format = "♪: %volume"
+        format_muted = "♪: muted (%volume)"
+        device = "pulse:1"
+}
+
+tztime local {
+        format = "<span color='#ddddff' size='large' font-family='Adobe Utopia' weight='bold'>%A %h %d, %Y %l:%M:%S %p</span>"
+        /*format_time = "%A %h %d, %Y %l:%M:%S %p"*/
+}

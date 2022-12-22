@@ -2,3 +2,7 @@
 !.gitignore
 !nvim/
 !.tmux.conf
+!i3/
+!i3status/
+!kitty/
+!qmk/
