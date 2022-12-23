@@ -1,6 +1,7 @@
 vim.filetype.add({
 	extension = {
 		astro = "astro",
+		postcss = "css",
 		mdx = "mdx",
 	},
 	filename = {
