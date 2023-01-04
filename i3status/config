@@ -16,7 +16,7 @@ order += "volume master"
 order += "tztime local"
 
 disk "/" {
-  format = "disk: %percentage_used"
+  format = "<span size='small'> %avail free</span>"
 }
 
 memory {
@@ -37,6 +37,6 @@ volume master {
 }
 
 tztime local {
-        format = "<span color='#ddddff' size='large' font-family='Adobe Utopia' weight='bold'>%A %h %d, %Y %l:%M:%S %p</span>"
-        /*format_time = "%A %h %d, %Y %l:%M:%S %p"*/
+        format = "<span color='#ddddff' size='medium' font-family='Adobe Utopia' weight='bold'>%A %h %d, %Y %l:%M:%S %p</span>"
+		format_time = "%a %h %d, %Y %l:%M:%S %p"
 }
