@@ -4,7 +4,7 @@ local b = null_ls.builtins
 
 require("null-ls").setup({
 	sources = {
-		b.formatting.prettier.with({ extra_args = { "--tab-width", "4" } }),
+		b.formatting.prettier.with({ extra_args = { "--tab-width", "4", "--print-width", "100" } }),
 		b.formatting.stylua,
 		b.diagnostics.cfn_lint,
 		b.formatting.rustfmt,
