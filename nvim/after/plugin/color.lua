@@ -3,12 +3,9 @@ local dir = vim.fn.getcwd()
 
 -- options: default, atlantis, andromeda, shusia, maia, espresso
 vim.g.sonokai_better_performance = 1
-vim.g.everforest_better_performance = 1
-vim.g.everforest_diagnostic_text_highlight = 1
-vim.g.everforest_background = "hard"
 
 -- DEFAULT COLORSCHEME
-vim.cmd([[colorscheme everforest]])
+vim.cmd([[colorscheme OceanicNext]])
 
 -- DIRECTORY-BASED SCHEMES
 if dir == HOME .. "/repos/crmi-common" then
@@ -23,6 +20,11 @@ elseif dir == HOME .. "/repos/crmi-web-to-case" then
 elseif dir == HOME .. "/repos/student-recruitment-integrations" then
 	vim.g.sonokai_style = "shusia"
 	vim.cmd([[colorscheme sonokai]])
+elseif dir == HOME .. "/repos/crmi-source-to-salesforce-transformations" then
+	vim.g.everforest_better_performance = 1
+	vim.g.everforest_diagnostic_text_highlight = 1
+	vim.g.everforest_background = "hard"
+	vim.cmd([[colorscheme everforest]])
 elseif dir == HOME .. "/.config" then
 	vim.cmd([[colorscheme tokyonight]])
 end
