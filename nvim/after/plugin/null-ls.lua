@@ -10,11 +10,8 @@ require("null-ls").setup({
 		b.formatting.rustfmt,
 		b.formatting.codespell,
 		b.formatting.fixjson,
-		b.formatting.npm_groovy_lint,
 		b.formatting.prismaFmt,
 		b.formatting.rustywind,
-		--b.formatting.yamlfmt,
-		--b.formatting.xmlfmt,
 	},
 	-- you can reuse a shared lspconfig on_attach callback here
 	on_attach = function(client, bufnr)

@@ -1,6 +1,10 @@
 HOME = os.getenv("HOME")
 local dir = vim.fn.getcwd()
 
+vim.g.everforest_better_performance = 1
+vim.g.everforest_diagnostic_text_highlight = 1
+vim.g.everforest_background = "hard"
+
 -- options: default, atlantis, andromeda, shusia, maia, espresso
 vim.g.sonokai_better_performance = 1
 
@@ -21,10 +25,7 @@ elseif dir == HOME .. "/repos/student-recruitment-integrations" then
 	vim.g.sonokai_style = "shusia"
 	vim.cmd([[colorscheme sonokai]])
 elseif dir == HOME .. "/repos/crmi-source-to-salesforce-transformations" then
-	vim.g.everforest_better_performance = 1
-	vim.g.everforest_diagnostic_text_highlight = 1
-	vim.g.everforest_background = "hard"
-	vim.cmd([[colorscheme everforest]])
+	vim.cmd([[colorscheme rose-pine]])
 elseif dir == HOME .. "/.config" then
 	vim.cmd([[colorscheme tokyonight]])
 end

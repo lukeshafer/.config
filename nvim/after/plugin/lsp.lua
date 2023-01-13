@@ -30,8 +30,8 @@ lsp.ensure_installed({
 	"svelte",
 	"tailwindcss",
 	"tsserver",
-	"tsserver",
 	"vimls",
+	"yamlls",
 })
 
 -- Fix Undefined global 'vim'
@@ -49,6 +49,28 @@ lsp.configure("tsserver", {
 	init_options = {
 		preferences = {
 			disableSuggestions = true,
+		},
+	},
+})
+
+lsp.configure("yamlls", {
+	settings = {
+		yaml = {
+			customTags = {
+				"!Equals sequence",
+				"!FindInMap sequence",
+				"!GetAtt",
+				"!GetAZs",
+				"!ImportValue",
+				"!Join sequence",
+				"!Ref",
+				"!Select sequence",
+				"!Split sequence",
+				"!Sub",
+				"!If sequence",
+				"!Not sequence",
+				"!Or sequence",
+			},
 		},
 	},
 })
