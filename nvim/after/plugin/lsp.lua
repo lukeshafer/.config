@@ -22,7 +22,7 @@ lsp.ensure_installed({
 	--"codespell",
 	"cssls",
 	"emmet_ls",
-	"eslint",
+	--"eslint",
 	--"fixjson",
 	"html",
 	"rust_analyzer",

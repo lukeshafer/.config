@@ -7,6 +7,7 @@ require("null-ls").setup({
 		b.formatting.prettier.with({ extra_args = { "--tab-width", "4", "--print-width", "100" } }),
 		b.formatting.stylua,
 		b.diagnostics.cfn_lint,
+		b.diagnostics.eslint_d,
 		b.formatting.rustfmt,
 		b.formatting.codespell,
 		b.formatting.fixjson,
