@@ -9,5 +9,7 @@ vim.filetype.add({
 		["Jenkinsfile"] = "groovy",
 		["APIJenkinsFile"] = "groovy",
 		["APIJenkinsfile"] = "groovy",
+		["tsconfig.json"] = "jsonc",
+		["jsconfig.json"] = "jsonc",
 	},
 })
