@@ -88,6 +88,9 @@ alias gacp="git add . && git commit -m $1 && git push"
 alias gsh='git stash'
 alias gsha='git stash apply'
 
+alias mrc='glab mr create -b dev -f -y'
+alias mrm='glab mr merge'
+
 alias awslogin="aws s3 ls --profile dev-crmi >> /dev/null && cat ~/.aws/saml-credentials"
 alias awslogout="rm ~/.aws/saml-credentials"
 alias awsreset="awslogout && awslogin"
