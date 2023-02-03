@@ -9,13 +9,13 @@ local lspSources = {
 	b.formatting.stylua,
 	b.diagnostics.cfn_lint,
 	b.formatting.rustfmt,
-	b.formatting.codespell,
+	--b.formatting.codespell,
 	b.formatting.fixjson,
 	b.formatting.prismaFmt,
-	b.formatting.rustywind,
+	--b.formatting.rustywind,
 }
 
-if atWork == false then
+if not atWork then
 	table.insert(lspSources, b.diagnostics.eslint_d)
 end
 
