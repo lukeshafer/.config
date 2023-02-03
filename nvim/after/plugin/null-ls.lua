@@ -2,18 +2,25 @@ local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 local null_ls = require("null-ls")
 local b = null_ls.builtins
 
+local atWork = os.getenv("PC_CONTEXT") == "work"
+
+local lspSources = {
+	b.formatting.prettier.with({ extra_args = { "--tab-width", "4", "--print-width", "100" } }),
+	b.formatting.stylua,
+	b.diagnostics.cfn_lint,
+	b.formatting.rustfmt,
+	b.formatting.codespell,
+	b.formatting.fixjson,
+	b.formatting.prismaFmt,
+	b.formatting.rustywind,
+}
+
+if atWork == false then
+	table.insert(lspSources, b.diagnostics.eslint_d)
+end
+
 require("null-ls").setup({
-	sources = {
-		b.formatting.prettier.with({ extra_args = { "--tab-width", "4", "--print-width", "100" } }),
-		b.formatting.stylua,
-		b.diagnostics.cfn_lint,
-		b.diagnostics.eslint_d,
-		b.formatting.rustfmt,
-		b.formatting.codespell,
-		b.formatting.fixjson,
-		b.formatting.prismaFmt,
-		b.formatting.rustywind,
-	},
+	sources = lspSources,
 	-- you can reuse a shared lspconfig on_attach callback here
 	on_attach = function(client, bufnr)
 		if client.supports_method("textDocument/formatting") then

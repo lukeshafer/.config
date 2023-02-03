@@ -26,6 +26,7 @@ prompt_context(){}
 
 # Preferred editor for local and remote sessions
 export EDITOR="nvim"
+export PC_CONTEXT="work"
 
 export GITLAB_HOST="https://code.osu.edu/"
 export GLAMOUR_STYLE="dark"
