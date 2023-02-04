@@ -1,0 +1,294 @@
+# If you come from bash you might have to change your $PATHclass="w-16" .
+# export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH="$HOME/.local/bin:$PATH"
+
+# Path to your oh-my-zsh installation.
+export ZSH="$HOME/.oh-my-zsh"
+
+# Set name of the theme to load --- if set to "random", it will
+# load a random theme each time oh-my-zsh is loaded, in which case,
+# to know which specific one was loaded, run: echo $RANDOM_THEME
+# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
+# themes I like: avit, candy, evan, fino-time, frontcube, intheloop, jonathan, jtriley, robbyrussell
+ZSH_THEME="af-magic"
+
+# Which plugins would you like to load?
+# Standard plugins can be found in $ZSH/plugins/
+# Custom plugins may be added to $ZSH_CUSTOM/plugins/
+# Example format: plugins=(rails git textmate ruby lighthouse)
+# Add wisely, as too many plugins slow down shell startup.
+#plugins=(git)
+
+source $ZSH/oh-my-zsh.sh
+
+# User configuration
+# set display configuration
+if [ -n "$DISPLAY" ]
+then
+	xrandr --output HDMI-1 --rotate left --left-of HDMI-2
+	feh --bg-fill /home/luke/Pictures/wallpapers/eberhard-grossgasteiger-pBgnT4KH8d4-unsplash.jpg --bg-fill /home/luke/Pictures/wallpapers/luca-micheli-ruWkmt3nU58-unsplash.jpg
+	xset r rate 200 60
+fi
+
+# Preferred editor for local and remote sessions
+export EDITOR='nvim'
+
+# set environment variables for npm
+NPM_PACKAGES="${HOME}/.npm-packages"
+NODE_PATH="$NPM_PACKAGES/lib/node_modules:$NODE_PATH"
+PATH="$NPM_PACKAGES/bin:$PATH"
+# Unset manpath so we can inherit from /etc/manpath via the `manpath`
+# command
+unset MANPATH # delete if you already modified MANPATH elsewhere in your config
+MANPATH="$NPM_PACKAGES/share/man:$(manpath)"
+
+# set bun paths
+export BUN_INSTALL="/home/luke/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+export PATH="$PATH:/usr/local/go/bin"
+
+# set path for mcrcon
+export PATH="$PATH:/opt/minecraft/tools/mcrcon"
+
+# set path for vscode CLI
+# export PATH="$PATH:/home/luke/.vscode-server/bin/74b1f979648cc44d385a2286793c226e611f59e7/bin/remote-cli"
+
+# set path for any scripts we want on the path
+export PATH="$PATH:/home/luke/.path"
+
+#export PATH="$PATH:/home/luke/.local/lib/firefox"
+
+export DENO_INSTALL="/home/luke/.deno"
+export PATH="$DENO_INSTALL/bin:$PATH"
+
+# port checking stuff
+function cprt() {
+	sudo lsof -i -P -n | grep ":$1" | grep LISTEN
+}
+
+# make dir and cd into it
+function mkcd() {
+	mkdir -p "$1" && cd "$1"
+}
+
+# init new sveltekit project
+function skinit() {
+	# require an argument
+	if [ -z "$1" ]; then
+		echo "Usage: skinit <project-name>"
+		return 1
+	fi
+	npm create svelte@latest $1
+	cd $1
+	pnpm install 
+	git init 
+	git add -A  
+	git commit -m "Initial commit"
+}
+
+function add() {
+	if [ -z "$1" ]; then
+		echo "Usage: add <file-name>"
+		return 1
+	fi
+	pnpm add $1
+	pnpm add -D @types/$1
+}
+
+function init-prettier() {
+	pnpm add -D prettier eslint-config-prettier eslint-plugin-prettier
+}
+
+function init-ts() {
+	pnpm add -D typescript @types/node ts-node 
+}
+
+function init-eslint() {
+	pnpm add -D eslint 
+}
+
+function init-luke() {
+	init-prettier
+	init-ts
+	init-eslint
+}
+
+function ls-default() {
+	if [ -z "$1" ]; then
+		echo "Usage: default <filename> (e.g. .prettierrc)"
+		return 1
+	fi
+	cp ~/.defaults/$1 ./
+}
+
+function nerd-font {
+	echo "Installing $1 Nerd Font"
+	wget -nv -O /tmp/$1.zip https://github.com/ryanoasis/nerd-fonts/releases/download/v2.2.2/$1.zip
+	mkdir -p /tmp/$1
+	unzip -q /tmp/$1.zip -d /tmp/$1/
+	sudo mv /tmp/$1/ /usr/share/fonts/truetype/
+	fc-cache -f
+	rm /tmp/$1.zip
+	echo "Done"
+}
+
+function unzilp {
+	ARG_NAME=$(echo $1 | cut -d '.' -f 1)
+	unzip -q $1 -d ./$ARG_NAME
+	rm $1
+	CUR_DIR=$(pwd)
+	echo "unzipped ./$1 to $CUR_DIR/$ARG_NAME/"
+}
+
+function deldir {
+	# if -rf or -r is passed
+	# Confirm user wants to delete the directory
+		read -p "Are you sure you want to delete $1? (y/n) " -n 1 -r
+		echo    # (optional) move to a new line
+		if [[ $REPLY =~ ^[Yy]$ ]]; then
+			# for safety, the directory will be moved to /tmp/trash
+			# trash is emptied every week
+			mv $1 /tmp/trash
+			echo "Moving $1 to trash"
+		fi
+}
+
+# Automatically attach to TMUX if connecting via SSH
+if [[ $- =~ i ]] && [[ -z "$TMUX" ]]; then
+	tmux new-session -A -s $USER
+fi
+
+function zrc() {
+	nvim ~/.zshrc
+	cp ~/.zshrc ~/.config/.zshrc.personal
+	source ~/.zshrc
+}
+
+
+# Set personal aliases, overriding those provided by oh-my-zsh libs,
+# plugins, and themes. Aliases can be placed here, though oh-my-zsh
+# users are encouraged to define aliases within the ZSH_CUSTOM folder.
+# For a full list of active aliases, run `alias`.
+#
+# Example aliases
+# alias zshconfig="mate ~/.zshrc"
+# alias ohmyzsh="mate ~/.oh-my-zsh"
+# luke's custom aliases
+alias tn='npx ts-node'
+
+alias caddyconfig='sudoedit /etc/caddy/Caddyfile'
+alias caddyrestart='sudo systemctl restart caddy'
+alias caddyreload='caddy reload --config /etc/caddy/Caddyfile'
+alias ced='caddyconfig && caddyreload'
+alias cadhtml='nvim /etc/caddy/index.html'
+alias cadcss='nvim /etc/caddy/style.css'
+alias cadlog='sudo systemctl status caddy'
+
+alias dnsedit='sudoedit /etc/hosts'
+alias dnsrestart='sudo systemctl restart dnsmasq'
+alias dns='dnsedit && dnsrestart'
+
+alias reload_shell='exec $SHELL'
+alias rconfig='source ~/.zshrc'
+alias brc='nvim ~/.bashrc && rconfig'
+alias bls='nvim ~/.bash_aliases && rconfig'
+alias lsbls='cat ~/.bash_aliases'
+alias data='cd /mnt/data'
+alias vrc='nvim ~/.vimrc'
+alias nvrc='nvim ~/.config/nvim/'
+
+alias sshedit='nvim ~/.ssh/authorized_keys'
+
+alias ports='sudo lsof -i -P -n | grep LISTEN'
+
+alias dcu='sudo docker compose up -d'
+alias dcd='sudo docker compose down'
+alias dcr='sudo docker compose restart'
+alias dcl='sudo docker compose logs -f'
+alias dce='nvim ./docker-compose.yml'
+alias start='pnpm start'
+
+#alias docker-compose="echo use docker compose"
+
+alias tmr="tmux source-file ~/.tmux.conf"
+alias tmc="nvim ~/.tmux.conf && tmr"
+
+# enable/disable lightdm (display manager for desktop environment)
+alias gui="sudo systemctl start lightdm.service"
+alias ngui="sudo systemctl stop lightdm.service"
+alias rgui="sudo systemctl restart lightdm.service"
+
+# pnpm
+export PNPM_HOME="/home/luke/.local/share/pnpm"
+export PATH="$PNPM_HOME:$PATH"
+# pnpm end
+#
+# go path
+export PATH="$PATH:$HOME/go/bin"
+
+# Fuzzy find
+# fd - cd to selected directory
+fd() {
+  local dir
+  dir=$(find ${1:-.} -path '*/\.*' -prune \
+                  -o -type d -print 2> /dev/null | fzf +m) &&
+  cd "$dir"
+}
+
+# fp - cd to project with git repo
+fp() {
+  local dir
+  dir=$(find repos bots -type d -name '.git' | sed -r 's|/[^/]+$||' |sort -u \
+                   | fzf +m) &&
+  clear &&
+  cd "$dir"
+}
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+alias tm="tmux attach-session -t main_tmux || tmux new-session -s main_tmux"
+
+alias vi="nvim"
+alias vim="nvim"
+
+alias ga="git add"
+alias gc="git commit -m"
+alias gca="git commit -am"
+alias gp="git push"
+alias gf="git fetch"
+alias gpl="git pull"
+alias gs="git status"
+alias gd="git diff"
+alias gr="git restore --staged"
+alias gacp="git add . && git commit -m $1 && git push"
+alias gsh='git stash'
+alias gsha='git stash apply'
+function gsync() {
+	gca $1 && gp
+}
+
+alias ghnew="gh repo create --source=. --remote=origin --public && git push --set-upstream origin main"
+
+# bun completions
+[ -s "/home/luke/.bun/_bun" ] && source "/home/luke/.bun/_bun"
+
+# arch things
+function pkgs() {
+	if [ -z "$1" ]; then
+		echo "Usage: pkgs <search-term>"
+		return 1
+	fi
+	pacman -Ss $1 | less
+}
+function aur() {
+	if [ -z "$1" ]; then
+		echo "Usage: aur <search-term>"
+		return 1
+	fi
+	yay -Ss $1 | less
+}
+alias aurs="aur"
+
+alias pki="yay -S"
+
+alias ec2connect='ssh -i "~/.ssh/keys/Macbook Pro.pem" ubuntu@ec2-3-142-246-64.us-east-2.compute.amazonaws.com'
