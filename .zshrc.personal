@@ -23,12 +23,12 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 # set display configuration
-if [ -n "$DISPLAY" ]
-then
-	xrandr --output HDMI-1 --rotate left --left-of HDMI-2
-	feh --bg-fill /home/luke/Pictures/wallpapers/eberhard-grossgasteiger-pBgnT4KH8d4-unsplash.jpg --bg-fill /home/luke/Pictures/wallpapers/luca-micheli-ruWkmt3nU58-unsplash.jpg
-	xset r rate 200 60
-fi
+#if [ -n "$DISPLAY" ]
+#then
+	#xrandr --output HDMI-1 --rotate left --left-of HDMI-2
+	#feh --bg-fill /home/luke/Pictures/wallpapers/eberhard-grossgasteiger-pBgnT4KH8d4-unsplash.jpg --bg-fill /home/luke/Pictures/wallpapers/luca-micheli-ruWkmt3nU58-unsplash.jpg
+	#xset r rate 200 60
+#fi
 
 # Preferred editor for local and remote sessions
 export EDITOR='nvim'
@@ -248,26 +248,17 @@ fp() {
 
 alias tm="tmux attach-session -t main_tmux || tmux new-session -s main_tmux"
 
-alias vi="nvim"
-alias vim="nvim"
-
-alias ga="git add"
+alias ga="git add ."
 alias gc="git commit -m"
 alias gca="git commit -am"
 alias gp="git push"
 alias gf="git fetch"
-alias gpl="git pull"
 alias gs="git status"
 alias gd="git diff"
-alias gr="git restore --staged"
-alias gacp="git add . && git commit -m $1 && git push"
-alias gsh='git stash'
-alias gsha='git stash apply'
+alias ghnew="gh repo create --source=. --remote=origin --public && git push --set-upstream origin main"
 function gsync() {
 	gca $1 && gp
 }
-
-alias ghnew="gh repo create --source=. --remote=origin --public && git push --set-upstream origin main"
 
 # bun completions
 [ -s "/home/luke/.bun/_bun" ] && source "/home/luke/.bun/_bun"
@@ -289,6 +280,6 @@ function aur() {
 }
 alias aurs="aur"
 
-alias pki="yay -S"
+alias pkadd="sudo pacman -S"
 
 alias ec2connect='ssh -i "~/.ssh/keys/Macbook Pro.pem" ubuntu@ec2-3-142-246-64.us-east-2.compute.amazonaws.com'
