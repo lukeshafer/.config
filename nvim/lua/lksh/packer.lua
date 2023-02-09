@@ -25,6 +25,7 @@ return require("packer").startup(function(use)
 	use({ "rose-pine/neovim", as = "rose-pine" })
 	use("savq/melange")
 	use("Mofiqul/vscode.nvim")
+	use("olimorris/onedarkpro.nvim")
 
 	use("rktjmp/lush.nvim") -- colorscheme MAKER
 	------------------
@@ -50,8 +51,15 @@ return require("packer").startup(function(use)
 	})
 	use("RRethy/vim-illuminate") -- highlights matches to the word under the cursor
 	use("p00f/nvim-ts-rainbow") -- rainbow nested parentheses/brackets
-	use("brenoprata10/nvim-highlight-colors") -- highlight hex color strings i.e. #CCCCFF
+	use({ "brenoprata10/nvim-highlight-colors" }) -- highlight hex color strings i.e. #CCCCFF
 	use("APZelos/blamer.nvim") -- git blame inline
+
+	use({
+		"j-hui/fidget.nvim",
+		config = function()
+			require("fidget").setup()
+		end,
+	})
 	------------------
 	--
 
@@ -59,10 +67,33 @@ return require("packer").startup(function(use)
 	------------------
 	--     TOOLS    --
 	------------------
-	use("github/copilot.vim") -- ai pair programmer
-	use("abstract-ide/penvim") -- sets working dir to project root
+	--use("github/copilot.vim") -- ai pair programmer
+	use({ -- better copilot client written in lua
+		"zbirenbaum/copilot.lua",
+		cmd = "Copilot",
+		event = "InsertEnter",
+		config = function()
+			require("copilot").setup({
+				suggestion = { enabled = false },
+				panel = { enabled = false },
+			})
+		end,
+	})
+	use({ -- adds copilot as a source to cmp
+		"zbirenbaum/copilot-cmp",
+		after = { "copilot.lua" },
+		config = function()
+			require("copilot_cmp").setup()
+		end,
+	})
+
+	--use("abstract-ide/penvim") -- sets working dir to project root
 	use("preservim/nerdcommenter") -- comment line with <leader>/
 	use("mvolkmann/vim-tag-comment") -- html tag comments
+	use({ "ahmedkhalf/project.nvim" }) -- project manager and switcher
+	use("andweeb/presence.nvim") -- discord presence for neovim
+	use("uga-rosa/ccc.nvim") -- color picker
+	use({ "sindrets/diffview.nvim", requires = "nvim-lua/plenary.nvim" }) -- git diff viewer
 
 	use({ -- floating file explorer
 		"nvim-tree/nvim-tree.lua",
@@ -99,6 +130,17 @@ return require("packer").startup(function(use)
 		tag = "0.1.0",
 		requires = { { "nvim-lua/plenary.nvim" } },
 	})
+
+	use({ -- neogen, generate comment annotations with :Neogen
+		"danymat/neogen",
+		requires = "nvim-treesitter/nvim-treesitter",
+		config = function()
+			require("neogen").setup({})
+		end,
+		-- Uncomment next line if you want to follow only stable versions
+		-- tag = "*"
+	})
+
 	------------------
 	--
 
@@ -135,10 +177,4 @@ return require("packer").startup(function(use)
 		},
 	})
 	------------------
-	--vim.cmd([[
-	--augroup packer_user_config
-	--autocmd!
-	--autocmd BufWritePost packer.lua source <afile> | PackerSync
-	--augroup end
-	--]])
 end)
