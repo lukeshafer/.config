@@ -1,5 +1,11 @@
 -- OR setup with some options
 require("nvim-tree").setup({
+	sync_root_with_cwd = true,
+	respect_buf_cwd = true,
+	update_focused_file = {
+		enable = true,
+		update_root = true,
+	},
 	sort_by = "case_sensitive",
 	view = {
 		--adaptive_size = true,
@@ -13,7 +19,7 @@ require("nvim-tree").setup({
 			enable = true,
 			open_win_config = {
 				width = 50,
-				height = 35,
+				height = 30,
 				row = 1,
 				col = 10,
 			},
