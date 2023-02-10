@@ -42,7 +42,8 @@ return require("packer").startup(function(use)
 	use({ "akinsho/bufferline.nvim", tag = "v2.*", requires = "kyazdani42/nvim-web-devicons" }) -- tabline for buffers, top
 	use({ "nvim-lualine/lualine.nvim", requires = { "kyazdani42/nvim-web-devicons", opt = true } }) -- status line, bottom
 
-	use({ -- highlight todo comments, i.e. TODO:
+	use({
+		-- highlight todo comments, i.e. TODO:
 		"folke/todo-comments.nvim",
 		requires = "nvim-lua/plenary.nvim",
 		config = function()
@@ -68,7 +69,8 @@ return require("packer").startup(function(use)
 	--     TOOLS    --
 	------------------
 	--use("github/copilot.vim") -- ai pair programmer
-	use({ -- better copilot client written in lua
+	use({
+		-- better copilot client written in lua
 		"zbirenbaum/copilot.lua",
 		cmd = "Copilot",
 		event = "InsertEnter",
@@ -79,7 +81,8 @@ return require("packer").startup(function(use)
 			})
 		end,
 	})
-	use({ -- adds copilot as a source to cmp
+	use({
+		-- adds copilot as a source to cmp
 		"zbirenbaum/copilot-cmp",
 		after = { "copilot.lua" },
 		config = function()
@@ -95,7 +98,8 @@ return require("packer").startup(function(use)
 	use("uga-rosa/ccc.nvim") -- color picker
 	use({ "sindrets/diffview.nvim", requires = "nvim-lua/plenary.nvim" }) -- git diff viewer
 
-	use({ -- floating file explorer
+	use({
+		-- floating file explorer
 		"nvim-tree/nvim-tree.lua",
 		tag = "nightly", -- optional, updated every week. (see issue #1193)
 		requires = {
@@ -103,21 +107,24 @@ return require("packer").startup(function(use)
 		},
 	})
 
-	use({ -- auto-create brackets/parentheses
+	use({
+		-- auto-create brackets/parentheses
 		"windwp/nvim-autopairs",
 		config = function()
 			require("nvim-autopairs").setup()
 		end,
 	})
 
-	use({ -- autoclose/rename html tags
+	use({
+		-- autoclose/rename html tags
 		"windwp/nvim-ts-autotag",
 		config = function()
 			require("nvim-ts-autotag").setup()
 		end,
 	})
 
-	use({ -- surround using brackets, quotes, etc with shortcuts
+	use({
+		-- surround using brackets, quotes, etc with shortcuts
 		"kylechui/nvim-surround",
 		tag = "*", -- use for stability; omit to use `main` branch for the latest features
 		config = function()
@@ -125,13 +132,15 @@ return require("packer").startup(function(use)
 		end,
 	})
 
-	use({ -- fuzzy finder
+	use({
+		-- fuzzy finder
 		"nvim-telescope/telescope.nvim",
 		tag = "0.1.0",
 		requires = { { "nvim-lua/plenary.nvim" } },
 	})
 
-	use({ -- neogen, generate comment annotations with :Neogen
+	use({
+		-- neogen, generate comment annotations with :Neogen
 		"danymat/neogen",
 		requires = "nvim-treesitter/nvim-treesitter",
 		config = function()
