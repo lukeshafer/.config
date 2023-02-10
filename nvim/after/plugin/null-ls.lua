@@ -5,18 +5,21 @@ local b = null_ls.builtins
 local atWork = os.getenv("PC_CONTEXT") == "work"
 
 local lspSources = {
-	b.formatting.prettier.with({ extra_args = { "--tab-width", "4", "--print-width", "100" } }),
 	b.formatting.stylua,
 	b.diagnostics.cfn_lint,
 	b.formatting.rustfmt,
-	--b.formatting.codespell,
 	b.formatting.fixjson,
 	b.formatting.prismaFmt,
-	--b.formatting.rustywind,
 }
 
 if not atWork then
 	table.insert(lspSources, b.diagnostics.eslint_d)
+	table.insert(lspSources, b.diagnostics.prettierd)
+else
+	table.insert(
+		lspSources,
+		b.formatting.prettier.with({ extra_args = { "--tab-width", "4", "--print-width", "100" } })
+	)
 end
 
 require("null-ls").setup({

@@ -19,11 +19,8 @@ lsp.set_preferences({
 lsp.ensure_installed({
 	"astro",
 	"bashls",
-	--"codespell",
 	"cssls",
 	"emmet_ls",
-	--"eslint",
-	--"fixjson",
 	"html",
 	"rust_analyzer",
 	"sumneko_lua",
