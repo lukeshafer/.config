@@ -10,11 +10,12 @@ local lspSources = {
 	b.formatting.rustfmt,
 	b.formatting.fixjson,
 	b.formatting.prismaFmt,
+	--b.formatting.prettierd,
 }
 
 if not atWork then
 	table.insert(lspSources, b.diagnostics.eslint_d)
-	table.insert(lspSources, b.diagnostics.prettierd)
+	table.insert(lspSources, b.formatting.prettierd)
 else
 	table.insert(
 		lspSources,
