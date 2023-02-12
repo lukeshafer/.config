@@ -10,7 +10,6 @@ vim.g.mapleader = " "
 -- CTRL n opens new tab
 map("n", "<C-n>", ":tabnew <CR>")
 -- CTRL e toggles file browser
-map("n", "<leader>e", ":NvimTreeToggle<CR>")
 -- CTRL Up/Down moves lines up/down
 map("n", "<C-Up>", ":m -2<CR>")
 map("n", "<C-k>", ":m -2<CR>")
@@ -38,6 +37,7 @@ map("n", ";", ":")
 -- Leader+Y copies to system clipboard
 map("n", "<leader>y", '"+y')
 map("v", "<leader>y", '"+y')
+map("n", "<leader>e", "<C-W>w")
 
 local opts = { noremap = true, silent = true }
 vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts)

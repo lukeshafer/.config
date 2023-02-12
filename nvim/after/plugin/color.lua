@@ -8,8 +8,12 @@
 ---- options: default, atlantis, andromeda, shusia, maia, espresso
 --vim.g.sonokai_better_performance = 1
 
+require("rose-pine").setup({
+	dark_variant = "moon",
+})
+
 -- DEFAULT COLORSCHEME
-vim.cmd([[colorscheme onedark_vivid]])
+--vim.cmd([[colorscheme onedark_vivid]])
 vim.opt.background = "dark"
 vim.cmd([[colorscheme rose-pine]])
 

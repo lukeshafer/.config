@@ -8,20 +8,11 @@ require("nvim-tree").setup({
 	},
 	sort_by = "case_sensitive",
 	view = {
-		--adaptive_size = true,
+		width = 40,
 		mappings = {
 			list = {
 				--{ key = "u", action = "dir_up" },
-			},
-		},
-		side = "right",
-		float = {
-			enable = true,
-			open_win_config = {
-				width = 50,
-				height = 30,
-				row = 1,
-				col = 10,
+				{ key = "<leader>f", action = "live_filter" },
 			},
 		},
 	},
@@ -31,4 +22,22 @@ require("nvim-tree").setup({
 	filters = {
 		dotfiles = true,
 	},
+	open_on_setup = true,
+	open_on_setup_file = true,
+	git = {
+		--ignore = false,
+	},
+	remove_keymaps = {
+		"q",
+		"f",
+	},
+	tab = {
+		sync = {
+			open = true,
+			close = true,
+		},
+	},
 })
+
+vim.cmd("highlight NvimTreeNormal guibg=#191724")
+--vim.api.nvim_set_keymap("n", "<leader>e", ":NvimTreeToggle<CR>", { noremap = true })

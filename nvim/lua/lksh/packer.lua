@@ -92,11 +92,12 @@ return require("packer").startup(function(use)
 
 	--use("abstract-ide/penvim") -- sets working dir to project root
 	use("preservim/nerdcommenter") -- comment line with <leader>/
-	use("mvolkmann/vim-tag-comment") -- html tag comments
+	--use("mvolkmann/vim-tag-comment") -- html tag comments
 	use({ "ahmedkhalf/project.nvim" }) -- project manager and switcher
 	use("andweeb/presence.nvim") -- discord presence for neovim
 	use("uga-rosa/ccc.nvim") -- color picker
 	use({ "sindrets/diffview.nvim", requires = "nvim-lua/plenary.nvim" }) -- git diff viewer
+	use({ "akinsho/toggleterm.nvim", tag = "*" }) -- Terminal pane/tab/window handler
 
 	use({
 		-- floating file explorer

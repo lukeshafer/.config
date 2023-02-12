@@ -11,7 +11,7 @@
  italic_font      auto
  bold_italic_font auto
 
- adjust_line_height 9
+ adjust_line_height 7
 
 #: You can specify different fonts for the bold/italic/bold-italic
 #: variants. To get a full list of supported fonts use the `kitty
@@ -26,7 +26,7 @@
 #:     italic_font      Operator Mono Book Italic
 #:     bold_italic_font Operator Mono Medium Italic
 
- font_size 11.0
+ font_size 10.0
 
 #: Font size (in pts)
 
@@ -2244,6 +2244,6 @@ background_opacity 1.0
 
 
 # BEGIN_KITTY_THEME
-# Rosé Pine Moon
+# Rosé Pine Dawn
 include current-theme.conf
 # END_KITTY_THEME
