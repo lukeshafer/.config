@@ -17,6 +17,8 @@ require("rose-pine").setup({
 vim.opt.background = "dark"
 vim.cmd([[colorscheme rose-pine]])
 
+vim.cmd("highlight IndentBlanklineChar guifg=#44415A gui=nocombine")
+
 -- -- DIRECTORY-BASED SCHEMES
 --if dir == HOME .. "/repos/crmi-common" then
 --vim.g.sonokai_style = "default"
