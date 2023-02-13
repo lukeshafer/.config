@@ -38,12 +38,13 @@ return require("packer").startup(function(use)
 	use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" }) -- treesitter, parses code for better colors
 	use("nvim-treesitter/nvim-treesitter-context") -- shows current context, aka function/block parent
 	use("nvim-treesitter/playground") -- tool to view treesitter nodes
+	use("kyazdani42/nvim-web-devicons")
 
 	--use({ "akinsho/bufferline.nvim", tag = "v2.*", requires = "kyazdani42/nvim-web-devicons" }) -- tabline for buffers, top
 	use({ "nvim-lualine/lualine.nvim", requires = { "kyazdani42/nvim-web-devicons", opt = true } }) -- status line, bottom
 
 	use({
-		-- highlight todo comments, i.e. TODO:
+		-- highlight todo comments, e.g. TODO:
 		"folke/todo-comments.nvim",
 		requires = "nvim-lua/plenary.nvim",
 		config = function()

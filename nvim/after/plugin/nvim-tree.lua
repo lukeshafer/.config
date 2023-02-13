@@ -16,17 +16,11 @@ require("nvim-tree").setup({
 			},
 		},
 	},
-	renderer = {
-		group_empty = true,
-	},
 	filters = {
 		dotfiles = true,
 	},
 	open_on_setup = true,
 	open_on_setup_file = true,
-	git = {
-		--ignore = false,
-	},
 	remove_keymaps = {
 		"q",
 		"f",
