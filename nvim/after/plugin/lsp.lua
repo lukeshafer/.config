@@ -23,7 +23,6 @@ lsp.ensure_installed({
 	"emmet_ls",
 	"html",
 	"rust_analyzer",
-	"sumneko_lua",
 	"svelte",
 	"tailwindcss",
 	"tsserver",

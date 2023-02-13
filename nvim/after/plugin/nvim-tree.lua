@@ -25,10 +25,9 @@ require("nvim-tree").setup({
 		"q",
 		"f",
 	},
-	tab = {
-		sync = {
-			open = true,
-			close = true,
+	renderer = {
+		icons = {
+			webdev_colors = false,
 		},
 	},
 })
