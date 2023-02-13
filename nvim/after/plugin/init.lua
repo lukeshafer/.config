@@ -18,5 +18,3 @@ require("nvim-highlight-colors").setup({
 vim.g.blamer_enabled = 1
 
 vim.api.nvim_set_keymap("n", "cp", ":CccPick<CR>", { noremap = true })
-
-require("lualine").setup()
