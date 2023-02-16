@@ -33,4 +33,4 @@ require("nvim-tree").setup({
 })
 
 vim.cmd("highlight NvimTreeNormal guibg=#191724")
---vim.api.nvim_set_keymap("n", "<leader>e", ":NvimTreeToggle<CR>", { noremap = true })
+vim.api.nvim_set_keymap("n", "<leader>e", ":NvimTreeToggle<CR>", { noremap = true })

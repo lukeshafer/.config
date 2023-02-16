@@ -37,7 +37,8 @@ map("n", ";", ":")
 -- Leader+Y copies to system clipboard
 map("n", "<leader>y", '"+y')
 map("v", "<leader>y", '"+y')
-map("n", "<leader>e", "<C-W>w")
+map("n", "<leader>n", "<C-W>w")
+map("n", "<leader>p", "<C-W>W")
 
 local opts = { noremap = true, silent = true }
 vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts)
