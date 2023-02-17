@@ -75,27 +75,27 @@ return require("packer").startup(function(use)
 	------------------
 	--     TOOLS    --
 	------------------
-	--use("github/copilot.vim") -- ai pair programmer
-	use({
-		-- better copilot client written in lua
-		"zbirenbaum/copilot.lua",
-		cmd = "Copilot",
-		event = "InsertEnter",
-		config = function()
-			require("copilot").setup({
-				suggestion = { enabled = false },
-				panel = { enabled = false },
-			})
-		end,
-	})
-	use({
-		-- adds copilot as a source to cmp
-		"zbirenbaum/copilot-cmp",
-		after = { "copilot.lua" },
-		config = function()
-			require("copilot_cmp").setup()
-		end,
-	})
+	use("github/copilot.vim") -- ai pair programmer
+	--use({
+	---- better copilot client written in lua
+	--"zbirenbaum/copilot.lua",
+	--cmd = "Copilot",
+	--event = "InsertEnter",
+	--config = function()
+	--require("copilot").setup({
+	--suggestion = { enabled = false },
+	--panel = { enabled = false },
+	--})
+	--end,
+	--})
+	--use({
+	---- adds copilot as a source to cmp
+	--"zbirenbaum/copilot-cmp",
+	--after = { "copilot.lua" },
+	--config = function()
+	--require("copilot_cmp").setup()
+	--end,
+	--})
 
 	--use("abstract-ide/penvim") -- sets working dir to project root
 	use("preservim/nerdcommenter") -- comment line with <leader>/
