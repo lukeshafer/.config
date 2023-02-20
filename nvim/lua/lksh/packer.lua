@@ -40,7 +40,7 @@ return require("packer").startup(function(use)
 	use("nvim-treesitter/playground") -- tool to view treesitter nodes
 	use("kyazdani42/nvim-web-devicons")
 
-	--use({ "akinsho/bufferline.nvim", tag = "v2.*", requires = "kyazdani42/nvim-web-devicons" }) -- tabline for buffers, top
+	use({ "akinsho/bufferline.nvim", tag = "v2.*", requires = "kyazdani42/nvim-web-devicons" }) -- tabline for buffers, top
 	use({ "nvim-lualine/lualine.nvim", requires = { "kyazdani42/nvim-web-devicons", opt = true } }) -- status line, bottom
 
 	use({
