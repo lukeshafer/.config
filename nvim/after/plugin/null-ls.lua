@@ -19,7 +19,7 @@ if not atWork then
 else
 	table.insert(
 		lspSources,
-		b.formatting.prettier.with({ extra_args = { "--tab-width", "4", "--print-width", "100" } })
+		b.formatting.prettier.with({ extra_args = { "--tab-width", "4", "--print-width", "100", "--use-tabs" } })
 	)
 end
 
