@@ -14,7 +14,7 @@ local lspSources = {
 }
 
 if not atWork then
-	--table.insert(lspSources, b.diagnostics.eslint_d)
+	table.insert(lspSources, b.diagnostics.eslint_d)
 	table.insert(lspSources, b.formatting.prettierd)
 else
 	table.insert(
