@@ -8,3 +8,4 @@
 !qmk/
 !.zsh*
 !polybar/
+packer_compiled.lua

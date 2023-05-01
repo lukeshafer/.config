@@ -17,4 +17,5 @@ vim.opt.dir = HOME .. "/.vim/swapfiles"
 vim.cmd("let mapleader = ' '")
 vim.opt.guicursor = "n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50"
 vim.opt.mouse = "a"
+vim.opt.cursorline = true
 --vim.opt.wrap = false

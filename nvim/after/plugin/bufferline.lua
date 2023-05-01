@@ -23,7 +23,7 @@
 
 require("bufferline").setup({
 	options = {
-		right_mouse_command = nil, -- can be a string | function, see "Mouse actions"
+		right_mouse_command = nil,      -- can be a string | function, see "Mouse actions"
 		middle_mouse_command = "bdelete! %d", -- can be a string | function, see "Mouse actions"
 		truncate_names = false,
 		color_icons = false,

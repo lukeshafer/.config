@@ -6,8 +6,16 @@ require("lualine").setup({
 	sections = {
 		lualine_a = { "mode" },
 		lualine_b = { "branch", "diff", "diagnostics" },
-		lualine_c = { "filename" },
-		lualine_x = { "encoding", "fileformat", "filetype" },
+		lualine_c = {
+			{
+				"filename",
+				symbols = {
+					modified = '●',
+					readonly = '[READONLY]'
+				}
+			}
+		},
+		lualine_x = { "encoding", "filetype" },
 		lualine_y = { neovim },
 		lualine_z = { "location" },
 	},

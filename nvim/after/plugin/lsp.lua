@@ -1,3 +1,13 @@
+-- nvim-ufo, folding client
+vim.o.foldcolumn = '1' -- '0' is not bad
+vim.o.foldlevel = 99   -- Using ufo provider need a large value, feel free to decrease the value
+vim.o.foldlevelstart = 99
+vim.o.foldenable = true
+
+vim.keymap.set('n', 'zR', require('ufo').openAllFolds)
+vim.keymap.set('n', 'zM', require('ufo').closeAllFolds)
+require('ufo').setup()
+
 local lsp = require("lsp-zero")
 
 lsp.set_preferences({
@@ -29,10 +39,11 @@ lsp.ensure_installed({
 	"vimls",
 	"yamlls",
 	"jsonls",
+	"lua_ls"
 })
 
 -- Fix Undefined global 'vim'
-lsp.configure("sumneko_lua", {
+lsp.configure("lua_ls", {
 	settings = {
 		Lua = {
 			diagnostics = {
@@ -135,10 +146,9 @@ lsp.setup_nvim_cmp({
 	mapping = cmp_mappings,
 	sources = {
 		{ name = "path" },
-		{ name = "copilot", keyword_length = 1 },
 		{ name = "nvim_lsp", keyword_length = 0 },
-		{ name = "buffer", keyword_length = 3 },
-		--{ name = "luasnip", keyword_length = 3 },
+		{ name = "buffer",   keyword_length = 3 },
+		{ name = "luasnip",  keyword_length = 1 },
 	},
 })
 
@@ -176,6 +186,17 @@ lsp.on_attach(function(client, bufnr)
 		vim.lsp.buf.format({ bufnr = vim.api.nvim_get_current_buf() })
 	end, { buffer = bufnr, desc = "[lsp] format" })
 end)
+
+lsp.set_server_config({
+	capabilities = {
+		textDocument = {
+			foldingRange = {
+				dynamicRegistration = false,
+				lineFoldingOnly = true
+			}
+		}
+	}
+})
 
 lsp.setup()
 

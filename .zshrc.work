@@ -95,3 +95,5 @@ alias mrm='glab mr merge'
 alias awslogin="aws s3 ls --profile dev-crmi >> /dev/null && cat ~/.aws/saml-credentials"
 alias awslogout="rm ~/.aws/saml-credentials"
 alias awsreset="awslogout && awslogin"
+
+alias tmr='tmux source ~/.tmux.conf'
