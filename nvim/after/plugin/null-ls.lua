@@ -5,22 +5,23 @@ local b = null_ls.builtins
 local atWork = os.getenv("PC_CONTEXT") == "work"
 
 local lspSources = {
-	b.formatting.stylua,
+	--b.formatting.stylua,
 	b.diagnostics.cfn_lint,
-	b.formatting.rustfmt,
+	--b.formatting.rustfmt,
 	b.formatting.fixjson,
-	b.formatting.prismaFmt,
+	--b.formatting.prismaFmt,
 	--b.formatting.prettierd,
 }
 
 if not atWork then
 	--table.insert(lspSources, b.diagnostics.eslint_d)
 	table.insert(lspSources, b.formatting.prettierd)
-else
-	table.insert(
-		lspSources,
-		b.formatting.prettier.with({ extra_args = { "--tab-width", "4", "--print-width", "100" } })
-	)
+	--else
+	--table.insert(
+	--lspSources
+	----b.formatting.prettier.with({ extra_args = { "--tab-width", "4", "--print-width", "100" } }),
+	----b.formatting.prettier
+	--)
 end
 
 require("null-ls").setup({
@@ -34,14 +35,14 @@ require("null-ls").setup({
 			end, { buffer = bufnr, desc = "[lsp] format" })
 
 			-- format on save
-			vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
-			vim.api.nvim_create_autocmd("BufWritePre", {
-				group = augroup,
-				buffer = bufnr,
-				callback = function()
-					vim.lsp.buf.format({ bufnr = bufnr })
-				end,
-			})
+			--vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+			--vim.api.nvim_create_autocmd("BufWritePre", {
+				--group = augroup,
+				--buffer = bufnr,
+				--callback = function()
+					--vim.lsp.buf.format({ bufnr = bufnr })
+				--end,
+			--})
 		end
 	end,
 })

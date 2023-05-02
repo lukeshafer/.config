@@ -26,11 +26,6 @@ require("nvim-tree").setup({
 		"q",
 		"f",
 	},
-	renderer = {
-		icons = {
-			webdev_colors = false,
-		},
-	},
 })
 
 local api = require("nvim-tree.api")
@@ -50,7 +45,7 @@ local function toggle_nvim_focus()
 	end
 end
 
-vim.cmd("highlight NvimTreeNormal guibg=#191724")
+--vim.cmd("highlight NvimTreeNormal guibg=#191724")
 --vim.api.nvim_set_keymap("n", "<leader>e", ":NvimTreeToggle<CR>", { noremap = true })
 vim.keymap.set("n", "<leader>e", toggle_nvim_focus, { noremap = true })
 vim.keymap.set("n", "<leader>E", api.tree.toggle, { noremap = true })
