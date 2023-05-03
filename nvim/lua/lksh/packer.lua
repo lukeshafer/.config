@@ -1,6 +1,6 @@
 return require("packer").startup(function(use)
 	-- Packer manages itself!
-	use("wbthomason/packer.nvim")
+	use({ "wbthomason/packer.nvim" })
 	vim.cmd([[
 	  augroup packer_user_config
 		autocmd!
@@ -13,15 +13,15 @@ return require("packer").startup(function(use)
 	------------------
 	-- COLOR THEMES --
 	------------------
-	use("folke/tokyonight.nvim")
-	use("EdenEast/nightfox.nvim")
+	--use("folke/tokyonight.nvim")
+	--use("EdenEast/nightfox.nvim")
 	use("shaunsingh/moonlight.nvim")
-	use("frenzyexists/aquarium-vim")
+	--use("frenzyexists/aquarium-vim")
 	use("sainnhe/sonokai")
-	use("sainnhe/everforest")
-	use("sainnhe/edge")
-	use("rebelot/kanagawa.nvim")
-	use("mhartington/oceanic-next")
+	--use("sainnhe/everforest")
+	--use("sainnhe/edge")
+	--use("rebelot/kanagawa.nvim")
+	--use("mhartington/oceanic-next")
 	use({
 		"rose-pine/neovim",
 		as = "rose-pine",
@@ -31,12 +31,12 @@ return require("packer").startup(function(use)
 			})
 		end
 	})
-	use("savq/melange")
+	--use("savq/melange")
 	use("Mofiqul/vscode.nvim")
-	use("olimorris/onedarkpro.nvim")
-	use { "catppuccin/nvim", as = "catppuccin" }
-	use { 'embark-theme/vim', as = 'embark' }
-	use 'rmehri01/onenord.nvim'
+	--use("olimorris/onedarkpro.nvim")
+	--use { "catppuccin/nvim", as = "catppuccin" }
+	--use { 'embark-theme/vim', as = 'embark' }
+	--use 'rmehri01/onenord.nvim'
 	use {
 		'olivercederborg/poimandres.nvim',
 		config = function()
@@ -47,10 +47,10 @@ return require("packer").startup(function(use)
 			}
 		end
 	}
-	use { 'Everblush/nvim', as = 'everblush' }
-	use 'Yazeed1s/oh-lucy.nvim'
+	--use { 'Everblush/nvim', as = 'everblush' }
+	--use 'Yazeed1s/oh-lucy.nvim'
 
-	use("rktjmp/lush.nvim") -- colorscheme MAKER
+	--use("rktjmp/lush.nvim") -- colorscheme MAKER
 	------------------
 	--
 
@@ -63,18 +63,18 @@ return require("packer").startup(function(use)
 	use("nvim-treesitter/playground")                          -- tool to view treesitter nodes
 	use("kyazdani42/nvim-web-devicons")
 
-	use({ "akinsho/bufferline.nvim", tag = "v2.*", requires = "kyazdani42/nvim-web-devicons" }) -- tabline for buffers, top
+	use({ "akinsho/bufferline.nvim", tag = "v2.*", requires = "kyazdani42/nvim-web-devicons" })  -- tabline for buffers, top
 	use({ "nvim-lualine/lualine.nvim", requires = { "kyazdani42/nvim-web-devicons", opt = true } }) -- status line, bottom
 	--use({
-		--"rebelot/heirline.nvim",
-		---- You can optionally lazy-load heirline on UiEnter
-		---- to make sure all required plugins and colorschemes are loaded before setup
-		---- event = "UiEnter",
-		--config = function()
-			--require("heirline").setup({
+	--"rebelot/heirline.nvim",
+	---- You can optionally lazy-load heirline on UiEnter
+	---- to make sure all required plugins and colorschemes are loaded before setup
+	---- event = "UiEnter",
+	--config = function()
+	--require("heirline").setup({
 
-			--})
-		--end
+	--})
+	--end
 	--})
 
 
@@ -92,6 +92,7 @@ return require("packer").startup(function(use)
 	use("APZelos/blamer.nvim")                 -- git blame inline
 
 	use({
+		-- shows tasks that are running (formatters, lsp, etc)
 		"j-hui/fidget.nvim",
 		config = function()
 			require("fidget").setup()
@@ -128,17 +129,17 @@ return require("packer").startup(function(use)
 			}
 		end
 	}
-	use {
-		-- dims all code but the block you're editing
-		"folke/twilight.nvim",
-		config = function()
-			require("twilight").setup {
-				-- your configuration comes here
-				-- or leave it empty to use the default settings
-				-- refer to the configuration section below
-			}
-		end
-	}
+	--use {
+		---- dims all code but the block you're editing
+		--"folke/twilight.nvim",
+		--config = function()
+			--require("twilight").setup {
+				---- your configuration comes here
+				---- or leave it empty to use the default settings
+				---- refer to the configuration section below
+			--}
+		--end
+	--}
 
 	------------------
 	--
@@ -237,7 +238,7 @@ return require("packer").startup(function(use)
 		-- Uncomment next line if you want to follow only stable versions
 		-- tag = "*"
 	})
-	use { 'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async' }
+	use { 'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async' } -- some fold thing, idk
 
 	------------------
 	--
