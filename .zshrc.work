@@ -97,3 +97,4 @@ alias awslogout="rm ~/.aws/saml-credentials"
 alias awsreset="awslogout && awslogin"
 
 alias tmr='tmux source ~/.tmux.conf'
+alias e2e='AWS_SDK_LOAD_CONFIG=1 AWS_PROFILE=dev-crmi STAGE=ls npm test'

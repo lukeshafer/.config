@@ -1,10 +1,24 @@
-local function neovim()
-	return "Neovim"
+local function formatMode(str)
+	if str == "NORMAL" then
+		return ""
+	elseif str == "INSERT" then
+		return ""
+	elseif str == "VISUAL" then
+		return "󰗧"
+	elseif str == "V-LINE" then
+		return "󰗧"
+	elseif str == "V-BLOCK" then
+		return "󰗧"
+	elseif str == "COMMAND" then
+		return ""
+	else
+		return str
+	end
 end
 
 require("lualine").setup({
 	sections = {
-		lualine_a = { "mode" },
+		lualine_a = { { "mode", fmt = formatMode } },
 		lualine_b = { "branch", "diff", "diagnostics" },
 		lualine_c = {
 			{
@@ -16,13 +30,21 @@ require("lualine").setup({
 			}
 		},
 		lualine_x = { "encoding", "filetype" },
-		lualine_y = { neovim },
+		lualine_y = {},
 		lualine_z = { "location" },
 	},
 	inactive_sections = {
 		lualine_a = {},
 		lualine_b = {},
-		lualine_c = { "filename" },
+		lualine_c = {
+			{
+				"filename",
+				symbols = {
+					modified = '●',
+					readonly = '[READONLY]'
+				}
+			}
+		},
 		lualine_x = {},
 		lualine_y = {},
 		lualine_z = {},
