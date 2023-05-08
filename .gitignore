@@ -8,4 +8,5 @@
 !qmk/
 !.zsh*
 !polybar/
+!zsh-theme/
 packer_compiled.lua

@@ -60,6 +60,7 @@ function cfe() {
 
 function ztheme() {
 	nvim ~/.oh-my-zsh/themes/luke.zsh-theme
+	cp ~/.oh-my-zsh/themes/luke.zsh-theme ~/.config/zsh-theme/
 	source ~/.zshrc
 }
 
