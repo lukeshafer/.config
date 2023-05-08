@@ -9,7 +9,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 # ZSH_THEME="frontcube"
-ZSH_THEME="af-magic"
+ZSH_THEME="luke"
 
 # Which plugins would you like to load?
 # Standard plugins can be found in $ZSH/plugins/
@@ -62,6 +62,8 @@ function ztheme() {
 	nvim ~/.oh-my-zsh/themes/luke.zsh-theme
 	source ~/.zshrc
 }
+
+alias zreload="source ~/.zshrc"
 
 alias vi="nvim"
 alias vim="nvim"
