@@ -14,5 +14,5 @@
 -- 	 	'espresso'  -- reddish-brown, coffee vibes
 
 vim.opt.background = "dark" -- sets light/dark for some colorschemes
-vim.g.sonokai_style = "shusia"
-vim.cmd "color sonokai"
+--vim.g.sonokai_style = "shusia"
+vim.cmd "color vscode"

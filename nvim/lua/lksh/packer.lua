@@ -132,15 +132,15 @@ return require("packer").startup(function(use)
 		end
 	}
 	--use {
-		---- dims all code but the block you're editing
-		--"folke/twilight.nvim",
-		--config = function()
-			--require("twilight").setup {
-				---- your configuration comes here
-				---- or leave it empty to use the default settings
-				---- refer to the configuration section below
-			--}
-		--end
+	---- dims all code but the block you're editing
+	--"folke/twilight.nvim",
+	--config = function()
+	--require("twilight").setup {
+	---- your configuration comes here
+	---- or leave it empty to use the default settings
+	---- refer to the configuration section below
+	--}
+	--end
 	--}
 
 	------------------
@@ -278,5 +278,13 @@ return require("packer").startup(function(use)
 		},
 	})
 	------------------
+	--
+
+	--
+	------------------
+	--     FUN      --
+	------------------
+	--
+	use("seandewar/nvimesweeper")
 end)
 

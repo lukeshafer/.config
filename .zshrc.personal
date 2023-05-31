@@ -121,6 +121,12 @@ function ls-default() {
 	cp ~/.defaults/$1 ./
 }
 
+function attach-tmux-if-not-attached() {
+	if [ -z "$TMUX" ]; then
+		tm
+	fi
+}
+
 function nerd-font {
 	echo "Installing $1 Nerd Font"
 	wget -nv -O /tmp/$1.zip https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.0/$1.zip
@@ -246,7 +252,7 @@ fp() {
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-alias tm="tmux attach-session -t main_tmux || tmux new-session -s main_tmux"
+alias tm="tmux new-session -A -s $USER"
 
 alias ga="git add ."
 alias gc="git commit -m"

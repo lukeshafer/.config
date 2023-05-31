@@ -9,7 +9,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 # ZSH_THEME="frontcube"
-ZSH_THEME="af-magic"
+ZSH_THEME="luke"
 
 # Which plugins would you like to load?
 # Standard plugins can be found in $ZSH/plugins/
@@ -45,10 +45,17 @@ function zrc() {
 	source ~/.zshrc
 }
 
+function attach-tmux-if-not-attached() {
+	if [ -z "$TMUX" ]; then
+		tmux new-session -A -s $USER
+	fi
+}
+attach-tmux-if-not-attached
+
 function tmrc() {
 	nvim ~/.tmux.conf
 	cp ~/.tmux.conf ~/.config/.tmux.conf
-	source ~/.zshrc
+	tmr
 }
 
 function cfe() {
@@ -60,8 +67,11 @@ function cfe() {
 
 function ztheme() {
 	nvim ~/.oh-my-zsh/themes/luke.zsh-theme
+	cp ~/.oh-my-zsh/themes/luke.zsh-theme ~/.config/zsh-theme/
 	source ~/.zshrc
 }
+
+alias zreload="source ~/.zshrc"
 
 alias vi="nvim"
 alias vim="nvim"
@@ -96,5 +106,6 @@ alias awslogin="aws s3 ls --profile dev-crmi >> /dev/null && cat ~/.aws/saml-cre
 alias awslogout="rm ~/.aws/saml-credentials"
 alias awsreset="awslogout && awslogin"
 
+alias tm="tmux new-session -A -s $USER"
 alias tmr='tmux source ~/.tmux.conf'
 alias e2e='AWS_SDK_LOAD_CONFIG=1 AWS_PROFILE=dev-crmi STAGE=ls npm test'
