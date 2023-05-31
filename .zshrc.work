@@ -45,10 +45,17 @@ function zrc() {
 	source ~/.zshrc
 }
 
+function attach-tmux-if-not-attached() {
+	if [ -z "$TMUX" ]; then
+		tmux new-session -A -s $USER
+	fi
+}
+attach-tmux-if-not-attached
+
 function tmrc() {
 	nvim ~/.tmux.conf
 	cp ~/.tmux.conf ~/.config/.tmux.conf
-	source ~/.zshrc
+	tmr
 }
 
 function cfe() {
@@ -99,5 +106,6 @@ alias awslogin="aws s3 ls --profile dev-crmi >> /dev/null && cat ~/.aws/saml-cre
 alias awslogout="rm ~/.aws/saml-credentials"
 alias awsreset="awslogout && awslogin"
 
+alias tm="tmux new-session -A -s $USER"
 alias tmr='tmux source ~/.tmux.conf'
 alias e2e='AWS_SDK_LOAD_CONFIG=1 AWS_PROFILE=dev-crmi STAGE=ls npm test'
