@@ -87,7 +87,9 @@ return require("packer").startup(function(use)
 		end,
 	})
 	use("RRethy/vim-illuminate")               -- highlights matches to the word under the cursor
-	use("p00f/nvim-ts-rainbow")                -- rainbow nested parentheses/brackets
+
+	-- rainbow is no longer maintained, look at HiPhish/nvim-ts-rainbow2
+	--use("p00f/nvim-ts-rainbow")                -- rainbow nested parentheses/brackets
 	use({ "brenoprata10/nvim-highlight-colors" }) -- highlight hex color strings i.e. #CCCCFF
 	use("APZelos/blamer.nvim")                 -- git blame inline
 
@@ -277,3 +279,4 @@ return require("packer").startup(function(use)
 	})
 	------------------
 end)
+

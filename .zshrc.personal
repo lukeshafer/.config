@@ -256,6 +256,10 @@ alias gf="git fetch"
 alias gs="git status"
 alias gd="git diff"
 alias ghnew="gh repo create --source=. --remote=origin --public && git push --set-upstream origin main"
+alias gpl="git pull"
+alias gch="git checkout"
+alias gchb="git checkout -b"
+
 function gsync() {
 	gca $1 && gp
 }
