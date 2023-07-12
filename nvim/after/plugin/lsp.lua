@@ -138,6 +138,7 @@ lsp.configure("jsonls", {
 
 local cmp = require("cmp")
 local cmp_mappings = lsp.defaults.cmp_mappings({
+	["<CR>"] = cmp.mapping.confirm({ select = false }),
 	["<C-y>"] = cmp.mapping.confirm({ select = true }),
 	["<C-Space>"] = cmp.mapping.complete(),
 })
