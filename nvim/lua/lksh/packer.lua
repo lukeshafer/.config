@@ -59,8 +59,8 @@ return require("packer").startup(function(use)
 	--  UI HELPERS  --
 	------------------
 	use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" }) -- treesitter, parses code for better colors
-	use("nvim-treesitter/nvim-treesitter-context")             -- shows current context, aka function/block parent
-	use("nvim-treesitter/playground")                          -- tool to view treesitter nodes
+	--use("nvim-treesitter/nvim-treesitter-context")             -- shows current context, aka function/block parent
+	--use("nvim-treesitter/playground")                          -- tool to view treesitter nodes
 	use("kyazdani42/nvim-web-devicons")
 
 	use({ "akinsho/bufferline.nvim", tag = "v2.*", requires = "kyazdani42/nvim-web-devicons" })  -- tabline for buffers, top
@@ -86,16 +86,17 @@ return require("packer").startup(function(use)
 			require("todo-comments").setup()
 		end,
 	})
-	use("RRethy/vim-illuminate")               -- highlights matches to the word under the cursor
+	use("RRethy/vim-illuminate") -- highlights matches to the word under the cursor
 
 	-- rainbow is no longer maintained, look at HiPhish/nvim-ts-rainbow2
 	--use("p00f/nvim-ts-rainbow")                -- rainbow nested parentheses/brackets
-	use({ "brenoprata10/nvim-highlight-colors" }) -- highlight hex color strings i.e. #CCCCFF
+	use({ "brenoprata10/nvim-highlight-colors" }) -- highlight hex color strings e.g. #CCCCFF
 	use("APZelos/blamer.nvim")                 -- git blame inline
 
 	use({
 		-- shows tasks that are running (formatters, lsp, etc)
 		"j-hui/fidget.nvim",
+		tag = "legacy", -- being rewritten, this prevents breaking changes, idk
 		config = function()
 			require("fidget").setup()
 		end,
@@ -142,6 +143,8 @@ return require("packer").startup(function(use)
 	--}
 	--end
 	--}
+	use { "folke/zen-mode.nvim" }
+
 
 	------------------
 	--
@@ -151,27 +154,6 @@ return require("packer").startup(function(use)
 	--     TOOLS    --
 	------------------
 	use("github/copilot.vim") -- ai pair programmer
-	--use({
-	---- better copilot client written in lua
-	--"zbirenbaum/copilot.lua",
-	--cmd = "Copilot",
-	--event = "InsertEnter",
-	--config = function()
-	--require("copilot").setup({
-	--suggestion = { enabled = false },
-	--panel = { enabled = false },
-	--})
-	--end,
-	--})
-	--use({
-	---- adds copilot as a source to cmp
-	--"zbirenbaum/copilot-cmp",
-	--after = { "copilot.lua" },
-	--config = function()
-	--require("copilot_cmp").setup()
-	--end,
-	--})
-
 	--use("abstract-ide/penvim") -- sets working dir to project root
 	use("preservim/nerdcommenter")                                     -- comment line with <leader>/
 	--use("mvolkmann/vim-tag-comment") -- html tag comments
@@ -252,7 +234,6 @@ return require("packer").startup(function(use)
 	-- Languages without LSP config
 	use({ "ckipp01/nvim-jenkinsfile-linter", requires = { "nvim-lua/plenary.nvim" } }) -- lint jenkinsfiles (no lsp)
 	use("lankavitharana/ballerina-vim")                                             -- lint ballerina (no lsp)
-	--use("MunifTanjim/prettier.nvim")
 	use("jose-elias-alvarez/null-ls.nvim")
 
 	-- LSP Config Handler
@@ -287,4 +268,3 @@ return require("packer").startup(function(use)
 	--
 	use("seandewar/nvimesweeper")
 end)
-
