@@ -28,8 +28,8 @@ map("n", "x", '"_x')
 map("n", "<leader>/", "<Plug>NERDCommenterToggle")
 map("v", "<leader>/", "<Plug>NERDCommenterToggle<CR>gv")
 -- TAB/SHIFT TAB changes buffer
-map("n", "<Tab>", ":bnext<cr>")
-map("n", "<S-Tab>", ":bprevious<cr>")
+--map("n", "<Tab>", ":bnext<cr>")
+--map("n", "<S-Tab>", ":bprevious<cr>")
 map("n", "<leader>x", ":bprevious|bdelete #<cr>")
 map("n", "<leader>XX", ":bdelete!<cr>")
 -- Semicolon is also Colon
