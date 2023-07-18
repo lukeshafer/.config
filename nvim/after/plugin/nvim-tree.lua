@@ -74,6 +74,6 @@ end
 --vim.cmd("highlight NvimTreeNormal guibg=#191724")
 --vim.api.nvim_set_keymap("n", "<leader>e", ":NvimTreeToggle<CR>", { noremap = true })
 --vim.keymap.set("n", "<leader>e", toggle_nvim_focus, { noremap = true })
-vim.keymap.set("n", "<leader>e", api.tree.toggle, { noremap = true })
+vim.keymap.set("n", "<leader>E", api.tree.toggle, { noremap = true })
 
 --vim.api.nvim_create_autocmd({ "VimEnter" }, { callback = open_nvim_tree })
