@@ -86,7 +86,7 @@ return require("packer").startup(function(use)
 			require("todo-comments").setup()
 		end,
 	})
-	use("RRethy/vim-illuminate")               -- highlights matches to the word under the cursor
+	use("RRethy/vim-illuminate") -- highlights matches to the word under the cursor
 
 	-- rainbow is no longer maintained, look at HiPhish/nvim-ts-rainbow2
 	--use("p00f/nvim-ts-rainbow")                -- rainbow nested parentheses/brackets
@@ -96,6 +96,7 @@ return require("packer").startup(function(use)
 	use({
 		-- shows tasks that are running (formatters, lsp, etc)
 		"j-hui/fidget.nvim",
+		tag = "legacy",
 		config = function()
 			require("fidget").setup()
 		end,
@@ -287,4 +288,3 @@ return require("packer").startup(function(use)
 	--
 	use("seandewar/nvimesweeper")
 end)
-
