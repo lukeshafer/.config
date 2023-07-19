@@ -100,6 +100,7 @@ alias gsh='git stash'
 alias gsha='git stash apply'
 
 alias mrc='glab mr create -b dev -f -y'
+alias mrdraft='glab mr create -b dev -f -y --draft'
 alias mrm='glab mr merge'
 
 alias awslogin="aws s3 ls --profile dev-crmi >> /dev/null && cat ~/.aws/saml-credentials"
