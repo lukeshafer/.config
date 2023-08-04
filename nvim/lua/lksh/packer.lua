@@ -44,6 +44,7 @@ return require("packer").startup(function(use)
 	------------------
 	--use({ "akinsho/bufferline.nvim", tag = "v2.*", requires = "kyazdani42/nvim-web-devicons" })  -- tabline for buffers, top
 	use { "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" }                                                             -- treesitter, parses code for better colors
+	use { "nvim-treesitter/nvim-treesitter-context" } 																		 -- shows parent context, like the current function/method, at the top of code
 	use { "kyazdani42/nvim-web-devicons" }
 	use { "nvim-lualine/lualine.nvim", requires = { "kyazdani42/nvim-web-devicons", opt = true } }                           -- status line, bottom
 	use { "RRethy/vim-illuminate" }                                                                                          -- highlights matches to the word under the cursor
