@@ -265,6 +265,8 @@ alias ghnew="gh repo create --source=. --remote=origin --public && git push --se
 alias gpl="git pull"
 alias gch="git checkout"
 alias gchb="git checkout -b"
+alias gm="git merge"
+alias gm-devtoqa="gch qa && gm dev && gp && gch dev"
 
 function gsync() {
 	gca $1 && gp

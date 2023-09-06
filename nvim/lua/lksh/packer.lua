@@ -76,7 +76,7 @@ return require("packer").startup(function(use)
 	use { "github/copilot.vim" }                                                                        -- ai pair programmer
 	use { "preservim/nerdcommenter" }                                                                   -- comment line with <leader>/
 	use { "ahmedkhalf/project.nvim" }                                                                   -- project manager and switcher
-	use { "andweeb/presence.nvim" }                                                                     -- discord presence for neovim
+	--use { "andweeb/presence.nvim" }                                                                     -- discord presence for neovim
 	use { "uga-rosa/ccc.nvim" }                                                                         -- color picker
 	use { "sindrets/diffview.nvim", requires = "nvim-lua/plenary.nvim" }                                -- git diff viewer
 	use { "akinsho/toggleterm.nvim", tag = "*" }                                                        -- Terminal pane/tab/window handler
