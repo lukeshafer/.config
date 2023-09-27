@@ -16,19 +16,20 @@ local function formatMode(str)
 	end
 end
 
+local filename = {
+	"filename",
+	symbols = {
+		modified = '●',
+		readonly = '[READONLY]'
+	},
+	path = 4,
+}
+
 require("lualine").setup({
 	sections = {
 		lualine_a = { { "mode", fmt = formatMode } },
 		lualine_b = { "branch", "diff", "diagnostics" },
-		lualine_c = {
-			{
-				"filename",
-				symbols = {
-					modified = '●',
-					readonly = '[READONLY]'
-				}
-			}
-		},
+		lualine_c = { filename },
 		lualine_x = { "encoding", "filetype" },
 		lualine_y = {},
 		lualine_z = { "location" },
@@ -36,15 +37,7 @@ require("lualine").setup({
 	inactive_sections = {
 		lualine_a = {},
 		lualine_b = {},
-		lualine_c = {
-			{
-				"filename",
-				symbols = {
-					modified = '●',
-					readonly = '[READONLY]'
-				}
-			}
-		},
+		lualine_c = { filename },
 		lualine_x = {},
 		lualine_y = {},
 		lualine_z = {},
