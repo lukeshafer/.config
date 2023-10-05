@@ -98,6 +98,9 @@ alias gr="git restore --staged"
 alias gacp="git add . && git commit -m $1 && git push"
 alias gsh='git stash'
 alias gsha='git stash apply'
+alias gm='git merge'
+alias gch='git checkout'
+alias git-tree='git log --oneline --graph --color --all --decorate'
 
 alias mrc='glab mr create -b dev -f -y'
 alias mrdraft='glab mr create -b dev -f -y --draft'
