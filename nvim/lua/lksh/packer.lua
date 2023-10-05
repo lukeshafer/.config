@@ -44,7 +44,7 @@ return require("packer").startup(function(use)
 	------------------
 	--use({ "akinsho/bufferline.nvim", tag = "v2.*", requires = "kyazdani42/nvim-web-devicons" })  -- tabline for buffers, top
 	use { "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" }                                                             -- treesitter, parses code for better colors
-	use { "nvim-treesitter/nvim-treesitter-context" } 																		 -- shows parent context, like the current function/method, at the top of code
+	use { "nvim-treesitter/nvim-treesitter-context" }                                                                        -- shows parent context, like the current function/method, at the top of code
 	use { "kyazdani42/nvim-web-devicons" }
 	use { "nvim-lualine/lualine.nvim", requires = { "kyazdani42/nvim-web-devicons", opt = true } }                           -- status line, bottom
 	use { "RRethy/vim-illuminate" }                                                                                          -- highlights matches to the word under the cursor
@@ -61,10 +61,21 @@ return require("packer").startup(function(use)
 	}
 	use {
 		"lukas-reineke/indent-blankline.nvim",
-		config = function()
-			require("indent_blankline").setup({ show_end_of_line = true, show_current_context = true, })
-		end,
+		config = function() require("ibl").setup({}) end,
 	}
+	use {
+		-- dims all code but the block you're editing
+		"folke/twilight.nvim",
+		config = function()
+			require("twilight").setup {
+				dimming = {
+					alpha = 0.50, -- amount of dimming
+				},
+				context = 20, -- amount of lines we will try to show around the current line
+			}
+		end
+	}
+
 
 
 	------------------
