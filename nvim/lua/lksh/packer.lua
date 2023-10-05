@@ -18,6 +18,7 @@ return require("packer").startup(function(use)
 	use { "rose-pine/neovim", as = "rose-pine", config = function() require("rose-pine").setup {} end }
 	use { 'olivercederborg/poimandres.nvim', config = function() require('poimandres').setup {} end }
 	use("Mofiqul/vscode.nvim")
+	use("rktjmp/lush.nvim") -- colorscheme MAKER
 
 	---- OLD COLOR SCHEMES ----
 	--use("folke/tokyonight.nvim")
@@ -34,7 +35,6 @@ return require("packer").startup(function(use)
 	--use 'rmehri01/onenord.nvim'
 	--use { 'Everblush/nvim', as = 'everblush' }
 	--use 'Yazeed1s/oh-lucy.nvim'
-	--use("rktjmp/lush.nvim") -- colorscheme MAKER
 	------------------
 	--
 
@@ -100,7 +100,7 @@ return require("packer").startup(function(use)
 	use { "windwp/nvim-ts-autotag", config = function() require("nvim-ts-autotag").setup() end, }       -- autoclose/rename html tags
 	use { "kylechui/nvim-surround", tag = "*", config = function() require("nvim-surround").setup() end, } -- surround using brackets, quotes, etc with shortcuts
 	use { "nvim-telescope/telescope.nvim", tag = "0.1.0", requires = { { "nvim-lua/plenary.nvim" } } }  -- fuzzy finder
-	use { 'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async' }                            -- some fold thing, idk
+	--use { 'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async' }                            -- some fold thing, idk
 
 	------------------
 	--
