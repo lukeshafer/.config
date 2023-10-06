@@ -26,20 +26,26 @@ lsp.set_preferences({
 	},
 })
 
-lsp.ensure_installed({
-	"astro",
-	"bashls",
-	"cssls",
-	"emmet_ls",
-	"html",
-	"rust_analyzer",
-	"svelte",
-	"tailwindcss",
-	"tsserver",
-	"vimls",
-	"yamlls",
-	"jsonls",
-	"lua_ls"
+require('mason').setup({})
+require('mason-lspconfig').setup({
+	handlers = {
+		lsp.default_setup,
+	},
+	ensure_installed = {
+		"astro",
+		"bashls",
+		"cssls",
+		"emmet_ls",
+		"html",
+		"rust_analyzer",
+		"svelte",
+		"tailwindcss",
+		"tsserver",
+		"vimls",
+		"yamlls",
+		"jsonls",
+		"lua_ls"
+	}
 })
 
 -- Fix Undefined global 'vim'
@@ -137,14 +143,18 @@ lsp.configure("jsonls", {
 })
 
 local cmp = require("cmp")
-local cmp_mappings = lsp.defaults.cmp_mappings({
-	["<CR>"] = cmp.mapping.confirm({ select = false }),
-	["<C-y>"] = cmp.mapping.confirm({ select = true }),
-	["<C-Space>"] = cmp.mapping.complete(),
-})
+--local cmp_mappings = lsp.defaults.cmp_mappings({
+--["<CR>"] = cmp.mapping.confirm({ select = false }),
+--["<C-y>"] = cmp.mapping.confirm({ select = true }),
+--["<C-Space>"] = cmp.mapping.complete(),
+--})
 
-lsp.setup_nvim_cmp({
-	mapping = cmp_mappings,
+cmp.setup({
+	mapping = {
+		["<CR>"] = cmp.mapping.confirm({ select = false }),
+		["<C-y>"] = cmp.mapping.confirm({ select = true }),
+		["<C-Space>"] = cmp.mapping.complete(),
+	},
 	sources = {
 		{ name = "path" },
 		{ name = "nvim_lsp", keyword_length = 0 },
