@@ -99,7 +99,7 @@ return require("packer").startup(function(use)
 	use { "windwp/nvim-autopairs", config = function() require("nvim-autopairs").setup() end, }         -- auto-create brackets/parentheses
 	use { "windwp/nvim-ts-autotag", config = function() require("nvim-ts-autotag").setup() end, }       -- autoclose/rename html tags
 	use { "kylechui/nvim-surround", tag = "*", config = function() require("nvim-surround").setup() end, } -- surround using brackets, quotes, etc with shortcuts
-	use { "nvim-telescope/telescope.nvim", tag = "0.1.0", requires = { { "nvim-lua/plenary.nvim" } } }  -- fuzzy finder
+	use { "nvim-telescope/telescope.nvim", tag = "0.1.4", requires = { { "nvim-lua/plenary.nvim" } } }  -- fuzzy finder
 	--use { 'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async' }                            -- some fold thing, idk
 
 	------------------
