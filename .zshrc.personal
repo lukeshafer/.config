@@ -96,7 +96,15 @@ function add() {
 }
 
 function init-prettier() {
+	cp ~/.config/.luke-config/prettier.config.cjs ./
 	pnpm add -D prettier eslint-config-prettier eslint-plugin-prettier
+	echo "Prettier config created"
+}
+
+function init-prettier-astro() {
+	cp ~/.config/.luke-config/prettier.config.cjs.astro ./prettier.config.cjs
+	pnpm add -Dw prettier eslint-config-prettier eslint-plugin-prettier prettier-plugin-astro prettier-plugin-tailwindcss || pnpm add -D prettier eslint-config-prettier eslint-plugin-prettier prettier-plugin-astro prettier-plugin-tailwindcss
+	echo "Prettier config created"
 }
 
 function init-ts() {
@@ -104,13 +112,18 @@ function init-ts() {
 }
 
 function init-eslint() {
-	pnpm add -D eslint 
+	pnpm add -D eslint || pnpm add -Dw eslint
 }
 
 function init-luke() {
 	init-prettier
 	init-ts
 	init-eslint
+}
+
+function astro-setup() {
+	init-eslint
+	init-prettier-astro
 }
 
 function ls-default() {
