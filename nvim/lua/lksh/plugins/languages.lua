@@ -5,6 +5,7 @@ return function()
 		------------------
 		--Languages without LSP config
 		"lankavitharana/ballerina-vim",
+		'architect/vim-plugin',
 		{
 			"ckipp01/nvim-jenkinsfile-linter",
 			dependencies = { "nvim-lua/plenary.nvim" }

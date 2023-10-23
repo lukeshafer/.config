@@ -18,7 +18,12 @@ return function()
 		"RRethy/vim-illuminate",
 
 		-- git blame inline
-		"APZelos/blamer.nvim",
+		{
+			"APZelos/blamer.nvim",
+			config = function()
+				vim.g.blamer_enabled = 1
+			end
+		},
 
 		-- inline git helpers
 		'lewis6991/gitsigns.nvim',
@@ -32,7 +37,16 @@ return function()
 		"folke/zen-mode.nvim",
 
 		-- highlight hex color strings e.g. #CCCCFF
-		"brenoprata10/nvim-highlight-colors",
+		{
+			"brenoprata10/nvim-highlight-colors",
+			config = function()
+				require("nvim-highlight-colors").setup({
+					render = "background", -- or 'foreground' or 'first_column'
+					enable_named_colors = true,
+					enable_tailwind = true,
+				})
+			end
+		},
 
 		-- highlight todo comments, e.g. TODO:
 		{ "folke/todo-comments.nvim",  dependencies = "nvim-lua/plenary.nvim" },

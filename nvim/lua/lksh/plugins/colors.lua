@@ -12,7 +12,7 @@ return function()
 			'rose-pine/neovim',
 			name = 'rose-pine'
 		},
-		{ dir = "~/.config/nvim/lua/lush_theme/stream.lua", name = "stream" },
+		{ dir = "~/.config/lush_themes/stream.lua" },
 		---- OTHER COLOR SCHEMES ----
 		--"folke/tokyonight.nvim",
 		--"EdenEast/nightfox.nvim",

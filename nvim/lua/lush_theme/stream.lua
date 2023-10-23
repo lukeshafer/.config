@@ -1,3 +1,4 @@
+-- Custom theme for Lush.nvim
 local lush = require('lush')
 local hsl = lush.hsl
 
@@ -8,10 +9,9 @@ local theme_red_base = hsl(13, 73, 42)
 local theme_green_base = hsl(143, 15, 35)
 local theme_gray = hsl(52, 10, 10)
 
-print("test")
-print(theme_blue_base)
 --- @diagnostic disable: undefined-global
-return lush(function()
+return lush(function(injected_functions)
+	local sym = injected_functions.sym
 	return {
 		-- Define what vims Normal highlight group should look like
 		Normal { bg = theme_blue_base.darken(83), fg = theme_beige_base },
@@ -19,12 +19,42 @@ return lush(function()
 		Whitespace { fg = Normal.fg.darken(40).saturate(-80) },
 		-- And make comments look the same, but with italic text
 		Comment { Whitespace, gui = "italic" },
-		Identifier { fg = theme_blue_base, gui = "italic" },
-		Statement { fg = theme_green_base.lighten(50) },
-		Special { fg = theme_yellow_base },
+		Identifier { fg = theme_blue_base.lighten(45).saturate(40), gui = "italic" },
+		Constant { fg = theme_red_base.lighten(40).desaturate(30) },
+		Statement { fg = theme_red_base.lighten(50).mix(theme_blue_base.lighten(10), 60).saturate(10) },
+		Function { fg = theme_yellow_base },
 		PMenu { bg = Normal.bg.lighten(5) },
 		Error { fg = Normal.fg.lighten(10), bg = theme_red_base, gui = "bold" },
-		Constant { fg = theme_red_base.lighten(50) },
+		Special { fg = theme_green_base.lighten(50) },
+		NonText { fg = Identifier.fg.darken(50), gui = "bold" },
+		SpecialKey { NonText },
+		Directory { fg = Normal.fg },
+		Type { Special },
+		PreProc { Statement },
+		Question { PreProc },
+		MoreMsg { Question },
+
+		-- HTML / JSX
+		sym"@tag.delimiter" { fg = Whitespace.fg },
+		sym"@tag" { fg = theme_blue_base.darken(10) },
+		sym"@tag.attribute" { fg = Identifier.fg },
+
+		-- SYNTAX
+		sym"@variable" { fg = Identifier.fg },
+		sym"@operator" { fg = Normal.fg.darken(10) },
+		sym"@keyword" { fg = Statement.fg },
+		sym"@keyword.function" { fg = theme_blue_base },
+		sym"@punctuation" { fg = Normal.fg },
+		sym"@function" { fg = Statement.fg },
+		sym"@lsp.typemod.type" { fg = theme_blue_base },
+		sym"@lsp.typemod.function.defaultLibrary" { fg = Statement.fg },
+
+		-- DIAGNOSTICS
+		DiagnosticError { fg = Error.bg.lighten(30), gui = "bold" },
+		DiagnosticWarn { fg = theme_yellow_base.mix(theme_red_base, 20), gui = "bold" },
+		DiagnosticInfo { fg = theme_blue_base.lighten(30), gui = "bold" },
+		DiagnosticHint { fg = theme_beige_base.darken(30), gui = "bold" },
+		DiagnosticOk { fg = theme_green_base, gui = "bold" },
 
 		-- COLUMNS
 		SignColumn { fg = Identifier.fg.darken(50), gui = "bold" },
@@ -34,11 +64,11 @@ return lush(function()
 		DiffChange { fg = theme_yellow_base, gui = "bold" },
 
 		-- LINES
-		Cursor { fg = Normal.bg, bg = Identifier.fg.lighten(10) },
-		CursorLine { bg = Normal.bg.lighten(10) }, -- lighten() can also be called via li()
-		CursorColumn { CursorLine },               -- CursorColumn is linked to CursorLine
-		Visual { fg = Normal.bg, bg = Identifier.fg }, -- Try pressing v and selecting some text
-		LineNr { fg = Identifier.fg.da(40), gui = "italic" },
+		Cursor { fg = Normal.bg, bg = theme_blue_base.lighten(10) },
+		CursorLine { bg = Normal.bg.lighten(10) },   -- lighten() can also be called via li()
+		CursorColumn { CursorLine },                 -- CursorColumn is linked to CursorLine
+		Visual { fg = Normal.bg, bg = theme_blue_base }, -- Try pressing v and selecting some text
+		LineNr { fg = theme_blue_base.da(40), gui = "italic" },
 		LineNrBelow { fg = LineNr.fg.da(40) },
 		LineNrAbove { LineNrBelow },
 		CursorLineNr { LineNr, fg = CursorLine.bg.mix(Normal.fg, 50) },
