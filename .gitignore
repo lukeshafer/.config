@@ -9,4 +9,5 @@
 !.zsh*
 !polybar/
 !zsh-theme/
+!.luke-config/
 packer_compiled.lua
