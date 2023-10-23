@@ -3,15 +3,15 @@ return function()
 		------------------
 		-- COLOR THEMES --
 		------------------
-		"shaunsingh/moonlight.nvim",
-		"sainnhe/sonokai",
-		"olivercederborg/poimandres.nvim",
+		--"shaunsingh/moonlight.nvim",
+		--"sainnhe/sonokai",
+		--"olivercederborg/poimandres.nvim",
 		"Mofiqul/vscode.nvim",
 		"rktjmp/lush.nvim", -- colorscheme MAKER
-		{
-			'rose-pine/neovim',
-			name = 'rose-pine'
-		},
+		--{
+			--'rose-pine/neovim',
+			--name = 'rose-pine'
+		--},
 		{ dir = "~/.config/lush_themes/stream.lua" },
 		---- OTHER COLOR SCHEMES ----
 		--"folke/tokyonight.nvim",

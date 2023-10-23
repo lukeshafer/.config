@@ -12,10 +12,18 @@ return function()
 		"nvim-tree/nvim-web-devicons",
 
 		-- status line, bottom
-		{ "nvim-lualine/lualine.nvim", dependencies = { "nvim-tree/nvim-web-devicons", opt = true } },
+		{
+			"nvim-lualine/lualine.nvim",
+			dependencies = { "nvim-tree/nvim-web-devicons", opt = true }
+		},
 
 		-- highlights matches to the word under the cursor
-		"RRethy/vim-illuminate",
+		{
+			"RRethy/vim-illuminate",
+			config = function()
+				require('illuminate').configure()
+			end
+		},
 
 		-- git blame inline
 		{
@@ -26,7 +34,10 @@ return function()
 		},
 
 		-- inline git helpers
-		'lewis6991/gitsigns.nvim',
+		{
+			'lewis6991/gitsigns.nvim',
+			opts = {}
+		},
 
 		-- better diagnostics
 		{
@@ -49,19 +60,27 @@ return function()
 		},
 
 		-- highlight todo comments, e.g. TODO:
-		{ "folke/todo-comments.nvim",  dependencies = "nvim-lua/plenary.nvim" },
+		{
+			"folke/todo-comments.nvim",
+			dependencies = "nvim-lua/plenary.nvim",
+			opts = {}
+		},
 
 		-- show indentation levels
-		"lukas-reineke/indent-blankline.nvim",
+		{
+			"lukas-reineke/indent-blankline.nvim",
+			main = "ibl",
+			opts = {}
+		}
 
 		-- dim inactive code
-		{
-			"folke/twilight.nvim",
-			config = {
-				dimming = { alpha = 0.50 },
-				context = 20
-			},
-		},
+		--{
+		--"folke/twilight.nvim",
+		--config = {
+		--dimming = { alpha = 0.50 },
+		--context = 20
+		--},
+		--},
 		------------------
 	}
 end

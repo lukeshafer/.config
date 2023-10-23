@@ -21,7 +21,7 @@ return lush(function(injected_functions)
 		Comment { Whitespace, gui = "italic" },
 		Identifier { fg = theme_blue_base.lighten(45).saturate(40), gui = "italic" },
 		Constant { fg = theme_red_base.lighten(40).desaturate(30) },
-		Statement { fg = theme_red_base.lighten(50).mix(theme_blue_base.lighten(10), 60).saturate(10) },
+		Statement { fg = theme_red_base.lighten(50).mix(theme_blue_base.lighten(10), 60).saturate(30) },
 		Function { fg = theme_yellow_base },
 		PMenu { bg = Normal.bg.lighten(5) },
 		Error { fg = Normal.fg.lighten(10), bg = theme_red_base, gui = "bold" },
@@ -33,6 +33,9 @@ return lush(function(injected_functions)
 		PreProc { Statement },
 		Question { PreProc },
 		MoreMsg { Question },
+		IblIndent { fg = Whitespace.fg.mix(Normal.bg, 80) },
+		IblWhitespace { IblIndent },
+		IblScope { IblIndent },
 
 		-- HTML / JSX
 		sym"@tag.delimiter" { fg = Whitespace.fg },
@@ -56,22 +59,25 @@ return lush(function(injected_functions)
 		DiagnosticHint { fg = theme_beige_base.darken(30), gui = "bold" },
 		DiagnosticOk { fg = theme_green_base, gui = "bold" },
 
+
 		-- COLUMNS
-		SignColumn { fg = Identifier.fg.darken(50), gui = "bold" },
+		ColumnBase { bg = Normal.bg.lighten(2) },
+		SignColumn { ColumnBase, fg = Identifier.fg.darken(50), gui = "bold" },
 		FoldColumn { SignColumn },
-		DiffAdd { fg = theme_green_base, gui = "bold" },
-		DiffDelete { fg = theme_red_base, gui = "bold" },
-		DiffChange { fg = theme_yellow_base, gui = "bold" },
+		DiffAdd { fg = theme_green_base, gui = "bold", ColumnBase },
+		DiffDelete { fg = theme_red_base, gui = "bold", ColumnBase },
+		DiffChange { fg = theme_yellow_base, gui = "bold", ColumnBase },
 
 		-- LINES
 		Cursor { fg = Normal.bg, bg = theme_blue_base.lighten(10) },
-		CursorLine { bg = Normal.bg.lighten(10) },   -- lighten() can also be called via li()
+		CursorLine { bg = Normal.bg.lighten(5) },   -- lighten() can also be called via li()
 		CursorColumn { CursorLine },                 -- CursorColumn is linked to CursorLine
 		Visual { fg = Normal.bg, bg = theme_blue_base }, -- Try pressing v and selecting some text
-		LineNr { fg = theme_blue_base.da(40), gui = "italic" },
-		LineNrBelow { fg = LineNr.fg.da(40) },
+		LineNr { fg = theme_blue_base.da(40), gui = "italic", bg = ColumnBase.bg },
+		LineNrBelow { fg = LineNr.fg.da(40), ColumnBase },
 		LineNrAbove { LineNrBelow },
 		CursorLineNr { LineNr, fg = CursorLine.bg.mix(Normal.fg, 50) },
+		IlluminatedWordRead { bg = CursorLine.bg.darken(10) },
 
 		-- STATUSLINES
 		StatusLine { bg = Normal.bg.lighten(10), fg = Normal.fg.darken(20) },

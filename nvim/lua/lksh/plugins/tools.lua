@@ -17,15 +17,15 @@ return function()
 		"preservim/nerdcommenter",
 
 		-- project manager and switcher
-		{
-			"ahmedkhalf/project.nvim",
-			config = function()
-				require("project_nvim").setup({
-					detection_methods = { "pattern", "lsp" },
-					patterns = { ".git", ".gitignore" },
-				})
-			end
-		},
+		--{
+			--"ahmedkhalf/project.nvim",
+			--config = function()
+				--require("project_nvim").setup({
+					--detection_methods = { "pattern", "lsp" },
+					--patterns = { ".git", ".gitignore" },
+				--})
+			--end
+		--},
 
 		-- color picker
 		{
