@@ -114,6 +114,8 @@ return require("packer").startup(function(use)
 	use { "lankavitharana/ballerina-vim" }                                         -- lint ballerina (no lsp)
 	use { "jose-elias-alvarez/null-ls.nvim" }
 
+	use { 'architect/vim-plugin' }
+
 	-- LSP Config Handler
 	use({
 		"VonHeikemen/lsp-zero.nvim",
