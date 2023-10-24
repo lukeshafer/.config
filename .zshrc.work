@@ -47,7 +47,7 @@ function zrc() {
 
 function attach-tmux-if-not-attached() {
 	if [ -z "$TMUX" ]; then
-		tmux new-session -A -s $USER
+		tm
 	fi
 }
 attach-tmux-if-not-attached
