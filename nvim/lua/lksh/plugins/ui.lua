@@ -7,7 +7,7 @@ return function()
 		"nvim-treesitter/nvim-treesitter",
 
 		-- shows parent context, like the current function/method, at the top of code
-		"nvim-treesitter/nvim-treesitter-context",
+		{ "nvim-treesitter/nvim-treesitter-context", event = "VeryLazy" },
 
 		"nvim-tree/nvim-web-devicons",
 
@@ -20,6 +20,7 @@ return function()
 		-- highlights matches to the word under the cursor
 		{
 			"RRethy/vim-illuminate",
+			event = "VeryLazy",
 			config = function()
 				require('illuminate').configure()
 			end
@@ -28,6 +29,7 @@ return function()
 		-- git blame inline
 		{
 			"APZelos/blamer.nvim",
+			event = "VeryLazy",
 			config = function()
 				vim.g.blamer_enabled = 1
 			end
