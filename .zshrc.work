@@ -103,6 +103,7 @@ alias gch='git checkout'
 alias git-tree='git log --oneline --graph --color --all --decorate'
 
 alias mrc='glab mr create -b dev -f -y'
+alias mrcqa='glab mr create -b qa -y'
 alias mrdraft='glab mr create -b dev -f -y --draft'
 alias mrm='glab mr merge'
 
