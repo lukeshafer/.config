@@ -6,7 +6,7 @@ return function()
 		-- AI code completion
 		{
 			"github/copilot.vim",
-			event = "VeryLazy",
+			event = "InsertEnter",
 			config = function()
 				vim.api.nvim_set_keymap("i", "<C-J>", 'copilot#Accept("<CR>")', { silent = true, expr = true })
 				vim.g.copilot_no_tab_map = true
@@ -14,22 +14,12 @@ return function()
 		},
 
 		-- comment line with <leader>/
-		"preservim/nerdcommenter",
-
-		-- project manager and switcher
-		--{
-			--"ahmedkhalf/project.nvim",
-			--config = function()
-				--require("project_nvim").setup({
-					--detection_methods = { "pattern", "lsp" },
-					--patterns = { ".git", ".gitignore" },
-				--})
-			--end
-		--},
+		{ "preservim/nerdcommenter",       event = "VeryLazy" },
 
 		-- color picker
 		{
 			"uga-rosa/ccc.nvim",
+			event = "VeryLazy",
 			config = function()
 				vim.api.nvim_set_keymap("n", "cp", ":CccPick<CR>", { noremap = true })
 			end
@@ -43,23 +33,25 @@ return function()
 		},
 
 		-- autoclose/rename html tags
-		"windwp/nvim-ts-autotag",
+		{ "windwp/nvim-ts-autotag",        event = "InsertEnter" },
 
 		-- fuzzy finder
-		"nvim-telescope/telescope.nvim",
+		{ "nvim-telescope/telescope.nvim", lazy = true },
 
 		-- Terminal pane/tab/window handler
-		"akinsho/toggleterm.nvim",
+		{ "akinsho/toggleterm.nvim",       event = "VeryLazy" },
 
 		-- git diff viewer
 		{
 			"sindrets/diffview.nvim",
+			event = "VeryLazy",
 			dependencies = "nvim-lua/plenary.nvim"
 		},
 
 		-- move and jump to spots in code quickly
 		{
 			"ggandor/leap.nvim",
+			event = "BufEnter",
 			config = function()
 				require('leap').add_default_mappings()
 			end
@@ -68,12 +60,14 @@ return function()
 		-- easier navigation between files
 		{
 			"ThePrimeagen/harpoon",
+			event = "VeryLazy",
 			dependencies = "nvim-lua/plenary.nvim"
 		},
 
 		-- floating file explorer
 		{
 			"nvim-tree/nvim-tree.lua",
+			event = "VeryLazy",
 			dependencies = { "nvim-tree/nvim-web-devicons" },
 		},
 

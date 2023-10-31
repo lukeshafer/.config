@@ -36,6 +36,7 @@ return lush(function(injected_functions)
 		IblIndent { fg = Whitespace.fg.mix(Normal.bg, 80) },
 		IblWhitespace { IblIndent },
 		IblScope { IblIndent },
+		WinSeparator {  fg = Whitespace.fg.mix(Normal.bg, 60)  },
 
 		-- HTML / JSX
 		sym"@tag.delimiter" { fg = Whitespace.fg },
