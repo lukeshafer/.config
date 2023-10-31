@@ -1,3 +1,5 @@
+local atWork = os.getenv("PC_CONTEXT") == "work"
+
 return function()
 	return {
 		------------------
@@ -73,7 +75,16 @@ return function()
 			"lukas-reineke/indent-blankline.nvim",
 			main = "ibl",
 			opts = {}
-		}
+		},
+
+		-- show package cost
+		{
+			'barrett-ruth/import-cost.nvim',
+			build = atWork and 'sh install.sh npm' or 'sh install.sh pnpm',
+			-- if on windows
+			-- build = 'pwsh install.ps1 yarn',
+			config = true
+		},
 
 		-- dim inactive code
 		--{
