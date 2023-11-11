@@ -8,6 +8,8 @@ vim.g.loaded_netrwPlugin = 1
 vim.opt.tabstop = 3
 vim.opt.shiftwidth = 3
 vim.opt.termguicolors = true
+
+
 -- vim.opt.tCo = 256
 vim.opt.number = true
 vim.opt.relativenumber = true

@@ -24,3 +24,23 @@ local function set_stream_colors()
 end
 
 vim.api.nvim_create_user_command('SetStreamColors', set_stream_colors, {})
+
+local function reset_fonts()
+	vim.cmd("highlight Comment gui=italic")
+	vim.cmd("highlight Error gui=italic")
+	vim.cmd("highlight String gui=italic")
+
+	vim.cmd("highlight Function gui=bold")
+	vim.cmd("highlight Type gui=bold")
+	vim.cmd("highlight @type gui=bold")
+	vim.cmd("highlight @field gui=bold")
+
+	vim.cmd("highlight Keyword gui=italic,bold")
+	vim.cmd("highlight Conditional gui=italic,bold")
+	vim.cmd("highlight @keyword.function gui=italic,bold")
+	vim.cmd("highlight @keyword.operator gui=italic,bold")
+	--vim.cmd("highlight PreProc gui=italic,bold")
+end
+reset_fonts()
+
+vim.api.nvim_create_user_command('ResetFonts', reset_fonts, {})
