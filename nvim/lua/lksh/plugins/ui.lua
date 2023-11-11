@@ -7,7 +7,7 @@ return function()
 		"nvim-treesitter/nvim-treesitter",
 
 		-- shows parent context, like the current function/method, at the top of code
-		{ "nvim-treesitter/nvim-treesitter-context", event = "VeryLazy" },
+		--{ "nvim-treesitter/nvim-treesitter-context", event = "VeryLazy" },
 
 		"nvim-tree/nvim-web-devicons",
 

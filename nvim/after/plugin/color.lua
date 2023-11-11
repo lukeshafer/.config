@@ -15,7 +15,7 @@
 
 vim.opt.background = "dark" -- sets light/dark for some colorschemes
 --vim.g.sonokai_style = "shusia"
-vim.cmd "color vscode"
+--vim.cmd "color github_dark_high_contrast"
 
 --vim.g.colors_name = "stream"
 

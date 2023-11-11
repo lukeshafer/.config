@@ -5,13 +5,30 @@ return function()
 		------------------
 		"Mofiqul/vscode.nvim",
 		"rktjmp/lush.nvim", -- colorscheme MAKER
+		{
+			'projekt0n/github-nvim-theme',
+			config = function()
+				require('github-theme').setup({
+					options = {
+						styles = {
+							comments = 'italic',
+							keywords = 'bold',
+							types = 'italic,bold',
+						}
+					}
+				})
+
+				vim.cmd('colorscheme github_dark_tritanopia')
+			end,
+		},
+
 		{ dir = "~/.config/lush_themes/stream.lua" }, -- custom theme
 		--"shaunsingh/moonlight.nvim",
 		--"sainnhe/sonokai",
 		--"olivercederborg/poimandres.nvim",
 		--{
-			--'rose-pine/neovim',
-			--name = 'rose-pine'
+		--'rose-pine/neovim',
+		--name = 'rose-pine'
 		--},
 		---- OTHER COLOR SCHEMES ----
 		--"folke/tokyonight.nvim",

@@ -1,7 +1,7 @@
 /*
 !.gitignore
 !nvim/
-!.tmux.conf
+!.tmux.conf*
 !i3/
 !i3status/
 !kitty/
