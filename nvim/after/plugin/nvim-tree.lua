@@ -60,6 +60,10 @@ require("nvim-tree").setup({
 			open_win_config = center_floating_window,
 		},
 	},
+	diagnostics = {
+		enable = true,
+		show_on_dirs = true,
+	},
 })
 
 local api = require("nvim-tree.api")

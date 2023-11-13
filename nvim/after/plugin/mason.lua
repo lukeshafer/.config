@@ -43,13 +43,13 @@ require('mason-lspconfig').setup({
 			})
 		end,
 		tsserver = function()
-			lspconfig.tsserver.setup({
-				init_options = {
-					preferences = {
-						disableSuggestions = true,
-					},
-				},
-			})
+			--lspconfig.tsserver.setup({
+				--init_options = {
+					--preferences = {
+						--disableSuggestions = true,
+					--},
+				--},
+			--})
 		end,
 		yamlls = function()
 			lspconfig.yamlls.setup({

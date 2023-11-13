@@ -71,6 +71,14 @@ return function()
 			dependencies = { "nvim-tree/nvim-web-devicons" },
 		},
 
+		-- project-wide typescript checker
+		{
+			'dmmulroy/tsc.nvim',
+			config = function()
+				require('tsc').setup()
+			end
+		},
+
 		-- tools for surrounding text
 		{
 			"kylechui/nvim-surround",
