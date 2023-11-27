@@ -5,9 +5,10 @@ vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
 -- Editor Settings
-vim.opt.tabstop = 3
-vim.opt.shiftwidth = 3
+vim.opt.tabstop = 2
+vim.opt.shiftwidth = 2
 vim.opt.termguicolors = true
+vim.opt.expandtab = true
 
 
 -- vim.opt.tCo = 256

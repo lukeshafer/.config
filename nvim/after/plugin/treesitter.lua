@@ -18,6 +18,7 @@ require("nvim-treesitter.configs").setup({
 		"markdown",
 		"prisma",
 		"python",
+		"rescript",
 		"scss",
 		"sql",
 		"toml",

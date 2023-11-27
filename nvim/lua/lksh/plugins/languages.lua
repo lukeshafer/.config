@@ -6,17 +6,19 @@ return function()
 		--Languages without LSP config
 		"lankavitharana/ballerina-vim",
 		"architect/vim-plugin",
+		--"rescript-lang/vim-rescript",
+		"nkrkv/nvim-treesitter-rescript",
 		{
 			"ckipp01/nvim-jenkinsfile-linter",
 			dependencies = { "nvim-lua/plenary.nvim" }
 		},
 
 		-- LSPConfig Alternatives
-		{
-			"pmizio/typescript-tools.nvim",
-			dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
-			opts = {},
-		},
+		--{
+		--"pmizio/typescript-tools.nvim",
+		--dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+		--opts = {},
+		--},
 
 		-- Formatters and Linters
 		-- ( INFO: null-ls is no longer maintained, needs replacing )

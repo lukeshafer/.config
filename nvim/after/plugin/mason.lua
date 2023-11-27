@@ -14,6 +14,7 @@ require('mason-lspconfig').setup({
 		"html",
 		"jsonls",
 		"lua_ls",
+		--"rescriptls",
 		"rust_analyzer",
 		"svelte",
 		"tailwindcss",
@@ -43,13 +44,13 @@ require('mason-lspconfig').setup({
 			})
 		end,
 		tsserver = function()
-			--lspconfig.tsserver.setup({
-				--init_options = {
-					--preferences = {
-						--disableSuggestions = true,
-					--},
-				--},
-			--})
+			lspconfig.tsserver.setup({
+				init_options = {
+					preferences = {
+						disableSuggestions = true,
+					},
+				},
+			})
 		end,
 		yamlls = function()
 			lspconfig.yamlls.setup({
@@ -131,3 +132,5 @@ require('mason-lspconfig').setup({
 	},
 
 })
+
+require("lspconfig").rescriptls.setup {}
