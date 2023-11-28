@@ -19,7 +19,6 @@ return function()
 		--dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
 		--opts = {},
 		--},
-
 		-- Formatters and Linters
 		-- ( INFO: null-ls is no longer maintained, needs replacing )
 		"jose-elias-alvarez/null-ls.nvim",
