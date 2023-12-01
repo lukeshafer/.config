@@ -295,3 +295,5 @@ alias aurs="aur"
 alias pkadd="sudo pacman -S"
 
 alias ec2connect='ssh -i "~/.ssh/keys/Macbook Pro.pem" ubuntu@ec2-3-142-246-64.us-east-2.compute.amazonaws.com'
+
+[[ ! -r /home/luke/.opam/opam-init/init.zsh ]] || source /home/luke/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
