@@ -1,6 +1,5 @@
-/** @type {import("@types/prettier").Config} */
+/** @type {import("prettier").Config} */
 module.exports = {
-	pluginSearchDirs: false,
 	useTabs: true,
 	singleQuote: true,
 	trailingComma: 'es5',

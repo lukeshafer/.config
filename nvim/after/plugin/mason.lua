@@ -14,6 +14,7 @@ require('mason-lspconfig').setup({
 		"html",
 		"jsonls",
 		"lua_ls",
+		--"rescriptls",
 		"rust_analyzer",
 		"svelte",
 		"tailwindcss",
@@ -131,3 +132,5 @@ require('mason-lspconfig').setup({
 	},
 
 })
+
+require("lspconfig").rescriptls.setup {}

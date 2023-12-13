@@ -160,9 +160,9 @@ function deldir {
 }
 
 # Automatically attach to TMUX if connecting via SSH
-if [[ $- =~ i ]] && [[ -z "$TMUX" ]]; then
-	tmux new-session -A -s $USER
-fi
+#if [[ $- =~ i ]] && [[ -z "$TMUX" ]]; then
+	#tmux new-session -A -s $USER
+#fi
 
 function zrc() {
 	nvim ~/.zshrc

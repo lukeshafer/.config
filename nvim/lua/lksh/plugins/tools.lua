@@ -4,14 +4,14 @@ return function()
 		--     TOOLS    --
 		------------------
 		-- AI code completion
-		{
-			"github/copilot.vim",
-			event = "InsertEnter",
-			config = function()
-				vim.api.nvim_set_keymap("i", "<C-J>", 'copilot#Accept("<CR>")', { silent = true, expr = true })
-				vim.g.copilot_no_tab_map = true
-			end
-		},
+		--{
+			--"github/copilot.vim",
+			--event = "InsertEnter",
+			--config = function()
+				--vim.api.nvim_set_keymap("i", "<C-J>", 'copilot#Accept("<CR>")', { silent = true, expr = true })
+				--vim.g.copilot_no_tab_map = true
+			--end
+		--},
 
 		-- comment line with <leader>/
 		{ "preservim/nerdcommenter",       event = "VeryLazy" },
@@ -33,7 +33,13 @@ return function()
 		},
 
 		-- autoclose/rename html tags
-		{ "windwp/nvim-ts-autotag",        event = "InsertEnter" },
+		{
+			"windwp/nvim-ts-autotag",
+			event = "InsertEnter",
+			config = function()
+				require('nvim-ts-autotag').setup()
+			end
+		},
 
 		-- fuzzy finder
 		{ "nvim-telescope/telescope.nvim", lazy = true },
@@ -69,6 +75,14 @@ return function()
 			"nvim-tree/nvim-tree.lua",
 			event = "VeryLazy",
 			dependencies = { "nvim-tree/nvim-web-devicons" },
+		},
+
+		-- project-wide typescript checker
+		{
+			'dmmulroy/tsc.nvim',
+			config = function()
+				require('tsc').setup()
+			end
 		},
 
 		-- tools for surrounding text

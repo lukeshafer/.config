@@ -18,6 +18,7 @@ require("nvim-treesitter.configs").setup({
 		"markdown",
 		"prisma",
 		"python",
+		"rescript",
 		"scss",
 		"sql",
 		"toml",
@@ -48,4 +49,8 @@ require("nvim-treesitter.configs").setup({
 		-- colors = {}, -- table of hex strings
 		-- termcolors = {} -- table of colour name strings
 	},
+
+	autotag = {
+		enable = true,
+	}
 })
