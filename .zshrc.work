@@ -50,7 +50,7 @@ function attach-tmux-if-not-attached() {
 		tm
 	fi
 }
-attach-tmux-if-not-attached
+#attach-tmux-if-not-attached
 
 function tmrc() {
 	nvim ~/.tmux.conf
@@ -113,6 +113,8 @@ alias awsreset="awslogout && awslogin"
 
 alias tm="tmux new-session -A -s $USER"
 alias tmr='tmux source ~/.tmux.conf'
+alias tmc="nvim ~/.tmux.conf && cp ~/.tmux.conf ~/.config/.tmux.conf.work && tmr"
+
 alias e2e='AWS_SDK_LOAD_CONFIG=1 AWS_PROFILE=dev-crmi STAGE=ls npm test'
 
 alias install-handlers="cd ./src/lambda/handlers/ && (find . -maxdepth 2 -name package.json -execdir npm i \;) && cd -"

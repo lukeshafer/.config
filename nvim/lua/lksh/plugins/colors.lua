@@ -6,7 +6,7 @@ return function()
     {
       "Mofiqul/vscode.nvim",
       config = function()
-        --vim.cmd('colorscheme vscode')
+        vim.cmd('colorscheme vscode')
       end,
     },
     "rktjmp/lush.nvim", -- colorscheme MAKER
@@ -23,7 +23,7 @@ return function()
           }
         })
 
-        vim.cmd('colorscheme github_dark_high_contrast')
+        --vim.cmd('colorscheme github_dark_high_contrast')
       end,
     },
 
@@ -66,6 +66,7 @@ return function()
     "mhartington/oceanic-next",
     "savq/melange",
     "olimorris/onedarkpro.nvim",
+    "tomasiser/vim-code-dark",
     { "catppuccin/nvim",                       name = "catppuccin" },
     { 'embark-theme/vim',                      name = 'embark' },
     "rmehri01/onenord.nvim",
