@@ -114,13 +114,13 @@ return function()
 		},
 
 		-- show package cost
-		{
-			'barrett-ruth/import-cost.nvim',
-			build = atWork and 'sh install.sh npm' or 'sh install.sh pnpm',
-			-- if on windows
-			-- build = 'pwsh install.ps1 yarn',
-			config = true
-		},
+		--{
+			--'barrett-ruth/import-cost.nvim',
+			--build = atWork and 'sh install.sh npm' or 'sh install.sh pnpm',
+			---- if on windows
+			---- build = 'pwsh install.ps1 yarn',
+			--config = true
+		--},
 
 		-- notification API
 		{
