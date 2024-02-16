@@ -39,6 +39,8 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 export PATH="/opt/homebrew/opt/openjdk11/bin:$PATH"
 
+export DOCKER_HOST="unix:/$HOME/.docker/run/docker.sock"
+
 function zrc() {
 	nvim ~/.zshrc
 	cp ~/.zshrc ~/.config/.zshrc.work
@@ -120,3 +122,5 @@ alias e2e='AWS_SDK_LOAD_CONFIG=1 AWS_PROFILE=dev-crmi STAGE=ls npm test'
 alias install-handlers="cd ./src/lambda/handlers/ && (find . -maxdepth 2 -name package.json -execdir npm i \;) && cd -"
 alias install-lib="cd ./src/lambda/lib/ && npm i && cd -"
 alias install-all="install-handlers && install-lib"
+
+alias finder="echo 'Use open instead'"
