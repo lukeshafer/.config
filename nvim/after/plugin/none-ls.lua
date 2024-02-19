@@ -9,8 +9,8 @@ local lspSources = {
 	b.diagnostics.cfn_lint,
 	--b.formatting.rustfmt,
 	b.formatting.fixjson,
-  b.formatting.ocamlformat
-	--b.formatting.yamlfmt,
+  b.formatting.ocamlformat,
+  b.formatting.yamlfmt,
 	--b.formatting.prismaFmt,
 	--b.formatting.prettierd,
 }

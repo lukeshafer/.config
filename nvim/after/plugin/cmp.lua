@@ -6,6 +6,7 @@ cmp.setup({
 		{ name = "nvim_lsp", keyword_length = 0 },
 		{ name = "luasnip",  keyword_length = 1 },
 		{ name = "buffer",   keyword_length = 3 },
+    --{ name = "otter" }
 	},
 	mapping = cmp.mapping.preset.insert({
 		-- Enter key confirms completion item
