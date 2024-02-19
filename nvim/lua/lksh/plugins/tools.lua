@@ -1,5 +1,7 @@
+local atWork = os.getenv("PC_CONTEXT") == "work"
+
 return function()
-  return {
+  local tools = {
     ------------------
     --     TOOLS    --
     ------------------
@@ -97,13 +99,51 @@ return function()
       end
     },
 
+    -- github issues integrations
+    {
+      "pwntester/octo.nvim",
+      dependencies = { "nvim-tree/nvim-web-devicons", "nvim-lua/plenary.nvim", "nvim-telescope/telescope.nvim" },
+      config = function()
+        require("octo").setup({
+          -- Configuration here, or leave empty to use defaults
+        })
+      end
+    },
+
+    {
+      "ray-x/lsp_signature.nvim",
+      event = "VeryLazy",
+      opts = {},
+      config = function(_, opts) require 'lsp_signature'.setup(opts) end
+    },
+
+    'JoosepAlviste/nvim-ts-context-commentstring',
+
     --{
-      --"jmbuhr/otter.nvim",
-      --config = function()
-        --local otter = require('otter')
-        --otter.activate({ 'javascript', 'typescript', 'html', 'jsx', 'tsx', 'js', 'ts', 'css' })
-      --end
+    --"jmbuhr/otter.nvim",
+    --config = function()
+    --local otter = require('otter')
+    --otter.activate({ 'javascript', 'typescript', 'html', 'jsx', 'tsx', 'js', 'ts', 'css' })
+    --end
     --}
 
   }
+
+  -- personal PC only
+  if not atWork then
+    -- copilot alternative but FREE (for now)
+    tools[#tools + 1] = {
+      "Exafunction/codeium.vim",
+      event = 'BufEnter',
+      config = function()
+        vim.g.codeium_no_tab_map = true
+        -- Set Codeium Accept to <C-j> for insert mode
+        vim.keymap.set('i', '<C-j>', function()
+          return vim.fn['codeium#Accept']()
+        end, { expr = true })
+      end,
+    }
+  end
+
+  return tools
 end
