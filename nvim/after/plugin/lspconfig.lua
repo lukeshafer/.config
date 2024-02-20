@@ -1,5 +1,6 @@
 local lspconfig = require('lspconfig')
 local lsp_defaults = lspconfig.util.default_config
+local navbuddy = require('nvim-navbuddy')
 
 lsp_defaults.capabilities = vim.tbl_deep_extend(
 	'force',
@@ -12,6 +13,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
 	callback = function(event)
 		local opts = { noremap = true, silent = true, buffer = event.buf }
 
+    vim.keymap.set('n', '<leader>n', navbuddy.open, opts)
 		vim.keymap.set('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>', opts)
 		vim.keymap.set('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<cr>', opts)
 		vim.keymap.set('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<cr>', opts)
