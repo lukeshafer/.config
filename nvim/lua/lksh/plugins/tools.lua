@@ -130,20 +130,22 @@ return function()
   }
 
   -- personal PC only
-  if not atWork then
-    -- copilot alternative but FREE (for now)
-    tools[#tools + 1] = {
-      "Exafunction/codeium.vim",
-      event = 'BufEnter',
-      config = function()
-        vim.g.codeium_no_tab_map = true
-        -- Set Codeium Accept to <C-j> for insert mode
-        vim.keymap.set('i', '<C-j>', function()
-          return vim.fn['codeium#Accept']()
-        end, { expr = true })
-      end,
-    }
-  end
+  --if not atWork then
+    ---- copilot alternative but FREE (for now)
+    --tools[#tools + 1] = {
+      --"Exafunction/codeium.vim",
+      --event = 'BufEnter',
+      --config = function()
+        --vim.g.codeium_no_tab_map = true
+        ---- Set Codeium Accept to <C-j> for insert mode
+        --vim.keymap.set('i', '<C-j>', function()
+          --return vim.fn['codeium#Accept']()
+        --end, { expr = true })
+
+        --vim.cmd('CodeiumDisable')
+      --end,
+    --}
+  --end
 
   return tools
 end

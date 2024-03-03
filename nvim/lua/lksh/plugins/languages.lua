@@ -26,16 +26,16 @@ return function()
     -- LSP Support
     {
       "neovim/nvim-lspconfig",
-      dependencies = {
-        {
-          "SmiteshP/nvim-navbuddy",
-          dependencies = {
-            "SmiteshP/nvim-navic",
-            "MunifTanjim/nui.nvim"
-          },
-          opts = { lsp = { auto_attach = true } }
-        }
-      },
+      --dependencies = {
+        --{
+          --"SmiteshP/nvim-navbuddy",
+          --dependencies = {
+            --"SmiteshP/nvim-navic",
+            --"MunifTanjim/nui.nvim"
+          --},
+          --opts = { lsp = { auto_attach = true } }
+        --}
+      --},
 
     },
     "williamboman/mason.nvim",

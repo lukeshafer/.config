@@ -316,3 +316,5 @@ alias aurs="aur"
 alias pkadd="sudo pacman -S"
 
 alias ec2connect='ssh -i "~/.ssh/keys/Macbook Pro.pem" ubuntu@ec2-3-142-246-64.us-east-2.compute.amazonaws.com'
+
+alias vi="nvim"
