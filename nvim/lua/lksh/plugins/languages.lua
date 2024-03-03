@@ -7,7 +7,7 @@ return function()
     "lankavitharana/ballerina-vim",
     "architect/vim-plugin",
     --"rescript-lang/vim-rescript",
-    "nkrkv/nvim-treesitter-rescript",
+    --"nkrkv/nvim-treesitter-rescript",
     {
       "ckipp01/nvim-jenkinsfile-linter",
       dependencies = { "nvim-lua/plenary.nvim" }
@@ -21,22 +21,21 @@ return function()
     --},
     -- Formatters and Linters
     -- ( INFO: null-ls is no longer maintained, needs replacing )
-    "jose-elias-alvarez/null-ls.nvim",
+    "nvimtools/none-ls.nvim",
 
     -- LSP Support
     {
       "neovim/nvim-lspconfig",
-      dependencies = {
-        {
-          "SmiteshP/nvim-navbuddy",
-          dependencies = {
-            "SmiteshP/nvim-navic",
-            "MunifTanjim/nui.nvim"
-          },
-          opts = { lsp = { auto_attach = true } }
-        }
-      },
-
+      --dependencies = {
+        --{
+          --"SmiteshP/nvim-navbuddy",
+          --dependencies = {
+            --"SmiteshP/nvim-navic",
+            --"MunifTanjim/nui.nvim"
+          --},
+          --opts = { lsp = { auto_attach = true } }
+        --}
+      --},
     },
     "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",

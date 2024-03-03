@@ -1,11 +1,11 @@
 local lspconfig = require('lspconfig')
-local navbuddy = require('nvim-navbuddy')
+--local navbuddy = require('nvim-navbuddy')
 
 local default_setup = function(server)
   lspconfig[server].setup({
-    on_attach = function(client, bufnr)
-      navbuddy.attach(client, bufnr)
-    end
+    --on_attach = function(client, bufnr)
+      --navbuddy.attach(client, bufnr)
+    --end
   })
 end
 
@@ -15,7 +15,7 @@ require('mason-lspconfig').setup({
     "astro",
     "bashls",
     "cssls",
-    "custom_elements_ls",
+    --"custom_elements_ls",
     "emmet_ls",
     "html",
     "jsonls",
