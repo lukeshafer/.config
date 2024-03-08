@@ -54,11 +54,11 @@ require("nvim-tree").setup({
 	sort_by = "case_sensitive",
 	view = {
 		width = 40,
-		float = {
-			enable = true,
-			quit_on_focus_loss = true,
-			open_win_config = center_floating_window,
-		},
+		--float = {
+			--enable = true,
+			--quit_on_focus_loss = true,
+			--open_win_config = center_floating_window,
+		--},
 	},
 	diagnostics = {
 		enable = true,
@@ -67,4 +67,7 @@ require("nvim-tree").setup({
 })
 
 local api = require("nvim-tree.api")
+vim.keymap.set("n", "<leader>e", api.tree.open, { noremap = true })
 vim.keymap.set("n", "<leader>E", api.tree.toggle, { noremap = true })
+vim.api.nvim_create_autocmd({ "VimEnter" }, { callback = api.tree.open })
+
