@@ -29,7 +29,7 @@ require('mason-lspconfig').setup({
     "yamlls",
   },
   handlers = {
-    default_setup,
+    --default_setup,
     lua_ls = function()
       lspconfig.lua_ls.setup({
         settings = {
