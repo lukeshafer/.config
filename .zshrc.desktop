@@ -3,14 +3,14 @@
 export PATH="$HOME/.local/bin:$PATH"
 
 # Path to your oh-my-zsh installation.
-export ZSH="$HOME/.oh-my-zsh"
+export ZSH="/usr/share/oh-my-zsh/"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 # themes I like: af-magic avit, candy, evan, fino-time, frontcube, intheloop, jonathan, jtriley, robbyrussell
-ZSH_THEME="luke"
+ZSH_THEME="af-magic"
 
 # Which plugins would you like to load?
 # Standard plugins can be found in $ZSH/plugins/
@@ -232,6 +232,10 @@ export PATH="$PNPM_HOME:$PATH"
 # go path
 export PATH="$PATH:$HOME/go/bin"
 
+# n
+export N_PREFIX=$HOME/.n
+export PATH="$N_PREFIX/bin:$PATH"
+
 # Fuzzy find
 # fd - cd to selected directory
 fd() {
@@ -297,3 +301,5 @@ alias pkadd="sudo pacman -S"
 alias ec2connect='ssh -i "~/.ssh/keys/Macbook Pro.pem" ubuntu@ec2-3-142-246-64.us-east-2.compute.amazonaws.com'
 
 [[ ! -r /home/luke/.opam/opam-init/init.zsh ]] || source /home/luke/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
+
+

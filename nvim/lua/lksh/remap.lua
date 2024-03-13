@@ -37,8 +37,8 @@ map("n", ";", ":")
 -- Leader+Y copies to system clipboard
 map("n", "<leader>y", '"+y')
 map("v", "<leader>y", '"+y')
-map("n", "<leader>n", "<C-W>w")
-map("n", "<leader>p", "<C-W>W")
+--map("n", "<leader>n", "<C-W>w")
+--map("n", "<leader>p", "<C-W>W")
 map("n", "<leader>s", ":Inspect<cr>")
 
 local opts = { noremap = true, silent = true }

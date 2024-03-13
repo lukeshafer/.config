@@ -2,6 +2,8 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 export PATH="$HOME/.local/bin:$PATH"
 
+export N_PREFIX="$HOME/.local/bin"
+
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
@@ -316,3 +318,5 @@ alias aurs="aur"
 alias pkadd="sudo pacman -S"
 
 alias ec2connect='ssh -i "~/.ssh/keys/Macbook Pro.pem" ubuntu@ec2-3-142-246-64.us-east-2.compute.amazonaws.com'
+
+alias vi="nvim"
