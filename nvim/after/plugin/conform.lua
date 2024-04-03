@@ -14,7 +14,7 @@ local conform_setup = {
 
 		-- other
 		json = { "fixjson" },
-		yaml = { "yamlfmt" },
+		--yaml = { "yamlfmt" },
 	},
 }
 

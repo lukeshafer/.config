@@ -100,15 +100,15 @@ return function()
     },
 
     -- github issues integrations
-    {
-      "pwntester/octo.nvim",
-      dependencies = { "nvim-tree/nvim-web-devicons", "nvim-lua/plenary.nvim", "nvim-telescope/telescope.nvim" },
-      config = function()
-        require("octo").setup({
-          -- Configuration here, or leave empty to use defaults
-        })
-      end
-    },
+    --{
+      --"pwntester/octo.nvim",
+      --dependencies = { "nvim-tree/nvim-web-devicons", "nvim-lua/plenary.nvim", "nvim-telescope/telescope.nvim" },
+      --config = function()
+        --require("octo").setup({
+          ---- Configuration here, or leave empty to use defaults
+        --})
+      --end
+    --},
 
     --{
       --"ray-x/lsp_signature.nvim",
