@@ -31,7 +31,8 @@ source $ZSH/oh-my-zsh.sh
 #fi
 
 # Preferred editor for local and remote sessions
-export EDITOR='nvim'
+export EDITOR="nvim"
+export PC_CONTEXT="desktop-wsl"
 
 # set environment variables for npm
 NPM_PACKAGES="${HOME}/.npm-packages"
@@ -302,4 +303,7 @@ alias ec2connect='ssh -i "~/.ssh/keys/Macbook Pro.pem" ubuntu@ec2-3-142-246-64.u
 
 [[ ! -r /home/luke/.opam/opam-init/init.zsh ]] || source /home/luke/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
 
+alias godot="cd /mnt/c/Users/Luke/Documents/Godot/"
 
+# sst
+export PATH=/home/luke/.sst/bin:$PATH

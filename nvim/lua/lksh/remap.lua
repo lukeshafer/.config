@@ -1,6 +1,6 @@
 function map(mode, shortcut, command, noremap)
-	noremap = noremap or true
-	vim.api.nvim_set_keymap(mode, shortcut, command, { noremap = noremap })
+  noremap = noremap or true
+  vim.api.nvim_set_keymap(mode, shortcut, command, { noremap = noremap })
 end
 
 -- leader is SPACE key
@@ -42,7 +42,9 @@ map("v", "<leader>y", '"+y')
 map("n", "<leader>s", ":Inspect<cr>")
 
 local opts = { noremap = true, silent = true }
-vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts)
+vim.keymap.set("n", "<leader>d", function()
+  vim.diagnostic.open_float({ source = true })
+end, opts)
 vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
 vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
 vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, opts)

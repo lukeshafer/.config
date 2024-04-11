@@ -101,20 +101,20 @@ return function()
 
     -- github issues integrations
     --{
-      --"pwntester/octo.nvim",
-      --dependencies = { "nvim-tree/nvim-web-devicons", "nvim-lua/plenary.nvim", "nvim-telescope/telescope.nvim" },
-      --config = function()
-        --require("octo").setup({
-          ---- Configuration here, or leave empty to use defaults
-        --})
-      --end
+    --"pwntester/octo.nvim",
+    --dependencies = { "nvim-tree/nvim-web-devicons", "nvim-lua/plenary.nvim", "nvim-telescope/telescope.nvim" },
+    --config = function()
+    --require("octo").setup({
+    ---- Configuration here, or leave empty to use defaults
+    --})
+    --end
     --},
 
     --{
-      --"ray-x/lsp_signature.nvim",
-      --event = "VeryLazy",
-      --opts = {},
-      --config = function(_, opts) require 'lsp_signature'.setup(opts) end
+    --"ray-x/lsp_signature.nvim",
+    --event = "VeryLazy",
+    --opts = {},
+    --config = function(_, opts) require 'lsp_signature'.setup(opts) end
     --},
 
     'JoosepAlviste/nvim-ts-context-commentstring',
@@ -131,20 +131,20 @@ return function()
 
   -- personal PC only
   --if not atWork then
-    ---- copilot alternative but FREE (for now)
-    --tools[#tools + 1] = {
-      --"Exafunction/codeium.vim",
-      --event = 'BufEnter',
-      --config = function()
-        --vim.g.codeium_no_tab_map = true
-        ---- Set Codeium Accept to <C-j> for insert mode
-        --vim.keymap.set('i', '<C-j>', function()
-          --return vim.fn['codeium#Accept']()
-        --end, { expr = true })
+  ---- copilot alternative but FREE (for now)
+  --tools[#tools + 1] = {
+  --"Exafunction/codeium.vim",
+  --event = 'BufEnter',
+  --config = function()
+  --vim.g.codeium_no_tab_map = true
+  ---- Set Codeium Accept to <C-j> for insert mode
+  --vim.keymap.set('i', '<C-j>', function()
+  --return vim.fn['codeium#Accept']()
+  --end, { expr = true })
 
-        --vim.cmd('CodeiumDisable')
-      --end,
-    --}
+  --vim.cmd('CodeiumDisable')
+  --end,
+  --}
   --end
 
   return tools
