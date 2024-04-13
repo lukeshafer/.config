@@ -307,3 +307,6 @@ alias godot="cd /mnt/c/Users/Luke/Documents/Godot/"
 
 # sst
 export PATH=/home/luke/.sst/bin:$PATH
+
+alias vi="nvim"
+alias vim="nvim"
