@@ -1,4 +1,4 @@
-function map(mode, shortcut, command, noremap)
+local function map(mode, shortcut, command, noremap)
   noremap = noremap or true
   vim.api.nvim_set_keymap(mode, shortcut, command, { noremap = noremap })
 end
@@ -25,8 +25,8 @@ map("n", "<leader>l", "<C-w>l")
 -- x deletes character but does not put in clipboard"
 map("n", "x", '"_x')
 -- SPACE / toggles comment
-map("n", "<leader>/", "<Plug>NERDCommenterToggle")
-map("v", "<leader>/", "<Plug>NERDCommenterToggle<CR>gv")
+--map("n", "<leader>/", "<Plug>NERDCommenterToggle")
+--map("v", "<leader>/", "<Plug>NERDCommenterToggle<CR>gv")
 -- TAB/SHIFT TAB changes buffer
 --map("n", "<Tab>", ":bnext<cr>")
 --map("n", "<S-Tab>", ":bprevious<cr>")

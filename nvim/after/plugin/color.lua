@@ -43,6 +43,5 @@ local function reset_fonts()
 end
 --reset_fonts()
 
---vim.cmd("color vscode")
-vim.cmd("color kanagawa")
+vim.cmd("color oh-lucy")
 vim.api.nvim_create_user_command('ResetFonts', reset_fonts, {})

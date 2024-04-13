@@ -28,5 +28,4 @@ require("lazy").setup(combine_lists({
 	require('lksh.plugins.ui')(),
 	require('lksh.plugins.tools')(),
 	require('lksh.plugins.languages')(),
-	require('lksh.plugins.fun')(),
 }))

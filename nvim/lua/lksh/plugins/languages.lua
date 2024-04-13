@@ -13,24 +13,11 @@ return function()
       dependencies = { "nvim-lua/plenary.nvim" },
     },
 
-    -- LSPConfig Alternatives
-    --{
-    --"pmizio/typescript-tools.nvim",
-    --dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
-    --opts = {},
-    --},
-    -- Formatters and Linters
-    -- ( INFO: null-ls is no longer maintained, needs replacing )
-    --"nvimtools/none-ls.nvim",
-
     -- Formatter management
     {
       "stevearc/conform.nvim",
       opts = {},
     },
-
-    -- Linter management
-    --{ "mfussenegger/nvim-lint" },
 
     -- LSP Support
     { "neovim/nvim-lspconfig", },
