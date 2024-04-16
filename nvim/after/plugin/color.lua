@@ -15,11 +15,11 @@
 
 vim.opt.background = "dark" -- sets light/dark for some colorschemes
 
-local function set_stream_colors()
-  require('lush')(require('lush_theme.stream'))
-end
-
-vim.api.nvim_create_user_command('SetStreamColors', set_stream_colors, {})
+-- local function set_stream_colors()
+--   require('lush')(require('lush_theme.stream'))
+-- end
+--
+-- vim.api.nvim_create_user_command('SetStreamColors', set_stream_colors, {})
 
 -- local function reset_fonts()
 --   vim.cmd("highlight Comment gui=italic")

@@ -1,20 +1,9 @@
-local atWork = os.getenv("PC_CONTEXT") == "work"
-
 return function()
 	local tools = {
 		------------------
 		--     TOOLS    --
 		------------------
-		-- comment line with <leader>/
-		--{ "preservim/nerdcommenter", event = "VeryLazy" },
-		-- add this to your lua/plugins.lua, lua/plugins/init.lua,  or the file you keep your other plugins:
-		{
-			"numToStr/Comment.nvim",
-			opts = {
-				-- add any options here
-			},
-			lazy = false,
-		},
+		{ "numToStr/Comment.nvim", opts = {}, lazy = false },
 
 		-- color picker
 		{
@@ -27,11 +16,7 @@ return function()
 		},
 
 		-- auto-create brackets/parentheses
-		{
-			"windwp/nvim-autopairs",
-			event = "InsertEnter",
-			opts = {}, -- this is equalent to setup({}) function
-		},
+		{ "windwp/nvim-autopairs", event = "InsertEnter", opts = {} },
 
 		-- autoclose/rename html tags
 		{
@@ -64,27 +49,8 @@ return function()
 			end,
 		},
 
-		-- easier navigation between files
-		-- {
-		-- 	"ThePrimeagen/harpoon",
-		-- 	event = "VeryLazy",
-		-- 	dependencies = "nvim-lua/plenary.nvim",
-		-- },
-
-		-- floating file explorer
-		{
-			"nvim-tree/nvim-tree.lua",
-			event = "VeryLazy",
-			dependencies = { "nvim-tree/nvim-web-devicons" },
-		},
-
-		-- project-wide typescript checker
-		-- {
-		-- 	"dmmulroy/tsc.nvim",
-		-- 	config = function()
-		-- 		require("tsc").setup()
-		-- 	end,
-		-- },
+		-- file explorer
+		{ "nvim-tree/nvim-tree.lua", event = "VeryLazy", dependencies = { "nvim-tree/nvim-web-devicons" } },
 
 		-- tools for surrounding text
 		{
@@ -92,9 +58,7 @@ return function()
 			version = "*", -- Use for stability; omit to use `main` branch for the latest features
 			event = "VeryLazy",
 			config = function()
-				require("nvim-surround").setup({
-					-- Configuration here, or leave empty to use defaults
-				})
+				require("nvim-surround").setup({})
 			end,
 		},
 
@@ -115,24 +79,6 @@ return function()
 			end,
 		},
 	}
-
-	-- personal PC only
-	--if not atWork then
-	---- copilot alternative but FREE (for now)
-	--tools[#tools + 1] = {
-	--"Exafunction/codeium.vim",
-	--event = 'BufEnter',
-	--config = function()
-	--vim.g.codeium_no_tab_map = true
-	---- Set Codeium Accept to <C-j> for insert mode
-	--vim.keymap.set('i', '<C-j>', function()
-	--return vim.fn['codeium#Accept']()
-	--end, { expr = true })
-
-	--vim.cmd('CodeiumDisable')
-	--end,
-	--}
-	--end
 
 	return tools
 end
