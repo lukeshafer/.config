@@ -10,4 +10,5 @@
 !polybar/
 !zsh-theme/
 !.luke-config/
+!nvim-lite/
 packer_compiled.lua
