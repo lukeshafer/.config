@@ -120,7 +120,13 @@ alias tm="tmux new-session -A -s $USER"
 alias tmr='tmux source ~/.tmux.conf'
 alias tmc="nvim ~/.tmux.conf && cp ~/.tmux.conf ~/.config/.tmux.conf.work && tmr"
 
-alias e2e='AWS_SDK_LOAD_CONFIG=1 AWS_PROFILE=dev-crmi STAGE=ls npm test'
+function e2e2() {
+  if [ "$1" ]; then
+    AWS_SDK_LOAD_CONFIG=1 AWS_PROFILE=dev-crmi STAGE=ls E2E_SOURCE_NAME="$1" npm test
+  else
+    AWS_SDK_LOAD_CONFIG=1 AWS_PROFILE=dev-crmi STAGE=ls npm test
+  fi
+}
 
 alias install-handlers="cd ./src/lambda/handlers/ && (find . -maxdepth 2 -name package.json -execdir npm i \;) && cd -"
 alias install-lib="cd ./src/lambda/lib/ && npm i && cd -"

@@ -1,6 +1,6 @@
 local function map(mode, shortcut, command, noremap)
-  noremap = noremap or true
-  vim.api.nvim_set_keymap(mode, shortcut, command, { noremap = noremap })
+	noremap = noremap or true
+	vim.api.nvim_set_keymap(mode, shortcut, command, { noremap = noremap })
 end
 
 -- leader is SPACE key
@@ -37,13 +37,11 @@ map("n", ";", ":")
 -- Leader+Y copies to system clipboard
 map("n", "<leader>y", '"+y')
 map("v", "<leader>y", '"+y')
---map("n", "<leader>n", "<C-W>w")
---map("n", "<leader>p", "<C-W>W")
 map("n", "<leader>s", ":Inspect<cr>")
 
 local opts = { noremap = true, silent = true }
 vim.keymap.set("n", "<leader>d", function()
-  vim.diagnostic.open_float({ source = true })
+	vim.diagnostic.open_float({ source = true })
 end, opts)
 vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
 vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)

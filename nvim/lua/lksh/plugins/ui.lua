@@ -33,10 +33,7 @@ return function()
 		},
 
 		-- inline git helpers
-		{
-			"lewis6991/gitsigns.nvim",
-			opts = {},
-		},
+		{ "lewis6991/gitsigns.nvim", opts = {} },
 
 		-- highlight hex color strings e.g. #CCCCFF
 		-- text-gray-900
@@ -53,24 +50,10 @@ return function()
 		},
 
 		-- highlight todo comments, e.g. TODO:
-		{
-			"folke/todo-comments.nvim",
-			dependencies = "nvim-lua/plenary.nvim",
-			opts = {},
-		},
+		{ "folke/todo-comments.nvim", dependencies = "nvim-lua/plenary.nvim", opts = {} },
 
 		-- show indentation levels
-		{
-			"lukas-reineke/indent-blankline.nvim",
-			main = "ibl",
-			opts = {},
-		},
-
-		-- notification API
-		{
-			"rcarriga/nvim-notify",
-			config = function() end,
-		},
+		{ "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
 
 		------------------
 	}
