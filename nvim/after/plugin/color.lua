@@ -39,5 +39,5 @@ vim.opt.background = "dark" -- sets light/dark for some colorschemes
 -- end
 --reset_fonts()
 
-vim.cmd("color oh-lucy")
+vim.cmd("color catppuccin")
 -- vim.api.nvim_create_user_command('ResetFonts', reset_fonts, {})

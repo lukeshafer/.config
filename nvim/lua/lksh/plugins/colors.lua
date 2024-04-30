@@ -17,10 +17,10 @@ return function()
     -- { "sainnhe/edge" },
     -- { "rebelot/kanagawa.nvim" },
     -- { "olimorris/onedarkpro.nvim" },
-    -- { "tomasiser/vim-code-dark" },
+    { "tomasiser/vim-code-dark" },
     { "Yazeed1s/oh-lucy.nvim" },
     -- { 'rose-pine/neovim',                      name = 'rose-pine' },
-    -- { "catppuccin/nvim",                       name = "catppuccin" },
+    { "catppuccin/nvim",        name = "catppuccin" },
     -- { 'Everblush/nvim',                        name = 'everblush' },
     ------------------
   }
