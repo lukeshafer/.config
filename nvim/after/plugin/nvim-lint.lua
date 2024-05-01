@@ -1,7 +1,0 @@
---local js_linters = { "biomejs" }
---require("lint").linters_by_ft = {
---javascript = js_linters,
---typescript = js_linters,
---javascriptreact = js_linters,
---typescriptreact = js_linters,
---}

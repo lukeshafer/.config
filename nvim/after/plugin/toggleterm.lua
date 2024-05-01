@@ -1,7 +1,3 @@
-require("toggleterm").setup({
-	direction = "horizontal",
-})
-
 vim.keymap.set("n", "<leader>t", ":ToggleTerm<CR>")
 
 function _G.set_terminal_keymaps()

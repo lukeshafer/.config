@@ -3,11 +3,7 @@ local function formatMode(str)
 		return ""
 	elseif str == "INSERT" then
 		return ""
-	elseif str == "VISUAL" then
-		return "󰗧"
-	elseif str == "V-LINE" then
-		return "󰗧"
-	elseif str == "V-BLOCK" then
+	elseif str == "VISUAL" or str == "V-LINE" or str == "V-BLOCK" then
 		return "󰗧"
 	elseif str == "COMMAND" then
 		return ""
@@ -18,10 +14,7 @@ end
 
 local filename = {
 	"filename",
-	symbols = {
-		modified = '●',
-		readonly = '[READONLY]'
-	},
+	symbols = { modified = "●", readonly = "[READONLY]" },
 	path = 4,
 }
 
