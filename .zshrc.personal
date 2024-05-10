@@ -282,6 +282,7 @@ alias gch="git checkout"
 alias gchb="git checkout -b"
 alias gm="git merge"
 alias gm-devtoqa="gch qa && gm dev && gp && gch dev"
+alias gtree="git log --oneline --decorate --graph --all"
 
 function rescript_new() {
 	if [ -z "$1" ]; then
