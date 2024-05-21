@@ -20,13 +20,21 @@ local plugins = {
   -- colors i like
   --  catppuccin/nvim {catppuccin}, Yazeed1s/oh-lucy.nvim {oh-lucy}, rose-pine/neovim {rose-pine}, sainnhe/everforest {everforest}
   {
-    "Yazeed1s/oh-lucy.nvim",
-    -- name = "catppuccin",
+    'catppuccin/nvim',
+    name = "catppuccin",
     lazy = false,
     priority = 5000,
     config = function()
-      -- vim.cmd("color oh-lucy")
+      vim.cmd("color catppuccin")
     end,
+  },
+  {
+    "Yazeed1s/oh-lucy.nvim",
+    -- lazy = false,
+    -- priority = 5000,
+    -- config = function()
+    --   vim.cmd("color oh-lucy")
+    -- end,
   },
 
   ------------------
