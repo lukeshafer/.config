@@ -25,7 +25,7 @@ local plugins = {
     lazy = false,
     priority = 5000,
     config = function()
-      vim.cmd("color oh-lucy")
+      -- vim.cmd("color oh-lucy")
     end,
   },
 
@@ -425,7 +425,7 @@ local plugins = {
   },                                                                                    -- status line, bottom
   { "lewis6991/gitsigns.nvim",     opts = {} },                                         -- inline git helpers
   { "folke/todo-comments.nvim",    dependencies = "nvim-lua/plenary.nvim", opts = {} }, -- highlight todo comments, e.g. TODO:
-  { "numToStr/Comment.nvim",       opts = {},                              lazy = false },
+  -- { "numToStr/Comment.nvim",       opts = {},                              lazy = false },
   { "windwp/nvim-autopairs",       event = "InsertEnter",                  opts = {} }, -- auto-create brackets/parentheses
   { "windwp/nvim-ts-autotag",      event = "InsertEnter",                  opts = {} }, -- autoclose/rename html tags
   {
