@@ -1,8 +1,8 @@
-local IS_WINDOWS = vim.loop.os_uname().sysname == 'Windows_NT'
+local IS_WINDOWS = vim.loop.os_uname().sysname == "Windows_NT"
 HOME = os.getenv("HOME")
 if not HOME then
-  HOME = os.getenv("USERPROFILE")
-  IS_WINDOWS = true
+	HOME = os.getenv("USERPROFILE")
+	IS_WINDOWS = true
 end
 
 -- Required for NvimTree
@@ -18,11 +18,11 @@ vim.opt.background = "dark" -- sets light/dark for some colorschemes
 vim.opt.number = true
 vim.opt.numberwidth = 2
 if IS_WINDOWS then
-  vim.opt.backupdir = HOME .. "\\.vim\\backup"
-  vim.opt.dir = HOME .. "\\.vim\\swapfiles"
+	vim.opt.backupdir = HOME .. "\\.vim\\backup"
+	vim.opt.dir = HOME .. "\\.vim\\swapfiles"
 else
-  vim.opt.backupdir = HOME .. "/.vim/backup"
-  vim.opt.dir = HOME .. "/.vim/swapfiles"
+	vim.opt.backupdir = HOME .. "/.vim/backup"
+	vim.opt.dir = HOME .. "/.vim/swapfiles"
 end
 vim.opt.guicursor = "n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50"
 vim.opt.mouse = "a"

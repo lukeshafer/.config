@@ -12,7 +12,8 @@ export ZSH="$HOME/.oh-my-zsh"
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 # themes I like: avit, candy, evan, fino-time, frontcube, intheloop, jonathan, jtriley, robbyrussell
-ZSH_THEME="af-magic"
+ZSH_THEME="lksh"
+alias copy-zsh-theme="cp ~/.config/zsh-theme/lksh.zsh-theme ~/.oh-my-zsh/themes/lksh.zsh-theme"
 
 # Which plugins would you like to load?
 # Standard plugins can be found in $ZSH/plugins/
