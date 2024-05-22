@@ -31,18 +31,6 @@ set -g mouse on
 ### DESIGN CHANGES ###
 ######################
 
-#color0 #332f4a
-#color0 #58517f
-#color1 #EB6F92
-#color2 #689D6A
-#color3 #F6C177
-#color4 #31748F
-#color5 #C4A7E7
-#color6 #9CCFD8
-#color8 #E0DEF4
-#color8 #8683ab
-#color9 #EBBCBA
-
 set -g default-terminal "tmux"
 # tell Tmux that outside terminal supports true color
 #set -as terminal-features ",xterm-256color:RGB"

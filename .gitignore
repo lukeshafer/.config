@@ -11,4 +11,6 @@
 !zsh-theme/
 !.luke-config/
 !nvim-lite/
+!hypr/
+!waybar/
 packer_compiled.lua
