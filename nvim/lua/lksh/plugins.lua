@@ -507,7 +507,7 @@ local plugins = {
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 		keys = {
 			{
-				"<leader>e",
+				"<leader>E",
 				function()
 					require("nvim-tree.api").tree.open()
 				end,
@@ -627,6 +627,22 @@ local plugins = {
 					jsx_attribute = "// %s",
 					comment = "// %s",
 				},
+			},
+		},
+	},
+
+	{
+		"j-morano/buffer_manager.nvim",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+		},
+		keys = {
+			{
+				"<leader>e",
+				function()
+					require("buffer_manager.ui").toggle_quick_menu()
+				end,
+				noremap = true,
 			},
 		},
 	},
