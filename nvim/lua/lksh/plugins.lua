@@ -22,19 +22,19 @@ local plugins = {
 	{
 		"catppuccin/nvim",
 		name = "catppuccin",
-		-- lazy = false,
-		-- priority = 5000,
-		-- config = function()
-		-- vim.cmd("color catppuccin")
-		-- end,
-	},
-	{
-		"Yazeed1s/oh-lucy.nvim",
 		lazy = false,
 		priority = 5000,
 		config = function()
-			vim.cmd("color oh-lucy")
+		vim.cmd("color catppuccin")
 		end,
+	},
+	{
+		"Yazeed1s/oh-lucy.nvim",
+		-- lazy = false,
+		-- priority = 5000,
+		-- config = function()
+		-- 	vim.cmd("color oh-lucy")
+		-- end,
 	},
 
 	------------------

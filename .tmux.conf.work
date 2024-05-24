@@ -50,13 +50,13 @@ set -g default-terminal "screen-256color"
 #set -as terminal-features ",xterm-256color:RGB"
 
 # pane border
-set -g pane-border-style fg='#191719'
-set -g pane-active-border-style fg='#31748F'
+set -g pane-border-style fg='black'
+set -g pane-active-border-style fg='blue'
 
 # message text
-set -g message-style bg='#191719',fg='#31748F'
+set -g message-style bg='black',fg='cyan'
 
-set -g status-style bg='#{?client_prefix,#E0DEF4,#191719}',fg='#{?client_prefix,#E0DEF4,#191719}'
+set -g status-style bg='#{?client_prefix,white,black}',fg='#{?client_prefix,white,black}'
 set -g status-interval 1
 
 # status left
@@ -64,13 +64,13 @@ set -g status-interval 1
 #set -g status-left ''
 
 # window status
-set-window-option -g window-status-style fg='#EBBCBA',bg=default
-set-window-option -g window-status-current-style fg='#EB6F92',bg=default
+set-window-option -g window-status-style fg='yellow',bg=default
+set-window-option -g window-status-current-style fg='red',bg=default
 
-set -g window-status-current-format "#{?client_prefix,#[fg=#E0DEF4],#[fg=#191719]}#[fg=#58517f,bg=#EBBCBA,bold] #I #[fg=#191719]#W "
+set -g window-status-current-format "#{?client_prefix,#[fg=white],#[fg=black]}#[fg=blue,bg=white,bold] #I #[fg=black]#W "
 
-set -g window-status-format "#[bg=#191719]#{?client_prefix,#[fg=#E0DEF4],#[fg=#191719]}#[fg=#8683ab,bg=#191719] #I #[fg=#E0DEF4]#W "
+set -g window-status-format "#[bg=black]#{?client_prefix,#[fg=white],#[fg=black]}#[fg=blue,bg=black] #I #[fg=white]#W "
 
 # status right
 # strftime tokens
-set -g status-right '#[bg=#9cb3d8] #[fg=#31558f]%a %m/%d/%Y  #[fg=#191719]%-I:%M %p '
+set -g status-right '#[bg=blue] #[fg=black]%a %m/%d/%Y  #[fg=black,bold]%-I:%M %p '
