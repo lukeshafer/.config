@@ -21,11 +21,27 @@ local plugins = {
 	--  catppuccin/nvim {catppuccin}, Yazeed1s/oh-lucy.nvim {oh-lucy}, rose-pine/neovim {rose-pine}, sainnhe/everforest {everforest}
 	{
 		"catppuccin/nvim",
-		name = "catppuccin",
+		-- name = "catppuccin",
+		-- lazy = false,
+		-- priority = 5000,
+		-- config = function()
+		-- vim.cmd("color catppuccin")
+		-- end,
+	},
+	{
+		"sainnhe/everforest",
+		name = "everforest",
 		lazy = false,
 		priority = 5000,
 		config = function()
-		vim.cmd("color catppuccin")
+			vim.g.everforest_enable_italic = 1
+			vim.g.everforest_background = "hard"
+			vim.g.everforest_sign_column_background = "grey"
+			vim.g.everforest_ui_contrast = "high"
+			vim.g.everforest_better_performance = 1
+			vim.g.everforest_transparent_background = 2
+			vim.g.everforest_diagnostic_text_highlight = 1
+			vim.cmd("color everforest")
 		end,
 	},
 	{
