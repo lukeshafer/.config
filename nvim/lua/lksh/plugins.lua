@@ -15,6 +15,14 @@ vim.opt.rtp:prepend(lazypath)
 local atWork = os.getenv("PC_CONTEXT") == "work"
 vim.g.mapleader = " " -- Make sure to set `mapleader` before lazy so your mappings are correct
 
+local function js_formatter()
+	if atWork then
+		return {}
+	end
+
+	return { "prettier" }
+end
+
 -- actual lazy configuration
 local plugins = {
 	-- colors i like
@@ -25,7 +33,7 @@ local plugins = {
 		lazy = false,
 		priority = 5000,
 		config = function()
-		vim.cmd("color catppuccin")
+			vim.cmd("color catppuccin")
 		end,
 	},
 	{
@@ -57,13 +65,13 @@ local plugins = {
 		opts = {
 			formatters_by_ft = {
 				lua = { "stylua" },
-				javascript = { { "prettier" } },
-				typescript = { { "prettier" } },
-				javascriptreact = { { "prettier" } },
-				typescriptreact = { { "prettier" } },
-				jsx = { { "prettier" } },
-				tsx = { { "prettier" } },
-				astro = { { "prettier" } },
+				javascript = js_formatter,
+				typescript = js_formatter,
+				javascriptreact = js_formatter,
+				typescriptreact = js_formatter,
+				jsx = js_formatter,
+				tsx = js_formatter,
+				astro = js_formatter,
 				json = { "fixjson" },
 				java = { "google-java-format" },
 			},
@@ -374,7 +382,6 @@ local plugins = {
 				},
 				highlight = { enable = true },
 				indent = { enable = true },
-				autotag = { enable = true },
 			})
 		end,
 	},
@@ -435,7 +442,14 @@ local plugins = {
 	{ "folke/todo-comments.nvim", dependencies = "nvim-lua/plenary.nvim", opts = {} }, -- highlight todo comments, e.g. TODO:
 	-- { "numToStr/Comment.nvim",       opts = {},                              lazy = false },
 	{ "windwp/nvim-autopairs", event = "InsertEnter", opts = {} }, -- auto-create brackets/parentheses
-	{ "windwp/nvim-ts-autotag", event = "InsertEnter", opts = {} }, -- autoclose/rename html tags
+	{
+		"windwp/nvim-ts-autotag",
+		event = "InsertEnter",
+		opts = {},
+		config = function()
+			require("nvim-ts-autotag").setup({})
+		end,
+	}, -- autoclose/rename html tags
 	{
 		"sindrets/diffview.nvim",
 		event = "VeryLazy",
