@@ -37,6 +37,22 @@ local plugins = {
 		end,
 	},
 	{
+		"sainnhe/everforest",
+		name = "everforest",
+		-- lazy = false,
+		-- priority = 5000,
+		-- config = function()
+		-- 	vim.g.everforest_enable_italic = 1
+		-- 	vim.g.everforest_background = "hard"
+		-- 	vim.g.everforest_sign_column_background = "grey"
+		-- 	vim.g.everforest_ui_contrast = "high"
+		-- 	vim.g.everforest_better_performance = 1
+		-- 	vim.g.everforest_transparent_background = 2
+		-- 	vim.g.everforest_diagnostic_text_highlight = 1
+		-- 	vim.cmd("color everforest")
+		-- end,
+	},
+	{
 		"Yazeed1s/oh-lucy.nvim",
 		-- lazy = false,
 		-- priority = 5000,

@@ -13,4 +13,5 @@
 !nvim-lite/
 !hypr/
 !waybar/
+!tofi/
 packer_compiled.lua
