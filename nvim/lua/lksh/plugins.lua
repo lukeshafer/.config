@@ -570,7 +570,13 @@ local plugins = {
 				enable = true,
 				update_root = true,
 			},
-			sort_by = "case_sensitive",
+			actions = {
+				open_file = {
+					window_picker = {
+						enable = false,
+					},
+				},
+			},
 			view = {
 				-- width = 40,
 				side = "left",
