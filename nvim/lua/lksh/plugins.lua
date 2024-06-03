@@ -586,7 +586,8 @@ local plugins = {
 						["p"] = "paste_from_clipboard",
 						["c"] = "copy", -- takes text input for destination, also accepts the optional config.show_path option like "add":
 						["m"] = "move", -- takes text input for destination, also accepts the optional config.show_path option like "add".
-						["q"] = "close_window",
+						["Q"] = "close_window",
+						["q"] = "none",
 						["R"] = "refresh",
 						["?"] = "show_help",
 						["<"] = "prev_source",
@@ -695,69 +696,6 @@ local plugins = {
 		end,
 	},
 
-	-- {
-	-- 	"nvim-tree/nvim-tree.lua", -- file explorer
-	-- 	lazy = false,
-	-- 	dependencies = { "nvim-tree/nvim-web-devicons" },
-	-- 	keys = {
-	-- 		{
-	-- 			"<leader>e",
-	-- 			function()
-	-- 				require("nvim-tree.api").tree.open()
-	-- 			end,
-	-- 			noremap = true,
-	-- 		},
-	-- 	},
-	-- 	opts = {
-	-- 		on_attach = function(bufnr)
-	-- 			local api = require("nvim-tree.api")
-	--
-	-- 			local function opts(desc)
-	-- 				return {
-	-- 					desc = "nvim-tree: " .. desc,
-	-- 					buffer = bufnr,
-	-- 					noremap = true,
-	-- 					silent = true,
-	-- 					nowait = true,
-	-- 				}
-	-- 			end
-	--
-	-- 			api.config.mappings.default_on_attach(bufnr)
-	--
-	-- 			-- your removals and mappings go here
-	-- 			vim.keymap.set("n", "<leader>f", api.live_filter.start, opts("Filter"))
-	-- 			vim.keymap.del("n", "f", { buffer = bufnr })
-	-- 		end,
-	-- 		sync_root_with_cwd = true,
-	-- 		respect_buf_cwd = true,
-	-- 		update_focused_file = {
-	-- 			enable = true,
-	-- 			update_root = true,
-	-- 		},
-	-- 		sort_by = "case_sensitive",
-	-- 		view = {
-	-- 			-- width = 40,
-	-- 			side = "left",
-	-- 			float = {
-	-- 				enable = true,
-	-- 				quit_on_focus_loss = true,
-	-- 				open_win_config = {
-	-- 					relative = "editor",
-	-- 					border = "single", -- none, single, double, rounded, solid, shadow
-	-- 					width = 50,
-	-- 					height = vim.api.nvim_win_get_height(0) - 3,
-	-- 					row = 1,
-	-- 					col = 1,
-	-- 				},
-	-- 			},
-	-- 		},
-	-- 		diagnostics = {
-	-- 			enable = true,
-	-- 			show_on_dirs = true,
-	-- 		},
-	-- 	},
-	-- },
-
 	-- highlights matches to the word under the cursor
 	{
 		"RRethy/vim-illuminate",
@@ -824,22 +762,6 @@ local plugins = {
 			},
 		},
 	},
-
-	-- {
-	-- 	"j-morano/buffer_manager.nvim",
-	-- 	dependencies = {
-	-- 		"nvim-lua/plenary.nvim",
-	-- 	},
-	-- 	keys = {
-	-- 		{
-	-- 			"<leader>b",
-	-- 			function()
-	-- 				require("buffer_manager.ui").toggle_quick_menu()
-	-- 			end,
-	-- 			noremap = true,
-	-- 		},
-	-- 	},
-	-- },
 }
 
 require("lazy").setup(plugins)
