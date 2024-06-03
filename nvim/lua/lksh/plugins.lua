@@ -33,6 +33,9 @@ local plugins = {
 		lazy = false,
 		priority = 5000,
 		config = function()
+			require("catppuccin").setup({
+				transparent_background = true,
+			})
 			vim.cmd("color catppuccin")
 		end,
 	},

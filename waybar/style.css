@@ -6,7 +6,7 @@
 
 window#waybar {
   /*background: none;*/
-  background-color: rgba(23, 23, 30, 0.4);
+  background-color: rgba(17, 17, 27, 0.6);
 }
 
 .modules-right * {
