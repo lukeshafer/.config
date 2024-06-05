@@ -14,4 +14,5 @@
 !hypr/
 !waybar/
 !tofi/
+!tmux/
 packer_compiled.lua
