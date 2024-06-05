@@ -14,5 +14,6 @@
 !hypr/
 !waybar/
 !tofi/
-!tmux/
+!tmux/tmux.conf
+tmux/plugins/
 packer_compiled.lua
