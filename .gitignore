@@ -15,5 +15,6 @@
 !waybar/
 !tofi/
 !tmux/
+!wallpapers/
 tmux/plugins/
 packer_compiled.lua
