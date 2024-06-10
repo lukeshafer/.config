@@ -33,9 +33,13 @@ local plugins = {
 		lazy = false,
 		priority = 5000,
 		config = function()
-			require("catppuccin").setup({
-				-- transparent_background = true,
-			})
+			if atWork then
+				require("catppuccin").setup({})
+			else
+				require("catppuccin").setup({
+					transparent_background = true,
+				})
+			end
 			vim.cmd("color catppuccin")
 		end,
 	},
