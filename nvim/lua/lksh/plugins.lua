@@ -75,11 +75,11 @@ local plugins = {
 				json = { "fixjson" },
 				java = { "google-java-format" },
 			},
-			format_on_save = function()
-				if not atWork then
-					return { timeout_ms = 500, lsp_fallback = true }
-				end
-			end,
+			-- format_on_save = function()
+			-- 	if not atWork then
+			-- 		return { timeout_ms = 500, lsp_fallback = true }
+			-- 	end
+			-- end,
 		},
 	},
 

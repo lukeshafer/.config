@@ -10,12 +10,13 @@
     "hyprland/workspaces"
     //"custom/media"
   ],
-  "modules-center": [
-    "hyprland/window",
-  ],
+  //"modules-center": [
+    //"hyprland/window"
+  //],
   "modules-right": [
     "tray",
     "wireplumber",
+    "backlight",
     "network",
     "temperature",
     "battery",
@@ -23,30 +24,29 @@
   ],
   // Modules configuration
   "hyprland/workspaces": {
-    "format": "{icon}",
-    "format-icons": {
-      "1": " ",
-      "2": " ",
-      "3": " ",
-      //"active": "",
-      "default": " "
+    "format": "<small>{icon}</small>{windows}",
+    "format-window-separator": " ",
+    "window-rewrite-default": "  ",
+    "window-rewrite": {
+      "class<Google-chrome>": "  ",
+      "kitty": "  ",
+      "discord": "  "
     },
     "persistent-workspaces": {
-      "*": 2 // 5 workspaces by default on every monitor
+      "*": 3 // 5 workspaces by default on every monitor
     }
   },
   "hyprland/window": {
     //"separate-outputs": true
   },
   "tray": {
-    // "icon-size": 21,
+    "icon-size": 18,
     "spacing": 10
   },
   "clock": {
     "timezone": "America/New_York",
-    "format": "{:%I:%M}",
-    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-    "format-alt": "{:%Y-%m-%d}"
+    "format": "{:%a %b %d %I:%M %p}",
+    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
   },
   "temperature": {
     // "thermal-zone": 2,
@@ -55,27 +55,22 @@
     "format-critical": "CPU: {temperatureC}°C {icon}",
     "format": "CPU: {temperatureC}°C {icon}",
     "format-icons": {
-      "critical": "󰸁 ",
+      "critical": "󰸁",
       "default": [
-        "󱃃 ",
-        "󰔏 ",
-        "󱃂 "
+        "󱃃",
+        "󰔏",
+        "󱃂"
       ]
     }
   },
   "backlight": {
-    // "device": "acpi_video1",
-    "format": "{percent}% {icon} ",
+    "format": "{percent}% {icon}",
     "format-icons": [
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      ""
+      "󰃞",
+      "󰃟",
+      "󰃟",
+      "󰃟",
+      "󰃠"
     ]
   },
   "battery": {
@@ -87,23 +82,23 @@
     "format": "{capacity}% {icon}",
     "format-full": "{capacity}% {icon}",
     "format-charging": "{capacity}% {icon}",
-    "format-plugged": "{capacity}%  ",
+    "format-plugged": "{capacity}% ",
     "format-alt": "{time} {icon}",
     // "format-good": "", // An empty format will hide the module
     // "format-full": "",
     "format-icons": {
-      "full": "󱈏 ",
+      "full": "󱈏",
       "charging": [
-        "󰢜 ",
-        "󰂆 ",
-        "󰂇 ",
-        "󰂈 ",
-        "󰢝 ",
-        "󰂉 ",
-        "󰢞 ",
-        "󰂊 ",
-        "󰂋 ",
-        "󰂅 "
+        "󰢜",
+        "󰂆",
+        "󰂇",
+        "󰂈",
+        "󰢝",
+        "󰂉",
+        "󰢞",
+        "󰂊",
+        "󰂋",
+        "󰂅"
       ],
       "default": [
         "󰁺",
@@ -115,7 +110,7 @@
         "󰂀",
         "󰂁",
         "󰂂",
-        "󰁹",
+        "󰁹"
       ]
     }
   },
@@ -126,18 +121,18 @@
     "tooltip-format": "{ifname} via {gwaddr}",
     "format-disconnected": "Disconnected ⚠",
     "format-icons": {
-      "ethernet": "󰈀 ",
+      "ethernet": "󰈀",
       "wifi": [
-        "󰤟 ",
-        "󰤢 ",
-        "󰤥 ",
-        "󰤨 ",
+        "󰤟",
+        "󰤢",
+        "󰤥",
+        "󰤨"
       ]
     }
   },
   "wireplumber": {
     "format": "{volume}% {icon}",
-    "format-muted": "MUTED  ",
+    "format-muted": "MUTED ",
     "format-icons": {
       "headphone": "",
       "phone": "",
