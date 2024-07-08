@@ -117,8 +117,8 @@ alias awslogout="rm ~/.aws/saml-credentials"
 alias awsreset="awslogout && awslogin"
 
 alias tm="tmux new-session -A -s $USER"
-alias tmr='tmux source ~/.tmux.conf'
-alias tmc="nvim ~/.tmux.conf && cp ~/.tmux.conf ~/.config/.tmux.conf.work && tmr"
+alias tmr='tmux source ~/.config/tmux/tmux.conf'
+alias tmc="nvim ~/.config/tmux/tmux.conf && tmr"
 
 function e2e2() {
   if [ "$1" ]; then

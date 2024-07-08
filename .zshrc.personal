@@ -232,8 +232,8 @@ alias start='pnpm start'
 
 #alias docker-compose="echo use docker compose"
 
-alias tmr="tmux source-file ~/.tmux.conf"
-alias tmc="nvim ~/.tmux.conf && cp ~/.tmux.conf ~/.config/.tmux.conf.personal && tmr"
+alias tmr="tmux source-file ~/.config/tmux/tmux.conf"
+alias tmc="nvim ~/.config/tmux/tmux.conf && tmr"
 
 # enable/disable lightdm (display manager for desktop environment)
 alias gui="sudo systemctl start lightdm.service"

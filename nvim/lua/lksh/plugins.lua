@@ -15,6 +15,14 @@ vim.opt.rtp:prepend(lazypath)
 local atWork = os.getenv("PC_CONTEXT") == "work"
 vim.g.mapleader = " " -- Make sure to set `mapleader` before lazy so your mappings are correct
 
+local function js_formatter()
+	if atWork then
+		return {}
+	end
+
+	return { "prettier" }
+end
+
 -- actual lazy configuration
 local plugins = {
 	-- colors i like
@@ -25,33 +33,17 @@ local plugins = {
 		lazy = false,
 		priority = 5000,
 		config = function()
+			if atWork then
+				require("catppuccin").setup({})
+			else
+				require("catppuccin").setup({
+					transparent_background = true,
+				})
+			end
 			vim.cmd("color catppuccin")
 		end,
 	},
-	{
-		"sainnhe/everforest",
-		name = "everforest",
-		-- lazy = false,
-		-- priority = 5000,
-		-- config = function()
-		-- 	vim.g.everforest_enable_italic = 1
-		-- 	vim.g.everforest_background = "hard"
-		-- 	vim.g.everforest_sign_column_background = "grey"
-		-- 	vim.g.everforest_ui_contrast = "high"
-		-- 	vim.g.everforest_better_performance = 1
-		-- 	vim.g.everforest_transparent_background = 2
-		-- 	vim.g.everforest_diagnostic_text_highlight = 1
-		-- 	vim.cmd("color everforest")
-		-- end,
-	},
-	{
-		"Yazeed1s/oh-lucy.nvim",
-		-- lazy = false,
-		-- priority = 5000,
-		-- config = function()
-		-- 	vim.cmd("color oh-lucy")
-		-- end,
-	},
+	{ "Yazeed1s/oh-lucy.nvim" },
 
 	------------------
 	--      LSP     --
@@ -73,21 +65,21 @@ local plugins = {
 		opts = {
 			formatters_by_ft = {
 				lua = { "stylua" },
-				javascript = { { "prettier" } },
-				typescript = { { "prettier" } },
-				javascriptreact = { { "prettier" } },
-				typescriptreact = { { "prettier" } },
-				jsx = { { "prettier" } },
-				tsx = { { "prettier" } },
-				astro = { { "prettier" } },
+				javascript = js_formatter,
+				typescript = js_formatter,
+				javascriptreact = js_formatter,
+				typescriptreact = js_formatter,
+				jsx = js_formatter,
+				tsx = js_formatter,
+				astro = js_formatter,
 				json = { "fixjson" },
 				java = { "google-java-format" },
 			},
-			format_on_save = function()
-				if not atWork then
-					return { timeout_ms = 500, lsp_fallback = true }
-				end
-			end,
+			-- format_on_save = function()
+			-- 	if not atWork then
+			-- 		return { timeout_ms = 500, lsp_fallback = true }
+			-- 	end
+			-- end,
 		},
 	},
 
@@ -390,7 +382,6 @@ local plugins = {
 				},
 				highlight = { enable = true },
 				indent = { enable = true },
-				autotag = { enable = true },
 			})
 		end,
 	},
@@ -451,7 +442,14 @@ local plugins = {
 	{ "folke/todo-comments.nvim", dependencies = "nvim-lua/plenary.nvim", opts = {} }, -- highlight todo comments, e.g. TODO:
 	-- { "numToStr/Comment.nvim",       opts = {},                              lazy = false },
 	{ "windwp/nvim-autopairs", event = "InsertEnter", opts = {} }, -- auto-create brackets/parentheses
-	{ "windwp/nvim-ts-autotag", event = "InsertEnter", opts = {} }, -- autoclose/rename html tags
+	{
+		"windwp/nvim-ts-autotag",
+		event = "InsertEnter",
+		opts = {},
+		config = function()
+			require("nvim-ts-autotag").setup({})
+		end,
+	}, -- autoclose/rename html tags
 	{
 		"sindrets/diffview.nvim",
 		event = "VeryLazy",
@@ -518,66 +516,191 @@ local plugins = {
 	},
 
 	{
-		"nvim-tree/nvim-tree.lua", -- file explorer
-		lazy = false,
-		dependencies = { "nvim-tree/nvim-web-devicons" },
+		"nvim-neo-tree/neo-tree.nvim",
+		-- lazy = false,
+		event = "BufEnter",
+		branch = "v3.x",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+			"MunifTanjim/nui.nvim",
+			-- "3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
+		},
 		keys = {
 			{
-				"<leader>E",
+				"<leader>e",
 				function()
-					require("nvim-tree.api").tree.open()
+					vim.cmd("Neotree action=focus source=filesystem position=left reveal=true")
+				end,
+				noremap = true,
+			},
+			{
+				"<leader>b",
+				function()
+					vim.cmd("Neotree action=focus source=buffers position=left reveal=true")
+				end,
+				noremap = true,
+			},
+			{
+				"<leader>g",
+				function()
+					vim.cmd("Neotree action=focus source=git_status position=left reveal=true")
 				end,
 				noremap = true,
 			},
 		},
-		opts = {
-			on_attach = function(bufnr)
-				local api = require("nvim-tree.api")
-
-				local function opts(desc)
-					return {
-						desc = "nvim-tree: " .. desc,
-						buffer = bufnr,
+		config = function()
+			require("neo-tree").setup({
+				-- use_default_mappings = false,
+				close_if_last_window = true, -- Close Neo-tree if it is the last window left in the tab
+				enable_git_status = true,
+				enable_diagnostics = true,
+				sort_case_insensitive = true, -- used when sorting files and directories in the tree
+				window = {
+					position = "left",
+					width = 40,
+					mapping_options = {
 						noremap = true,
-						silent = true,
 						nowait = true,
-					}
-				end
-
-				api.config.mappings.default_on_attach(bufnr)
-
-				-- your removals and mappings go here
-				vim.keymap.set("n", "<leader>f", api.live_filter.start, opts("Filter"))
-				vim.keymap.del("n", "f", { buffer = bufnr })
-			end,
-			sync_root_with_cwd = true,
-			respect_buf_cwd = true,
-			update_focused_file = {
-				enable = true,
-				update_root = true,
-			},
-			sort_by = "case_sensitive",
-			view = {
-				-- width = 40,
-				side = "left",
-				float = {
-					enable = true,
-					quit_on_focus_loss = true,
-					open_win_config = {
-						relative = "editor",
-						border = "single", -- none, single, double, rounded, solid, shadow
-						width = 50,
-						height = vim.api.nvim_win_get_height(0) - 3,
-						row = 1,
-						col = 1,
+					},
+					mappings = {
+						["<space>"] = {
+							"toggle_node",
+							nowait = false, -- disable `nowait` if you have existing combos starting with this char that you want to use
+						},
+						["<2-LeftMouse>"] = "open",
+						["<cr>"] = "open",
+						["<esc>"] = "cancel", -- close preview or floating neo-tree window
+						["P"] = { "toggle_preview", config = { use_float = true, use_image_nvim = true } },
+						["l"] = "focus_preview",
+						["S"] = "open_split",
+						["s"] = "open_vsplit",
+						["t"] = "open_tabnew",
+						["w"] = "open_with_window_picker",
+						["C"] = "close_node",
+						["z"] = "close_all_nodes",
+						["a"] = {
+							"add",
+							config = {
+								show_path = "none", -- "none", "relative", "absolute"
+							},
+						},
+						["A"] = "add_directory", -- also accepts the optional config.show_path option like "add". this also supports BASH style brace expansion.
+						["d"] = "delete",
+						["r"] = "rename",
+						["y"] = "copy_to_clipboard",
+						["x"] = "cut_to_clipboard",
+						["p"] = "paste_from_clipboard",
+						["c"] = "copy", -- takes text input for destination, also accepts the optional config.show_path option like "add":
+						["m"] = "move", -- takes text input for destination, also accepts the optional config.show_path option like "add".
+						["Q"] = "close_window",
+						["q"] = "none",
+						["R"] = "refresh",
+						["?"] = "show_help",
+						["<"] = "prev_source",
+						[">"] = "next_source",
+						["i"] = "show_file_details",
+						["o"] = "open",
+						["oc"] = "none",
+						["od"] = "none",
+						["og"] = "none",
+						["om"] = "none",
+						["on"] = "none",
+						["os"] = "none",
+						["ot"] = "none",
 					},
 				},
-			},
-			diagnostics = {
-				enable = true,
-				show_on_dirs = true,
-			},
-		},
+				nesting_rules = {},
+				filesystem = {
+					filtered_items = {
+						visible = false, -- when true, they will just be displayed differently than normal items
+						hide_dotfiles = false,
+						hide_gitignored = true,
+						hide_hidden = true, -- only works on Windows for hidden files/directories
+					},
+					window = {
+						mappings = {
+							["<bs>"] = "navigate_up",
+							["."] = "set_root",
+							["H"] = "toggle_hidden",
+							["/"] = "fuzzy_finder",
+							["D"] = "fuzzy_finder_directory",
+							["#"] = "fuzzy_sorter", -- fuzzy sorting using the fzy algorithm
+							["f"] = "filter_on_submit",
+							["<c-x>"] = "clear_filter",
+							["[g"] = "prev_git_modified",
+							["]g"] = "next_git_modified",
+							["o"] = "open",
+							["oc"] = "none",
+							["od"] = "none",
+							["og"] = "none",
+							["om"] = "none",
+							["on"] = "none",
+							["os"] = "none",
+							["ot"] = "none",
+						},
+						fuzzy_finder_mappings = { -- define keymaps for filter popup window in fuzzy_finder_mode
+							["<down>"] = "move_cursor_down",
+							["<C-n>"] = "move_cursor_down",
+							["<up>"] = "move_cursor_up",
+							["<C-p>"] = "move_cursor_up",
+							-- ['<key>'] = function(state, scroll_padding) ... end,
+						},
+					},
+
+					commands = {}, -- Add a custom command or override a global one using the same function name
+				},
+				buffers = {
+					follow_current_file = {
+						enabled = true, -- This will find and focus the file in the active buffer every time
+						--              -- the current file is changed while the tree is open.
+						leave_dirs_open = false, -- `false` closes auto expanded dirs, such as with `:Neotree reveal`
+					},
+					group_empty_dirs = true, -- when true, empty folders will be grouped together
+					show_unloaded = true,
+					window = {
+						mappings = {
+							["d"] = "buffer_delete",
+							["bd"] = "buffer_delete",
+							["<bs>"] = "navigate_up",
+							["."] = "set_root",
+							["o"] = "open",
+							["oc"] = "none",
+							["od"] = "none",
+							["og"] = "none",
+							["om"] = "none",
+							["on"] = "none",
+							["os"] = "none",
+							["ot"] = "none",
+						},
+					},
+				},
+				git_status = {
+					window = {
+						position = "float",
+						mappings = {
+							["A"] = "git_add_all",
+							["gu"] = "git_unstage_file",
+							["ga"] = "git_add_file",
+							["gr"] = "git_revert_file",
+							["gc"] = "git_commit",
+							["gp"] = "git_push",
+							["gg"] = "git_commit_and_push",
+							["o"] = "open",
+							["oc"] = "none",
+							["od"] = "none",
+							["og"] = "none",
+							["om"] = "none",
+							["on"] = "none",
+							["os"] = "none",
+							["ot"] = "none",
+						},
+					},
+				},
+			})
+
+			vim.cmd("Neotree show")
+		end,
 	},
 
 	-- highlights matches to the word under the cursor
@@ -643,22 +766,6 @@ local plugins = {
 					jsx_attribute = "// %s",
 					comment = "// %s",
 				},
-			},
-		},
-	},
-
-	{
-		"j-morano/buffer_manager.nvim",
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-		},
-		keys = {
-			{
-				"<leader>e",
-				function()
-					require("buffer_manager.ui").toggle_quick_menu()
-				end,
-				noremap = true,
 			},
 		},
 	},
