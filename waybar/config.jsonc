@@ -7,18 +7,21 @@
   "spacing": 4, // Gaps between modules (4px)
   // Choose the order of the modules
   "modules-left": [
+    "custom/tofi",
     "hyprland/workspaces"
     //"custom/media"
   ],
   //"modules-center": [
-    //"hyprland/window"
+  //"hyprland/window"
   //],
   "modules-right": [
     "tray",
     "wireplumber",
     "backlight",
     "network",
+    "privacy",
     "temperature",
+    "memory",
     "battery",
     "clock"
   ],
@@ -28,9 +31,12 @@
     "format-window-separator": " ",
     "window-rewrite-default": "  ",
     "window-rewrite": {
-      "class<Google-chrome>": "  ",
+      "Google-chrome": "  ",
       "kitty": "  ",
-      "discord": "  "
+      "discord": "  ",
+      "minecraft": " 󰍳 ",
+      "dolphin": " 󰉋 ",
+      "steam": "  "
     },
     "persistent-workspaces": {
       "*": 3 // 5 workspaces by default on every monitor
@@ -71,6 +77,32 @@
       "󰃟",
       "󰃟",
       "󰃠"
+    ]
+  },
+  "memory": {
+    "interval": 30,
+    "format": "RAM: {used:0.1f}/{total:0.1f} GB 󰍛"
+  },
+  "privacy": {
+    "icon-spacing": 4,
+    "icon-size": 18,
+    "transition-duration": 250,
+    "modules": [
+      {
+        "type": "screenshare",
+        "tooltip": true,
+        "tooltip-icon-size": 24
+      },
+      {
+        "type": "audio-out",
+        "tooltip": true,
+        "tooltip-icon-size": 24
+      },
+      {
+        "type": "audio-in",
+        "tooltip": true,
+        "tooltip-icon-size": 24
+      }
     ]
   },
   "battery": {
@@ -146,5 +178,9 @@
     },
     "scroll-step": 1,
     "on-click": "helvum"
+  },
+  "custom/tofi": {
+    "on-click": "tofi-drun | xargs hyprctl dispatch exec --",
+    "format": "  "
   }
 }

@@ -37,7 +37,7 @@ local plugins = {
 				require("catppuccin").setup({})
 			else
 				require("catppuccin").setup({
-					transparent_background = true,
+					-- transparent_background = true,
 				})
 			end
 			vim.cmd("color catppuccin")
@@ -193,7 +193,7 @@ local plugins = {
 				"jsonls",
 				"lua_ls",
 				"tailwindcss",
-				"tsserver",
+				"ts_ls",
 			},
 			handlers = {
 				function(server)
@@ -210,8 +210,8 @@ local plugins = {
 						},
 					})
 				end,
-				tsserver = function()
-					require("lspconfig").tsserver.setup({
+				ts_ls = function()
+					require("lspconfig").ts_ls.setup({
 						init_options = { preferences = { disableSuggestions = true } },
 					})
 				end,
