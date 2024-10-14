@@ -27,6 +27,7 @@ end
 local plugins = {
 	-- colors i like
 	--  catppuccin/nvim {catppuccin}, Yazeed1s/oh-lucy.nvim {oh-lucy}, rose-pine/neovim {rose-pine}, sainnhe/everforest {everforest}
+	--
 	{
 		"catppuccin/nvim",
 		name = "catppuccin",
@@ -40,10 +41,14 @@ local plugins = {
 					-- transparent_background = true,
 				})
 			end
-			vim.cmd("color catppuccin")
+			vim.cmd("color mellow")
 		end,
 	},
 	{ "Yazeed1s/oh-lucy.nvim" },
+	"bluz71/vim-moonfly-colors",
+	"mellow-theme/mellow.nvim",
+	"kdheepak/monochrome.nvim",
+  "slugbyte/lackluster.nvim",
 
 	------------------
 	--      LSP     --
@@ -83,31 +88,31 @@ local plugins = {
 		},
 	},
 
-	{
-		"nvim-java/nvim-java",
-		config = function()
-			require("java").setup()
-		end,
-		dependencies = {
-			"nvim-java/lua-async-await",
-			"nvim-java/nvim-java-refactor",
-			"nvim-java/nvim-java-core",
-			"nvim-java/nvim-java-test",
-			"nvim-java/nvim-java-dap",
-			"MunifTanjim/nui.nvim",
-			"neovim/nvim-lspconfig",
-			"mfussenegger/nvim-dap",
-			{
-				"williamboman/mason.nvim",
-				opts = {
-					registries = {
-						"github:nvim-java/mason-registry",
-						"github:mason-org/mason-registry",
-					},
-				},
-			},
-		},
-	},
+	-- {
+	-- 	"nvim-java/nvim-java",
+	-- 	config = function()
+	-- 		require("java").setup()
+	-- 	end,
+	-- 	dependencies = {
+	-- 		"nvim-java/lua-async-await",
+	-- 		"nvim-java/nvim-java-refactor",
+	-- 		"nvim-java/nvim-java-core",
+	-- 		"nvim-java/nvim-java-test",
+	-- 		"nvim-java/nvim-java-dap",
+	-- 		"MunifTanjim/nui.nvim",
+	-- 		"neovim/nvim-lspconfig",
+	-- 		"mfussenegger/nvim-dap",
+	-- 		{
+	-- 			"williamboman/mason.nvim",
+	-- 			opts = {
+	-- 				registries = {
+	-- 					"github:nvim-java/mason-registry",
+	-- 					"github:mason-org/mason-registry",
+	-- 				},
+	-- 			},
+	-- 		},
+	-- 	},
+	-- },
 
 	-- LSP Support
 	{
