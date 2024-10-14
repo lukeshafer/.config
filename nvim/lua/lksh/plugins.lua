@@ -80,11 +80,6 @@ local plugins = {
 				json = { "fixjson" },
 				java = { "google-java-format" },
 			},
-			-- format_on_save = function()
-			-- 	if not atWork then
-			-- 		return { timeout_ms = 500, lsp_fallback = true }
-			-- 	end
-			-- end,
 		},
 	},
 
@@ -459,6 +454,12 @@ local plugins = {
 		"sindrets/diffview.nvim",
 		event = "VeryLazy",
 		dependencies = "nvim-lua/plenary.nvim",
+    keys = {
+      { "<leader>vo", "<cmd>DiffviewOpen<cr>" },
+      { "<leader>vc", "<cmd>DiffviewClose<cr>" },
+      { "<leader>vm", "<cmd>DiffviewOpen origin/main<cr>" },
+      { "<leader>vd", "<cmd>DiffviewOpen origin/dev<cr>" },
+    },
 	}, -- git diff viewer
 	{
 		"kylechui/nvim-surround",
