@@ -48,7 +48,7 @@ local plugins = {
 	"bluz71/vim-moonfly-colors",
 	"mellow-theme/mellow.nvim",
 	"kdheepak/monochrome.nvim",
-  "slugbyte/lackluster.nvim",
+	"slugbyte/lackluster.nvim",
 
 	------------------
 	--      LSP     --
@@ -454,12 +454,12 @@ local plugins = {
 		"sindrets/diffview.nvim",
 		event = "VeryLazy",
 		dependencies = "nvim-lua/plenary.nvim",
-    keys = {
-      { "<leader>vo", "<cmd>DiffviewOpen<cr>" },
-      { "<leader>vc", "<cmd>DiffviewClose<cr>" },
-      { "<leader>vm", "<cmd>DiffviewOpen origin/main<cr>" },
-      { "<leader>vd", "<cmd>DiffviewOpen origin/dev<cr>" },
-    },
+		keys = {
+			{ "<leader>vo", "<cmd>DiffviewOpen<cr>" },
+			{ "<leader>vc", "<cmd>DiffviewClose<cr>" },
+			{ "<leader>vm", "<cmd>DiffviewOpen origin/main<cr>" },
+			{ "<leader>vd", "<cmd>DiffviewOpen origin/dev<cr>" },
+		},
 	}, -- git diff viewer
 	{
 		"kylechui/nvim-surround",
