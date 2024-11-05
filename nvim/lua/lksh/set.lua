@@ -1,4 +1,4 @@
-local IS_WINDOWS = vim.loop.os_uname().sysname == "Windows_NT"
+local IS_WINDOWS = vim.uv.os_uname().sysname == "Windows_NT"
 HOME = os.getenv("HOME")
 if not HOME then
 	HOME = os.getenv("USERPROFILE")
