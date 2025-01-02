@@ -134,4 +134,10 @@ alias install-handlers="cd ./src/lambda/handlers/ && (find . -maxdepth 2 -name p
 alias install-lib="cd ./src/lambda/lib/ && npm i && cd -"
 alias install-all="install-handlers && install-lib"
 
+alias update-handlers="cd ./src/lambda/handlers/ && (find . -maxdepth 2 -name package.json -execdir npm up \;) && cd -"
+alias update-lib="cd ./src/lambda/lib/ && npm up && cd -"
+alias update-all="update-handlers && update-lib"
+
 alias finder="echo 'Use open instead'"
+
+alias git-node20-branch="git checkout -b @features/node20-upgrade && git push --set-upstream origin @features/node20-upgrade"

@@ -34,20 +34,13 @@ local plugins = {
 		lazy = false,
 		priority = 5000,
 		config = function()
-			if atWork then
-				require("catppuccin").setup({})
-			else
-				require("catppuccin").setup({
-					-- transparent_background = true,
-				})
-			end
+			require("catppuccin").setup({})
 			vim.cmd("color mellow")
 		end,
 	},
 	{ "Yazeed1s/oh-lucy.nvim" },
 	"bluz71/vim-moonfly-colors",
 	"mellow-theme/mellow.nvim",
-	"kdheepak/monochrome.nvim",
 	"slugbyte/lackluster.nvim",
 
 	------------------
@@ -82,32 +75,6 @@ local plugins = {
 			},
 		},
 	},
-
-	-- {
-	-- 	"nvim-java/nvim-java",
-	-- 	config = function()
-	-- 		require("java").setup()
-	-- 	end,
-	-- 	dependencies = {
-	-- 		"nvim-java/lua-async-await",
-	-- 		"nvim-java/nvim-java-refactor",
-	-- 		"nvim-java/nvim-java-core",
-	-- 		"nvim-java/nvim-java-test",
-	-- 		"nvim-java/nvim-java-dap",
-	-- 		"MunifTanjim/nui.nvim",
-	-- 		"neovim/nvim-lspconfig",
-	-- 		"mfussenegger/nvim-dap",
-	-- 		{
-	-- 			"williamboman/mason.nvim",
-	-- 			opts = {
-	-- 				registries = {
-	-- 					"github:nvim-java/mason-registry",
-	-- 					"github:mason-org/mason-registry",
-	-- 				},
-	-- 			},
-	-- 		},
-	-- 	},
-	-- },
 
 	-- LSP Support
 	{
@@ -321,14 +288,10 @@ local plugins = {
 					{ name = "buffer", keyword_length = 3 },
 				},
 				mapping = cmp.mapping.preset.insert({
-					-- Enter key confirms completion item
-					["<CR>"] = cmp.mapping.confirm({ select = false }),
-					-- Ctrl + y confirms completion item
-					["<C-y>"] = cmp.mapping.confirm({ select = true }),
-					-- Ctrl + space triggers completion menu
-					["<C-Space>"] = cmp.mapping.complete(),
-					-- Tab and S-Tab move through completion menu
-					["<Tab>"] = cmp.mapping.select_next_item(),
+					["<CR>"] = cmp.mapping.confirm({ select = false }), -- Enter key confirms completion item
+					["<C-y>"] = cmp.mapping.confirm({ select = true }), -- Ctrl + y confirms completion item
+					["<C-Space>"] = cmp.mapping.complete(), -- Ctrl + space triggers completion menu
+					["<Tab>"] = cmp.mapping.select_next_item(), -- Tab and S-Tab move through completion menu
 					["<S-Tab>"] = cmp.mapping.select_prev_item(),
 				}),
 				snippet = {
@@ -339,9 +302,9 @@ local plugins = {
 			})
 		end,
 	},
-	"hrsh7th/cmp-nvim-lsp",
-	"hrsh7th/cmp-buffer",
-	"hrsh7th/cmp-path",
+	{ "hrsh7th/cmp-nvim-lsp" },
+	{ "hrsh7th/cmp-buffer" },
+	{ "hrsh7th/cmp-path" },
 	{ "saadparwaiz1/cmp_luasnip" },
 	{ "hrsh7th/cmp-nvim-lua" },
 
@@ -440,18 +403,17 @@ local plugins = {
 	}, -- status line, bottom
 	{ "lewis6991/gitsigns.nvim", opts = {} }, -- inline git helpers
 	{ "folke/todo-comments.nvim", dependencies = "nvim-lua/plenary.nvim", opts = {} }, -- highlight todo comments, e.g. TODO:
-	-- { "numToStr/Comment.nvim",       opts = {},                              lazy = false },
 	{ "windwp/nvim-autopairs", event = "InsertEnter", opts = {} }, -- auto-create brackets/parentheses
 	{
-		"windwp/nvim-ts-autotag",
+		"windwp/nvim-ts-autotag", -- autoclose/rename html tags
 		event = "InsertEnter",
 		opts = {},
 		config = function()
 			require("nvim-ts-autotag").setup({})
 		end,
-	}, -- autoclose/rename html tags
+	},
 	{
-		"sindrets/diffview.nvim",
+		"sindrets/diffview.nvim", -- git diff viewer
 		event = "VeryLazy",
 		dependencies = "nvim-lua/plenary.nvim",
 		keys = {
@@ -460,13 +422,13 @@ local plugins = {
 			{ "<leader>vm", "<cmd>DiffviewOpen origin/main<cr>" },
 			{ "<leader>vd", "<cmd>DiffviewOpen origin/dev<cr>" },
 		},
-	}, -- git diff viewer
+	},
 	{
-		"kylechui/nvim-surround",
+		"kylechui/nvim-surround", -- tools for surrounding text
 		version = "*",
 		event = "VeryLazy",
 		opts = {},
-	}, -- tools for surrounding text
+	},
 	{ "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} }, -- show indentation levels
 
 	{
