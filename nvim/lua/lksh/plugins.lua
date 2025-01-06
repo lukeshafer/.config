@@ -35,13 +35,14 @@ local plugins = {
 		priority = 5000,
 		config = function()
 			require("catppuccin").setup({})
-			vim.cmd("color mellow")
+			vim.cmd("color rose-pine-moon")
 		end,
 	},
 	{ "Yazeed1s/oh-lucy.nvim" },
-	"bluz71/vim-moonfly-colors",
-	"mellow-theme/mellow.nvim",
-	"slugbyte/lackluster.nvim",
+	{ "bluz71/vim-moonfly-colors" },
+	{ "mellow-theme/mellow.nvim" },
+	{ "slugbyte/lackluster.nvim" },
+	{ "rose-pine/neovim", name = "rose-pine" },
 
 	------------------
 	--      LSP     --
