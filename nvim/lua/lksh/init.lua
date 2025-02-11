@@ -65,6 +65,8 @@ map("n", ";", ":")
 map("n", "<leader>y", '"+y')
 map("v", "<leader>y", '"+y')
 map("n", "<leader>s", ":Inspect<cr>")
+-- Leader+T opens terminal in pane
+-- map("n", "<leader>t", ":belowright 15sp|term<cr>")
 
 local opts = { noremap = true, silent = true }
 vim.keymap.set("n", "<leader>d", function()

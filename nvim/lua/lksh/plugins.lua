@@ -682,18 +682,18 @@ local plugins = {
 	},
 
 	-- git blame inline
-	{
-		"APZelos/blamer.nvim",
-		event = "VeryLazy",
-		config = function()
-			local IS_WINDOWS = vim.loop.os_uname().sysname == "Windows_NT"
-			if IS_WINDOWS then
-				vim.g.blamer_enabled = 0
-			else
-				vim.g.blamer_enabled = 1
-			end
-		end,
-	},
+	-- {
+	-- 	"APZelos/blamer.nvim",
+	-- 	event = "VeryLazy",
+	-- 	config = function()
+	-- 		local IS_WINDOWS = vim.loop.os_uname().sysname == "Windows_NT"
+	-- 		if IS_WINDOWS then
+	-- 			vim.g.blamer_enabled = 0
+	-- 		else
+	-- 			vim.g.blamer_enabled = 1
+	-- 		end
+	-- 	end,
+	-- },
 
 	{
 		"brenoprata10/nvim-highlight-colors", -- highlight hex color strings e.g. #CCCCFF, text-sky-700
@@ -716,28 +716,73 @@ local plugins = {
 	},
 
 	{
-		"ggandor/leap.nvim", -- move and jump to spots in code quickly
-		event = "BufEnter",
-		config = function()
-			require("leap").add_default_mappings()
-		end,
-	},
-
-	{
-		"JoosepAlviste/nvim-ts-context-commentstring",
-		main = "ts_context_commentstring",
+		"hat0uma/csvview.nvim",
+		---@module "csvview"
+		---@type CsvView.Options
 		opts = {
-			languages = {
-				javascript = {
-					__default = "// %s",
-					jsx_element = "{/* %s */}",
-					jsx_fragment = "{/* %s */}",
-					jsx_attribute = "// %s",
-					comment = "// %s",
-				},
+			parser = { comments = { "#", "//" } },
+			keymaps = {
+				-- Text objects for selecting fields
+				textobject_field_inner = { "if", mode = { "o", "x" } },
+				textobject_field_outer = { "af", mode = { "o", "x" } },
+				-- Excel-like navigation:
+				-- Use <Tab> and <S-Tab> to move horizontally between fields.
+				-- Use <Enter> and <S-Enter> to move vertically between rows and place the cursor at the end of the field.
+				-- Note: In terminals, you may need to enable CSI-u mode to use <S-Tab> and <S-Enter>.
+				jump_next_field_end = { "<Tab>", mode = { "n", "v" } },
+				jump_prev_field_end = { "<S-Tab>", mode = { "n", "v" } },
+				jump_next_row = { "<Enter>", mode = { "n", "v" } },
+				jump_prev_row = { "<S-Enter>", mode = { "n", "v" } },
 			},
 		},
+		cmd = { "CsvViewEnable", "CsvViewDisable", "CsvViewToggle" },
+		keys = {
+			{ "<leader>cs", "<cmd>CsvViewToggle<cr>" },
+		},
 	},
+	{
+		"cameron-wags/rainbow_csv.nvim",
+		config = true,
+		ft = {
+			"csv",
+			"tsv",
+			"csv_semicolon",
+			"csv_whitespace",
+			"csv_pipe",
+			"rfc_csv",
+			"rfc_semicolon",
+		},
+		cmd = {
+			"RainbowDelim",
+			"RainbowDelimSimple",
+			"RainbowDelimQuoted",
+			"RainbowMultiDelim",
+		},
+	},
+
+	-- {
+	-- 	"ggandor/leap.nvim", -- move and jump to spots in code quickly
+	-- 	event = "BufEnter",
+	-- 	config = function()
+	-- 		require("leap").add_default_mappings()
+	-- 	end,
+	-- },
+
+	-- {
+	-- 	"JoosepAlviste/nvim-ts-context-commentstring",
+	-- 	main = "ts_context_commentstring",
+	-- 	opts = {
+	-- 		languages = {
+	-- 			javascript = {
+	-- 				__default = "// %s",
+	-- 				jsx_element = "{/* %s */}",
+	-- 				jsx_fragment = "{/* %s */}",
+	-- 				jsx_attribute = "// %s",
+	-- 				comment = "// %s",
+	-- 			},
+	-- 		},
+	-- 	},
+	-- },
 }
 
 require("lazy").setup(plugins)
