@@ -681,20 +681,6 @@ local plugins = {
 		end,
 	},
 
-	-- git blame inline
-	-- {
-	-- 	"APZelos/blamer.nvim",
-	-- 	event = "VeryLazy",
-	-- 	config = function()
-	-- 		local IS_WINDOWS = vim.loop.os_uname().sysname == "Windows_NT"
-	-- 		if IS_WINDOWS then
-	-- 			vim.g.blamer_enabled = 0
-	-- 		else
-	-- 			vim.g.blamer_enabled = 1
-	-- 		end
-	-- 	end,
-	-- },
-
 	{
 		"brenoprata10/nvim-highlight-colors", -- highlight hex color strings e.g. #CCCCFF, text-sky-700
 		config = function()
@@ -717,8 +703,6 @@ local plugins = {
 
 	{
 		"hat0uma/csvview.nvim",
-		---@module "csvview"
-		---@type CsvView.Options
 		opts = {
 			parser = { comments = { "#", "//" } },
 			keymaps = {
@@ -759,30 +743,6 @@ local plugins = {
 			"RainbowMultiDelim",
 		},
 	},
-
-	-- {
-	-- 	"ggandor/leap.nvim", -- move and jump to spots in code quickly
-	-- 	event = "BufEnter",
-	-- 	config = function()
-	-- 		require("leap").add_default_mappings()
-	-- 	end,
-	-- },
-
-	-- {
-	-- 	"JoosepAlviste/nvim-ts-context-commentstring",
-	-- 	main = "ts_context_commentstring",
-	-- 	opts = {
-	-- 		languages = {
-	-- 			javascript = {
-	-- 				__default = "// %s",
-	-- 				jsx_element = "{/* %s */}",
-	-- 				jsx_fragment = "{/* %s */}",
-	-- 				jsx_attribute = "// %s",
-	-- 				comment = "// %s",
-	-- 			},
-	-- 		},
-	-- 	},
-	-- },
 }
 
 require("lazy").setup(plugins)
