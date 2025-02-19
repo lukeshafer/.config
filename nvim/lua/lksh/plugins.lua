@@ -35,7 +35,7 @@ local plugins = {
 		priority = 5000,
 		config = function()
 			require("catppuccin").setup({})
-			vim.cmd("color rose-pine-moon")
+			vim.cmd("color rose-pine-main")
 		end,
 	},
 	{ "Yazeed1s/oh-lucy.nvim" },
