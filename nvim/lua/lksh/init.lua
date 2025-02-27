@@ -1,4 +1,8 @@
-require("lksh.plugins")
+if vim.g.vscode then
+	require("lksh.vsc-plugins")
+else
+	require("lksh.plugins")
+end
 
 local IS_WINDOWS = vim.uv.os_uname().sysname == "Windows_NT"
 HOME = os.getenv("HOME")
