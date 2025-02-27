@@ -12,8 +12,8 @@ if not HOME then
 end
 
 -- Required for NvimTree
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
+-- vim.g.loaded_netrw = 1
+-- vim.g.loaded_netrwPlugin = 1
 
 -- Editor Settings
 vim.opt.tabstop = 2
@@ -30,23 +30,51 @@ else
 	vim.opt.backupdir = HOME .. "/.vim/backup"
 	vim.opt.dir = HOME .. "/.vim/swapfiles"
 end
-vim.opt.guicursor = "n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50"
 vim.opt.mouse = "a"
 vim.opt.cursorline = true
--- vim.opt.foldmethod = "indent"
+-- vim.opt.guicursor = "n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50"
 
 local function map(mode, shortcut, command, noremap)
 	noremap = noremap or true
 	vim.api.nvim_set_keymap(mode, shortcut, command, { noremap = noremap })
 end
 
+local map_opts = { noremap = true, silent = true }
+
 -- leader is SPACE key
 vim.g.mapleader = " "
 
 --------NORMAL MODE---------
 -- CTRL n opens new tab
-map("n", "<C-n>", ":tabnew <CR>")
+-- map("n", "<C-n>", ":tabnew <CR>") -- TODO: delete this next commit
 -- CTRL e toggles file browser
+-- map("n", "<leader>e", ":Explore<cr>")
+
+-- local netrw_buf --- @type integer
+-- local netrw_win --- @type integer
+-- local prev_buf --- @type integer
+-- vim.keymap.set("n", "<leader>e", function()
+-- 	if netrw_buf ~= vim.api.nvim_get_current_buf() then
+-- 		prev_buf = vim.api.nvim_get_current_buf()
+-- 	end
+--
+-- 	if netrw_buf == nil then
+-- 		netrw_buf = vim.api.nvim_create_buf(false, true)
+-- 	end
+--
+-- 	if netrw_win == nil or not vim.api.nvim_win_is_valid(netrw_win) then
+-- 		netrw_win = vim.api.nvim_open_win(netrw_buf, true, {
+-- 			-- relative = "editor",
+-- 			width = 50,
+-- 			split = "left",
+-- 			style = "minimal",
+-- 		})
+-- 		vim.cmd("Explore")
+-- 	else
+-- 		vim.api.nvim_set_current_win(netrw_win)
+-- 	end
+-- end, map_opts)
+
 -- CTRL Up/Down moves lines up/down
 map("n", "<C-Up>", ":m -2<CR>")
 map("n", "<C-k>", ":m -2<CR>")
@@ -72,13 +100,12 @@ map("n", "<leader>s", ":Inspect<cr>")
 -- Leader+T opens terminal in pane
 -- map("n", "<leader>t", ":belowright 15sp|term<cr>")
 
-local opts = { noremap = true, silent = true }
 vim.keymap.set("n", "<leader>d", function()
 	vim.diagnostic.open_float({ source = true })
-end, opts)
-vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
-vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
-vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, opts)
+end, map_opts)
+vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, map_opts)
+vim.keymap.set("n", "]d", vim.diagnostic.goto_next, map_opts)
+vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, map_opts)
 
 --------INSERT MODE---------
 map("i", "<C-h>", "<Left>")
