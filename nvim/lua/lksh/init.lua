@@ -32,6 +32,7 @@ else
 end
 vim.opt.mouse = "a"
 vim.opt.cursorline = true
+vim.opt.diffopt:append { "iwhiteall" }
 -- vim.opt.guicursor = "n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50"
 
 local function map(mode, shortcut, command, noremap)

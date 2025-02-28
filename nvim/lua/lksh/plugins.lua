@@ -153,14 +153,14 @@ local plugins = {
 		lazy = false,
 		opts = {
 			ensure_installed = {
-				"astro",
-				"eslint",
+				-- "astro",
+				-- "eslint",
 				"cssls",
 				"emmet_ls",
 				"html",
 				"jsonls",
 				"lua_ls",
-				"tailwindcss",
+				-- "tailwindcss",
 				"ts_ls",
 			},
 			handlers = {
