@@ -28,21 +28,27 @@ local plugins = {
 	-- colors i like
 	--  catppuccin/nvim {catppuccin}, Yazeed1s/oh-lucy.nvim {oh-lucy}, rose-pine/neovim {rose-pine}, sainnhe/everforest {everforest}
 	--
+	-- {
+	-- 	"catppuccin/nvim",
+	-- 	name = "catppuccin",
+	-- 	lazy = false,
+	-- 	priority = 5000,
+	-- 	config = function()
+	-- 		require("catppuccin").setup({})
+	-- 		vim.cmd("color rose-pine-main")
+	-- 	end,
+	-- },
+	-- { "Yazeed1s/oh-lucy.nvim" },
+	-- { "bluz71/vim-moonfly-colors" },
+	-- { "mellow-theme/mellow.nvim" },
+	-- { "slugbyte/lackluster.nvim" },
 	{
-		"catppuccin/nvim",
-		name = "catppuccin",
-		lazy = false,
-		priority = 5000,
+		"rose-pine/neovim",
+		name = "rose-pine",
 		config = function()
-			require("catppuccin").setup({})
 			vim.cmd("color rose-pine-main")
 		end,
 	},
-	{ "Yazeed1s/oh-lucy.nvim" },
-	{ "bluz71/vim-moonfly-colors" },
-	{ "mellow-theme/mellow.nvim" },
-	{ "slugbyte/lackluster.nvim" },
-	{ "rose-pine/neovim", name = "rose-pine" },
 
 	------------------
 	--      LSP     --

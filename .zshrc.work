@@ -84,7 +84,7 @@ alias vim="nvim"
 alias ring="echo -e \"\a\""
 
 alias sb="sam build --config-env ls"
-alias sd="sam deploy --config-env ls"
+alias sd="sam deploy --config-env ls --profile dev-crmi"
 alias sdg="sam deploy --guided --profile dev-crmi"
 alias sbd="(sb && sd && say \"SAM deployment successful\") || say \"SAM deployment failed\""
 alias ss="sam sync --config-env ls"
