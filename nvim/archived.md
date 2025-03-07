@@ -128,3 +128,37 @@ return lush(function(injected_functions)
 	}
 end)
 ```
+
+shortcut for opening netrw
+```lua
+--------NORMAL MODE---------
+-- CTRL n opens new tab
+-- map("n", "<C-n>", ":tabnew <CR>") -- TODO: delete this next commit
+-- CTRL e toggles file browser
+-- map("n", "<leader>e", ":Explore<cr>")
+
+-- local netrw_buf --- @type integer
+-- local netrw_win --- @type integer
+-- local prev_buf --- @type integer
+-- vim.keymap.set("n", "<leader>e", function()
+-- 	if netrw_buf ~= vim.api.nvim_get_current_buf() then
+-- 		prev_buf = vim.api.nvim_get_current_buf()
+-- 	end
+--
+-- 	if netrw_buf == nil then
+-- 		netrw_buf = vim.api.nvim_create_buf(false, true)
+-- 	end
+--
+-- 	if netrw_win == nil or not vim.api.nvim_win_is_valid(netrw_win) then
+-- 		netrw_win = vim.api.nvim_open_win(netrw_buf, true, {
+-- 			-- relative = "editor",
+-- 			width = 50,
+-- 			split = "left",
+-- 			style = "minimal",
+-- 		})
+-- 		vim.cmd("Explore")
+-- 	else
+-- 		vim.api.nvim_set_current_win(netrw_win)
+-- 	end
+-- end, map_opts)
+```

@@ -26,18 +26,7 @@ end
 -- actual lazy configuration
 local plugins = {
 	-- colors i like
-	--  catppuccin/nvim {catppuccin}, Yazeed1s/oh-lucy.nvim {oh-lucy}, rose-pine/neovim {rose-pine}, sainnhe/everforest {everforest}
-	--
-	-- {
-	-- 	"catppuccin/nvim",
-	-- 	name = "catppuccin",
-	-- 	lazy = false,
-	-- 	priority = 5000,
-	-- 	config = function()
-	-- 		require("catppuccin").setup({})
-	-- 		vim.cmd("color rose-pine-main")
-	-- 	end,
-	-- },
+	-- { "catppuccin/nvim", name = "catppuccin" },
 	-- { "Yazeed1s/oh-lucy.nvim" },
 	-- { "bluz71/vim-moonfly-colors" },
 	-- { "mellow-theme/mellow.nvim" },
@@ -45,6 +34,7 @@ local plugins = {
 	{
 		"rose-pine/neovim",
 		name = "rose-pine",
+		lazy = false,
 		config = function()
 			vim.cmd("color rose-pine-main")
 		end,
@@ -749,18 +739,18 @@ local plugins = {
 		},
 	},
 	-- Lua
-	{
-		"folke/zen-mode.nvim",
-		opts = {
-			-- your configuration comes here
-			-- or leave it empty to use the default settings
-			-- refer to the configuration section below
-		},
-		keys = {
-			{ "<leader>z", "<cmd>ZenMode<cr>" },
-		},
-		cmd = { "ZenMode" },
-	},
+	-- {
+	-- 	"folke/zen-mode.nvim",
+	-- 	opts = {
+	-- 		-- your configuration comes here
+	-- 		-- or leave it empty to use the default settings
+	-- 		-- refer to the configuration section below
+	-- 	},
+	-- 	keys = {
+	-- 		{ "<leader>z", "<cmd>ZenMode<cr>" },
+	-- 	},
+	-- 	cmd = { "ZenMode" },
+	-- },
 }
 
 require("lazy").setup(plugins)
