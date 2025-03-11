@@ -141,3 +141,5 @@ alias update-all="update-handlers && update-lib"
 alias finder="echo 'Use open instead'"
 
 alias git-node20-branch="git checkout -b @features/node20-upgrade && git push --set-upstream origin @features/node20-upgrade"
+
+alias vil="NVIM_APPNAME=\"nvim-lite\" nvim"
