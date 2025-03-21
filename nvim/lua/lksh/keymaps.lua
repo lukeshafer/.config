@@ -33,16 +33,16 @@ vim.keymap.set("n", "]d", vim.diagnostic.goto_next, map_opts)
 vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, map_opts)
 
 --------INSERT MODE---------
-vim.keymap.set("i", "<C-h>", "<Left>", map_opts)
-vim.keymap.set("i", "<C-k>", "<Up>", map_opts)
-vim.keymap.set("i", "<C-l>", "<Right>", map_opts)
-vim.keymap.set("i", "<C-j>", "<Down>", map_opts)
+-- vim.keymap.set("i", "<C-h>", "<Left>", map_opts)
+-- vim.keymap.set("i", "<C-k>", "<Up>", map_opts)
+-- vim.keymap.set("i", "<C-l>", "<Right>", map_opts)
+-- vim.keymap.set("i", "<C-j>", "<Down>", map_opts)
 
 --------VISUAL MODE---------
 --
 -- CTRL + BRACKET wraps selected text in the bracket
-vim.keymap.set("v", "<C-9>", "c()<Esc>hp", map_opts)
-vim.keymap.set("v", "<C-(>", "c()<Esc>hp", map_opts)
+-- vim.keymap.set("v", "<C-9>", "c()<Esc>hp", map_opts)
+-- vim.keymap.set("v", "<C-(>", "c()<Esc>hp", map_opts)
 -- Indenting keeps previous highlight
 vim.keymap.set("v", ">", ">gv", map_opts)
 vim.keymap.set("v", "<", "<gv", map_opts)
