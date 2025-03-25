@@ -182,8 +182,7 @@ function deldir {
 #fi
 
 function zrc() {
-	nvim ~/.zshrc
-	cp ~/.zshrc ~/.config/.zshrc.personal
+	nvim ~/.config/.zshrc.personal
 	source ~/.zshrc
 }
 
@@ -284,7 +283,8 @@ alias gch="git checkout"
 alias gchb="git checkout -b"
 alias gm="git merge"
 alias gm-devtoqa="gch qa && gm dev && gp && gch dev"
-alias gtree="git log --oneline --decorate --graph --all"
+alias gtree="echo 'Use git-tree'"
+alias git-tree="git log --oneline --decorate --graph --all"
 
 function rescript_new() {
 	if [ -z "$1" ]; then
@@ -301,28 +301,12 @@ function gsync() {
 # bun completions
 [ -s "/home/luke/.bun/_bun" ] && source "/home/luke/.bun/_bun"
 
-# arch things
-function pkgs() {
-	if [ -z "$1" ]; then
-		echo "Usage: pkgs <search-term>"
-		return 1
-	fi
-	pacman -Ss $1 | less
-}
-function aur() {
-	if [ -z "$1" ]; then
-		echo "Usage: aur <search-term>"
-		return 1
-	fi
-	yay -Ss $1 | less
-}
-alias aurs="aur"
-
-alias pkadd="sudo pacman -S"
-
 alias ec2connect='ssh -i "~/.ssh/keys/Macbook Pro.pem" ubuntu@ec2-3-142-246-64.us-east-2.compute.amazonaws.com'
 
 alias vi="nvim"
 
+alias lsconfig="cd ~/.config && nvim && cd -"
+
 # alias mcstartserver="java -Xmx1G -Xms1G -jar paper.jar --nogui"
 # alias mcrefreshplugin="cp /home/luke/Code/minecraft-dev/*/target/*-SNAPSHOT.jar /home/luke/Code/minecraft-dev/server/plugins"
+

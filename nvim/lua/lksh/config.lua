@@ -6,8 +6,8 @@ if not HOME then
 end
 
 -- Required for NvimTree
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
+-- vim.g.loaded_netrw = 1
+-- vim.g.loaded_netrwPlugin = 1
 
 -- Editor Settings
 vim.opt.tabstop = 2
