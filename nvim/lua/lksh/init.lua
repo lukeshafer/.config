@@ -4,5 +4,6 @@ if vim.g.vscode then
 end
 
 require("lksh.plugins")
-require('lksh.config')
-require('lksh.keymaps')
+require("lksh.config")
+require("lksh.lsp")
+require("lksh.keymaps")

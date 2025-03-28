@@ -28,8 +28,8 @@ vim.keymap.set("n", "<leader>s", ":Inspect<cr>", map_opts)
 vim.keymap.set("n", "<leader>d", function()
 	vim.diagnostic.open_float({ source = true })
 end, map_opts)
-vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, map_opts)
-vim.keymap.set("n", "]d", vim.diagnostic.goto_next, map_opts)
+-- vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, map_opts) -- built in
+-- vim.keymap.set("n", "]d", vim.diagnostic.goto_next, map_opts) -- built in
 vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, map_opts)
 
 --------INSERT MODE---------

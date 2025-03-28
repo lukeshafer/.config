@@ -74,196 +74,196 @@ local plugins = {
 	},
 
 	-- LSP Support
-	{
-		"neovim/nvim-lspconfig",
-		event = { "BufReadPost", "BufNewFile" },
-		cmd = { "LspInfo", "LspInstall", "LspUninstall" },
-		config = function()
-			local lspconfig = require("lspconfig")
-			local lsp_defaults = lspconfig.util.default_config
-
-			lsp_defaults.capabilities =
-				vim.tbl_deep_extend("force", lsp_defaults.capabilities, require("cmp_nvim_lsp").default_capabilities())
-
-			local onWSL = os.getenv("PC_CONTEXT") == "desktop-wsl"
-
-			if onWSL then
-				lspconfig.gdscript.setup({
-					cmd = { "godot-wsl-lsp" },
-				})
-			else
-				lspconfig.gdscript.setup({})
-			end
-
-			vim.api.nvim_create_autocmd("LspAttach", {
-				desc = "LSP actions",
-				callback = function(event)
-					local opts = { noremap = true, silent = true, buffer = event.buf }
-
-					vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-					vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
-					vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
-					vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
-					vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
-					vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
-					vim.keymap.set("n", "go", vim.lsp.buf.type_definition, opts)
-					vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
-					vim.keymap.set("n", "gs", vim.lsp.buf.signature_help, opts)
-					vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
-					vim.keymap.set("n", "<F4>", vim.lsp.buf.code_action, opts)
-					vim.keymap.set("n", "gl", vim.diagnostic.open_float, opts)
-					vim.keymap.set("n", "<leader>f", function()
-						require("conform").format({ timeout_ms = 2000, bufnr = event.buf, lsp_fallback = true })
-					end, opts)
-				end,
-			})
-
-			vim.fn.sign_define("DiagnosticSignError", {
-				texthl = "DiagnosticSignError",
-				text = "✘",
-				numhl = "",
-			})
-
-			vim.fn.sign_define("DiagnosticSignWarn", {
-				texthl = "DiagnosticSignWarn",
-				text = "▲",
-				numhl = "",
-			})
-
-			vim.fn.sign_define("DiagnosticSignHint", {
-				texthl = "DiagnosticSignHint",
-				text = "⚑",
-				numhl = "",
-			})
-
-			vim.fn.sign_define("DiagnosticSignInfo", {
-				texthl = "DiagnosticSignInfo",
-				text = "",
-				numhl = "",
-			})
-		end,
-	},
+	-- {
+	-- 	"neovim/nvim-lspconfig",
+	-- 	event = { "BufReadPost", "BufNewFile" },
+	-- 	cmd = { "LspInfo", "LspInstall", "LspUninstall" },
+	-- 	config = function()
+	-- 		local lspconfig = require("lspconfig")
+	-- 		local lsp_defaults = lspconfig.util.default_config
+	--
+	-- 		lsp_defaults.capabilities =
+	-- 			vim.tbl_deep_extend("force", lsp_defaults.capabilities, require("cmp_nvim_lsp").default_capabilities())
+	--
+	-- 		local onWSL = os.getenv("PC_CONTEXT") == "desktop-wsl"
+	--
+	-- 		if onWSL then
+	-- 			lspconfig.gdscript.setup({
+	-- 				cmd = { "godot-wsl-lsp" },
+	-- 			})
+	-- 		else
+	-- 			lspconfig.gdscript.setup({})
+	-- 		end
+	--
+	-- 		vim.api.nvim_create_autocmd("LspAttach", {
+	-- 			desc = "LSP actions",
+	-- 			callback = function(event)
+	-- 				local opts = { noremap = true, silent = true, buffer = event.buf }
+	--
+	-- 				vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+	-- 				vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
+	-- 				vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
+	-- 				vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
+	-- 				vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+	-- 				vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
+	-- 				vim.keymap.set("n", "go", vim.lsp.buf.type_definition, opts)
+	-- 				vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
+	-- 				vim.keymap.set("n", "gs", vim.lsp.buf.signature_help, opts)
+	-- 				vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
+	-- 				vim.keymap.set("n", "<F4>", vim.lsp.buf.code_action, opts)
+	-- 				vim.keymap.set("n", "gl", vim.diagnostic.open_float, opts)
+	-- 				vim.keymap.set("n", "<leader>f", function()
+	-- 					require("conform").format({ timeout_ms = 2000, bufnr = event.buf, lsp_fallback = true })
+	-- 				end, opts)
+	-- 			end,
+	-- 		})
+	--
+	-- 		vim.fn.sign_define("DiagnosticSignError", {
+	-- 			texthl = "DiagnosticSignError",
+	-- 			text = "✘",
+	-- 			numhl = "",
+	-- 		})
+	--
+	-- 		vim.fn.sign_define("DiagnosticSignWarn", {
+	-- 			texthl = "DiagnosticSignWarn",
+	-- 			text = "▲",
+	-- 			numhl = "",
+	-- 		})
+	--
+	-- 		vim.fn.sign_define("DiagnosticSignHint", {
+	-- 			texthl = "DiagnosticSignHint",
+	-- 			text = "⚑",
+	-- 			numhl = "",
+	-- 		})
+	--
+	-- 		vim.fn.sign_define("DiagnosticSignInfo", {
+	-- 			texthl = "DiagnosticSignInfo",
+	-- 			text = "",
+	-- 			numhl = "",
+	-- 		})
+	-- 	end,
+	-- },
 	{ "williamboman/mason.nvim", opts = {}, lazy = false },
-	{
-		"williamboman/mason-lspconfig.nvim",
-		lazy = false,
-		opts = {
-			ensure_installed = {
-				-- "astro",
-				-- "eslint",
-				"cssls",
-				"emmet_ls",
-				"html",
-				"jsonls",
-				"lua_ls",
-				-- "tailwindcss",
-				"ts_ls",
-			},
-			handlers = {
-				function(server)
-					require("lspconfig")[server].setup({})
-				end,
-				lua_ls = function()
-					require("lspconfig").lua_ls.setup({
-						settings = {
-							Lua = {
-								runtime = { version = "LuaJIT" },
-								diagnostics = { globals = { "vim" } },
-								workspace = { library = { vim.env.VIMRUNTIME } },
-							},
-						},
-					})
-				end,
-				ts_ls = function()
-					require("lspconfig").ts_ls.setup({
-						init_options = { preferences = { disableSuggestions = true } },
-					})
-				end,
-				yamlls = function()
-					require("lspconfig").yamlls.setup({
-						settings = {
-							yaml = {
-								customTags = {
-									"!Equals sequence",
-									"!FindInMap sequence",
-									"!GetAtt",
-									"!GetAZs",
-									"!ImportValue",
-									"!Join sequence",
-									"!Ref",
-									"!Select sequence",
-									"!Split sequence",
-									"!Sub",
-									"!If sequence",
-									"!Not sequence",
-									"!Or sequence",
-								},
-							},
-						},
-					})
-				end,
-				jsonls = function()
-					require("lspconfig").jsonls.setup({
-						settings = {
-							json = {
-								schemas = {
-									{
-										fileMatch = { "package.json" },
-										url = "https://json.schemastore.org/package.json",
-									},
-									{
-										fileMatch = { "jsconfig*.json" },
-										url = "https://json.schemastore.org/jsconfig.json",
-									},
-									{
-										fileMatch = { "tsconfig*.json" },
-										url = "https://json.schemastore.org/tsconfig.json",
-									},
-									{
-										fileMatch = { ".prettierrc", ".prettierrc.json", "prettier.config.json" },
-										url = "https://json.schemastore.org/prettierrc.json",
-									},
-									{
-										fileMatch = { ".eslintrc", ".eslintrc.json" },
-										url = "https://json.schemastore.org/eslintrc.json",
-									},
-									{
-										fileMatch = { ".babelrc", ".babelrc.json", "babel.config.json" },
-										url = "https://json.schemastore.org/babelrc.json",
-									},
-									{
-										fileMatch = {
-											".stylelintrc",
-											".stylelintrc.json",
-											"stylelint.config.json",
-										},
-										url = "http://json.schemastore.org/stylelintrc.json",
-									},
-								},
-							},
-						},
-					})
-				end,
-				tailwindcss = function()
-					require("lspconfig").tailwindcss.setup({
-						settings = {
-							tailwindCSS = {
-								classAttributes = {
-									"class",
-									"className",
-									"class:list",
-									"classList",
-									"ngClass",
-									".*Styles.*",
-								},
-								experimental = { classRegex = { { "/\\*tw\\*/ ([^;]*);", "'([^']*)'" } } },
-							},
-						},
-					})
-				end,
-			},
-		},
-	},
+	-- {
+	-- 	"williamboman/mason-lspconfig.nvim",
+	-- 	lazy = false,
+	-- 	opts = {
+	-- 		ensure_installed = {
+	-- 			-- "astro",
+	-- 			-- "eslint",
+	-- 			"cssls",
+	-- 			"emmet_ls",
+	-- 			"html",
+	-- 			"jsonls",
+	-- 			"lua_ls",
+	-- 			-- "tailwindcss",
+	-- 			"ts_ls",
+	-- 		},
+	-- 		handlers = {
+	-- 			function(server)
+	-- 				require("lspconfig")[server].setup({})
+	-- 			end,
+	-- 			lua_ls = function()
+	-- 				require("lspconfig").lua_ls.setup({
+	-- 					settings = {
+	-- 						Lua = {
+	-- 							runtime = { version = "LuaJIT" },
+	-- 							diagnostics = { globals = { "vim" } },
+	-- 							workspace = { library = { vim.env.VIMRUNTIME } },
+	-- 						},
+	-- 					},
+	-- 				})
+	-- 			end,
+	-- 			ts_ls = function()
+	-- 				require("lspconfig").ts_ls.setup({
+	-- 					init_options = { preferences = { disableSuggestions = true } },
+	-- 				})
+	-- 			end,
+	-- 			yamlls = function()
+	-- 				require("lspconfig").yamlls.setup({
+	-- 					settings = {
+	-- 						yaml = {
+	-- 							customTags = {
+	-- 								"!Equals sequence",
+	-- 								"!FindInMap sequence",
+	-- 								"!GetAtt",
+	-- 								"!GetAZs",
+	-- 								"!ImportValue",
+	-- 								"!Join sequence",
+	-- 								"!Ref",
+	-- 								"!Select sequence",
+	-- 								"!Split sequence",
+	-- 								"!Sub",
+	-- 								"!If sequence",
+	-- 								"!Not sequence",
+	-- 								"!Or sequence",
+	-- 							},
+	-- 						},
+	-- 					},
+	-- 				})
+	-- 			end,
+	-- 			jsonls = function()
+	-- 				require("lspconfig").jsonls.setup({
+	-- 					settings = {
+	-- 						json = {
+	-- 							schemas = {
+	-- 								{
+	-- 									fileMatch = { "package.json" },
+	-- 									url = "https://json.schemastore.org/package.json",
+	-- 								},
+	-- 								{
+	-- 									fileMatch = { "jsconfig*.json" },
+	-- 									url = "https://json.schemastore.org/jsconfig.json",
+	-- 								},
+	-- 								{
+	-- 									fileMatch = { "tsconfig*.json" },
+	-- 									url = "https://json.schemastore.org/tsconfig.json",
+	-- 								},
+	-- 								{
+	-- 									fileMatch = { ".prettierrc", ".prettierrc.json", "prettier.config.json" },
+	-- 									url = "https://json.schemastore.org/prettierrc.json",
+	-- 								},
+	-- 								{
+	-- 									fileMatch = { ".eslintrc", ".eslintrc.json" },
+	-- 									url = "https://json.schemastore.org/eslintrc.json",
+	-- 								},
+	-- 								{
+	-- 									fileMatch = { ".babelrc", ".babelrc.json", "babel.config.json" },
+	-- 									url = "https://json.schemastore.org/babelrc.json",
+	-- 								},
+	-- 								{
+	-- 									fileMatch = {
+	-- 										".stylelintrc",
+	-- 										".stylelintrc.json",
+	-- 										"stylelint.config.json",
+	-- 									},
+	-- 									url = "http://json.schemastore.org/stylelintrc.json",
+	-- 								},
+	-- 							},
+	-- 						},
+	-- 					},
+	-- 				})
+	-- 			end,
+	-- 			tailwindcss = function()
+	-- 				require("lspconfig").tailwindcss.setup({
+	-- 					settings = {
+	-- 						tailwindCSS = {
+	-- 							classAttributes = {
+	-- 								"class",
+	-- 								"className",
+	-- 								"class:list",
+	-- 								"classList",
+	-- 								"ngClass",
+	-- 								".*Styles.*",
+	-- 							},
+	-- 							experimental = { classRegex = { { "/\\*tw\\*/ ([^;]*);", "'([^']*)'" } } },
+	-- 						},
+	-- 					},
+	-- 				})
+	-- 			end,
+	-- 		},
+	-- 	},
+	-- },
 
 	-- Autocompletion
 	{
