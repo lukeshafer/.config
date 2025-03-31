@@ -1,12 +1,12 @@
-vim.lsp.enable("astro")
-vim.lsp.enable("cssls")
-vim.lsp.enable("emmet_ls")
-vim.lsp.enable("html")
-vim.lsp.enable("jsonls")
-vim.lsp.enable("lua_ls")
-vim.lsp.enable("tailwindcss")
-vim.lsp.enable("ts_ls")
-vim.lsp.enable("yamlls")
+-- vim.lsp.enable("astro")
+-- vim.lsp.enable("cssls")
+-- vim.lsp.enable("emmet_ls")
+-- vim.lsp.enable("html")
+-- vim.lsp.enable("jsonls")
+-- vim.lsp.enable("lua_ls")
+-- vim.lsp.enable("tailwindcss")
+-- vim.lsp.enable("ts_ls")
+-- vim.lsp.enable("yamlls")
 
 vim.api.nvim_create_autocmd("LspAttach", {
 	callback = function(ev)
@@ -40,26 +40,3 @@ vim.diagnostic.config({
     }
 	},
 })
--- vim.fn.sign_define("DiagnosticSignError", {
--- 	texthl = "DiagnosticSignError",
--- 	text = "✘",
--- 	numhl = "",
--- })
---
--- vim.fn.sign_define("DiagnosticSignWarn", {
--- 	texthl = "DiagnosticSignWarn",
--- 	text = "▲",
--- 	numhl = "",
--- })
---
--- vim.fn.sign_define("DiagnosticSignHint", {
--- 	texthl = "DiagnosticSignHint",
--- 	text = "⚑",
--- 	numhl = "",
--- })
---
--- vim.fn.sign_define("DiagnosticSignInfo", {
--- 	texthl = "DiagnosticSignInfo",
--- 	text = "",
--- 	numhl = "",
--- })
