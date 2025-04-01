@@ -27,7 +27,7 @@ end
 vim.o.mouse = "a"
 vim.o.cursorline = true
 vim.opt.diffopt:append({ "iwhiteall" })
-vim.opt.shortmess:append({ "I" })
+vim.opt.shortmess:append("I")
 -- vim.opt.guicursor = "n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50"
 
 -- leader is SPACE key
