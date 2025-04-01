@@ -12,5 +12,6 @@
 !tofi/
 !tmux/
 !wallpapers/
+!neovim-plugin-replacement.md
 tmux/plugins/
 packer_compiled.lua
