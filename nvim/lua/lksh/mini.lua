@@ -83,3 +83,58 @@
 --
 --
 -- end)
+--
+--
+-- vim.cmd("colorscheme randomhue")
+
+-- require("mini.files").setup({ })
+-- vim.keymap.set("n", "<leader>e", MiniFiles.open, {})
+
+-- local starter = require("mini.starter")
+-- starter.setup({
+-- 	items = {
+-- 		{ name = "FE : Explore Files", action = MiniFiles.open, section = "Files" },
+-- 		starter.sections.recent_files(10, true),
+-- 		starter.sections.pick(),
+-- 	},
+-- })
+
+-- require("mini.icons").setup()
+-- require("mini.statusline").setup()
+-- require("mini.pairs").setup()
+-- require("mini.surround").setup()
+-- require("mini.cursorword").setup()
+-- require("mini.completion").setup()
+-- require("mini.snippets").setup()
+
+-- require("mini.pick").setup()
+
+-- vim.keymap.set("n", "ff", ":Pick files<cr>", {})
+-- vim.keymap.set("n", "fg", ":Pick grep_live<cr>", {})
+-- vim.keymap.set("n", "fh", ":Pick help<cr>", {})
+-- vim.keymap.set("n", "fb", ":Pick buffers<cr>", {})
+
+-- require("mini.diff").setup({
+-- 	view = {
+-- 		signs = { add = "┃", change = "┃", delete = "┃" },
+-- 	},
+-- })
+
+-- local indentscope = require("mini.indentscope")
+-- indentscope.setup({
+-- 	draw = {
+-- 		animation = indentscope.gen_animation.none(),
+-- 	},
+-- })
+
+-- local hi = require("mini.hipatterns")
+-- hi.setup({
+-- 	highlighters = {
+-- 		fixme = { pattern = "%f[%w]()FIXME()%f[%W]", group = "MiniHipatternsFixme" },
+-- 		hack = { pattern = "%f[%w]()HACK()%f[%W]", group = "MiniHipatternsHack" },
+-- 		todo = { pattern = "%f[%w]()TODO()%f[%W]", group = "MiniHipatternsTodo" },
+-- 		note = { pattern = "%f[%w]()NOTE()%f[%W]", group = "MiniHipatternsNote" },
+--
+-- 		hex_color = hi.gen_highlighter.hex_color(),
+-- 	},
+-- })
