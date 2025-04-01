@@ -45,15 +45,15 @@ local plugins = {
 			require("mini.files").setup()
 			vim.keymap.set("n", "<leader>e", MiniFiles.open, {})
 
-			local starter = require("mini.starter")
-			starter.setup({
-				items = {
-					starter.sections.builtin_actions(),
-					{ name = "Explore Files", action = MiniFiles.open, section = "Files" },
-					starter.sections.recent_files(10, true),
-					-- starter.sections.pick(),
-				},
-			})
+			-- local starter = require("mini.starter")
+			-- starter.setup({
+			-- 	items = {
+			-- 		starter.sections.builtin_actions(),
+			-- 		{ name = "Explore Files", action = MiniFiles.open, section = "Files" },
+			-- 		starter.sections.recent_files(10, true),
+			-- 		-- starter.sections.pick(),
+			-- 	},
+			-- })
 
 			require("mini.icons").setup()
 			require("mini.statusline").setup()
