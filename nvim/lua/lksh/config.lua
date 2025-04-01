@@ -10,36 +10,37 @@ end
 -- vim.g.loaded_netrwPlugin = 1
 
 -- Editor Settings
-vim.opt.tabstop = 2
-vim.opt.shiftwidth = 2
-vim.opt.termguicolors = true
-vim.opt.expandtab = true
-vim.opt.background = "dark" -- sets light/dark for some colorschemes
-vim.opt.number = true
-vim.opt.numberwidth = 2
+vim.o.tabstop = 2
+vim.o.shiftwidth = 2
+vim.o.termguicolors = true
+vim.o.expandtab = true
+vim.o.background = "dark" -- sets light/dark for some colorschemes
+vim.o.number = true
+vim.o.numberwidth = 2
 if IS_WINDOWS then
-	vim.opt.backupdir = HOME .. "\\.vim\\backup"
-	vim.opt.dir = HOME .. "\\.vim\\swapfiles"
+	vim.o.backupdir = HOME .. "\\.vim\\backup"
+	vim.o.dir = HOME .. "\\.vim\\swapfiles"
 else
-	vim.opt.backupdir = HOME .. "/.vim/backup"
-	vim.opt.dir = HOME .. "/.vim/swapfiles"
+	vim.o.backupdir = HOME .. "/.vim/backup"
+	vim.o.dir = HOME .. "/.vim/swapfiles"
 end
-vim.opt.mouse = "a"
-vim.opt.cursorline = true
+vim.o.mouse = "a"
+vim.o.cursorline = true
 vim.opt.diffopt:append({ "iwhiteall" })
+vim.opt.shortmess:append({ "I" })
 -- vim.opt.guicursor = "n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50"
 
 -- leader is SPACE key
 vim.g.mapleader = " "
 
-vim.g.clipboard = {
-	name = "OSC 52",
-	copy = {
-		["+"] = require("vim.ui.clipboard.osc52").copy("+"),
-		["*"] = require("vim.ui.clipboard.osc52").copy("*"),
-	},
-	paste = {
-		["+"] = require("vim.ui.clipboard.osc52").paste("+"),
-		["*"] = require("vim.ui.clipboard.osc52").paste("*"),
-	},
-}
+-- vim.g.clipboard = {
+-- 	name = "OSC 52",
+-- 	copy = {
+-- 		["+"] = require("vim.ui.clipboard.osc52").copy("+"),
+-- 		["*"] = require("vim.ui.clipboard.osc52").copy("*"),
+-- 	},
+-- 	paste = {
+-- 		["+"] = require("vim.ui.clipboard.osc52").paste("+"),
+-- 		["*"] = require("vim.ui.clipboard.osc52").paste("*"),
+-- 	},
+-- }

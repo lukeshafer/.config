@@ -48,10 +48,9 @@ local plugins = {
 			-- local starter = require("mini.starter")
 			-- starter.setup({
 			-- 	items = {
-			-- 		starter.sections.builtin_actions(),
-			-- 		{ name = "Explore Files", action = MiniFiles.open, section = "Files" },
+			-- 		{ name = "FE : Explore Files", action = MiniFiles.open, section = "Files" },
 			-- 		starter.sections.recent_files(10, true),
-			-- 		-- starter.sections.pick(),
+			-- 		starter.sections.pick(),
 			-- 	},
 			-- })
 
