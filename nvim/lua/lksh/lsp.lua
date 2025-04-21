@@ -16,6 +16,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
 		vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
 		vim.keymap.set("n", "gl", vim.diagnostic.open_float, opts)
+		vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
 	end,
 })
 
@@ -34,11 +35,11 @@ vim.diagnostic.config({
 		numhl = {
 			[vim.diagnostic.severity.WARN] = "WarningMsg",
 		},
-    texthl = {
+		texthl = {
 			[vim.diagnostic.severity.ERROR] = "DiagnosticSignError",
 			[vim.diagnostic.severity.WARN] = "DiagnosticSignWarn",
 			[vim.diagnostic.severity.HINT] = "DiagnosticSignHint",
 			[vim.diagnostic.severity.INFO] = "DiagnosticSignInfo",
-    }
+		},
 	},
 })
