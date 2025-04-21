@@ -24,14 +24,7 @@ local plugins = {
 	-- { "slugbyte/lackluster.nvim" },
 	-- { "rose-pine/neovim", name = "rose-pine" },
 
-	{
-		"echasnovski/mini.hues",
-		version = false,
-		lazy = false,
-		config = function()
-			vim.cmd("colorscheme randomhue")
-		end,
-	},
+	require("lksh.plugins.color"),
 	require("lksh.plugins.conform-nvim"),
 	require("lksh.plugins.nvim-lspconfig"),
 	{ "williamboman/mason.nvim", opts = {}, lazy = false },

@@ -46,11 +46,12 @@ export DOCKER_HOST="unix:/$HOME/.docker/run/docker.sock"
 
 export MANPAGER='nvim +Man!'
 
-function zrc() {
-	nvim ~/.zshrc
-	cp ~/.zshrc ~/.config/.zshrc.work
-	source ~/.zshrc
-}
+alias zrc="nvim ~/.config/.zshrc.work"
+# function zrc() {
+# 	nvim ~/.zshrc
+# 	cp ~/.zshrc ~/.config/.zshrc.work
+# 	source ~/.zshrc
+# }
 
 function attach-tmux-if-not-attached() {
 	if [ -z "$TMUX" ]; then
@@ -80,8 +81,8 @@ function ztheme() {
 
 alias zreload="source ~/.zshrc"
 
-alias vi="nvim"
-alias vim="nvim"
+# alias vi="nvim"
+# alias vim="nvim"
 
 alias ring="echo -e \"\a\""
 

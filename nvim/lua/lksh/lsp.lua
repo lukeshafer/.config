@@ -8,6 +8,8 @@
 -- vim.lsp.enable("ts_ls")
 -- vim.lsp.enable("yamlls")
 
+-- vim.lsp.enable("cfn-lint")
+
 vim.api.nvim_create_autocmd("LspAttach", {
 	callback = function(ev)
 		local opts = { noremap = true, silent = true, buffer = ev.buf }

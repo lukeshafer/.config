@@ -25,3 +25,12 @@ local plugins = {
 }
 
 require("lazy").setup(plugins)
+
+local map_opts = { noremap = true, silent = true }
+vim.keymap.set("n", "<C-Up>", ":m -2<CR>", map_opts)
+vim.keymap.set("n", "<C-k>", ":m -2<CR>", map_opts)
+vim.keymap.set("n", "<C-Down>", ":m +1<CR>", map_opts)
+vim.keymap.set("n", "<C-j>", ":m +1<CR>", map_opts)
+vim.keymap.set("n", ";", ":", map_opts)
+vim.keymap.set("v", ">", ">gv", map_opts)
+vim.keymap.set("v", "<", "<gv", map_opts)
