@@ -2,7 +2,7 @@
 local function get_seed_from_string(text)
 	local value = 0
 	local prev = 3
-	local MAX = 1e18
+	local MAX = 1e7
 
 	for c in text:gmatch(".") do
 		local b = c:byte()
@@ -10,7 +10,7 @@ local function get_seed_from_string(text)
 		if prev > b then
 			value = b * (value + prev * b)
 		elseif prev < b then
-			value = prev * (value - prev * b + value)
+			value = prev * (value - prev * b)
 		end
 
 		value = math.fmod(value, MAX)
@@ -37,6 +37,7 @@ return {
 	config = function()
 		-- Generate random config with initialized random seed based on cwd
 		local seed = get_seed_from_string(vim.fn.getcwd())
+    vim.g.lksh_color_seed = seed
 		math.randomseed(seed)
 		local base_colors = gen_random_base_colors()
 
