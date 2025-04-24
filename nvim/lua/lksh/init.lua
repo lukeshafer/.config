@@ -4,7 +4,7 @@ if vim.g.vscode then
 end
 
 require("lksh.plugins")
--- require("lksh.statusline")
+require("lksh.statusline")
 require("lksh.config")
 require("lksh.lsp")
 require("lksh.keymaps")

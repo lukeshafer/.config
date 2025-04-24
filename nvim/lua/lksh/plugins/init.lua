@@ -46,7 +46,7 @@ local plugins = {
 
 	{ "nvim-tree/nvim-web-devicons", lazy = true },
 
-	require("lksh.plugins.lualine"),
+	-- require("lksh.plugins.lualine"),
 
 	{ "lewis6991/gitsigns.nvim", opts = {} }, -- inline git helpers
 	{ "folke/todo-comments.nvim", dependencies = "nvim-lua/plenary.nvim", opts = {} },
