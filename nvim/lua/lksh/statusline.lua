@@ -143,6 +143,7 @@ Statusline.active = function()
 		"%#StatusLine# ",
 		filepath(),
 		filename(),
+    " %m",
 		"%#StatusLine#",
 		lsp(),
 		"%=%#StatusLine#",
