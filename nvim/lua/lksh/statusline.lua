@@ -88,7 +88,7 @@ local function lsp()
 		info = " %#MoreMsg# " .. count["info"]
 	end
 
-	return errors .. warnings .. hints .. info .. "%#StatusLine#"
+	return errors .. warnings .. hints .. info .. "%#StatusLineNC#"
 end
 
 local function filetype()
@@ -128,32 +128,32 @@ local git = function()
 		"%#GitSignsAdd# ",
 		git_info.head,
 		" %#Normal#",
-    component_separators.left,
+		component_separators.left,
 	})
 end
-
 
 Statusline = {}
 
 Statusline.active = function()
 	return table.concat({
-		"%#StatusLine#",
+		"%#StatusLineNC#",
 		git(),
 		mode(),
-		"%#StatusLine# ",
+		"%#StatusLineNC# ",
 		filepath(),
 		filename(),
-    " %m",
-		"%#StatusLine#",
+		" %m",
+		"%#StatusLineNC#",
 		lsp(),
-		"%=%#StatusLine#",
+		"%=%#StatusLineNC#",
 		filetype(),
 		lineinfo(),
+		"%#StatusLineNC#",
 	})
 end
 
 function Statusline.inactive()
-	return " %F"
+	return " %F %m "
 end
 
 vim.cmd(
