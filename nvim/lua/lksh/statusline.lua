@@ -121,13 +121,14 @@ local git = function()
 	end
 	return table.concat({
 		" ",
+		"%#StatusLineNC#",
 		added,
 		changed,
 		removed,
 		" ",
 		"%#GitSignsAdd# ",
 		git_info.head,
-		" %#Normal#",
+		" %#StatusLineNC#",
 		component_separators.left,
 	})
 end
@@ -137,8 +138,8 @@ Statusline = {}
 Statusline.active = function()
 	return table.concat({
 		"%#StatusLineNC#",
-		git(),
 		mode(),
+		git(),
 		"%#StatusLineNC# ",
 		filepath(),
 		filename(),
@@ -166,16 +167,3 @@ vim.cmd(
 ]],
 	false
 )
-
--- local statusline = {
--- 	"hello %t",
--- 	"%r",
--- 	"%m",
--- 	"%=",
--- 	"%{&filetype}",
--- 	-- " %2p%%",
--- 	" %3l:%-2c ",
--- }
-
--- vim.o.statusline = nil
--- vim.o.statusline = table.concat(statusline, "")
