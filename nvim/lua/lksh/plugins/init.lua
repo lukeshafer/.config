@@ -32,9 +32,9 @@ local plugins = {
 
 	-- Autocompletion
 	require("lksh.plugins.nvim-cmp"),
-	-- { "hrsh7th/cmp-nvim-lsp" },
-	-- { "hrsh7th/cmp-buffer" },
-	-- { "hrsh7th/cmp-path" },
+	{ "hrsh7th/cmp-nvim-lsp" },
+	{ "hrsh7th/cmp-buffer" },
+	{ "hrsh7th/cmp-path" },
 	{ "saadparwaiz1/cmp_luasnip" },
 	{ "hrsh7th/cmp-nvim-lua" },
 
@@ -49,6 +49,7 @@ local plugins = {
 	-- require("lksh.plugins.lualine"),
 
 	{ "lewis6991/gitsigns.nvim", opts = {} }, -- inline git helpers
+  { "nvim-lua/plenary.nvim" },
 	{ "folke/todo-comments.nvim", dependencies = "nvim-lua/plenary.nvim", opts = {} },
 	{ "windwp/nvim-autopairs", event = "InsertEnter", opts = {} },
 	{ "windwp/nvim-ts-autotag", event = "InsertEnter", opts = {} },

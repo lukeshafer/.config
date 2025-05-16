@@ -11,12 +11,13 @@ return {
 		local cmp = require("cmp")
 
 		cmp.setup({
-			sources = {
-				{ name = "path" },
+			sources = cmp.config.sources({
 				{ name = "nvim_lsp", keyword_length = 0 },
 				{ name = "luasnip", keyword_length = 1 },
+			}, {
+				{ name = "path" },
 				{ name = "buffer", keyword_length = 3 },
-			},
+			}),
 			mapping = cmp.mapping.preset.insert({
 				["<CR>"] = cmp.mapping.confirm({ select = false }), -- Enter key confirms completion item
 				["<C-y>"] = cmp.mapping.confirm({ select = true }), -- Ctrl + y confirms completion item
@@ -26,7 +27,8 @@ return {
 			}),
 			snippet = {
 				expand = function(args)
-					require("luasnip").lsp_expand(args.body)
+					vim.snippet.expand(args.body)
+					-- require("luasnip").lsp_expand(args.body)
 				end,
 			},
 		})
