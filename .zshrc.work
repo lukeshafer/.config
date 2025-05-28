@@ -146,3 +146,14 @@ alias finder="echo 'Use open instead'"
 alias git-node20-branch="git checkout -b @features/node20-upgrade && git push --set-upstream origin @features/node20-upgrade"
 
 alias vil="NVIM_APPNAME=\"nvim-lite\" nvim"
+
+function common-explain() {
+	if [ -z "$1" ]; then
+		echo "Usage: common-explain <package-name>"
+		return 1
+	fi
+
+  cd ~/repos/crmi-repos/crmi-common/src/lambda/layers/crmi-common-lambda-layer/nodejs
+  npm explain $1
+  cd -
+}
