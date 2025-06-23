@@ -18,6 +18,8 @@ ZSH_THEME="lksh"
 # Add wisely, as too many plugins slow down shell startup.
 #plugins=(git)
 
+export ZSH_DISABLE_COMPFIX="true"
+
 source $ZSH/oh-my-zsh.sh
 export DEFAULT_USER="shafer.361"
 prompt_context(){}

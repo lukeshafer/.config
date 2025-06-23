@@ -22,10 +22,13 @@ end
 
 local function gen_random_base_colors()
 	local convert = require("mini.colors").convert
-	local hue = math.random(180, 359)
+	local bghue = math.random(120, 359)
+
+	local hueDiff = 90 * math.random(0, 4) - 180
+	local fghue = math.fmod(bghue + hueDiff, 360)
 	return {
-		background = convert({ l = 15, c = 3, h = hue }, "hex"),
-		foreground = convert({ l = 80, c = 1, h = hue }, "hex"),
+		background = convert({ l = 11, c = 2, h = bghue }, "hex"),
+		foreground = convert({ l = 85, c = 4, h = fghue }, "hex"),
 	}
 end
 
@@ -37,7 +40,7 @@ return {
 	config = function()
 		-- Generate random config with initialized random seed based on cwd
 		local seed = get_seed_from_string(vim.fn.getcwd())
-    vim.g.lksh_color_seed = seed
+		vim.g.lksh_color_seed = seed
 		math.randomseed(seed)
 		local base_colors = gen_random_base_colors()
 
@@ -46,7 +49,7 @@ return {
 			foreground = base_colors.foreground,
 			n_hues = 8,
 			saturation = vim.o.background == "dark" and "medium" or "high",
-			accent = "bg",
+			accent = "fg",
 		})
 
 		vim.g.colors_name = "randomhue"
