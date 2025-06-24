@@ -29,8 +29,17 @@ return {
 				})
 			end,
 			ts_ls = function()
-				require("lspconfig").ts_ls.setup({
+				local nvim_lsp = require("lspconfig")
+				nvim_lsp.ts_ls.setup({
 					init_options = { preferences = { disableSuggestions = true } },
+					root_dir = nvim_lsp.util.root_pattern("package.json"),
+					single_file_support = false,
+				})
+			end,
+			denols = function()
+				local nvim_lsp = require("lspconfig")
+				nvim_lsp.denols.setup({
+					root_dir = nvim_lsp.util.root_pattern("deno.json", "deno.jsonc"),
 				})
 			end,
 			yamlls = function()
