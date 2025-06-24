@@ -14,15 +14,41 @@ vim.opt.rtp:prepend(lazypath)
 
 vim.g.mapleader = " " -- Make sure to set `mapleader` before lazy so your mappings are correct
 
+local function color(name)
+	return function()
+		vim.cmd("colorscheme " .. name)
+	end
+end
+
 -- actual lazy configuration
 local plugins = {
 	-- colors i like
-	-- { "catppuccin/nvim", name = "catppuccin" },
-	-- { "Yazeed1s/oh-lucy.nvim" },
-	-- { "bluz71/vim-moonfly-colors" },
-	-- { "mellow-theme/mellow.nvim" },
-	-- { "slugbyte/lackluster.nvim" },
-	-- { "rose-pine/neovim", name = "rose-pine" },
+	{
+		"catppuccin/nvim",
+		name = "catppuccin",
+		-- config = color("catppuccin"),
+	},
+	{
+		"Yazeed1s/oh-lucy.nvim",
+		-- config = color("oh-lucy"),
+	},
+	{
+		"bluz71/vim-moonfly-colors",
+		-- config = color("moonfly")
+	},
+	{
+		"mellow-theme/mellow.nvim",
+		-- config = color("mellow"),
+	},
+	{
+		"slugbyte/lackluster.nvim",
+		-- config = color("lackluster"),
+	},
+	{
+		"rose-pine/neovim",
+		name = "rose-pine",
+		-- config = color("rose-pine"),
+	},
 
 	require("lksh.plugins.color"),
 	require("lksh.plugins.conform-nvim"),
@@ -49,7 +75,7 @@ local plugins = {
 	-- require("lksh.plugins.lualine"),
 
 	{ "lewis6991/gitsigns.nvim", opts = {} }, -- inline git helpers
-  { "nvim-lua/plenary.nvim" },
+	{ "nvim-lua/plenary.nvim" },
 	{ "folke/todo-comments.nvim", dependencies = "nvim-lua/plenary.nvim", opts = {} },
 	{ "windwp/nvim-autopairs", event = "InsertEnter", opts = {} },
 	{ "windwp/nvim-ts-autotag", event = "InsertEnter", opts = {} },
