@@ -22,13 +22,23 @@ end
 
 local function gen_random_base_colors()
 	local convert = require("mini.colors").convert
-	local bghue = math.random(120, 359)
 
-	local hueDiff = 90 * math.random(0, 4) - 180
-	local fghue = math.fmod(bghue + hueDiff, 360)
+	local bgL = vim.o.background == "dark" and math.random(10, 15) or math.random(85, 95) -- used to be 12
+	local bgH = math.random(120, 360)
+	local bgC = 4 * math.random() + 1 -- used to be 2
+
+	local fgL = vim.o.background == "dark" and 87 or 10
+	local fgC = 4 * math.random() + 1
+	local fgH = math.random(0, 360)
+
+	-- local sign = 2 * math.random(0,1) - 1 -- (+-1)
+	-- local hueDiff = sign * math.random(45, 135)
+	-- local hueDiff = 180 * math.random(0, 1) - 90
+
+	-- local fghue = math.fmod(bgH + hueDiff, 360)
 	return {
-		background = convert({ l = 11, c = 2, h = bghue }, "hex"),
-		foreground = convert({ l = 85, c = 4, h = fghue }, "hex"),
+		background = convert({ l = bgL, c = bgC, h = bgH }, "hex"),
+		foreground = convert({ l = fgL, c = fgC, h = fgH }, "hex"),
 	}
 end
 
@@ -48,7 +58,7 @@ return {
 			background = base_colors.background,
 			foreground = base_colors.foreground,
 			n_hues = 8,
-			saturation = vim.o.background == "dark" and "medium" or "high",
+			saturation = vim.o.background == "dark" and "lowmedium" or "high",
 			accent = "fg",
 		})
 
