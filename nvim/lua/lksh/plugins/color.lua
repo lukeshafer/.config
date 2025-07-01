@@ -28,7 +28,7 @@ local function gen_random_base_colors()
 	local bgC = 4 * math.random() + 1 -- used to be 2
 
 	local fgL = vim.o.background == "dark" and 87 or 10
-	local fgC = 4 * math.random() + 1
+	local fgC = 2 * math.random() + 1
 	local fgH = math.random(0, 360)
 
 	-- local sign = 2 * math.random(0,1) - 1 -- (+-1)
@@ -58,7 +58,7 @@ return {
 			background = base_colors.background,
 			foreground = base_colors.foreground,
 			n_hues = 8,
-			saturation = vim.o.background == "dark" and "lowmedium" or "high",
+			saturation = vim.o.background == "dark" and "medium" or "high",
 			accent = "fg",
 		})
 
