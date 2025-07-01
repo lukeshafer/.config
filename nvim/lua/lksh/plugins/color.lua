@@ -54,6 +54,9 @@ return {
 		math.randomseed(seed)
 		local base_colors = gen_random_base_colors()
 
+		vim.g.lksh_background = base_colors.background
+		vim.g.lksh_foreground = base_colors.foreground
+
 		require("mini.hues").setup({
 			background = base_colors.background,
 			foreground = base_colors.foreground,
