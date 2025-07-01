@@ -2,9 +2,9 @@ Steps to test:
 
 > Note: we're not going to retain the draft buckets anymore since they are temporary and usually sit empty. I'll just warn Ryan about the migration
 
-1. In current v2 branches, change "default removal policy" from "retain" back to "remove" for non-prod stages
+[x] 1. In current v2 branches, change "default removal policy" from "retain" back to "remove" for non-prod stages
 
-2. Deploy in dev + qa
+[x] 2. Deploy in dev + qa
 
 3. Add removal protection to database and buckets (i believe there are 6)
     ```js
@@ -14,7 +14,7 @@ Steps to test:
     new Table(stack, "Table", {
       cdk: {
         table: {
-          removalPolicy: RemovalPolicy.DESTROY,
+          removalPolicy: RemovalPolicy.RETAIN,
         },
       },
     });
@@ -34,13 +34,13 @@ Steps to test:
 5. Run `sst deploy` in local env for `luke` stage. Ensure everything is deployed correctly.
     - Why deploy? Because realistically, we don't need to test this with `sst dev` since production doesn't use it, and our dev environment gets replaced every so often. 
 
-6. Create sample data for the site -- we want to be sure everything transfers. 
+[x] 6. Create sample data for the site -- we want to be sure everything transfers. 
     - one season
     - two cards
     - two rarities
     - 4 packs, open 3
 
-7. In AWS console, locate the table and bucket names required and add to the `sst-3-migration` branch for the `luke` stage.
+[x] 7. In AWS console, locate the table and bucket names required and add to the `sst-3-migration` branch for the `luke` stage.
     - Data table
     - Cards bucket (for CDN)
     - Card designs bucket

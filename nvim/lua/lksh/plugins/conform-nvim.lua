@@ -32,6 +32,7 @@ return {
 			astro = js_formatter,
 			json = { "fixjson" },
 			java = { "google-java-format" },
+			go = { "golines", "goimports", "gofumpt" },
 		},
 	},
 }
