@@ -52,9 +52,9 @@ local plugins = {
 
 	require("lksh.plugins.color"),
 	require("lksh.plugins.conform-nvim"),
-	require("lksh.plugins.nvim-lspconfig"),
 	{ "williamboman/mason.nvim", opts = {}, lazy = false },
-	require("lksh.plugins.mason-lspconfig"),
+	{ "neovim/nvim-lspconfig", event = { "BufReadPost", "BufNewFile" }, opts = {} },
+	-- { "williamboman/mason-lspconfig.nvim", opts = {}, lazy = false },
 
 	-- Autocompletion
 	require("lksh.plugins.nvim-cmp"),

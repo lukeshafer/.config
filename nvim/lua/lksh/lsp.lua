@@ -1,12 +1,16 @@
--- vim.lsp.enable("astro")
--- vim.lsp.enable("cssls")
--- vim.lsp.enable("emmet_ls")
--- vim.lsp.enable("html")
--- vim.lsp.enable("jsonls")
--- vim.lsp.enable("lua_ls")
--- vim.lsp.enable("tailwindcss")
--- vim.lsp.enable("ts_ls")
--- vim.lsp.enable("yamlls")
+vim.lsp.enable("astro")
+vim.lsp.enable("cssls")
+vim.lsp.enable("emmet_ls")
+vim.lsp.enable("html")
+vim.lsp.enable("jsonls")
+vim.lsp.enable("lua_ls")
+vim.lsp.enable("tailwindcss")
+vim.lsp.enable("ts_ls")
+vim.lsp.enable("yamlls")
+
+if os.getenv("PC_CONTEXT") == "desktop-wsl" then
+	vim.lsp.config.gdscript = { cmd = { "godot-wsl-lsp" } }
+end
 
 -- vim.lsp.enable("cfn-lint")
 

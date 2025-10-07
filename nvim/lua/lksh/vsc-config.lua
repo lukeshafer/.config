@@ -34,3 +34,5 @@ vim.keymap.set("n", "<C-j>", ":m +1<CR>", map_opts)
 vim.keymap.set("n", ";", ":", map_opts)
 vim.keymap.set("v", ">", ">gv", map_opts)
 vim.keymap.set("v", "<", "<gv", map_opts)
+
+vim.keymap.set("n", "<leader><Esc>", ":noh<cr>", map_opts)
