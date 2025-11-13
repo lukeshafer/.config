@@ -1,18 +1,27 @@
-vim.lsp.enable("astro")
-vim.lsp.enable("cssls")
-vim.lsp.enable("emmet_ls")
-vim.lsp.enable("html")
-vim.lsp.enable("jsonls")
-vim.lsp.enable("lua_ls")
-vim.lsp.enable("tailwindcss")
-vim.lsp.enable("ts_ls")
-vim.lsp.enable("yamlls")
+vim.lsp.enable({
+	"html",
+	"jsonls",
+	"lua_ls",
+	"ts_ls",
+	"yamlls",
+})
+
+if os.getenv("PC_CONTEXT") == "work" then
+	-- ONLY NEED FOR WORK
+  -- nothing
+else
+	-- NOT NEEDED AT WORK
+	vim.lsp.enable({
+		"astro",
+		"cssls",
+		"emmet_ls",
+		"tailwindcss",
+	})
+end
 
 if os.getenv("PC_CONTEXT") == "desktop-wsl" then
 	vim.lsp.config.gdscript = { cmd = { "godot-wsl-lsp" } }
 end
-
--- vim.lsp.enable("cfn-lint")
 
 vim.api.nvim_create_autocmd("LspAttach", {
 	callback = function(ev)
