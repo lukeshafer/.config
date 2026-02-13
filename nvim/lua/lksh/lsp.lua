@@ -4,6 +4,7 @@ vim.lsp.enable({
 	"lua_ls",
 	"ts_ls",
 	"yamlls",
+  "emmet_language_server"
 })
 
 if os.getenv("PC_CONTEXT") == "work" then
@@ -14,7 +15,7 @@ else
 	vim.lsp.enable({
 		"astro",
 		"cssls",
-		"emmet_ls",
+		-- "emmet_ls",
 		"tailwindcss",
 	})
 end
