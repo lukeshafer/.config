@@ -6,8 +6,8 @@ Steps to test:
 
 [x] 2. Deploy in dev + qa
 
-3. Add removal protection to database and buckets (i believe there are 6)
-    ```js
+[ ] 3. Add removal protection to database and buckets (i believe there are 6)
+```js
     import { RemovalPolicy } from "aws-cdk-lib";
 
     // dynamo
@@ -28,10 +28,11 @@ Steps to test:
         },
       },
     });
-    ```
-4. Remove existing 'luke' stage (if exists) and all resources that may have been accidentally retained
+```
 
-5. Run `sst deploy` in local env for `luke` stage. Ensure everything is deployed correctly.
+[ ] 4. Remove existing 'luke' stage (if exists) and all resources that may have been accidentally retained
+
+[ ] 5. Run `sst deploy` in local env for `luke` stage. Ensure everything is deployed correctly.
     - Why deploy? Because realistically, we don't need to test this with `sst dev` since production doesn't use it, and our dev environment gets replaced every so often. 
 
 [x] 6. Create sample data for the site -- we want to be sure everything transfers. 

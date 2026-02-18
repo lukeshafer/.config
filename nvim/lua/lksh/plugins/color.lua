@@ -5,7 +5,7 @@ local function get_seed_from_string(text)
 	local MAX = 1e7
 
 	for c in text:gmatch(".") do
-		local b = c:byte()
+		local b = c:byte() * 2
 
 		if prev > b then
 			value = b * (value + prev * b)
