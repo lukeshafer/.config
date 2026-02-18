@@ -33,6 +33,7 @@ return {
 			json = { "fixjson" },
 			java = { "google-java-format" },
 			go = { "golines", "goimports", "gofumpt" },
+      soql = { "sleek" },
 		},
 	},
 }

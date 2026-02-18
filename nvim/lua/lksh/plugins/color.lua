@@ -24,7 +24,7 @@ local function gen_random_base_colors()
 	local convert = require("mini.colors").convert
 
 	local bgL = vim.o.background == "dark" and math.random(10, 15) or math.random(85, 95) -- used to be 12
-	local bgH = math.random(120, 360)
+	local bgH = math.random(180, 360)
 	local bgC = 4 * math.random() + 1 -- used to be 2
 
 	local fgL = vim.o.background == "dark" and 87 or 10
