@@ -7,13 +7,14 @@
 	# characters not in the chosen font will fail to render.
 	#
 	# Otherwise, fonts are interpreted in Pango format.
+
 	font = "CaskaydiaCove Nerd Font"
-	font-size = 18
+	font-size = 16
 	prompt-text = "Apps: "
-  text-color = #cdd6f4
-  selection-color = #f9e2af
-  background-color = #1e1e2eee
-  prompt-color = #f38ba8
+	 text-color = #cdd6f4
+	 selection-color = #f9e2af
+	 background-color = #1e1e2eee
+	 prompt-color = #f38ba8
 	input-color = #cdd6f4
 	prompt-padding = 0
 	result-spacing = 10
@@ -27,8 +28,8 @@
 	padding-bottom = 8
 	padding-left = 8
 	padding-right = 8
-	scale = true
-	anchor = center
+	# scale = true
+	# anchor = center
 	hide-cursor = false # Hide the mouse cursor.
 	text-cursor = true # Show a text cursor in the input field.
 	history = true # Sort results by number of usages in run and drun modes.

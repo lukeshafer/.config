@@ -1,3 +1,10 @@
+if vim.g.vscode then
+	require("lksh.vsc-config")
+	return
+end
+
 require("lksh.plugins")
-require("lksh.set")
-require("lksh.remap")
+require("lksh.statusline")
+require("lksh.config")
+require("lksh.lsp")
+require("lksh.keymaps")

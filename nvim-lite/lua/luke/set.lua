@@ -1,13 +1,9 @@
-local IS_WINDOWS = vim.loop.os_uname().sysname == "Windows_NT"
+local IS_WINDOWS = vim.uv.os_uname().sysname == "Windows_NT"
 HOME = os.getenv("HOME")
 if not HOME then
 	HOME = os.getenv("USERPROFILE")
 	IS_WINDOWS = true
 end
-
--- Required for NvimTree
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
 
 -- Editor Settings
 vim.opt.tabstop = 2
@@ -24,7 +20,11 @@ else
 	vim.opt.backupdir = HOME .. "/.vim/backup"
 	vim.opt.dir = HOME .. "/.vim/swapfiles"
 end
-vim.opt.guicursor = "n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50"
 vim.opt.mouse = "a"
 vim.opt.cursorline = true
--- vim.opt.foldmethod = "indent"
+vim.opt.diffopt:append { "iwhiteall" }
+-- vim.opt.guicursor = "n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50"
+
+-- leader is SPACE key
+vim.g.mapleader = " "
+

@@ -18,6 +18,8 @@ ZSH_THEME="lksh"
 # Add wisely, as too many plugins slow down shell startup.
 #plugins=(git)
 
+export ZSH_DISABLE_COMPFIX="true"
+
 source $ZSH/oh-my-zsh.sh
 export DEFAULT_USER="shafer.361"
 prompt_context(){}
@@ -44,11 +46,14 @@ export PATH="$HOME/.local/bin:$PATH"
 
 export DOCKER_HOST="unix:/$HOME/.docker/run/docker.sock"
 
-function zrc() {
-	nvim ~/.zshrc
-	cp ~/.zshrc ~/.config/.zshrc.work
-	source ~/.zshrc
-}
+export MANPAGER='nvim +Man!'
+
+alias zrc="nvim ~/.config/.zshrc.work"
+# function zrc() {
+# 	nvim ~/.zshrc
+# 	cp ~/.zshrc ~/.config/.zshrc.work
+# 	source ~/.zshrc
+# }
 
 function attach-tmux-if-not-attached() {
 	if [ -z "$TMUX" ]; then
@@ -78,18 +83,19 @@ function ztheme() {
 
 alias zreload="source ~/.zshrc"
 
-alias vi="nvim"
-alias vim="nvim"
+# alias vi="nvim"
+# alias vim="nvim"
+
+alias ring="echo -e \"\a\""
 
 alias sb="sam build --config-env ls"
-alias sd="sam deploy --config-env ls"
+alias sd="sam deploy --config-env ls --profile dev-crmi"
 alias sdg="sam deploy --guided --profile dev-crmi"
-alias sbd="sb && sd"
-alias ss="sam sync --config-env ls"
-alias samb="echo \"Use sb\" && sb"
-alias samd="echo \"Use sd\" && sd"
-alias samdg="echo \"Use sdg\" && sdg"
-alias sambd="echo \"Use sbd\" && sb && sd"
+alias sbd="(sb && sd && say \"SAM deployment successful\") || say \"SAM deployment failed\""
+
+alias sb-qa="sam build --config-env qa"
+alias sd-qa="sam deploy --config-env qa --profile qa-crmi"
+alias sbd-qa="(sb-qa && sd-qa && say \"QA deployment successful\") || say \"QA deployment failed\""
 
 alias ga="git add"
 alias gc="git commit -m"
@@ -132,4 +138,23 @@ alias install-handlers="cd ./src/lambda/handlers/ && (find . -maxdepth 2 -name p
 alias install-lib="cd ./src/lambda/lib/ && npm i && cd -"
 alias install-all="install-handlers && install-lib"
 
+alias update-handlers="cd ./src/lambda/handlers/ && (find . -maxdepth 2 -name package.json -execdir npm up \;) && cd -"
+alias update-lib="cd ./src/lambda/lib/ && npm up && cd -"
+alias update-all="update-handlers && update-lib"
+
 alias finder="echo 'Use open instead'"
+
+alias git-node20-branch="git checkout -b @features/node20-upgrade && git push --set-upstream origin @features/node20-upgrade"
+
+alias vil="NVIM_APPNAME=\"nvim-lite\" nvim"
+
+function common-explain() {
+	if [ -z "$1" ]; then
+		echo "Usage: common-explain <package-name>"
+		return 1
+	fi
+
+  cd ~/repos/crmi-repos/crmi-common/src/lambda/layers/crmi-common-lambda-layer/nodejs
+  npm explain $1
+  cd -
+}

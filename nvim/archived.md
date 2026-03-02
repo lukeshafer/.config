@@ -1,3 +1,39 @@
+!!!! DO NOT DELETE !!!!
+These are plugins or other snippets of lua config code that I may want to re-enable in the future
+
+
+- nvim-java setup
+```lua
+{
+    "nvim-java/nvim-java",
+    config = function()
+        require("java").setup()
+    end,
+    dependencies = {
+        "nvim-java/lua-async-await",
+        "nvim-java/nvim-java-refactor",
+        "nvim-java/nvim-java-core",
+        "nvim-java/nvim-java-test",
+        "nvim-java/nvim-java-dap",
+        "MunifTanjim/nui.nvim",
+        "neovim/nvim-lspconfig",
+        "mfussenegger/nvim-dap",
+        {
+            "williamboman/mason.nvim",
+            opts = {
+            registries = {
+                "github:nvim-java/mason-registry",
+                "github:mason-org/mason-registry",
+            },
+            },
+        },
+    },
+},
+```
+
+
+- custom theme using lush
+```lua
 -- Custom theme for Lush.nvim
 local lush = require('lush')
 local hsl = lush.hsl
@@ -91,3 +127,38 @@ return lush(function(injected_functions)
 		IncSearch { bg = search_base.bg.ro(-20), fg = search_base.fg.da(90) },
 	}
 end)
+```
+
+shortcut for opening netrw
+```lua
+--------NORMAL MODE---------
+-- CTRL n opens new tab
+-- map("n", "<C-n>", ":tabnew <CR>") -- TODO: delete this next commit
+-- CTRL e toggles file browser
+-- map("n", "<leader>e", ":Explore<cr>")
+
+-- local netrw_buf --- @type integer
+-- local netrw_win --- @type integer
+-- local prev_buf --- @type integer
+-- vim.keymap.set("n", "<leader>e", function()
+-- 	if netrw_buf ~= vim.api.nvim_get_current_buf() then
+-- 		prev_buf = vim.api.nvim_get_current_buf()
+-- 	end
+--
+-- 	if netrw_buf == nil then
+-- 		netrw_buf = vim.api.nvim_create_buf(false, true)
+-- 	end
+--
+-- 	if netrw_win == nil or not vim.api.nvim_win_is_valid(netrw_win) then
+-- 		netrw_win = vim.api.nvim_open_win(netrw_buf, true, {
+-- 			-- relative = "editor",
+-- 			width = 50,
+-- 			split = "left",
+-- 			style = "minimal",
+-- 		})
+-- 		vim.cmd("Explore")
+-- 	else
+-- 		vim.api.nvim_set_current_win(netrw_win)
+-- 	end
+-- end, map_opts)
+```
