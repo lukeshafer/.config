@@ -4,10 +4,10 @@ local component_separators = { left = "", right = "" }
 local section_separators = { left = "", right = "" }
 
 local mode_icons = {
-	normal = " ",
-	visual = "󰗧 ",
-	insert = " ",
-	command = " ",
+	normal = "%#MiniStatuslineModeNormal#  %#WhichKeyFloat#",
+	visual = "%#MiniStatuslineModeVisual# 󰗧 %#DiagnosticFloatingOk#",
+	insert = "%#MiniHipatternsTodo#  %#DiagnosticFloatingInfo#",
+	command = "%#MiniStatuslineModeCommand#  %#DiagnosticFloatingWarn#",
 }
 
 local modes = {
@@ -36,7 +36,7 @@ local modes = {
 local function mode()
 	local current_mode = vim.api.nvim_get_mode().mode
 
-	return string.format(" %s %s ", modes[current_mode], component_separators.left)
+	return string.format("%s%s%s", modes[current_mode], section_separators.left, "%#StatusLineNC#")
 end
 
 local function filepath()
@@ -107,9 +107,9 @@ local git = function()
 	if not git_info or git_info.head == "" then
 		return ""
 	end
-	local added = git_info.added and ("%#GitSignsAdd#+" .. git_info.added .. " ") or ""
-	local changed = git_info.changed and ("%#GitSignsChange#~" .. git_info.changed .. " ") or ""
-	local removed = git_info.removed and ("%#GitSignsDelete#-" .. git_info.removed .. " ") or ""
+	local added = git_info.added and ("%#DiagnosticFloatingOk#+" .. git_info.added .. " ") or ""
+	local changed = git_info.changed and ("%#DiagnosticFloatingWarn#~" .. git_info.changed .. " ") or ""
+	local removed = git_info.removed and ("%#DiagnosticFloatingError#-" .. git_info.removed .. " ") or ""
 	if git_info.added == 0 then
 		added = ""
 	end
@@ -121,13 +121,13 @@ local git = function()
 	end
 	return table.concat({
 		" ",
-		"%#StatusLineNC#",
+		"%#DiagnosticFloatingInfo# ",
+		git_info.head,
+		-- "%#StatusLineNC#",
+		" ",
 		added,
 		changed,
 		removed,
-		" ",
-		"%#GitSignsAdd# ",
-		git_info.head,
 		" %#StatusLineNC#",
 		component_separators.left,
 	})
