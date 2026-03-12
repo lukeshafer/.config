@@ -14,63 +14,39 @@ vim.opt.rtp:prepend(lazypath)
 
 vim.g.mapleader = " " -- Make sure to set `mapleader` before lazy so your mappings are correct
 
-local utils = require('lksh.utils')
+local utils = require("lksh.utils")
+
+-- colors i've liked
+-- catppuccin/nvim, Yazeed1s/oh-lucy.nvim, bluz71/vim-moonfly-colors, mellow-theme/mellow.nvim, slugbyte/lackluster.nvim, rose-pine/neovim
 
 -- actual lazy configuration
 local plugins = {
-	-- colors i like
-	-- {
-	-- 	"catppuccin/nvim",
-	-- 	name = "catppuccin",
-	-- 	-- config = color("catppuccin"),
-	-- },
-	-- {
-	-- 	"Yazeed1s/oh-lucy.nvim",
-	-- 	-- config = color("oh-lucy"),
-	-- },
-	-- {
-	-- 	"bluz71/vim-moonfly-colors",
-	-- 	-- config = color("moonfly")
-	-- },
-	-- {
-	-- 	"mellow-theme/mellow.nvim",
-	-- 	-- config = color("mellow"),
-	-- },
-	-- {
-	-- 	"slugbyte/lackluster.nvim",
-	-- 	-- config = color("lackluster"),
-	-- },
-	-- {
-	-- 	"rose-pine/neovim",
-	-- 	name = "rose-pine",
-	-- 	-- config = color("rose-pine"),
-	-- },
-{
-	"echasnovski/mini.hues",
-	dependencies = { "echasnovski/mini.colors" },
-	version = false,
-	lazy = false,
-	config = function()
-		-- Generate random config with initialized random seed based on cwd
-		local seed = utils.get_seed_from_string(vim.fn.getcwd())
-		vim.g.lksh_color_seed = seed
-		math.randomseed(seed)
-		local base_colors = utils.gen_random_base_colors()
+	{
+		"echasnovski/mini.hues",
+		dependencies = { "echasnovski/mini.colors" },
+		version = false,
+		lazy = false,
+		config = function()
+			-- Generate random config with initialized random seed based on cwd
+			local seed = utils.get_seed_from_string(vim.fn.getcwd())
+			vim.g.lksh_color_seed = seed
+			math.randomseed(seed)
+			local base_colors = utils.gen_random_base_colors()
 
-		vim.g.lksh_background = base_colors.background
-		vim.g.lksh_foreground = base_colors.foreground
+			vim.g.lksh_background = base_colors.background
+			vim.g.lksh_foreground = base_colors.foreground
 
-		require("mini.hues").setup({
-			background = base_colors.background,
-			foreground = base_colors.foreground,
-			n_hues = 8,
-			saturation = vim.o.background == "dark" and "medium" or "high",
-			accent = "fg",
-		})
+			require("mini.hues").setup({
+				background = base_colors.background,
+				foreground = base_colors.foreground,
+				n_hues = 8,
+				saturation = vim.o.background == "dark" and "medium" or "high",
+				accent = "fg",
+			})
 
-		vim.g.colors_name = "randomhue"
-	end,
-},
+			vim.g.colors_name = "randomhue"
+		end,
+	},
 
 	{
 		"hrsh7th/nvim-cmp",
@@ -234,7 +210,7 @@ local plugins = {
 			defaults = { file_ignore_patterns = { "node_modules", "dist", "build", ".git" } },
 			pickers = { find_files = { hidden = true } },
 		},
-    cmd = { "Telescope" },
+		cmd = { "Telescope" },
 		keys = {
 			{
 				"ff",

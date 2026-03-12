@@ -9,7 +9,7 @@ vim.lsp.enable({
 
 if os.getenv("PC_CONTEXT") == "work" then
 	-- ONLY NEED FOR WORK
-  -- nothing
+  -- nothing rn
 else
 	-- NOT NEEDED AT WORK
 	vim.lsp.enable({

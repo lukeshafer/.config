@@ -47,6 +47,7 @@ export PATH="$HOME/.local/bin:$PATH"
 export DOCKER_HOST="unix:/$HOME/.docker/run/docker.sock"
 
 export MANPAGER='nvim +Man!'
+# export MANPAGER='nvim +Man!'
 
 alias zrc="nvim ~/.config/.zshrc.work"
 # function zrc() {
