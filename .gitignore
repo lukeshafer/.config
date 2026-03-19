@@ -5,6 +5,7 @@
 !kitty/
 !qmk/
 !.zsh*
+!zsh/
 !zsh-theme/
 !.luke-config/
 !nvim-lite/
