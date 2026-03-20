@@ -4,7 +4,8 @@ vim.lsp.enable({
 	"lua_ls",
 	"ts_ls",
 	"yamlls",
-  "emmet_language_server"
+  "emmet_language_server",
+  "bashls",
 })
 
 if os.getenv("PC_CONTEXT") == "work" then
