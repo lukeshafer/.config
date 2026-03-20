@@ -11,7 +11,7 @@ local main="$colors[$color_index]"
 local accent="white"
 
 PROMPT="
-%F{$accent}%K{black}%t%F{$main} %F{black}%K{$main}%B%~/%b%K{default}%F{$main}\$(git_prompt_info)%{$reset_color%}
+%F{$accent}%K{black}%t%F{$main} %F{black}%K{$main}%B%~%b%K{default}%F{$main}\$(git_prompt_info)%{$reset_color%}
 %F{$main}%n%F{default}%K{default} %F{$accent}%(!.#.»)%F{default}%K{default} "
 
 RPROMPT="%(?..%{$fg[red]%}%? ↵%{$reset_color%}) "
