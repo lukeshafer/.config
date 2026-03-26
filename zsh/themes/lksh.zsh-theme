@@ -6,15 +6,15 @@
 # %F{black}\${(l.\$COLUMNS..-.)}%{$reset_color%}
 
 local colors=("blue" "cyan" "magenta" "white" "green" "yellow" "red")
-local color_index="$(($(echo $TMUX_PANE | tr -d -c 0-9) % ${#colors[@]} + 1))"
+local color_index="$(($RANDOM % ${#colors[@]} + 1))"
 local main="$colors[$color_index]"
 local accent="white"
 
 PROMPT="
-%F{$accent}%K{black}%t%F{$main} %F{black}%K{$main}%B%~%b%K{default}%F{$main}\$(git_prompt_info)%{$reset_color%}
+%F{black}%K{$main} %B%~%b %K{black}\$(git_prompt_info)%F{black}%K{default}%{$reset_color%}
 %F{$main}%n%F{default}%K{default} %F{$accent}%(!.#.»)%F{default}%K{default} "
 
-RPROMPT="%(?..%{$fg[red]%}%? ↵%{$reset_color%}) "
+RPROMPT="%(?..%{$fg[red]%}%? ↵%{$reset_color%}) %F{$accent}%t"
 
 # useful chars:  
 #            »
