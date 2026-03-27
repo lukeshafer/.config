@@ -5,7 +5,7 @@ source "$HOME/.config/.zshrc.base"
 # prompt_context(){}
 
 # work specific config
-source $ZSH/oh-my-zsh.sh
+# source $ZSH/oh-my-zsh.sh
 export DEFAULT_USER="shafer.361"
 
 # User configuration

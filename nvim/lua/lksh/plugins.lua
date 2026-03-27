@@ -192,7 +192,7 @@ local plugins = {
 		"nvim-telescope/telescope.nvim", -- fuzzy finder
 		lazy = true,
 		config = {
-			defaults = { file_ignore_patterns = { "node_modules", "dist", "build", ".git" } },
+			defaults = { file_ignore_patterns = { "node_modules", "dist", "build" } },
 			pickers = { find_files = { hidden = true } },
 		},
 		cmd = { "Telescope" },

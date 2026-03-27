@@ -1,12 +1,13 @@
 # Path to your oh-my-zsh installation.
-export ZSH="$HOME/.oh-my-zsh"
+export ZSH="$HOME/.config/zsh"
 # Customization path
-export ZSH_CUSTOM="$HOME/.config/zsh"
+# export ZSH_CUSTOM="$HOME/.config/zsh"
+export ZSH_CACHE_DIR="$HOME/.cache/zsh"
 
 ZSH_THEME="lksh"
 
 # run oh-my-zsh startup
-source $ZSH/oh-my-zsh.sh
+source $ZSH/init.sh
 
 # Common config
 export EDITOR="nvim" # Preferred editor for local and remote sessions
