@@ -29,22 +29,7 @@ local plugins = {
 		config = function()
 			-- Generate random config with initialized random seed based on cwd
 			local seed = utils.get_seed_from_string(vim.fn.getcwd())
-			vim.g.lksh_color_seed = seed
-			math.randomseed(seed)
-			local base_colors = utils.gen_random_base_colors()
-
-			vim.g.lksh_background = base_colors.background
-			vim.g.lksh_foreground = base_colors.foreground
-
-			require("mini.hues").setup({
-				background = base_colors.background,
-				foreground = base_colors.foreground,
-				n_hues = 8,
-				saturation = vim.o.background == "dark" and "medium" or "high",
-				accent = "fg",
-			})
-
-			vim.g.colors_name = "randomhue"
+      require("lksh.colors").prepare_color_theme(seed)
 		end,
 	},
 

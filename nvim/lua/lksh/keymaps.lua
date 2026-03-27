@@ -23,7 +23,7 @@ vim.keymap.set("n", "<leader>y", '"+y', map_opts)
 vim.keymap.set("v", "<leader>y", '"+y', map_opts)
 vim.keymap.set("n", "<leader>s", ":Inspect<cr>", map_opts)
 -- Leader+T opens terminal in pane
--- map("n", "<leader>t", ":belowright 15sp|term<cr>") -- WIP for no plugin 
+-- map("n", "<leader>t", ":belowright 15sp|term<cr>") -- WIP for no plugin
 
 vim.keymap.set("n", "<leader>d", function()
 	vim.diagnostic.open_float({ source = true })
@@ -34,6 +34,8 @@ vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, map_opts)
 -- Indenting keeps previous highlight
 vim.keymap.set("v", ">", ">gv", map_opts)
 vim.keymap.set("v", "<", "<gv", map_opts)
+
+vim.keymap.set("v", "<leader>s", "<Cmd>LSSortList<cr>", map_opts)
 
 -- nvim terminal mappings
 -- Escape gets out of insert (in terminal)

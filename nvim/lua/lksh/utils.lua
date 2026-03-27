@@ -1,4 +1,6 @@
-local function js_formatter()
+local M = {}
+
+function M.js_formatter()
 	if os.getenv("PC_CONTEXT") then
 		return {}
 	end
@@ -7,7 +9,7 @@ local function js_formatter()
 end
 
 ---@param text string
-local function get_seed_from_string(text)
+function M.get_seed_from_string(text)
 	local value = 0
 	local prev = 3
 	local MAX = 1e7
@@ -28,7 +30,7 @@ local function get_seed_from_string(text)
 	return value
 end
 
-local function gen_random_base_colors()
+function M.gen_random_base_colors()
 	local convert = require("mini.colors").convert
 
 	local bgL = vim.o.background == "dark" and math.random(12, 12) or math.random(85, 85) -- used to be 12
@@ -45,8 +47,4 @@ local function gen_random_base_colors()
 	}
 end
 
-return {
-	js_formatter = js_formatter,
-	get_seed_from_string = get_seed_from_string,
-	gen_random_base_colors = gen_random_base_colors,
-}
+return M

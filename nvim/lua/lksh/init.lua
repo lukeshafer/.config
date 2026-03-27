@@ -6,5 +6,6 @@ end
 require("lksh.plugins")
 require("lksh.config")
 require("lksh.lsp")
+require("lksh.commands")
 require("lksh.keymaps")
 require("lksh.statusline")
