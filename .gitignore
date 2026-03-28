@@ -5,6 +5,7 @@
 !kitty/
 !qmk/
 !.zsh*
+!zsh/
 !zsh-theme/
 !.luke-config/
 !nvim-lite/
@@ -16,3 +17,4 @@
 !notes-to-self/
 tmux/plugins/
 packer_compiled.lua
+# !.oh-my-zsh/

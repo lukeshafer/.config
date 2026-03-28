@@ -4,12 +4,13 @@ vim.lsp.enable({
 	"lua_ls",
 	"ts_ls",
 	"yamlls",
-  "emmet_language_server"
+  "emmet_language_server",
+  "bashls",
 })
 
 if os.getenv("PC_CONTEXT") == "work" then
 	-- ONLY NEED FOR WORK
-  -- nothing
+  -- nothing rn
 else
 	-- NOT NEEDED AT WORK
 	vim.lsp.enable({
