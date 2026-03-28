@@ -165,10 +165,13 @@ Transaction amounts should be line items, i.e. its own entity, to include when s
     transactionId
     transactionType (for queries)
     lineNumber
-    account
+    accountId
     amount
 * Customer
     customerId
     name
     foundVia? (i.e. how customer found the business)
+* Account
+    accountId
+    name
 (even though we have transaction items, they will only be displayed to the user when a transaction has multiple accounts)

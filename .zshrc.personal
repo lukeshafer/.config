@@ -1,4 +1,4 @@
-source "./.zshrc.base"
+source "$HOME/.config/.zshrc.base"
 
 export PATH="$HOME/.local/bin:$PATH"
 export N_PREFIX="$HOME/.local"
