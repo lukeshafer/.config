@@ -10,16 +10,17 @@ local color_index="$(($RANDOM % ${#colors[@]} + 1))"
 local main="$colors[$color_index]"
 local accent="white"
 
-if [[ "${OSTYPE}" == darwin* ]] then
+# iTerm renders the   characters differently
+if [[ -n "$ITERM_PROFILE" ]] then
   local left_sep=" "
   local right_sep=" "
 else
-  local left_sep=" "
+  local left_sep=""
   local right_sep=" "
 fi
 
 PROMPT="
-%F{black}%K{$main} %B%~%b$right_sep%K{black}\$(git_prompt_info)%F{black}%K{default}$left_sep%{$reset_color%}
+%F{black}%K{$main} %B%~%b$right_sep%K{black} \$(git_prompt_info)%F{black}%K{default}$left_sep%{$reset_color%}
 %F{$main}%n%F{default}%K{default} %F{$accent}%(!.#.»)%F{default}%K{default} "
 
 RPROMPT="%(?..%{$fg[red]%}%? ↵%{$reset_color%}) %F{$accent}%t"
