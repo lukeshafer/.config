@@ -1,3 +1,5 @@
+# zmodload zsh/zprof
+
 source "$HOME/.config/.zshrc.base"
 
 # Commented legacy blocks. Remove if their absence is unnoticed
@@ -65,3 +67,5 @@ function common-explain() {
   npm explain $1
   cd -
 }
+
+# zprof
