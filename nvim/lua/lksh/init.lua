@@ -3,7 +3,12 @@ if vim.g.vscode then
 	return
 end
 
-require("lksh.plugins")
+if vim.version.range(">=0.12.0"):has(vim.version()) then
+	require("lksh.plugins")
+else
+	require("lksh.plugins-lazy")
+end
+
 require("lksh.config")
 require("lksh.lsp")
 require("lksh.commands")
