@@ -3,12 +3,6 @@ if vim.g.vscode then
 	return
 end
 
-if vim.version.range(">=0.12.0"):has(vim.version()) then
-	require("lksh.plugins")
-else
-	require("lksh.plugins-lazy")
-end
-
 local utils = require("lksh.utils")
 
 -- Editor Settings
@@ -22,7 +16,7 @@ vim.o.numberwidth = 2
 vim.o.mouse = "a"
 vim.o.cursorline = true
 vim.opt.diffopt:append({ "iwhiteall" })
--- vim.opt.shortmess:append("I")
+vim.opt.shortmess:append("I")
 
 if utils.IS_WINDOWS then
 	vim.o.backupdir = utils.HOME_DIR .. "\\.vim\\backup"
@@ -33,6 +27,12 @@ else
 end
 
 vim.g.mapleader = " "
+
+if vim.version.range(">=0.12.0"):has(vim.version()) then
+	require("lksh.plugins")
+else
+	require("lksh.plugins-lazy")
+end
 
 require("lksh.lsp")
 require("lksh.commands")
