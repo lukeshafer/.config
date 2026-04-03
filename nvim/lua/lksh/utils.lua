@@ -120,4 +120,58 @@ else
 	M.IS_WINDOWS = false
 end
 
+---@class PluginDef
+---@field src string
+---@field deps? string[]
+---@field setup? boolean|table|function
+
+---@param url string
+local function resolve_plugin_url(url)
+	return url:find("://") and url or "https://github.com/" .. url
+end
+
+---@param name string
+---@return string
+local function resolve_plugin_module(name)
+	local m = name:match("[^/]+$"):gsub("%.nvim$", "")
+	return m
+end
+
+---Light wrapper around vim.pack.add to mark dependencies
+---@param plugins (PluginDef|string)[]
+function M.load_plugins(plugins)
+	---@type string[]
+	local plugin_list = {}
+	---@type function[]
+	local setup_fns = {}
+	for _, p in ipairs(plugins) do
+		if type(p) == "string" then
+			table.insert(plugin_list, resolve_plugin_url(p))
+		else
+			for _, dep in ipairs(p.deps or {}) do
+				table.insert(plugin_list, resolve_plugin_url(dep))
+			end
+			table.insert(plugin_list, resolve_plugin_url(p.src))
+			local setup = p.setup
+			if type(setup) == "function" then
+				table.insert(setup_fns, setup)
+			elseif setup == true then
+				table.insert(setup_fns, function()
+					require(resolve_plugin_module(p.src)).setup({})
+				end)
+			elseif type(setup) == "table" then
+				table.insert(setup_fns, function()
+					require(resolve_plugin_module(p.src)).setup(setup)
+				end)
+			end
+		end
+	end
+
+	vim.pack.add(plugin_list)
+
+	for _, setup_fn in ipairs(setup_fns) do
+		setup_fn()
+	end
+end
+
 return M

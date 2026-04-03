@@ -1,61 +1,10 @@
 local utils = require("lksh.utils")
 
----@class PluginDef
----@field src string
----@field deps? string[]
----@field setup? boolean|table|function
-
----@param url string
-local function resolve_plugin_url(url)
-	return url:find("://") and url or "https://github.com/" .. url
+if not vim.version.range(">=0.12.0"):has(vim.version()) then
+	return
 end
 
----@param name string
----@return string
-local function resolve_plugin_module(name)
-	local m = name:match("[^/]+$"):gsub("%.nvim$", "")
-	return m
-end
-
----Light wrapper around vim.pack.add to mark dependencies
----@param plugins (PluginDef|string)[]
-local function load_plugins(plugins)
-	---@type string[]
-	local plugin_list = {}
-	---@type function[]
-	local setup_fns = {}
-	for _, p in ipairs(plugins) do
-		if type(p) == "string" then
-			table.insert(plugin_list, resolve_plugin_url(p))
-		else
-			for _, dep in ipairs(p.deps or {}) do
-				table.insert(plugin_list, resolve_plugin_url(dep))
-			end
-			table.insert(plugin_list, resolve_plugin_url(p.src))
-			local setup = p.setup
-			if type(setup) == "function" then
-				table.insert(setup_fns, setup)
-			elseif setup == true then
-				table.insert(setup_fns, function()
-					require(resolve_plugin_module(p.src)).setup({})
-				end)
-			elseif type(setup) == "table" then
-				table.insert(setup_fns, function()
-					require(resolve_plugin_module(p.src)).setup(setup)
-				end)
-			end
-		end
-	end
-
-	vim.pack.add(plugin_list)
-
-	for _, setup_fn in ipairs(setup_fns) do
-		setup_fn()
-	end
-end
-
-load_plugins({
-	-- "nvim-tree/nvim-web-devicons",
+utils.load_plugins({
 	{
 		src = "nvim-mini/mini.nvim",
 		setup = function()
@@ -66,12 +15,42 @@ load_plugins({
 				},
 			})
 
+      require("mini.colors").setup({})
+
 			vim.keymap.set("n", "<leader>e", function()
 				MiniFiles.open()
 			end, { noremap = true, silent = true })
 
-			local seed = utils.get_seed_from_string(vim.fn.getcwd())
-			require("lksh.colors").prepare_color_theme(seed)
+			vim.keymap.set("n", "<leader>E", function()
+				MiniFiles.open(vim.api.nvim_buf_get_name(0))
+			end, { noremap = true, silent = true })
+
+			math.randomseed(utils.get_seed_from_string(vim.fn.getcwd()))
+
+			local bg = MiniColors.convert({
+				l = vim.o.background == "dark" and 12 or 85,
+				c = 3,
+				h = math.random(180, 360),
+			}, "hex")
+
+			local fg = MiniColors.convert({
+				l = vim.o.background == "dark" and 87 or 10,
+				c = 2,
+				h = math.random(0, 360),
+			}, "hex")
+
+			require("mini.hues").setup({
+				background = bg,
+				foreground = fg,
+				n_hues = 8,
+				saturation = vim.o.background == "dark" and "medium" or "high",
+				accent = "fg",
+			})
+
+			-- vim.g.lksh_color_seed = seed
+			-- vim.g.lksh_background = bg
+			-- vim.g.lksh_foreground = fg
+			vim.g.colors_name = "randomhue"
 		end,
 	},
 	{
@@ -245,10 +224,6 @@ load_plugins({
 	-- "https://github.com/uga-rosa/ccc.nvim", -- color picker
 	-- "https://github.com/hat0uma/csvview.nvim",
 })
-
-if not vim.version.range(">=0.12.0"):has(vim.version()) then
-	return
-end
 
 -- require("neo-tree").setup({
 -- 	sort_case_insensitive = true,
