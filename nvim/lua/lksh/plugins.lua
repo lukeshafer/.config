@@ -1,29 +1,16 @@
--- Add another property to PluginDef to automatically setup packages
---  { setup = true } -- call require(plugin_name).setup({})
---  { setup = some_table } -- call require(plugin_name).setup(some_table)
---  plugin_name should resolve to the last portion of the source, minus any .nvim suffix. For instance, "stevarc/conform.nvim" should resolve to "conform" and call `require("conform")`
---  { setup = function() ... end } -- call the passed function instead of a require().setup
---
-
 ---@class PluginDef
 ---@field src string
 ---@field deps? string[]
----@field setup? boolean|table|function
 
 ---@param url string
 local function resolve(url)
 	return url:find("://") and url or "https://github.com/" .. url
 end
 
-local function plugin_name(src)
-	return src:match("[^/]+$"):gsub("%.nvim$", "")
-end
-
 ---Light wrapper around vim.pack.add to mark dependencies
 ---@param plugins (PluginDef|string)[]
 local function load_plugins(plugins)
 	local list = {}
-	local setups = {}
 	for _, p in ipairs(plugins) do
 		if type(p) == "string" then
 			list[#list + 1] = resolve(p)
@@ -32,20 +19,9 @@ local function load_plugins(plugins)
 				list[#list + 1] = resolve(dep)
 			end
 			list[#list + 1] = resolve(p.src)
-			if p.setup then
-				setups[#setups + 1] = { src = p.src, setup = p.setup }
-			end
 		end
 	end
 	vim.pack.add(list)
-	for _, s in ipairs(setups) do
-		if type(s.setup) == "function" then
-			s.setup()
-		else
-			local opts = s.setup == true and {} or s.setup
-			require(plugin_name(s.src)).setup(opts)
-		end
-	end
 end
 
 load_plugins({
@@ -73,12 +49,7 @@ load_plugins({
 	"windwp/nvim-ts-autotag",
 	"sindrets/diffview.nvim",
 	"kylechui/nvim-surround",
-	{
-		src = "lukas-reineke/indent-blankline.nvim",
-		setup = function()
-			require("ibl").setup({})
-		end,
-	},
+	"lukas-reineke/indent-blankline.nvim",
 	"akinsho/toggleterm.nvim",
 	{ src = "nvim-telescope/telescope.nvim", deps = { "nvim-lua/plenary.nvim" } }, -- fuzzy finder
 	{

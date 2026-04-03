@@ -1,17 +1,16 @@
+local utils = require("lksh.utils")
+
 vim.lsp.enable({
 	"html",
 	"jsonls",
 	"lua_ls",
 	"ts_ls",
 	"yamlls",
-  "emmet_language_server",
-  "bashls",
+	"emmet_language_server",
+	"bashls",
 })
 
-if os.getenv("PC_CONTEXT") == "work" then
-	-- ONLY NEED FOR WORK
-  -- nothing rn
-else
+utils.run_in_context("work", nil, function()
 	-- NOT NEEDED AT WORK
 	vim.lsp.enable({
 		"astro",
@@ -19,11 +18,11 @@ else
 		-- "emmet_ls",
 		"tailwindcss",
 	})
-end
+end)
 
-if os.getenv("PC_CONTEXT") == "desktop-wsl" then
+utils.run_in_context("desktop-wsl", function()
 	vim.lsp.config.gdscript = { cmd = { "godot-wsl-lsp" } }
-end
+end)
 
 vim.api.nvim_create_autocmd("LspAttach", {
 	callback = function(ev)

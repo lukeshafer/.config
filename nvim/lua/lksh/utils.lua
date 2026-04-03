@@ -47,4 +47,75 @@ function M.gen_random_base_colors()
 	}
 end
 
+---@param t table
+---@param depth integer
+---@return string
+local function _format_table(t, depth)
+	local indent = string.format("%" .. depth .. "s", "")
+	local table_str_lines = {}
+
+	for k, v in pairs(t) do
+		if type(v) == "table" then
+			table.insert(
+				table_str_lines,
+				table.concat({
+					indent,
+					k,
+					" = {\n",
+					_format_table(v, depth + 2),
+					"\n",
+					indent,
+					"}",
+				})
+			)
+		else
+			table.insert(
+				table_str_lines,
+				table.concat({
+					indent,
+					k,
+					" = ",
+					tostring(v),
+				})
+			)
+		end
+	end
+
+	return table.concat(table_str_lines, "\n")
+end
+
+---Converts formatted table to string
+---@param t table
+---@return string
+function M.format_table(t)
+	return _format_table(t, 0)
+end
+
+---Runs a function only in the correct context
+---@param ctx string
+---@param fn function|nil
+---@param el_fn function? Else function -- run only if context is NOT ctx
+function M.run_in_context(ctx, fn, el_fn)
+	local env_ctx = os.getenv("PC_CONTEXT")
+	if env_ctx == ctx and fn then
+		return fn()
+	elseif el_fn then
+		return el_fn()
+	end
+end
+
+M.HOME_DIR = os.getenv("HOME") or os.getenv("USERPROFILE")
+
+
+local function check_is_windows()
+	if vim.uv.os_uname().sysname == "Windows_NT" then
+		return true
+	elseif not os.getenv("HOME") and os.getenv("USERPROFILE") then
+		return true
+	else
+		return false
+	end
+end
+M.IS_WINDOWS = check_is_windows()
+
 return M
