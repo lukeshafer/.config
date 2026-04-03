@@ -2,6 +2,8 @@ local utils = require("lksh.utils")
 
 if not vim.version.range(">=0.12.0"):has(vim.version()) then
 	return
+else
+  return
 end
 
 require("mason").setup({})
