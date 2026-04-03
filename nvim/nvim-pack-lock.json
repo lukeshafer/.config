@@ -50,11 +50,11 @@
     },
     "mini.colors": {
       "rev": "c2d5efa3f7aa66c164fa43f3bc4c58c601d09cdd",
-      "src": "https://github.com/echasnovski/mini.colors"
+      "src": "https://github.com/nvim-mini/mini.colors"
     },
     "mini.hues": {
       "rev": "d0cd643e3e77f773ecda7205e6504ac8b6f04806",
-      "src": "https://github.com/echasnovski/mini.hues"
+      "src": "https://github.com/nvim-mini/mini.hues"
     },
     "neo-tree.nvim": {
       "rev": "08edbf0ca8b5a05086c14c824e139cc67020c718",
