@@ -91,6 +91,12 @@ function M.format_table(t)
 	return _format_table(t, 0)
 end
 
+---Prints table
+---@param t table
+function M.print_table(t)
+  print(M.format_table(t))
+end
+
 ---Runs a function only in the correct context
 ---@param ctx string
 ---@param fn function|nil
@@ -106,16 +112,12 @@ end
 
 M.HOME_DIR = os.getenv("HOME") or os.getenv("USERPROFILE")
 
-
-local function check_is_windows()
-	if vim.uv.os_uname().sysname == "Windows_NT" then
-		return true
-	elseif not os.getenv("HOME") and os.getenv("USERPROFILE") then
-		return true
-	else
-		return false
-	end
+if vim.uv.os_uname().sysname == "Windows_NT" then
+	M.IS_WINDOWS = true
+elseif not os.getenv("HOME") and os.getenv("USERPROFILE") then
+	M.IS_WINDOWS = true
+else
+	M.IS_WINDOWS = false
 end
-M.IS_WINDOWS = check_is_windows()
 
 return M

@@ -24,9 +24,9 @@ local function prepare_color_theme(seed)
 		accent = "fg",
 	})
 
-	vim.g.lksh_color_seed = seed
-	vim.g.lksh_background = bg
-	vim.g.lksh_foreground = fg
+	-- vim.g.lksh_color_seed = seed
+	-- vim.g.lksh_background = bg
+	-- vim.g.lksh_foreground = fg
 	vim.g.colors_name = "randomhue"
 end
 
