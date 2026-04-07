@@ -162,3 +162,59 @@ shortcut for opening netrw
 -- 	end
 -- end, map_opts)
 ```
+
+OLD PLUGINS PRIOR TO MINI
+2026-04-07
+```lua
+require("neo-tree").setup({
+	sort_case_insensitive = true,
+	window = {
+		position = "float",
+		mappings = {
+			["o"] = "open",
+			["oc"] = "none",
+			["od"] = "none",
+			["og"] = "none",
+			["om"] = "none",
+			["on"] = "none",
+			["os"] = "none",
+			["ot"] = "none",
+		},
+	},
+	filesystem = {
+		filtered_items = {
+			visible = false, -- when true, they will just be displayed differently than normal items
+			hide_dotfiles = false,
+			hide_gitignored = true,
+			hide_hidden = true, -- only works on Windows for hidden files/directories
+		},
+	},
+})
+
+vim.keymap.set("n", "<leader>e", "<Cmd>Neotree reveal<cr>", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>b", "<cmd>Neotree buffers reveal<cr>", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>g", "<cmd>Neotree git_status reveal<cr>", { noremap = true, silent = true })
+{
+	src = "nvim-neo-tree/neo-tree.nvim",
+	deps = {
+		"MunifTanjim/nui.nvim",
+		"nvim-lua/plenary.nvim",
+	},
+},
+{
+	src = "RRethy/vim-illuminate",
+	setup = function()
+		require("illuminate").configure({})
+	end,
+},
+{ src = "kylechui/nvim-surround", setup = true },
+{
+	src = "lukas-reineke/indent-blankline.nvim",
+	setup = function()
+     require("ibl").setup()
+   end
+},
+{ src = "lewis6991/gitsigns.nvim", setup = true },
+{ src = "folke/todo-comments.nvim", setup = true },
+{ src = "windwp/nvim-autopairs", setup = true },
+```

@@ -1,11 +1,9 @@
 local M = {}
 
-function M.js_formatter()
-	if os.getenv("PC_CONTEXT") then
-		return {}
-	end
-
-	return { "prettier" }
+if os.getenv("PC_CONTEXT") then
+	M.js_formatter = {}
+else
+	M.js_formatter = { "prettier" }
 end
 
 ---@param text string
@@ -94,7 +92,7 @@ end
 ---Prints table
 ---@param t table
 function M.print_table(t)
-  print(M.format_table(t))
+	print(M.format_table(t))
 end
 
 ---Runs a function only in the correct context
@@ -172,6 +170,29 @@ function M.load_plugins(plugins)
 	for _, setup_fn in ipairs(setup_fns) do
 		setup_fn()
 	end
+end
+
+---@class MiniPluginEntry
+---@field [1] string The plugin name
+---@field setup? fun() Optional setup function
+
+---@alias MiniPluginList (string|MiniPluginEntry)[]
+
+---@param plugins MiniPluginList
+---@return PluginDef
+function M.mini_nvim_modules(plugins)
+	return {
+		src = "nvim-mini/mini.nvim",
+		setup = function()
+			for _, value in ipairs(plugins) do
+				if type(value) == "string" then
+					require("mini." .. value).setup({})
+				else
+					value.setup()
+				end
+			end
+		end,
+	}
 end
 
 return M

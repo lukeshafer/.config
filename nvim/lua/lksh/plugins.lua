@@ -5,105 +5,90 @@ if not vim.version.range(">=0.12.0"):has(vim.version()) then
 end
 
 utils.load_plugins({
-	{
-		src = "nvim-mini/mini.nvim",
-		setup = function()
-			local mini = {
-				files = require("mini.files"),
-				colors = require("mini.colors"),
-				hues = require("mini.hues"),
-				pairs = require("mini.pairs"),
-				surround = require("mini.surround"),
-				indentscope = require("mini.indentscope"),
-				git = require("mini.git"),
-				diff = require("mini.diff"),
-				cursorword = require("mini.cursorword"),
-			}
-
-			mini.files.setup({
-				mappings = {
-					go_in = "L", -- swap go in plus to close explorer by default
-					go_in_plus = "l",
-				},
-			})
-
-			mini.colors.setup({})
-
-			vim.keymap.set("n", "<leader>e", function()
-				mini.files.open()
-			end, { noremap = true, silent = true })
-
-			vim.keymap.set("n", "<leader>E", function()
-				mini.files.open(vim.api.nvim_buf_get_name(0))
-			end, { noremap = true, silent = true })
-
-			math.randomseed(utils.get_seed_from_string(vim.fn.getcwd()))
-			local bg = mini.colors.convert({
-				l = vim.o.background == "dark" and 12 or 85,
-				c = 3,
-				h = math.random(180, 360),
-			}, "hex")
-
-			local fg = mini.colors.convert({
-				l = vim.o.background == "dark" and 87 or 10,
-				c = 2,
-				h = math.random(0, 360),
-			}, "hex")
-
-			mini.hues.setup({
-				background = bg,
-				foreground = fg,
-				n_hues = 8,
-				saturation = vim.o.background == "dark" and "medium" or "high",
-				accent = "fg",
-			})
-
-			-- vim.g.lksh_color_seed = seed
-			-- vim.g.lksh_background = bg
-			-- vim.g.lksh_foreground = fg
-			vim.g.colors_name = "randomhue"
-
-			mini.pairs.setup({})
-			mini.surround.setup({})
-
-			vim.api.nvim_set_keymap("n", "ys", "<cmd>lua error(\"Use 'sa'\")<cr>", {})
-			vim.api.nvim_set_keymap("n", "ds", "<cmd>lua error(\"Use 'sd'\")<cr>", {})
-			vim.api.nvim_set_keymap("n", "cs", "<cmd>lua error(\"Use 'sr'\")<cr>", {})
-
-			mini.indentscope.setup({
-				draw = {
-					delay = 0,
-					animation = mini.indentscope.gen_animation.none(),
-				},
-				options = {
-					indent_at_cursor = true,
-				},
-				symbol = "▎",
-			})
-
-			vim.api.nvim_set_hl(0, "MiniIndentscopeSymbol", {
-				link = "LineNr",
-			})
-
-			mini.git.setup({})
-			mini.diff.setup({
-				view = {
-					style = "sign",
-					signs = {
-						add = "",
-						change = "▎",
-						delete = "▁",
+	utils.mini_nvim_modules({
+		"colors",
+		"cursorword",
+		"git",
+		"icons",
+		"pairs",
+		"surround",
+		{
+			"files",
+			setup = function()
+				require("mini.files").setup({
+					mappings = {
+						go_in = "L", -- swap go in plus to close explorer by default
+						go_in_plus = "l",
 					},
-				},
-			})
+				})
 
-			vim.api.nvim_set_hl(0, "MiniDiffSignChange", {
-				link = "diffFile",
-			})
+				vim.keymap.set("n", "<leader>e", function()
+					MiniFiles.open()
+				end, { noremap = true, silent = true })
 
-			mini.cursorword.setup({})
-		end,
-	},
+				vim.keymap.set("n", "<leader>E", function()
+					MiniFiles.open(vim.api.nvim_buf_get_name(0))
+				end, { noremap = true, silent = true })
+			end,
+		},
+		{
+			"hues",
+			setup = function()
+				math.randomseed(utils.get_seed_from_string(vim.fn.getcwd()))
+
+				require("mini.hues").setup({
+					background = require("mini.colors").convert({
+						l = vim.o.background == "dark" and 12 or 85,
+						c = 3,
+						h = math.random(180, 360),
+					}, "hex"),
+					foreground = require("mini.colors").convert({
+						l = vim.o.background == "dark" and 87 or 10,
+						c = 2,
+						h = math.random(0, 360),
+					}, "hex"),
+					n_hues = 8,
+					saturation = vim.o.background == "dark" and "medium" or "high",
+					accent = "fg",
+				})
+
+				vim.g.colors_name = "randomhue"
+			end,
+		},
+		{
+			"indentscope",
+			setup = function()
+				require("mini.indentscope").setup({
+					draw = {
+						delay = 0,
+						animation = require("mini.indentscope").gen_animation.none(),
+					},
+					options = { indent_at_cursor = true },
+					symbol = "▎",
+				})
+			end,
+		},
+		{
+			"diff",
+			setup = function()
+				require("mini.diff").setup({
+					view = {
+						style = "sign",
+						signs = {
+							-- add = "",
+							add = "▎",
+							change = "▎",
+							delete = "▁",
+						},
+					},
+				})
+
+				vim.api.nvim_set_hl(0, "MiniDiffSignChange", {
+					link = "diffFile",
+				})
+			end,
+		},
+	}),
 	{
 		src = "hrsh7th/nvim-cmp",
 		deps = {
@@ -201,9 +186,6 @@ utils.load_plugins({
 			})
 		end,
 	},
-	-- { src = "lewis6991/gitsigns.nvim", setup = true },
-	-- { src = "folke/todo-comments.nvim", setup = true },
-	-- { src = "windwp/nvim-autopairs", setup = true },
 	{ src = "windwp/nvim-ts-autotag", setup = true },
 	{
 		src = "sindrets/diffview.nvim",
@@ -214,13 +196,6 @@ utils.load_plugins({
 			vim.keymap.set("n", "<leader>vd", "<cmd>DiffviewOpen origin/dev<cr>", { noremap = true, silent = true })
 		end,
 	},
-	-- { src = "kylechui/nvim-surround", setup = true },
-	-- {
-	-- 	src = "lukas-reineke/indent-blankline.nvim",
-	-- 	setup = function()
-	--      require("ibl").setup()
-	--    end
-	-- },
 	{
 		src = "akinsho/toggleterm.nvim",
 		setup = function()
@@ -256,19 +231,6 @@ utils.load_plugins({
 			end, { noremap = true, silent = true })
 		end,
 	}, -- fuzzy finder
-	-- {
-	-- 	src = "nvim-neo-tree/neo-tree.nvim",
-	-- 	deps = {
-	-- 		"MunifTanjim/nui.nvim",
-	-- 		"nvim-lua/plenary.nvim",
-	-- 	},
-	-- },
-	-- {
-	-- 	src = "RRethy/vim-illuminate",
-	-- 	setup = function()
-	-- 		require("illuminate").configure({})
-	-- 	end,
-	-- },
 	{
 		src = "brenoprata10/nvim-highlight-colors", -- mini.hipatterns may be able to replace
 		setup = {
@@ -281,31 +243,3 @@ utils.load_plugins({
 	-- "https://github.com/hat0uma/csvview.nvim",
 })
 
--- require("neo-tree").setup({
--- 	sort_case_insensitive = true,
--- 	window = {
--- 		position = "float",
--- 		mappings = {
--- 			["o"] = "open",
--- 			["oc"] = "none",
--- 			["od"] = "none",
--- 			["og"] = "none",
--- 			["om"] = "none",
--- 			["on"] = "none",
--- 			["os"] = "none",
--- 			["ot"] = "none",
--- 		},
--- 	},
--- 	filesystem = {
--- 		filtered_items = {
--- 			visible = false, -- when true, they will just be displayed differently than normal items
--- 			hide_dotfiles = false,
--- 			hide_gitignored = true,
--- 			hide_hidden = true, -- only works on Windows for hidden files/directories
--- 		},
--- 	},
--- })
---
--- vim.keymap.set("n", "<leader>e", "<Cmd>Neotree reveal<cr>", { noremap = true, silent = true })
--- vim.keymap.set("n", "<leader>b", "<cmd>Neotree buffers reveal<cr>", { noremap = true, silent = true })
--- vim.keymap.set("n", "<leader>g", "<cmd>Neotree git_status reveal<cr>", { noremap = true, silent = true })
