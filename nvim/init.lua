@@ -4,6 +4,10 @@ if vim.g.vscode then
 end
 
 local utils = require("lksh.utils")
+local lsp = require("lksh.lsp")
+local commands = require("lksh.commands")
+local keymaps = require("lksh.keymaps")
+local statusline = require("lksh.statusline")
 
 -- Editor Settings
 vim.o.tabstop = 2
@@ -29,12 +33,12 @@ end
 vim.g.mapleader = " "
 
 if vim.version.range(">=0.12.0"):has(vim.version()) then
-	require("lksh.plugins")
+	require("lksh.plugins").init()
 else
 	require("lksh.plugins-lazy")
 end
 
-require("lksh.lsp")
-require("lksh.commands")
-require("lksh.keymaps")
-require("lksh.statusline")
+lsp.init()
+commands.init()
+keymaps.init()
+statusline.init()

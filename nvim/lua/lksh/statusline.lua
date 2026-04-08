@@ -1,13 +1,17 @@
 -- Statusline Modules
 
-local component_separators = { left = "", right = "" }
-local section_separators = { left = "", right = "" }
+-- local component_separators = { left = "", right = "" }
+-- local section_separators = { left = "", right = "" }
 
 local mode_icons = {
-	normal = "%#MiniStatuslineModeNormal#  %#WhichKeyFloat#",
-	visual = "%#MiniStatuslineModeVisual# 󰗧 %#DiagnosticFloatingOk#",
-	insert = "%#MiniHipatternsTodo#  %#DiagnosticFloatingInfo#",
-	command = "%#MiniStatuslineModeCommand#  %#DiagnosticFloatingWarn#",
+	-- normal = "%#MiniStatuslineModeNormal#  %#WhichKeyFloat#",
+	-- visual = "%#MiniStatuslineModeVisual# 󰗧 %#DiagnosticFloatingOk#",
+	-- insert = "%#MiniHipatternsTodo#  %#DiagnosticFloatingInfo#",
+	-- command = "%#MiniStatuslineModeCommand#  %#DiagnosticFloatingWarn#",
+	normal = "%#MiniStatuslineModeNormal#  ",
+	visual = "%#MiniStatuslineModeVisual# 󰗧 ",
+	insert = "%#MiniHipatternsTodo#  ",
+	command = "%#MiniStatuslineModeCommand#  ",
 }
 
 local modes = {
@@ -36,7 +40,7 @@ local modes = {
 local function mode()
 	local current_mode = vim.api.nvim_get_mode().mode
 
-	return string.format("%s%s%s", modes[current_mode], section_separators.left, "%#StatusLineNC#")
+	return string.format("%s%s", modes[current_mode], "%#StatusLineNC#")
 end
 
 local function filepath()
@@ -129,13 +133,13 @@ local git = function()
 		changed,
 		removed,
 		" %#StatusLineNC#",
-		component_separators.left,
+		-- component_separators.left,
 	})
 end
 
-Statusline = {}
+local Statusline = {}
 
-Statusline.active = function()
+function Statusline.active()
 	return table.concat({
 		"%#StatusLineNC#",
 		mode(),
@@ -157,13 +161,21 @@ function Statusline.inactive()
 	return " %F %m "
 end
 
-vim.cmd(
-	[[
-  augroup Statusline
-  au!
-  au WinEnter,BufEnter * setlocal statusline=%!v:lua.Statusline.active()
-  au WinLeave,BufLeave * setlocal statusline=%!v:lua.Statusline.inactive()
-  augroup END
-]],
-	false
-)
+function Statusline.init()
+	local group = vim.api.nvim_create_augroup("Statusline", {})
+	vim.api.nvim_create_autocmd({ "WinEnter", "BufEnter" }, {
+		group = group,
+		callback = function()
+			vim.opt_local.statusline = "%!v:lua.require('lksh.statusline').active()"
+		end,
+	})
+
+	vim.api.nvim_create_autocmd({ "WinLeave", "BufLeave" }, {
+		group = group,
+		callback = function()
+			vim.opt_local.statusline = "%!v:lua.require('lksh.statusline').inactive()"
+		end,
+	})
+end
+
+return Statusline
