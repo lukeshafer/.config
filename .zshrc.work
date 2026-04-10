@@ -68,4 +68,6 @@ function common-explain() {
   cd -
 }
 
+alias klogin="echo $KIRO_START_URL | pbcopy && kiro-cli login"
+
 # zprof
