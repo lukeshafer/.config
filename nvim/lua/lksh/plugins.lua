@@ -91,44 +91,53 @@ function Plugins.init()
 					})
 				end,
 			},
-		}),
-		{
-			src = "hrsh7th/nvim-cmp",
-			deps = {
-				"hrsh7th/cmp-nvim-lsp",
-				"hrsh7th/cmp-buffer",
-				"hrsh7th/cmp-path",
-				"saadparwaiz1/cmp_luasnip",
-				"L3MON4D3/LuaSnip",
-				"hrsh7th/cmp-nvim-lua",
-				-- "rafamadriz/friendly-snippets",
-			},
-			setup = function()
-				local cmp = require("cmp")
+			{
+				"completion",
+				setup = function()
+					require("mini.completion").setup({})
 
-				cmp.setup({
-					sources = cmp.config.sources({
-						{ name = "nvim_lsp", keyword_length = 0 },
-						{ name = "luasnip", keyword_length = 1 },
-					}, {
-						{ name = "path" },
-						{ name = "buffer", keyword_length = 3 },
-					}),
-					mapping = cmp.mapping.preset.insert({
-						["<CR>"] = cmp.mapping.confirm({ select = false }), -- Enter key confirms completion item
-						["<C-y>"] = cmp.mapping.confirm({ select = true }), -- Ctrl + y confirms completion item
-						["<C-Space>"] = cmp.mapping.complete(), -- Ctrl + space triggers completion menu
-						["<Tab>"] = cmp.mapping.select_next_item(), -- Tab and S-Tab move through completion menu
-						["<S-Tab>"] = cmp.mapping.select_prev_item(),
-					}),
-					snippet = {
-						expand = function(args)
-							vim.snippet.expand(args.body)
-						end,
-					},
-				})
-			end,
-		},
+					vim.keymap.set("i", "<Tab>", [[pumvisible() ? "\<C-n>" : "\<Tab>"]], { expr = true })
+					vim.keymap.set("i", "<S-Tab>", [[pumvisible() ? "\<C-p>" : "\<S-Tab>"]], { expr = true })
+				end,
+			},
+		}),
+		-- {
+		-- 	src = "hrsh7th/nvim-cmp",
+		-- 	deps = {
+		-- 		"hrsh7th/cmp-nvim-lsp",
+		-- 		"hrsh7th/cmp-buffer",
+		-- 		"hrsh7th/cmp-path",
+		-- 		"saadparwaiz1/cmp_luasnip",
+		-- 		"L3MON4D3/LuaSnip",
+		-- 		"hrsh7th/cmp-nvim-lua",
+		-- 		-- "rafamadriz/friendly-snippets",
+		-- 	},
+		-- 	setup = function()
+		-- 		local cmp = require("cmp")
+		--
+		-- 		cmp.setup({
+		-- 			sources = cmp.config.sources({
+		-- 				{ name = "nvim_lsp", keyword_length = 0 },
+		-- 				{ name = "luasnip", keyword_length = 1 },
+		-- 			}, {
+		-- 				{ name = "path" },
+		-- 				{ name = "buffer", keyword_length = 3 },
+		-- 			}),
+		-- 			mapping = cmp.mapping.preset.insert({
+		-- 				["<CR>"] = cmp.mapping.confirm({ select = false }), -- Enter key confirms completion item
+		-- 				["<C-y>"] = cmp.mapping.confirm({ select = true }), -- Ctrl + y confirms completion item
+		-- 				["<C-Space>"] = cmp.mapping.complete(), -- Ctrl + space triggers completion menu
+		-- 				["<Tab>"] = cmp.mapping.select_next_item(), -- Tab and S-Tab move through completion menu
+		-- 				["<S-Tab>"] = cmp.mapping.select_prev_item(),
+		-- 			}),
+		-- 			snippet = {
+		-- 				expand = function(args)
+		-- 					vim.snippet.expand(args.body)
+		-- 				end,
+		-- 			},
+		-- 		})
+		-- 	end,
+		-- },
 		{
 			src = "stevearc/conform.nvim",
 			setup = function()
