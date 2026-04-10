@@ -66,7 +66,7 @@ function Plugins.init()
 							delay = 0,
 							animation = require("mini.indentscope").gen_animation.none(),
 						},
-						options = { indent_at_cursor = true },
+						-- options = { indent_at_cursor = true },
 						symbol = "▎",
 					})
 				end,
