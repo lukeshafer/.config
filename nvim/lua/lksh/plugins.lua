@@ -32,6 +32,15 @@ function Plugins.init()
 					vim.keymap.set("n", "<leader>E", function()
 						MiniFiles.open(vim.api.nvim_buf_get_name(0))
 					end, { noremap = true, silent = true })
+
+					-- local ns = vim.api.nvim_create_namespace("mini-files-ns")
+					-- vim.api.nvim_create_autocmd({ "User" }, {
+					-- 	pattern = "MiniFilesBufferUpdate",
+					-- 	callback = function(ev)
+					-- 		local mark_id = vim.api.nvim_buf_set_extmark(ev.buf, ns, 0, 0, {})
+					-- 		vim.notify("hi there")
+					-- 	end,
+					-- })
 				end,
 			},
 			{
@@ -89,6 +98,10 @@ function Plugins.init()
 					vim.api.nvim_set_hl(0, "MiniDiffSignChange", {
 						link = "diffFile",
 					})
+
+					vim.keymap.set("n", "<leader>g", function()
+						MiniDiff.toggle_overlay(0)
+					end, { noremap = true, silent = true })
 				end,
 			},
 			{
@@ -256,8 +269,6 @@ function Plugins.init()
 				enable_tailwind = true, -- bg-blue-400
 			},
 		},
-		-- "https://github.com/uga-rosa/ccc.nvim", -- color picker
-		-- "https://github.com/hat0uma/csvview.nvim",
 	})
 end
 

@@ -217,4 +217,6 @@ vim.keymap.set("n", "<leader>g", "<cmd>Neotree git_status reveal<cr>", { noremap
 { src = "lewis6991/gitsigns.nvim", setup = true },
 { src = "folke/todo-comments.nvim", setup = true },
 { src = "windwp/nvim-autopairs", setup = true },
+		-- "https://github.com/uga-rosa/ccc.nvim", -- color picker
+		-- "https://github.com/hat0uma/csvview.nvim",
 ```
