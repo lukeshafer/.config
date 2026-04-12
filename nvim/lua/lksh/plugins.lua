@@ -145,7 +145,7 @@ function Plugins.init()
 							hack = { pattern = "HACK", group = "MiniHipatternsHack" },
 							todo = { pattern = "TODO", group = "MiniHipatternsTodo" },
 							note = { pattern = "NOTE", group = "MiniHipatternsNote" },
-							hex_color = require("minihipatterns").gen_highlighter.hex_color(),
+							hex_color = require("mini.hipatterns").gen_highlighter.hex_color(),
 						},
 					})
 				end,
