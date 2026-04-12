@@ -113,6 +113,43 @@ function Plugins.init()
 					vim.keymap.set("i", "<S-Tab>", [[pumvisible() ? "\<C-p>" : "\<S-Tab>"]], { expr = true })
 				end,
 			},
+			{
+				"pick",
+				setup = function()
+					require("mini.pick").setup({})
+
+					vim.keymap.set("n", "ff", function()
+						MiniPick.builtin.files()
+						-- require("telescope.builtin").find_files()
+					end, { noremap = true, silent = true })
+					vim.keymap.set("n", "fg", function()
+						MiniPick.builtin.grep_live()
+						-- require("telescope.builtin").live_grep()
+					end, { noremap = true, silent = true })
+					vim.keymap.set("n", "fb", function()
+						MiniPick.builtin.buffers()
+						-- require("telescope.builtin").buffers()
+					end, { noremap = true, silent = true })
+					vim.keymap.set("n", "fh", function()
+						MiniPick.builtin.help()
+						-- require("telescope.builtin").help_tags()
+					end, { noremap = true, silent = true })
+				end,
+			},
+			{
+				"hipatterns",
+				setup = function()
+					require("mini.hipatterns").setup({
+						highlighters = {
+							fixme = { pattern = "FIXME", group = "MiniHipatternsFixme" },
+							hack = { pattern = "HACK", group = "MiniHipatternsHack" },
+							todo = { pattern = "TODO", group = "MiniHipatternsTodo" },
+							note = { pattern = "NOTE", group = "MiniHipatternsNote" },
+							hex_color = require("minihipatterns").gen_highlighter.hex_color(),
+						},
+					})
+				end,
+			},
 		}),
 		-- {
 		-- 	src = "hrsh7th/nvim-cmp",
@@ -177,7 +214,7 @@ function Plugins.init()
 					conform.format({ timeout_ms = 2000, lsp_fallback = true })
 				end, { noremap = true, silent = true })
 			end,
-		}, -- Formatter management
+		},
 		{ src = "williamboman/mason.nvim", setup = true },
 		"neovim/nvim-lspconfig",
 		{
@@ -238,37 +275,37 @@ function Plugins.init()
 				vim.keymap.set("t", "<C-l>", "<cmd>wincmd l<cr>", { noremap = true, silent = true })
 			end,
 		},
-		{
-			src = "nvim-telescope/telescope.nvim", -- mini.pick may be able to replace (see mini.extra too)
-			deps = { "nvim-lua/plenary.nvim" },
-			setup = function()
-				require("telescope").setup({
-					defaults = { file_ignore_patterns = { "node_modules", "dist", "build" } },
-					pickers = { find_files = { hidden = true } },
-				})
-
-				vim.keymap.set("n", "ff", function()
-					require("telescope.builtin").find_files()
-				end, { noremap = true, silent = true })
-				vim.keymap.set("n", "fg", function()
-					require("telescope.builtin").live_grep()
-				end, { noremap = true, silent = true })
-				vim.keymap.set("n", "fb", function()
-					require("telescope.builtin").buffers()
-				end, { noremap = true, silent = true })
-				vim.keymap.set("n", "fh", function()
-					require("telescope.builtin").help_tags()
-				end, { noremap = true, silent = true })
-			end,
-		}, -- fuzzy finder
-		{
-			src = "brenoprata10/nvim-highlight-colors", -- mini.hipatterns may be able to replace
-			setup = {
-				render = "background", -- 'foreground' or 'background' or 'virtual'
-				enable_named_colors = false,
-				enable_tailwind = true, -- bg-blue-400
-			},
-		},
+		-- {
+		-- 	src = "nvim-telescope/telescope.nvim", -- mini.pick may be able to replace (see mini.extra too)
+		-- 	deps = { "nvim-lua/plenary.nvim" },
+		-- 	setup = function()
+		-- 		require("telescope").setup({
+		-- 			defaults = { file_ignore_patterns = { "node_modules", "dist", "build" } },
+		-- 			pickers = { find_files = { hidden = true } },
+		-- 		})
+		--
+		-- 		vim.keymap.set("n", "ff", function()
+		-- 			require("telescope.builtin").find_files()
+		-- 		end, { noremap = true, silent = true })
+		-- 		vim.keymap.set("n", "fg", function()
+		-- 			require("telescope.builtin").live_grep()
+		-- 		end, { noremap = true, silent = true })
+		-- 		vim.keymap.set("n", "fb", function()
+		-- 			require("telescope.builtin").buffers()
+		-- 		end, { noremap = true, silent = true })
+		-- 		vim.keymap.set("n", "fh", function()
+		-- 			require("telescope.builtin").help_tags()
+		-- 		end, { noremap = true, silent = true })
+		-- 	end,
+		-- }, -- fuzzy finder
+		-- {
+		-- 	src = "brenoprata10/nvim-highlight-colors", -- mini.hipatterns may be able to replace
+		-- 	setup = {
+		-- 		render = "background", -- 'foreground' or 'background' or 'virtual'
+		-- 		enable_named_colors = false,
+		-- 		enable_tailwind = true, -- bg-blue-400
+		-- 	},
+		-- },
 	})
 end
 
