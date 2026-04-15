@@ -21,6 +21,10 @@ function Commands.init()
 		table.sort(lines)
 		vim.api.nvim_buf_set_lines(buf, row1 - 1, row2, false, lines)
 	end, { range = true })
+
+  vim.api.nvim_create_user_command("LSRestart", function()
+    vim.cmd('mksession! Session.vim | restart source Session.vim')
+  end, {})
 end
 
 return Commands

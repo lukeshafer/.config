@@ -1,4 +1,5 @@
 local utils = require("lksh.utils")
+-- local git = require("lksh.git")
 
 if not vim.version.range(">=0.12.0"):has(vim.version()) then
 	return
@@ -9,6 +10,7 @@ local Plugins = {}
 function Plugins.init()
 	utils.load_plugins({
 		utils.mini_nvim_modules({
+			"notify",
 			"colors",
 			"cursorword",
 			"git",
@@ -18,10 +20,57 @@ function Plugins.init()
 			{
 				"files",
 				setup = function()
+					local show_ignored = false
+
+					local git_ignored = {}
+					local function check_is_git_ignored(fs_path)
+						return vim.tbl_contains(git_ignored, fs_path)
+					end
+
+					local function refresh_git_ignored(entries)
+						local result = vim.system({ "git", "check-ignore", "--stdin" }, {
+							stdin = table.concat(
+								vim.tbl_map(function(entry)
+									return entry.path
+								end, entries),
+								"\n"
+							),
+						}):wait()
+
+						git_ignored = vim.split(result.stdout, "\n")
+					end
+
+					local hide_git_ignored_sort = function(entries)
+						refresh_git_ignored(entries)
+
+						return MiniFiles.default_sort(vim.tbl_filter(function(entry)
+							return not check_is_git_ignored(entry.path)
+						end, entries))
+					end
+
+					local function get_file_sort()
+						if show_ignored then
+							return require("mini.files").default_sort
+						end
+
+						return hide_git_ignored_sort
+					end
+
 					require("mini.files").setup({
 						mappings = {
 							go_in = "L", -- swap go in plus to close explorer by default
 							go_in_plus = "l",
+						},
+						content = {
+							-- filter = get_filter(),
+							highlight = function(fs_entry)
+								if check_is_git_ignored(fs_entry.path) then
+									return "Comment"
+								else
+									return MiniFiles.default_highlight(fs_entry)
+								end
+							end,
+							sort = get_file_sort(),
 						},
 					})
 
@@ -33,12 +82,139 @@ function Plugins.init()
 						MiniFiles.open(vim.api.nvim_buf_get_name(0))
 					end, { noremap = true, silent = true })
 
-					-- local ns = vim.api.nvim_create_namespace("mini-files-ns")
+					vim.api.nvim_create_autocmd({ "User" }, {
+						pattern = "MiniFilesBufferCreate",
+						callback = function(ev)
+							local buf_id = ev.data.buf_id
+
+							-- Tweak left-hand side of mapping to your liking
+							vim.keymap.set("n", "g.", function()
+								show_ignored = not show_ignored
+								MiniFiles.refresh({ content = { sort = get_file_sort() } })
+							end, { buffer = buf_id })
+						end,
+					})
+
+					-- local ns = vim.api.nvim_create_namespace("ls-mini-files-ns")
 					-- vim.api.nvim_create_autocmd({ "User" }, {
 					-- 	pattern = "MiniFilesBufferUpdate",
 					-- 	callback = function(ev)
-					-- 		local mark_id = vim.api.nvim_buf_set_extmark(ev.buf, ns, 0, 0, {})
-					-- 		vim.notify("hi there")
+					-- 		local buf_id = ev.data.buf_id
+					-- 		-- MiniFiles
+					--
+					-- 		local lines = vim.api.nvim_buf_get_lines(buf_id, 0, -1, false)
+					--
+					-- 		git.refresh()
+					--
+					-- 		local count = 0
+					-- 		vim.iter(ipairs(lines))
+					-- 			:map(function(index, line)
+					-- 				local fs_entry = MiniFiles.get_fs_entry(buf_id, index)
+					-- 				if fs_entry == nil then
+					-- 					return
+					-- 				end
+					--
+					-- 				local s = git.get_status(fs_entry.path)[1]
+					-- 				if s == nil then
+					-- 					return
+					-- 				end
+					--
+					-- 				local status_str = s.status
+					--
+					-- 				---@type string?
+					-- 				local hl_group = nil
+					-- 				if status_str == "modified" or status_str == "renamed" then
+					-- 					hl_group = "MiniDiffSignChange"
+					-- 				elseif
+					-- 					status_str == "added"
+					-- 					or status_str == "copied"
+					-- 					or status_str == "untracked"
+					-- 				then
+					-- 					hl_group = "MiniDiffSignAdd"
+					-- 				elseif status_str == "deleted" then
+					-- 					hl_group = "MiniDiffSignDelete"
+					-- 				elseif status_str then
+					-- 					hl_group = "IncSearch"
+					-- 				end
+					--
+					-- 				-- local char = status_str:sub(1, 1):upper() or " "
+					-- 				-- if count == 0 then
+					-- 				-- 	count = count + 1
+					-- 				-- 	utils.print_table({
+					-- 				-- 		index = index,
+					-- 				-- 		line = line,
+					-- 				-- 		entry = fs_entry,
+					-- 				-- 		status = s,
+					-- 				-- 		char = char,
+					-- 				-- 		hl_group = hl_group,
+					-- 				-- 	})
+					-- 				-- end
+					--
+					-- 				local extid = vim.api.nvim_buf_set_extmark(buf_id, ns, index - 1, 0, {
+					-- 					virt_text = { { char, hl_group } },
+					-- 					virt_text_pos = "inline",
+					-- 					end_col = string.len(line),
+					-- 					hl_group = hl_group or MiniFiles.default_highlight(fs_entry),
+					-- 					hl_eol = hl_group and true,
+					-- 					--
+					-- 				})
+					-- 			end)
+					-- 			:totable()
+					--
+					-- 		-- local paths = {}
+					-- 		-- for index, line in ipairs(lines) do
+					-- 		-- 	local fs_entry = MiniFiles.get_fs_entry(buf_id, index)
+					-- 		-- 	local status = git.get_status(fs_entry.path)
+					-- 		--
+					-- 		-- 	-- if index == 1 then
+					-- 		-- 	-- 	utils.print_table({
+					-- 		-- 	-- 		index = index,
+					-- 		-- 	-- 		line = line,
+					-- 		-- 	-- 		entry = entry,
+					-- 		-- 	-- 		status = status,
+					-- 		-- 	-- 	})
+					-- 		-- 	-- end
+					-- 		--
+					-- 		-- 	local status_str = status[1].status
+					-- 		--
+					-- 		-- 	---@type string?
+					-- 		-- 	local hl_group = nil
+					-- 		-- 	if status_str == "modified" or status_str == "renamed" then
+					-- 		-- 		hl_group = "MiniDiffSignChange"
+					-- 		-- 	elseif status_str == "added" or status_str == "copied" or status_str == "untracked" then
+					-- 		-- 		hl_group = "MiniDiffSignAdd"
+					-- 		-- 	elseif status_str == "deleted" then
+					-- 		-- 		hl_group = "MiniDiffSignDelete"
+					-- 		-- 	elseif status_str then
+					-- 		-- 		hl_group = "IncSearch"
+					-- 		-- 	end
+					-- 		--
+					-- 		-- 	---
+					-- 		-- 	-- GitStatusName:
+					-- 		-- 	--     | "modified"
+					-- 		-- 	--     | "added"
+					-- 		-- 	--     | "deleted"
+					-- 		-- 	--     | "renamed"
+					-- 		-- 	--     | "copied"
+					-- 		-- 	--     | "untracked"
+					-- 		-- 	--     | "ignored"
+					-- 		-- 	--     | "unmerged"
+					-- 		-- 	-- ```
+					-- 		-- 	---
+					-- 		-- 	---
+					-- 		-- 	---
+					-- 		-- 	local char = status and status[1] and status[1].status:sub(1, 1):upper() or " "
+					-- 		-- 	local extid = vim.api.nvim_buf_set_extmark(buf_id, ns, index - 1, 0, {
+					-- 		-- 		virt_text = { { char, hl_group } },
+					-- 		-- 		virt_text_pos = "inline",
+					-- 		-- 		end_col = string.len(line),
+					-- 		-- 		hl_group = hl_group or MiniFiles.default_highlight(fs_entry),
+					-- 		-- 		hl_eol = hl_group and true,
+					-- 		-- 		--
+					-- 		-- 	})
+					-- 		-- end
+					--
+					-- 		-- utils.print_table(paths)
 					-- 	end,
 					-- })
 				end,
@@ -150,44 +326,34 @@ function Plugins.init()
 					})
 				end,
 			},
+			{
+				"map",
+				setup = function()
+					local map = require("mini.map")
+
+					map.setup({
+						window = {
+							-- show_integration_count = false,
+						},
+						integrations = {
+             map.gen_integration.builtin_search(),
+							map.gen_integration.diagnostic({
+								error = "DiagnosticFloatingError",
+								warn = "DiagnosticFloatingWarn",
+								info = "DiagnosticFloatingInfo",
+								hint = "DiagnosticFloatingHint",
+							}),
+							-- map.gen_integration.diff(),
+						},
+					})
+					MiniMap.open()
+
+					vim.keymap.set("n", "<leader>m", function()
+						MiniMap.toggle()
+					end, { noremap = true, silent = true })
+				end,
+			},
 		}),
-		-- {
-		-- 	src = "hrsh7th/nvim-cmp",
-		-- 	deps = {
-		-- 		"hrsh7th/cmp-nvim-lsp",
-		-- 		"hrsh7th/cmp-buffer",
-		-- 		"hrsh7th/cmp-path",
-		-- 		"saadparwaiz1/cmp_luasnip",
-		-- 		"L3MON4D3/LuaSnip",
-		-- 		"hrsh7th/cmp-nvim-lua",
-		-- 		-- "rafamadriz/friendly-snippets",
-		-- 	},
-		-- 	setup = function()
-		-- 		local cmp = require("cmp")
-		--
-		-- 		cmp.setup({
-		-- 			sources = cmp.config.sources({
-		-- 				{ name = "nvim_lsp", keyword_length = 0 },
-		-- 				{ name = "luasnip", keyword_length = 1 },
-		-- 			}, {
-		-- 				{ name = "path" },
-		-- 				{ name = "buffer", keyword_length = 3 },
-		-- 			}),
-		-- 			mapping = cmp.mapping.preset.insert({
-		-- 				["<CR>"] = cmp.mapping.confirm({ select = false }), -- Enter key confirms completion item
-		-- 				["<C-y>"] = cmp.mapping.confirm({ select = true }), -- Ctrl + y confirms completion item
-		-- 				["<C-Space>"] = cmp.mapping.complete(), -- Ctrl + space triggers completion menu
-		-- 				["<Tab>"] = cmp.mapping.select_next_item(), -- Tab and S-Tab move through completion menu
-		-- 				["<S-Tab>"] = cmp.mapping.select_prev_item(),
-		-- 			}),
-		-- 			snippet = {
-		-- 				expand = function(args)
-		-- 					vim.snippet.expand(args.body)
-		-- 				end,
-		-- 			},
-		-- 		})
-		-- 	end,
-		-- },
 		{
 			src = "stevearc/conform.nvim",
 			setup = function()
@@ -263,48 +429,17 @@ function Plugins.init()
 				vim.keymap.set("n", "<leader>vd", "<cmd>DiffviewOpen origin/dev<cr>", { noremap = true, silent = true })
 			end,
 		},
-		{
-			src = "akinsho/toggleterm.nvim",
-			setup = function()
-				require("toggleterm").setup({ direction = "horizontal" })
-				vim.keymap.set("n", "<leader>t", "<cmd>ToggleTerm<cr>", { noremap = true, silent = true })
-				vim.keymap.set("t", "<esc>", [[<C-\><C-n>]], { noremap = true, silent = true })
-				vim.keymap.set("t", "<C-h>", "<cmd>wincmd h<cr>", { noremap = true, silent = true })
-				vim.keymap.set("t", "<C-j>", "<cmd>wincmd j<cr>", { noremap = true, silent = true })
-				vim.keymap.set("t", "<C-k>", "<cmd>wincmd k<cr>", { noremap = true, silent = true })
-				vim.keymap.set("t", "<C-l>", "<cmd>wincmd l<cr>", { noremap = true, silent = true })
-			end,
-		},
 		-- {
-		-- 	src = "nvim-telescope/telescope.nvim", -- mini.pick may be able to replace (see mini.extra too)
-		-- 	deps = { "nvim-lua/plenary.nvim" },
+		-- 	src = "akinsho/toggleterm.nvim",
 		-- 	setup = function()
-		-- 		require("telescope").setup({
-		-- 			defaults = { file_ignore_patterns = { "node_modules", "dist", "build" } },
-		-- 			pickers = { find_files = { hidden = true } },
-		-- 		})
-		--
-		-- 		vim.keymap.set("n", "ff", function()
-		-- 			require("telescope.builtin").find_files()
-		-- 		end, { noremap = true, silent = true })
-		-- 		vim.keymap.set("n", "fg", function()
-		-- 			require("telescope.builtin").live_grep()
-		-- 		end, { noremap = true, silent = true })
-		-- 		vim.keymap.set("n", "fb", function()
-		-- 			require("telescope.builtin").buffers()
-		-- 		end, { noremap = true, silent = true })
-		-- 		vim.keymap.set("n", "fh", function()
-		-- 			require("telescope.builtin").help_tags()
-		-- 		end, { noremap = true, silent = true })
+		-- 		require("toggleterm").setup({ direction = "horizontal" })
+		-- 		vim.keymap.set("n", "<leader>t", "<cmd>ToggleTerm<cr>", { noremap = true, silent = true })
+		-- 		vim.keymap.set("t", "<esc>", [[<C-\><C-n>]], { noremap = true, silent = true })
+		-- 		vim.keymap.set("t", "<C-h>", "<cmd>wincmd h<cr>", { noremap = true, silent = true })
+		-- 		vim.keymap.set("t", "<C-j>", "<cmd>wincmd j<cr>", { noremap = true, silent = true })
+		-- 		vim.keymap.set("t", "<C-k>", "<cmd>wincmd k<cr>", { noremap = true, silent = true })
+		-- 		vim.keymap.set("t", "<C-l>", "<cmd>wincmd l<cr>", { noremap = true, silent = true })
 		-- 	end,
-		-- }, -- fuzzy finder
-		-- {
-		-- 	src = "brenoprata10/nvim-highlight-colors", -- mini.hipatterns may be able to replace
-		-- 	setup = {
-		-- 		render = "background", -- 'foreground' or 'background' or 'virtual'
-		-- 		enable_named_colors = false,
-		-- 		enable_tailwind = true, -- bg-blue-400
-		-- 	},
 		-- },
 	})
 end
