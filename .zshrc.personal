@@ -134,5 +134,7 @@ alias vi="nvim"
 
 alias lsconfig="cd ~/.config && nvim && cd -"
 
+alias open="open_command"
+
 # alias mcstartserver="java -Xmx1G -Xms1G -jar paper.jar --nogui"
 # alias mcrefreshplugin="cp /home/luke/Code/minecraft-dev/*/target/*-SNAPSHOT.jar /home/luke/Code/minecraft-dev/server/plugins"
