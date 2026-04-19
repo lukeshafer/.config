@@ -219,4 +219,74 @@ vim.keymap.set("n", "<leader>g", "<cmd>Neotree git_status reveal<cr>", { noremap
 { src = "windwp/nvim-autopairs", setup = true },
 		-- "https://github.com/uga-rosa/ccc.nvim", -- color picker
 		-- "https://github.com/hat0uma/csvview.nvim",
+
+
+		{
+			src = "nvim-telescope/telescope.nvim", -- mini.pick may be able to replace (see mini.extra too)
+			deps = { "nvim-lua/plenary.nvim" },
+			setup = function()
+				require("telescope").setup({
+					defaults = { file_ignore_patterns = { "node_modules", "dist", "build" } },
+					pickers = { find_files = { hidden = true } },
+				})
+
+				vim.keymap.set("n", "ff", function()
+					require("telescope.builtin").find_files()
+				end, { noremap = true, silent = true })
+				vim.keymap.set("n", "fg", function()
+					require("telescope.builtin").live_grep()
+				end, { noremap = true, silent = true })
+				vim.keymap.set("n", "fb", function()
+					require("telescope.builtin").buffers()
+				end, { noremap = true, silent = true })
+				vim.keymap.set("n", "fh", function()
+					require("telescope.builtin").help_tags()
+				end, { noremap = true, silent = true })
+			end,
+		}, -- fuzzy finder
+		{
+			src = "brenoprata10/nvim-highlight-colors", -- mini.hipatterns may be able to replace
+			setup = {
+				render = "background", -- 'foreground' or 'background' or 'virtual'
+				enable_named_colors = false,
+				enable_tailwind = true, -- bg-blue-400
+			},
+		},
+		{
+			src = "hrsh7th/nvim-cmp",
+			deps = {
+				"hrsh7th/cmp-nvim-lsp",
+				"hrsh7th/cmp-buffer",
+				"hrsh7th/cmp-path",
+				"saadparwaiz1/cmp_luasnip",
+				"L3MON4D3/LuaSnip",
+				"hrsh7th/cmp-nvim-lua",
+				-- "rafamadriz/friendly-snippets",
+			},
+			setup = function()
+				local cmp = require("cmp")
+
+				cmp.setup({
+					sources = cmp.config.sources({
+						{ name = "nvim_lsp", keyword_length = 0 },
+						{ name = "luasnip", keyword_length = 1 },
+					}, {
+						{ name = "path" },
+						{ name = "buffer", keyword_length = 3 },
+					}),
+					mapping = cmp.mapping.preset.insert({
+						["<CR>"] = cmp.mapping.confirm({ select = false }), -- Enter key confirms completion item
+						["<C-y>"] = cmp.mapping.confirm({ select = true }), -- Ctrl + y confirms completion item
+						["<C-Space>"] = cmp.mapping.complete(), -- Ctrl + space triggers completion menu
+						["<Tab>"] = cmp.mapping.select_next_item(), -- Tab and S-Tab move through completion menu
+						["<S-Tab>"] = cmp.mapping.select_prev_item(),
+					}),
+					snippet = {
+						expand = function(args)
+							vim.snippet.expand(args.body)
+						end,
+					},
+				})
+			end,
+		},
 ```
