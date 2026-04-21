@@ -8,6 +8,7 @@ local lsp = require("lksh.lsp")
 local commands = require("lksh.commands")
 local keymaps = require("lksh.keymaps")
 local statusline = require("lksh.statusline")
+local tabline = require("lksh.tabline")
 
 -- Editor Settings
 vim.o.tabstop = 2
@@ -19,6 +20,7 @@ vim.o.number = true
 vim.o.numberwidth = 2
 vim.o.mouse = "a"
 vim.o.cursorline = true
+vim.o.showtabline = 2
 vim.opt.diffopt:append({ "iwhiteall" })
 vim.opt.shortmess:append("I")
 
@@ -42,3 +44,4 @@ lsp.init()
 commands.init()
 keymaps.init()
 statusline.init()
+tabline.init()

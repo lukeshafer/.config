@@ -22,7 +22,13 @@ set $browser chromium
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg /home/luke/.config/wallpapers/shaded_landscape.png fill
+output * bg /home/luke/Pictures/Wallpapers/pinkflowers.png fill
+
+gaps horizontal 3
+gaps bottom 3
+# gaps inner 3
+hide_edge_borders both
+
 #
 # Example configuration:
 #
@@ -47,12 +53,12 @@ output * bg /home/luke/.config/wallpapers/shaded_landscape.png fill
 #
 # Example configuration:
 #
-#   input type:touchpad {
-#       dwt enabled
-#       tap enabled
-#       natural_scroll enabled
-#       middle_emulation enabled
-#   }
+  input type:touchpad {
+      dwt enabled
+      tap enabled
+      # natural_scroll enabled
+      middle_emulation enabled
+  }
 #
   input type:keyboard {
       repeat_delay 250
@@ -70,6 +76,8 @@ output * bg /home/luke/.config/wallpapers/shaded_landscape.png fill
 
     # Kill focused window
     bindsym $mod+Shift+q kill
+
+    bindsym $mod+Shift+b exec $browser
 
     # Start your launcher
     bindsym $mod+d exec $menu
@@ -217,18 +225,19 @@ bindsym $mod+r mode "resize"
 #
 # Read `man 5 sway-bar` for more information about this section.
 bar {
-    position top
-
-    # When the status_command prints a new line to stdout, swaybar updates.
-    # The default just shows the current date and time.
-    status_command while ~/.config/sway/status.sh; do sleep 1; done
-
-    colors {
-        statusline #ffffff
-        background #121222
-        inactive_workspace #32323200 #32323200 #5c5c5c
-        # active_workspace #32323200 #32323200 #5c5c5c
-    }
+    swaybar_command waybar
+    # position top
+    #
+    # # When the status_command prints a new line to stdout, swaybar updates.
+    # # The default just shows the current date and time.
+    # status_command while ~/.config/sway/status.sh; do sleep 1; done
+    #
+    # colors {
+    #     statusline #ffffff
+    #     background #121222
+    #     inactive_workspace #32323200 #32323200 #5c5c5c
+    #     # active_workspace #32323200 #32323200 #5c5c5c
+    # }
 }
 
 # Window

@@ -35,6 +35,8 @@ export PATH="$PATH:/home/luke/.path"
 export DENO_INSTALL="/home/luke/.deno"
 export PATH="$DENO_INSTALL/bin:$PATH"
 
+export RANGER_LOAD_DEFAULT_RC=FALSE
+
 # port checking stuff
 function cprt() {
 	sudo lsof -i -P -n | grep ":$1" | grep LISTEN
