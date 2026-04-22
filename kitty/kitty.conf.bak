@@ -11,7 +11,7 @@
 # italic_font      CaskaydiaCove NF Italic
 # bold_italic_font CaskaydiaCove NF Bold Italic
 
- adjust_line_height 5
+ adjust_line_height 0
 
 #: You can specify different fonts for the bold/italic/bold-italic
 #: variants. To get a full list of supported fonts use the `kitty
@@ -26,7 +26,7 @@
 #:     italic_font      Operator Mono Book Italic
 #:     bold_italic_font Operator Mono Medium Italic
 
- font_size 10
+ font_size 12
 
 #: Font size (in pts)
 
@@ -191,6 +191,11 @@
 #: Cursor customization {{{
 
 # cursor #cccccc
+
+cursor_trail 1
+cursor_trail_decay 0.1 0.4
+cursor_trail_start_threshold 2
+# cursor_trail_color none
 
 #: Default cursor color. If set to the special value none the cursor
 #: will be rendered with a "reverse video" effect. It's color will be
@@ -839,7 +844,7 @@
 
 #: Tab bar {{{
 
-# tab_bar_edge bottom
+tab_bar_edge top
 
 #: The edge to show the tab bar on, top or bottom.
 
@@ -854,7 +859,7 @@
 #: The second number is the margin between the tab bar and the
 #: contents of the current tab.
 
-# tab_bar_style fade
+tab_bar_style powerline
 
 #: The tab bar style, can be one of:
 
@@ -898,7 +903,7 @@
 #: closed tab. A value of right will switch to the tab to the right of
 #: the closed tab. A value of last will switch to the right-most tab.
 
-# tab_fade 0.25 0.5 0.75 1
+# tab_fade 0.1 0.2 0.5 1
 
 #: Control how each tab fades into the background when using fade for
 #: the tab_bar_style. Each number is an alpha (between zero and one)
@@ -912,7 +917,7 @@
 #: The separator between tabs in the tab bar when using separator as
 #: the tab_bar_style.
 
-# tab_powerline_style angled
+tab_powerline_style slanted
 
 #: The powerline separator style between tabs in the tab bar when
 #: using powerline as the tab_bar_style, can be one of: angled,
@@ -925,7 +930,7 @@
 #: leading or trailing spaces, surround the text with quotes. See
 #: tab_title_template for how this is rendered.
 
-# tab_title_template "{fmt.fg.red}{bell_symbol}{activity_symbol}{fmt.fg.tab}{title}"
+tab_title_template "{fmt.fg.red}{bell_symbol}{activity_symbol}{fmt.fg.tab}{index}:{title}"
 
 #: A template to render the tab title. The default just renders the
 #: title with optional symbols for bell and activity. If you wish to
@@ -969,7 +974,7 @@
 
 # active_tab_foreground   #000
 # active_tab_background   #eee
-# active_tab_font_style   bold-italic
+active_tab_font_style   bold
 # inactive_tab_foreground #444
 # inactive_tab_background #999
 # inactive_tab_font_style normal
@@ -1947,6 +1952,16 @@
 
 #:     map ctrl+alt+1 goto_tab 1
 #:     map ctrl+alt+2 goto_tab 2
+map kitty_mod+1 goto_tab 1
+map kitty_mod+2 goto_tab 2
+map kitty_mod+3 goto_tab 3
+map kitty_mod+4 goto_tab 4
+map kitty_mod+5 goto_tab 5
+map kitty_mod+6 goto_tab 6
+map kitty_mod+7 goto_tab 7
+map kitty_mod+8 goto_tab 8
+map kitty_mod+9 goto_tab 9
+map kitty_mod+0 goto_tab 10
 
 #: Just as with new_window above, you can also pass the name of
 #: arbitrary commands to run when using new_tab and new_tab_with_cwd.
@@ -2250,7 +2265,7 @@ include current-theme.conf
 
 
 # BEGIN_KITTY_FONTS
-font_family      family="Inconsolata Nerd Font"
+font_family      family="MonaspiceXe Nerd Font"
 bold_font        auto
 italic_font      auto
 bold_italic_font auto

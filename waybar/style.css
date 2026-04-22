@@ -2,8 +2,10 @@
 
  * {
    /* `otf-font-awesome` is required to be installed for icons */
-   font-family: 'MonaspiceNe Nerd Font', monospace;
-   font-size: 11px;
+   /* font-family: 'Arimo Nerd Font', 'MonaspiceNe Nerd Font', monospace; */
+   /* font-family: 'IosevkaTerm Nerd Font', 'MonaspiceNe Nerd Font', monospace; */
+   font-family: 'AurulentSansM Nerd Font', 'MonaspiceNe Nerd Font', monospace;
+   font-size: 13px;
  }
 
  window#waybar {
@@ -115,4 +117,3 @@
  #scratchpad.empty {
    background-color: transparent;
  }
-

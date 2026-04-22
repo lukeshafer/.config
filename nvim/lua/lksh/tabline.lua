@@ -4,7 +4,7 @@ function Tabline.init()
 	vim.opt.tabline = "%!v:lua.require('lksh.tabline').render()"
 
 	vim.api.nvim_create_user_command("LSTablineSetTitle", function(opts)
-		require("lksh.utils").print_table(opts)
+		-- require("lksh.utils").print_table(opts)
 		Tabline.set_title(opts.fargs[1])
 	end, { nargs = 1 })
 
@@ -50,45 +50,56 @@ function Tabline.get_title(tabpagenr)
 	end
 end
 
-local function tab_label(n)
-	local title, bufnr = Tabline.get_title(n)
-
-	local buf_opts = { scope = "local", buf = bufnr }
-	local is_modified = vim.api.nvim_get_option_value("modified", buf_opts)
-
-	local is_modifiable = vim.api.nvim_get_option_value("modifiable", buf_opts)
-
-	local modified_str
-	if is_modified then
-		modified_str = "[+]"
-	elseif is_modifiable then
-		modified_str = "   "
-	else
-		modified_str = "[-]"
-	end
-
-	if title:len() == 0 then
-		return "[unnamed]" .. modified_str
-	end
-
-	return title .. modified_str
-end
-
 function Tabline.render()
 	local cwd = string.gsub(vim.fn.getcwd(), vim.fn.getenv("HOME"), "~")
 
-	local tabline_table = { "%#Comment#", cwd, " " }
+	local tabline_table = { "%#LineNr#", cwd, " " }
 
 	local tab_count = vim.fn.tabpagenr("$")
-	for i = 1, tab_count do
-		if i == vim.fn.tabpagenr() then
-			table.insert(tabline_table, "%#Pmenu#")
+	for index = 1, tab_count do
+		local tab = {}
+
+		local highlight
+		if index == vim.fn.tabpagenr() then
+			highlight = "%#Pmenu#"
+			table.insert(tab, "%#Pmenu#")
 		else
-			table.insert(tabline_table, "%#LineNr#")
+			highlight = "%#Comment#"
+			table.insert(tab, "%#Comment#")
 		end
 
-		table.insert(tabline_table, "%" .. i .. "T")
-		table.insert(tabline_table, " " .. tab_label(i))
+		table.insert(tab, "%" .. index .. "T")
+
+		local title, bufnr = Tabline.get_title(index)
+		if title:len() == 0 then
+			title = "[unnamed]"
+		else
+			-- table.insert(tab, title)
+		end
+
+		local buf_opts = { scope = "local", buf = bufnr }
+
+		local mod_mark = " "
+		if vim.api.nvim_get_option_value("modified", buf_opts) then
+			mod_mark = "+"
+			table.insert(tab, " +")
+		elseif not vim.api.nvim_get_option_value("modifiable", buf_opts) then
+			mod_mark = "-"
+			table.insert(tab, "  ")
+		else
+			table.insert(tab, " -")
+		end
+
+		table.insert(
+			tabline_table,
+			table.concat({
+				highlight,
+				"%" .. index .. "T",
+				index .. " ",
+				title,
+				mod_mark,
+			})
+		)
 	end
 
 	table.insert(tabline_table, "%#TabLineFill#%T")
