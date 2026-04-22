@@ -38,13 +38,14 @@ function Tabline.get_title(tabpagenr)
 	end
 
 	local dirs = vim.split(bufname, "/")
+
 	local dirs_len = table.maxn(dirs)
 	if dirs_len < 3 then
 		return bufname, bufnr
 	else
 		return table.concat({
-			dirs[1],
-			"/../",
+			dirs[dirs_len - 1],
+			"/",
 			dirs[dirs_len],
 		}), bufnr
 	end
