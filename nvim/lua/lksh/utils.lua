@@ -195,4 +195,5 @@ function M.mini_nvim_modules(plugins)
 	}
 end
 
+LukeUtils = M
 return M

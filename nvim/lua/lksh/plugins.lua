@@ -2,6 +2,7 @@ local utils = require("lksh.utils")
 -- local git = require("lksh.git")
 
 if not vim.version.range(">=0.12.0"):has(vim.version()) then
+	vim.notify("Neovim plugins require version 0.12.0 or later.", vim.log.levels.ERROR)
 	return
 end
 
@@ -86,6 +87,7 @@ function Plugins.init()
 						pattern = "MiniFilesBufferCreate",
 						callback = function(ev)
 							local buf_id = ev.data.buf_id
+							show_ignored = false
 
 							-- Tweak left-hand side of mapping to your liking
 							vim.keymap.set("n", "g.", function()
@@ -333,10 +335,11 @@ function Plugins.init()
 
 					map.setup({
 						window = {
+							width = 4,
 							-- show_integration_count = false,
 						},
 						integrations = {
-             map.gen_integration.builtin_search(),
+							map.gen_integration.builtin_search(),
 							map.gen_integration.diagnostic({
 								error = "DiagnosticFloatingError",
 								warn = "DiagnosticFloatingWarn",
@@ -387,24 +390,24 @@ function Plugins.init()
 			src = "nvim-treesitter/nvim-treesitter",
 			setup = function()
 				require("nvim-treesitter").install({
-					"css",
-					"typescript",
-					"tsx",
-					"astro",
-					"lua",
-					"html",
-					"gitignore",
-					"http",
-					"jsdoc",
-					"javascript",
-					"json",
-					"json5",
-					"markdown",
-					"sql",
-					"toml",
-					"yaml",
-					"bash",
-					"comment",
+					-- "css",
+					-- "typescript",
+					-- "tsx",
+					-- "astro",
+					-- "lua",
+					-- "html",
+					-- "gitignore",
+					-- "http",
+					-- "jsdoc",
+					-- "javascript",
+					-- "json",
+					-- "json5",
+					-- "markdown",
+					-- "sql",
+					-- "toml",
+					-- "yaml",
+					-- "bash",
+					-- "comment",
 				})
 
 				vim.api.nvim_create_autocmd("PackChanged", {
@@ -415,30 +418,18 @@ function Plugins.init()
 			end,
 		},
 		{ src = "windwp/nvim-ts-autotag", setup = true },
-		{
-			src = "sindrets/diffview.nvim",
-			setup = function()
-				vim.keymap.set("n", "<leader>vo", "<cmd>DiffviewOpen<cr>", { noremap = true, silent = true })
-				vim.keymap.set("n", "<leader>vc", "<cmd>DiffviewClose<cr>", { noremap = true, silent = true })
-				vim.keymap.set(
-					"n",
-					"<leader>vm",
-					"<cmd>DiffviewOpen origin/main<cr>",
-					{ noremap = true, silent = true }
-				)
-				vim.keymap.set("n", "<leader>vd", "<cmd>DiffviewOpen origin/dev<cr>", { noremap = true, silent = true })
-			end,
-		},
 		-- {
-		-- 	src = "akinsho/toggleterm.nvim",
+		-- 	src = "sindrets/diffview.nvim",
 		-- 	setup = function()
-		-- 		require("toggleterm").setup({ direction = "horizontal" })
-		-- 		vim.keymap.set("n", "<leader>t", "<cmd>ToggleTerm<cr>", { noremap = true, silent = true })
-		-- 		vim.keymap.set("t", "<esc>", [[<C-\><C-n>]], { noremap = true, silent = true })
-		-- 		vim.keymap.set("t", "<C-h>", "<cmd>wincmd h<cr>", { noremap = true, silent = true })
-		-- 		vim.keymap.set("t", "<C-j>", "<cmd>wincmd j<cr>", { noremap = true, silent = true })
-		-- 		vim.keymap.set("t", "<C-k>", "<cmd>wincmd k<cr>", { noremap = true, silent = true })
-		-- 		vim.keymap.set("t", "<C-l>", "<cmd>wincmd l<cr>", { noremap = true, silent = true })
+		-- 		vim.keymap.set("n", "<leader>vo", "<cmd>DiffviewOpen<cr>", { noremap = true, silent = true })
+		-- 		vim.keymap.set("n", "<leader>vc", "<cmd>DiffviewClose<cr>", { noremap = true, silent = true })
+		-- 		vim.keymap.set(
+		-- 			"n",
+		-- 			"<leader>vm",
+		-- 			"<cmd>DiffviewOpen origin/main<cr>",
+		-- 			{ noremap = true, silent = true }
+		-- 		)
+		-- 		vim.keymap.set("n", "<leader>vd", "<cmd>DiffviewOpen origin/dev<cr>", { noremap = true, silent = true })
 		-- 	end,
 		-- },
 	})

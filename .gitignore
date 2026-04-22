@@ -15,6 +15,7 @@
 !wallpapers/
 !neovim-plugin-replacement.md
 !notes-to-self/
+!git/
 tmux/plugins/
 packer_compiled.lua
 # !.oh-my-zsh/
