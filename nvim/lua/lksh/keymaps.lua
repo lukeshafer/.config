@@ -39,6 +39,9 @@ function Keymaps.init()
 	Keymaps.set_map("n", "<leader>y", '"+y')
 	Keymaps.set_map("v", "<leader>y", '"+y')
 	Keymaps.set_map("n", "<leader>s", ":Inspect<cr>")
+
+  Keymaps.set_map("n", "<Tab>", "<cmd>tabnext<cr>")
+  Keymaps.set_map("n", "<S-Tab>", "<cmd>tabprevious<cr>")
 	-- Leader+T opens terminal in pane
 	-- map("n", "<leader>t", ":belowright 15sp|term<cr>") -- WIP for no plugin
 

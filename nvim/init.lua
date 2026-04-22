@@ -13,6 +13,7 @@ vim.o.number = true
 vim.o.numberwidth = 2
 vim.o.mouse = "a"
 vim.o.cursorline = true
+vim.o.showtabline = 2
 vim.opt.diffopt:append({ "iwhiteall" })
 vim.opt.shortmess:append("I")
 
@@ -33,3 +34,4 @@ require("lksh.plugins").init()
 require("lksh.lsp").init()
 require("lksh.statusline").init()
 require("lksh.treesitter").init()
+require("lksh.tabline").init()

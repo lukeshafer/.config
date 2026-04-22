@@ -16,6 +16,8 @@
 !neovim-plugin-replacement.md
 !notes-to-self/
 !git/
+!ranger/
+!waybar/
 tmux/plugins/
 packer_compiled.lua
 # !.oh-my-zsh/
