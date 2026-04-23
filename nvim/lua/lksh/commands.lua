@@ -22,9 +22,10 @@ function Commands.init()
 		vim.api.nvim_buf_set_lines(buf, row1 - 1, row2, false, lines)
 	end, { range = true })
 
-  vim.api.nvim_create_user_command("LSRestart", function()
-    vim.cmd('mksession! Session.vim | restart source Session.vim')
-  end, {})
+	vim.api.nvim_create_user_command("LSRestart", function()
+		local session_path = vim.fn.stdpath("state") .. "/lsrestart-session.vim"
+		vim.cmd("mksession! " .. session_path .. " | restart source " .. session_path)
+	end, {})
 end
 
 return Commands
