@@ -12,7 +12,8 @@ source $ZSH/init.sh
 # Common config
 export EDITOR="nvim" # Preferred editor for local and remote sessions
 export MANPAGER='nvim +Man!'
-export LESS="FRX"
+# export LESS="FRX"
+export LESS="FRrX"
 
 # Common aliases
 alias zreload="source ~/.zshrc"
@@ -29,7 +30,8 @@ alias gsh='git stash'
 alias gsha='git stash apply'
 alias gm='git merge'
 alias gch='git checkout'
-alias git-tree='git log --oneline --graph --color --all --decorate'
+local GIT_TREE_REGEX='s/\*//'
+alias git-tree='git log --oneline --graph --color --all --decorate | sed -E $GIT_TREE_REGEX | less'
 
 alias tmr='tmux source ~/.config/tmux/tmux.conf'
 alias tmc="nvim ~/.config/tmux/tmux.conf && tmr"
