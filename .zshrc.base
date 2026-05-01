@@ -12,6 +12,7 @@ source $ZSH/init.sh
 # Common config
 export EDITOR="nvim" # Preferred editor for local and remote sessions
 export MANPAGER='nvim +Man!'
+export LESS="FRX"
 
 # Common aliases
 alias zreload="source ~/.zshrc"

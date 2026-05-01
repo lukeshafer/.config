@@ -52,49 +52,40 @@ function Tabline.get_title(tabpagenr)
 end
 
 function Tabline.render()
-	local cwd = string.gsub(vim.fn.getcwd(), vim.fn.getenv("HOME"), "~")
+	-- local cwd = string.gsub(vim.fn.getcwd(), vim.fn.getenv("HOME"), "~")
 
-	local tabline_table = { "%#LineNr#", cwd, " " }
+	local tabline_table = {
+		-- "%#LineNr#", cwd, " "
+	}
 
 	local tab_count = vim.fn.tabpagenr("$")
 	for index = 1, tab_count do
-		local tab = {}
-
 		local highlight
 		if index == vim.fn.tabpagenr() then
 			highlight = "%#Pmenu#"
-			table.insert(tab, "%#Pmenu#")
 		else
 			highlight = "%#Comment#"
-			table.insert(tab, "%#Comment#")
 		end
-
-		table.insert(tab, "%" .. index .. "T")
 
 		local title, bufnr = Tabline.get_title(index)
 		if title:len() == 0 then
 			title = "[unnamed]"
-		else
-			-- table.insert(tab, title)
 		end
 
 		local buf_opts = { scope = "local", buf = bufnr }
 
-		local mod_mark = " "
+		local mod_mark = "  "
 		if vim.api.nvim_get_option_value("modified", buf_opts) then
-			mod_mark = "+"
-			table.insert(tab, " +")
+			mod_mark = " "
 		elseif not vim.api.nvim_get_option_value("modifiable", buf_opts) then
-			mod_mark = "-"
-			table.insert(tab, "  ")
-		else
-			table.insert(tab, " -")
+			mod_mark = " "
 		end
 
 		table.insert(
 			tabline_table,
 			table.concat({
 				highlight,
+        " ",
 				"%" .. index .. "T",
 				index .. " ",
 				title,
