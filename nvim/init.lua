@@ -14,6 +14,7 @@ vim.o.numberwidth = 2
 vim.o.mouse = "a"
 vim.o.cursorline = true
 vim.o.showtabline = 2
+vim.o.splitright = true
 vim.opt.diffopt:append({ "iwhiteall" })
 vim.opt.shortmess:append("I")
 

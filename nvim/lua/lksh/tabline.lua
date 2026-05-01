@@ -8,7 +8,7 @@ function Tabline.init()
 		Tabline.set_title(opts.fargs[1])
 	end, { nargs = 1 })
 
-	require("lksh.keymaps").set_map("n", "<leader>t", ":LSTablineSetTitle ")
+	require("lksh.keymaps").set_map("n", "<leader>n", ":LSTablineSetTitle ")
 end
 
 ---comment
