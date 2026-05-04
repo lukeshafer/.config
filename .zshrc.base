@@ -30,7 +30,8 @@ alias gsh='git stash'
 alias gsha='git stash apply'
 alias gm='git merge'
 alias gch='git checkout'
-local GIT_TREE_REGEX='s/\*//'
+#   
+local GIT_TREE_REGEX='s/\*//'
 alias git-tree='git log --oneline --graph --color --all --decorate | sed -E $GIT_TREE_REGEX | less'
 
 alias tmr='tmux source ~/.config/tmux/tmux.conf'
