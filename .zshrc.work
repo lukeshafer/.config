@@ -43,7 +43,7 @@ alias mrcqa='glab mr create -b qa -y'
 alias mrdraft='glab mr create -b dev -f -y --draft'
 alias mrm='glab mr merge'
 
-alias awslogin="aws s3 ls --profile dev-crmi >> /dev/null && cat ~/.aws/saml-credentials"
+alias awslogin="aws sts get-caller-identity --profile dev-crmi"
 alias awslogout="rm ~/.aws/saml-credentials"
 alias awsreset="awslogout && awslogin"
 
