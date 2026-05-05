@@ -263,6 +263,7 @@ function Plugins.init()
 				setup = function()
 					require("mini.diff").setup({
 						view = {
+              priority = 1,
 							style = "sign",
 							signs = {
 								-- add = "",

@@ -67,9 +67,9 @@ function M.init()
 			local ft = vim.bo.filetype
 			local treesitter = require("nvim-treesitter")
 
-			vim.opt_local.foldmethod = "expr"
-			vim.opt_local.foldexpr = "v:lua.vim.treesitter.foldexpr()"
-			vim.opt_local.foldlevel = 1
+			-- vim.opt_local.foldmethod = "expr"
+			-- vim.opt_local.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+			-- vim.opt_local.foldlevel = 1
 
 			-- if not vim.tbl_contains({ "python", "html", "yaml", "markdown" }, ft) then
 			-- 	vim.bo.indentexpr = "v:lua.require('nvim-treesitter').indentexpr()"

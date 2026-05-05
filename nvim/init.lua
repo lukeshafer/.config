@@ -10,13 +10,29 @@ vim.o.termguicolors = true
 vim.o.expandtab = true
 vim.o.background = "dark" -- sets light/dark for some colorschemes
 vim.o.number = true
-vim.o.numberwidth = 2
+-- vim.o.numberwidth = 2
 vim.o.mouse = "a"
 vim.o.cursorline = true
 vim.o.showtabline = 2
 vim.o.splitright = true
 vim.opt.diffopt:append({ "iwhiteall" })
 vim.opt.shortmess:append("I")
+
+vim.o.statuscolumn = "%s%C%l"
+
+vim.o.foldenable = true
+vim.o.foldcolumn = "auto:1"
+vim.o.foldmethod = "expr"
+vim.o.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+vim.o.foldlevelstart = 1
+-- vim.o.foldtext = ""
+vim.opt.fillchars = {
+	-- fold = "󰇘",
+	foldopen = "󰅀",
+	foldclose = "󰅂",
+	foldinner = " ",
+	-- foldsep = " ",
+}
 
 local utils = require("lksh.utils")
 if utils.IS_WINDOWS then
