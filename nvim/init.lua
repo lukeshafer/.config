@@ -18,7 +18,7 @@ vim.o.splitright = true
 vim.opt.diffopt:append({ "iwhiteall" })
 vim.opt.shortmess:append("I")
 
-vim.o.statuscolumn = "%s%C%l"
+-- vim.o.statuscolumn = "%s%C%l"
 
 vim.o.foldenable = true
 vim.o.foldcolumn = "auto:1"
