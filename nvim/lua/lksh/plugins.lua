@@ -359,6 +359,7 @@ function Plugins.init()
 						-- java = { "google-java-format" },
 						-- go = { "golines", "goimports", "gofumpt" },
 						soql = { "sleek" },
+						markdown = { "cbfmt" },
 					},
 				})
 
