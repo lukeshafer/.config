@@ -21,7 +21,7 @@ fi
 
 PROMPT="
 %F{black}%K{$main} %B%~%b$right_sep%K{black} \$(git_prompt_info)%F{black}%K{default}$left_sep%{$reset_color%}
-%F{$main}%n%F{default}%K{default} %F{$accent}%(!.#.»)%F{default}%K{default} "
+%F{$main}%n@%m%F{default}%K{default} %F{$accent}%(!.#.»)%F{default}%K{default} "
 
 RPROMPT="%(?..%{$fg[red]%}%? ↵%{$reset_color%}) %F{$accent}%t"
 

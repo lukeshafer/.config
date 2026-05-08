@@ -25,6 +25,7 @@ MANPATH="$NPM_PACKAGES/share/man:$(manpath)"
 export BUN_INSTALL="/home/luke/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 export PATH="$PATH:/usr/local/go/bin"
+export AUR_PAGER="nvim"
 
 # set path for mcrcon
 export PATH="$PATH:/opt/minecraft/tools/mcrcon"
