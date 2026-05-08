@@ -5,7 +5,7 @@
 
 # %F{black}\${(l.\$COLUMNS..-.)}%{$reset_color%}
 
-local colors=("blue" "cyan" "magenta" "white" "green" "yellow" "red")
+local colors=("blue" "cyan" "magenta" "green" "yellow" "red")
 local color_index="$(($RANDOM % ${#colors[@]} + 1))"
 local main="$colors[$color_index]"
 local accent="white"
@@ -21,7 +21,7 @@ fi
 
 PROMPT="
 %F{black}%K{$main} %B%~%b$right_sep%K{black} \$(git_prompt_info)%F{black}%K{default}$left_sep%{$reset_color%}
-%F{$main}%n@%m%F{default}%K{default} %F{$accent}%(!.#.»)%F{default}%K{default} "
+%F{$main}%n@%B%m%b%F{default}%K{default} %F{$accent}%(!.#.»)%F{default}%K{default} "
 
 RPROMPT="%(?..%{$fg[red]%}%? ↵%{$reset_color%}) %F{$accent}%t"
 
