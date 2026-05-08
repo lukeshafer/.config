@@ -131,69 +131,143 @@ end
 ---@param name string
 ---@return string
 local function resolve_plugin_module(name)
-	local m = name:match("[^/]+$"):gsub("%.nvim$", "")
-	return m
+	return name:match("[^/]+$"):gsub("%.nvim$", "")
 end
 
----Light wrapper around vim.pack.add to mark dependencies
----@param plugins (PluginDef|string)[]
-function M.load_plugins(plugins)
+---@param setup boolean|function|table|nil
+---@param src string
+---@return function|nil
+local function resolve_plugin_setup_fn(setup, src)
+	if type(setup) == "function" then
+		return setup
+	elseif setup == true then
+		return function()
+			require(resolve_plugin_module(src)).setup({})
+		end
+	elseif type(setup) == "table" then
+		return function()
+			require(resolve_plugin_module(src)).setup(setup)
+		end
+	else
+		return nil
+	end
+end
+
+---@class PluginConfig
+---@field deps? string[]
+---@field setup? boolean|table|function
+
+--- Takes a declarative input for plugins, dependencies, and setup functions
+--- and outputs a list of plugin URLs and a callback to run said setup functions.
+---@param plugin_input_list table<string,PluginConfig>
+function M.parse_plugin_list(plugin_input_list)
 	---@type string[]
-	local plugin_list = {}
+	local plugin_output_list = {}
 	---@type function[]
 	local setup_fns = {}
-	for _, p in ipairs(plugins) do
-		if type(p) == "string" then
-			table.insert(plugin_list, resolve_plugin_url(p))
-		else
-			for _, dep in ipairs(p.deps or {}) do
-				table.insert(plugin_list, resolve_plugin_url(dep))
-			end
-			table.insert(plugin_list, resolve_plugin_url(p.src))
-			local setup = p.setup
-			if type(setup) == "function" then
-				table.insert(setup_fns, setup)
-			elseif setup == true then
-				table.insert(setup_fns, function()
-					require(resolve_plugin_module(p.src)).setup({})
-				end)
-			elseif type(setup) == "table" then
-				table.insert(setup_fns, function()
-					require(resolve_plugin_module(p.src)).setup(setup)
-				end)
-			end
+
+	for plugin_name, plugin_config in pairs(plugin_input_list) do
+		for _, dep in ipairs(plugin_config.deps or {}) do
+			table.insert(plugin_output_list, resolve_plugin_url(dep))
+		end
+
+		table.insert(plugin_output_list, resolve_plugin_url(plugin_name))
+
+		local setup_fn = resolve_plugin_setup_fn(plugin_config.setup, plugin_name)
+		if setup_fn then
+			table.insert(setup_fns, setup_fn)
 		end
 	end
 
-	vim.pack.add(plugin_list)
-
-	for _, setup_fn in ipairs(setup_fns) do
-		setup_fn()
-	end
+	return {
+		plugin_list = plugin_output_list,
+		setup = function()
+			for _, setup_fn in ipairs(setup_fns) do
+				setup_fn()
+			end
+		end,
+	}
 end
 
----@class MiniPluginEntry
----@field [1] string The plugin name
+-- ---Light wrapper around vim.pack.add to mark dependencies
+-- ---@param plugins (PluginDef|string)[]
+-- function M.load_plugins(plugins)
+-- 	---@type string[]
+-- 	local plugin_list = {}
+-- 	---@type function[]
+-- 	local setup_fns = {}
+-- 	for _, p in ipairs(plugins) do
+-- 		if type(p) == "string" then
+-- 			table.insert(plugin_list, resolve_plugin_url(p))
+-- 		else
+-- 			for _, dep in ipairs(p.deps or {}) do
+-- 				table.insert(plugin_list, resolve_plugin_url(dep))
+-- 			end
+-- 			table.insert(plugin_list, resolve_plugin_url(p.src))
+-- 			local setup = p.setup
+-- 			if type(setup) == "function" then
+-- 				table.insert(setup_fns, setup)
+-- 			elseif setup == true then
+-- 				table.insert(setup_fns, function()
+-- 					require(resolve_plugin_module(p.src)).setup({})
+-- 				end)
+-- 			elseif type(setup) == "table" then
+-- 				table.insert(setup_fns, function()
+-- 					require(resolve_plugin_module(p.src)).setup(setup)
+-- 				end)
+-- 			end
+-- 		end
+-- 	end
+--
+-- 	vim.pack.add(plugin_list)
+--
+-- 	for _, setup_fn in ipairs(setup_fns) do
+-- 		setup_fn()
+-- 	end
+-- end
+
+----@class MiniPluginEntry
+----@field [1] string The plugin name
+----@field setup? fun() Optional setup function
+
+---@class MiniPluginTableEntry
 ---@field setup? fun() Optional setup function
 
----@alias MiniPluginList (string|MiniPluginEntry)[]
+----@alias MiniPluginList (string|MiniPluginEntry)[]
+---@alias MiniPluginTable table<string, MiniPluginTableEntry>
 
----@param plugins MiniPluginList
----@return PluginDef
-function M.mini_nvim_modules(plugins)
+---@param plugins MiniPluginTable
+---@return PluginConfig
+function M.mini_modules(plugins)
 	return {
-		src = "nvim-mini/mini.nvim",
 		setup = function()
-			for _, value in ipairs(plugins) do
-				if type(value) == "string" then
-					require("mini." .. value).setup({})
-				else
+			for name, value in pairs(plugins) do
+				if value.setup then
 					value.setup()
+				else
+					require(name).setup({})
 				end
 			end
 		end,
 	}
 end
+
+-- ---@param plugins MiniPluginList
+-- ---@return PluginDef
+-- function M.mini_nvim_modules(plugins)
+-- 	return {
+-- 		src = "nvim-mini/mini.nvim",
+-- 		setup = function()
+-- 			for _, value in ipairs(plugins) do
+-- 				if type(value) == "string" then
+-- 					require("mini." .. value).setup({})
+-- 				else
+-- 					value.setup()
+-- 				end
+-- 			end
+-- 		end,
+-- 	}
+-- end
 
 LukeUtils = M
 return M
