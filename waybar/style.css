@@ -1,16 +1,13 @@
  /* @import url("file:///etc/xdg/waybar/style.css"); */
 
  * {
-   /* `otf-font-awesome` is required to be installed for icons */
-   /* font-family: 'Arimo Nerd Font', 'MonaspiceNe Nerd Font', monospace; */
-   /* font-family: 'IosevkaTerm Nerd Font', 'MonaspiceNe Nerd Font', monospace; */
-   font-family: 'AurulentSansM Nerd Font', 'MonaspiceNe Nerd Font', monospace;
+   font-family: 'IosevkaTerm Nerd Font', monospace;
+   font-weight: 500;
    font-size: 13px;
  }
 
  window#waybar {
-   background-color: rgba(43, 48, 59, 0);
-   /* border-bottom: 3px solid rgba(100, 114, 125, 0.5); */
+   background-color: rgba(20, 25, 30, 0.8);
    color: #ffffff;
    transition-property: background-color;
    transition-duration: .5s;

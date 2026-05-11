@@ -240,6 +240,16 @@ function Plugins.init()
 						accent = "fg",
 					})
 
+					local kitty_pid = os.getenv("KITTY_PID")
+					if kitty_pid ~= nil and kitty_pid ~= "" then
+						vim.cmd([[
+					         highlight Normal guibg=none
+					         highlight NonText guibg=none
+					         highlight Normal ctermbg=none
+					         highlight NonText ctermbg=none
+					       ]])
+					end
+
 					vim.g.colors_name = "randomhue"
 				end,
 			},
@@ -333,7 +343,7 @@ function Plugins.init()
 							-- map.gen_integration.diff(),
 						},
 					})
-					MiniMap.open()
+					-- MiniMap.open()
 
 					vim.keymap.set("n", "<leader>m", function()
 						MiniMap.toggle()
