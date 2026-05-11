@@ -24,7 +24,7 @@ set $browser firefox
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
 output * {
   # bg /home/luke/Pictures/Wallpapers/pinkflowers.png fill
-  bg ~/Pictures/Wallpapers/pinkflowers.png fill
+  bg ~/.config/wallpapers/pinkflowers.png fill
 }
 
 # gaps horizontal 3
