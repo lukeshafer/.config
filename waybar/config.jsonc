@@ -38,20 +38,17 @@
     "disable-scroll": true,
     "all-outputs": true,
     "warp-on-scroll": false,
-    "format": " <span size='smaller'>{name}:</span>{windows} ",
+    "format": "<span size='smaller'><span foreground='#999999'>{name} </span>{windows}</span>",
     "format-icons": {
-      "1": "",
-      "2": "",
-      "3": "",
-      "4": "",
-      "5": "",
-      "urgent": ""
-      // "focused": "",
       // "default": ""
     },
     "window-rewrite": {
-      "class<firefox>": "",
-      "class<kitty>": ""
+      "class<firefox>": "󰈹 ",
+      "class<kitty>": " ",
+      "class<chromium>": " ",
+      "class<discord>": " ",
+      "class<spotify>": " ",
+      "class<pico8>": "p8",
     }
   },
   "sway/mode": {
@@ -148,12 +145,12 @@
     // "thermal-zone": 2,
     // "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
     "critical-threshold": 80,
-    // "format-critical": "{temperatureC}°C {icon}",
+    "format-critical": "{temperatureC}°C {icon}󰈸 ",
     "format": "{temperatureC}°C {icon}",
     "format-icons": [
-      "󰉬",
-      "",
-      "󰉪"
+      " ",
+      " ",
+      " "
     ]
   },
   "backlight": {
