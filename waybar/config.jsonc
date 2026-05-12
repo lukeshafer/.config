@@ -33,13 +33,12 @@
     "tray",
     "custom/power"
   ],
-
   // Modules configuration
   "sway/workspaces": {
     "disable-scroll": true,
     "all-outputs": true,
     "warp-on-scroll": false,
-    "format": " {name} ",
+    "format": " <span size='smaller'>{name}:</span>{windows} ",
     "format-icons": {
       "1": "",
       "2": "",
@@ -49,6 +48,10 @@
       "urgent": ""
       // "focused": "",
       // "default": ""
+    },
+    "window-rewrite": {
+      "class<firefox>": "",
+      "class<kitty>": ""
     }
   },
   "sway/mode": {
