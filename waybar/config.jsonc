@@ -49,6 +49,7 @@
       "class<discord>": " ",
       "class<spotify>": " ",
       "class<pico8>": "p8",
+      "class<dolphin>": " ",
     }
   },
   "sway/mode": {

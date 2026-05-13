@@ -20,6 +20,7 @@ function LSP.init()
 			"cssls",
 			-- "emmet_ls",
 			"tailwindcss",
+      "pico8_ls"
 		})
 	end)
 
