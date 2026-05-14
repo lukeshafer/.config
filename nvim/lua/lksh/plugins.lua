@@ -57,6 +57,10 @@ function Plugins.init()
 					end
 
 					require("mini.files").setup({
+            options = {
+              permanent_delete = false,
+              use_as_default_explorer = false,
+            },
 						mappings = {
 							go_in = "L", -- swap go in plus to close explorer by default
 							go_in_plus = "l",
@@ -351,6 +355,11 @@ function Plugins.init()
 				end,
 			},
 		}),
+    ["stevearc/oil.nvim"] = {
+      setup = {
+
+      }
+    },
 		["stevearc/conform.nvim"] = {
 			setup = function()
 				local conform = require("conform")
