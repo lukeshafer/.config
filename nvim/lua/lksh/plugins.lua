@@ -395,6 +395,16 @@ function Plugins.init()
 			setup = function()
 				require("nvim-treesitter").install({})
 
+				-- require("nvim-treesitter.parsers").pico8 = {
+				-- 	install_info = {
+				-- 		url = "https://github.com/paradoxskin/tree-sitter-pico8.git",
+				-- 		files = { "src/parser.c" },
+				-- 	},
+				-- 	filetype = "pico8",
+				-- }
+				--
+				--     vim.treesitter.language.register('pico8', { 'p8' })
+
 				vim.api.nvim_create_autocmd("PackChanged", {
 					callback = function()
 						require("nvim-treesitter").update()

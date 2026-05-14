@@ -84,6 +84,10 @@ function M.init()
 				return false
 			end
 
+			if ft == "p8" then
+				ft = "lua"
+			end
+
 			if not vim.treesitter.language.get_lang(ft) then
 				return
 			end

@@ -33,8 +33,14 @@
 
  #workspaces button {
    padding: 0 5px;
+   padding-bottom: 4px;
    background-color: transparent;
    color: #ffffff;
+   opacity: 0.4;
+ }
+
+ #workspaces button.current_output {
+   opacity: 1;
  }
 
  #workspaces button:hover {

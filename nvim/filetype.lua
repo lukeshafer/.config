@@ -5,6 +5,7 @@ vim.filetype.add({
     mdx = "mdx",
     webc = "html",
     soql = "soql",
+    p8 = "p8",
   },
   filename = {
     ["JenkinsFile"] = "groovy",
