@@ -252,22 +252,59 @@ function M.mini_modules(plugins)
 	}
 end
 
--- ---@param plugins MiniPluginList
--- ---@return PluginDef
--- function M.mini_nvim_modules(plugins)
--- 	return {
--- 		src = "nvim-mini/mini.nvim",
--- 		setup = function()
--- 			for _, value in ipairs(plugins) do
--- 				if type(value) == "string" then
--- 					require("mini." .. value).setup({})
--- 				else
--- 					value.setup()
--- 				end
--- 			end
--- 		end,
--- 	}
--- end
+function M.mini_files_help_init()
+	local obj = {}
 
-LukeUtils = M
+	local show_ignored = false
+	local default_sort = require("mini.files").default_sort
+	local default_highlight = require("mini.files").default_highlight
+
+	local git_ignored = {}
+
+  function obj.toggle_ignored()
+    show_ignored = not show_ignored
+  end
+
+	local function check_is_git_ignored(fs_path)
+		return vim.tbl_contains(git_ignored, fs_path)
+	end
+
+	local function refresh_git_ignored(entries)
+		local result = vim.system({ "git", "check-ignore", "--stdin" }, {
+			stdin = table.concat(
+				vim.tbl_map(function(entry)
+					return entry.path
+				end, entries),
+				"\n"
+			),
+		}):wait()
+
+		git_ignored = vim.split(result.stdout, "\n")
+	end
+
+	function obj.get_sort_fn()
+		if show_ignored then
+			return default_sort
+		end
+
+		return function(entries)
+			refresh_git_ignored(entries)
+
+			return default_sort(vim.tbl_filter(function(entry)
+				return not check_is_git_ignored(entry.path)
+			end, entries))
+		end
+	end
+
+	function obj.highlight_fn(fs_entry)
+		if check_is_git_ignored(fs_entry.path) then
+			return "Comment"
+		else
+			return default_highlight(fs_entry)
+		end
+	end
+
+	return obj
+end
+
 return M
