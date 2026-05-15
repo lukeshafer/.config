@@ -3,6 +3,8 @@ if vim.g.vscode then
 	return
 end
 
+require("lksh.time-shit")
+
 -- Editor Settings
 vim.o.tabstop = 2
 vim.o.shiftwidth = 2

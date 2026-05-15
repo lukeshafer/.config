@@ -3,15 +3,23 @@
 -- local component_separators = { left = "", right = "" }
 -- local section_separators = { left = "", right = "" }
 
+local hl_groups = {
+	base = "%#StatusLine#",
+	m_normal = "%#StatusLine#",
+	m_visual = "%#Cursor#",
+	m_insert = "%#Cursor#",
+	m_cmd = "%#Cursor#",
+}
+
 local mode_icons = {
 	-- normal = "%#MiniStatuslineModeNormal#  %#WhichKeyFloat#",
 	-- visual = "%#MiniStatuslineModeVisual# 󰗧 %#DiagnosticFloatingOk#",
 	-- insert = "%#MiniHipatternsTodo#  %#DiagnosticFloatingInfo#",
 	-- command = "%#MiniStatuslineModeCommand#  %#DiagnosticFloatingWarn#",
-	normal = "%#MiniStatuslineModeNormal#  ",
-	visual = "%#MiniStatuslineModeVisual# 󰗧 ",
-	insert = "%#MiniHipatternsTodo#  ",
-	command = "%#MiniStatuslineModeCommand#  ",
+	normal = "%#StatusLine#   ",
+	visual = "%#Cursor# 󰗧  ",
+	insert = "%#DiffText#   ",
+	command = "%#IncSearch#   ",
 }
 
 local modes = {
@@ -40,7 +48,7 @@ local modes = {
 local function mode()
 	local current_mode = vim.api.nvim_get_mode().mode
 
-	return string.format("%s%s", modes[current_mode], "%#StatusLineNC#")
+	return string.format("%s%s", modes[current_mode], "%#StatusLine#")
 end
 
 local function filepath()
@@ -64,10 +72,10 @@ end
 local function lsp()
 	local count = {}
 	local levels = {
-		errors = "Error",
-		warnings = "Warn",
-		info = "Info",
-		hints = "Hint",
+		errors = vim.diagnostic.severity.ERROR,
+		warnings = vim.diagnostic.severity.WARN,
+		info = vim.diagnostic.severity.INFO,
+		hints = vim.diagnostic.severity.HINT,
 	}
 
 	for k, level in pairs(levels) do
@@ -92,7 +100,7 @@ local function lsp()
 		info = " %#MoreMsg# " .. count["info"]
 	end
 
-	return errors .. warnings .. hints .. info .. "%#StatusLineNC#"
+	return errors .. warnings .. hints .. info .. "%#StatusLine#"
 end
 
 local function filetype()
@@ -107,6 +115,35 @@ local function lineinfo()
 end
 
 local git = function()
+	if not vim.b.minidiff_summary or not vim.b.minigit_summary then
+		return ""
+	end
+
+	local diff_summary = vim.b.minidiff_summary
+	local git_summary = vim.b.minigit_summary or {}
+
+	local diffadd = vim.b.minidiff_summary.add
+	local diffch = vim.b.minidiff_summary.change
+	local diffdel = vim.b.minidiff_summary.delete
+
+	local added = ""
+	if (vim.b.minidiff_summary.add or 0) > 0 then
+		added = string.format("%%#OkMsg#+%i", vim.b.minidiff_summary.add)
+	end
+
+	local result = table.concat({
+		hl_groups.base,
+		"(",
+		git_summary.head_name,
+		" ",
+	})
+
+	local git_data = vim.b.minidiff_summary_string
+	if git_data then
+		return git_data
+	end
+	string.format("")
+
 	local git_info = vim.b.gitsigns_status_dict
 	if not git_info or git_info.head == "" then
 		return ""

@@ -4,7 +4,6 @@ local oil = require("oil")
 oil.setup({
 	columns = {
 		"icon",
-		-- { "size", highlight="MoreMsg" },
 		{ "mtime", highlight = "LineNr" },
 	},
 	view_options = {
@@ -16,10 +15,17 @@ oil.setup({
 			-- { "mtime", "desc" },
 		},
 	},
+	delete_to_trash = true,
+	win_options = {
+		number = false,
+	},
+	keymaps = {
+		["<C-q>"] = { "actions.close", mode = "n" },
+	},
 	float = {
 		padding = 6,
 		max_height = 55,
-    border="bold"
+		border = "bold",
 	},
 })
 
