@@ -13,43 +13,43 @@ local mini_extra = require("mini.extra")
 mini_extra.setup()
 
 --- MINI FILES ---
-local mini_files = require("mini.files")
-local file_utils = utils.mini_files_help_init()
+-- local mini_files = require("mini.files")
+-- local file_utils = utils.mini_files_help_init()
 
-mini_files.setup({
-	options = {
-		permanent_delete = false,
-		use_as_default_explorer = false,
-	},
-	mappings = {
-		go_in = "L", -- swap go in plus to close explorer by default
-		go_in_plus = "l",
-	},
-	content = {
-		highlight = file_utils.highlight_fn,
-		sort = file_utils.get_sort_fn(),
-	},
-})
+-- mini_files.setup({
+-- 	options = {
+-- 		permanent_delete = false,
+-- 		use_as_default_explorer = false,
+-- 	},
+-- 	mappings = {
+-- 		go_in = "L", -- swap go in plus to close explorer by default
+-- 		go_in_plus = "l",
+-- 	},
+-- 	content = {
+-- 		highlight = file_utils.highlight_fn,
+-- 		sort = file_utils.get_sort_fn(),
+-- 	},
+-- })
 
-keys.set_map("n", "<leader>e", mini_files.open)
-keys.set_map("n", "<leader>E", function()
-	mini_files.open(vim.api.nvim_buf_get_name(0))
-end)
+-- keys.set_map("n", "<leader>e", mini_files.open)
+-- keys.set_map("n", "<leader>E", function()
+-- 	mini_files.open(vim.api.nvim_buf_get_name(0))
+-- end)
 
-vim.api.nvim_create_autocmd({ "User" }, {
-	pattern = "MiniFilesBufferCreate",
-	callback = function(ev)
-		local buf_id = ev.data.buf_id
-		-- show_ignored = false
-
-		keys.set_map("n", "g.", function()
-			file_utils.toggle_ignored()
-			mini_files.refresh({
-				content = { sort = file_utils.get_sort_fn() },
-			})
-		end, { buffer = buf_id })
-	end,
-})
+-- vim.api.nvim_create_autocmd({ "User" }, {
+-- 	pattern = "MiniFilesBufferCreate",
+-- 	callback = function(ev)
+-- 		local buf_id = ev.data.buf_id
+-- 		-- show_ignored = false
+--
+-- 		keys.set_map("n", "g.", function()
+-- 			file_utils.toggle_ignored()
+-- 			mini_files.refresh({
+-- 				content = { sort = file_utils.get_sort_fn() },
+-- 			})
+-- 		end, { buffer = buf_id })
+-- 	end,
+-- })
 
 --- MINI HUES ---
 math.randomseed(utils.get_seed_from_string(vim.fn.getcwd()))

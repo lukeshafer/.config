@@ -124,7 +124,7 @@ end
 ---@field setup? boolean|table|function
 
 ---@param url string
-local function resolve_plugin_url(url)
+function M.plugin(url)
 	return url:find("://") and url or "https://github.com/" .. url
 end
 
@@ -168,10 +168,10 @@ function M.parse_plugin_list(plugin_input_list)
 
 	for plugin_name, plugin_config in pairs(plugin_input_list) do
 		for _, dep in ipairs(plugin_config.deps or {}) do
-			table.insert(plugin_output_list, resolve_plugin_url(dep))
+			table.insert(plugin_output_list, M.plugin(dep))
 		end
 
-		table.insert(plugin_output_list, resolve_plugin_url(plugin_name))
+		table.insert(plugin_output_list, M.plugin(plugin_name))
 
 		local setup_fn = resolve_plugin_setup_fn(plugin_config.setup, plugin_name)
 		if setup_fn then
@@ -261,9 +261,9 @@ function M.mini_files_help_init()
 
 	local git_ignored = {}
 
-  function obj.toggle_ignored()
-    show_ignored = not show_ignored
-  end
+	function obj.toggle_ignored()
+		show_ignored = not show_ignored
+	end
 
 	local function check_is_git_ignored(fs_path)
 		return vim.tbl_contains(git_ignored, fs_path)

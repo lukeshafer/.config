@@ -8,20 +8,16 @@ end
 local Plugins = {}
 
 function Plugins.init()
-	local p = utils.parse_plugin_list({
-		["nvim-mini/mini.nvim"] = {},
-		["stevearc/oil.nvim"] = {},
-		["stevearc/conform.nvim"] = {},
-		["williamboman/mason.nvim"] = {},
-		["neovim/nvim-lspconfig"] = {},
-		["nvim-treesitter/nvim-treesitter"] = {},
-		["windwp/nvim-ts-autotag"] = {},
-		["nvim-treesitter/nvim-treesitter-context"] = {},
+	vim.pack.add({
+		utils.plugin("nvim-mini/mini.nvim"),
+		utils.plugin("stevearc/oil.nvim"),
+		utils.plugin("stevearc/conform.nvim"),
+		utils.plugin("williamboman/mason.nvim"),
+		utils.plugin("neovim/nvim-lspconfig"),
+		utils.plugin("nvim-treesitter/nvim-treesitter"),
+		utils.plugin("windwp/nvim-ts-autotag"),
+		utils.plugin("nvim-treesitter/nvim-treesitter-context"),
 	})
-
-	-- utils.print_table(p)
-	vim.pack.add(p.plugin_list)
-	-- p.setup()
 end
 
 return Plugins
