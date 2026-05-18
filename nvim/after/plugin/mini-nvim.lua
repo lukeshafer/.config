@@ -52,34 +52,30 @@ mini_extra.setup()
 -- })
 
 --- MINI HUES ---
--- math.randomseed(utils.get_seed_from_string(vim.fn.getcwd()))
--- require("mini.hues").setup({
--- 	background = require("mini.colors").convert({
--- 		l = vim.o.background == "dark" and 12 or 85,
--- 		c = 3,
--- 		h = math.random(180, 360),
--- 	}, "hex"),
--- 	foreground = require("mini.colors").convert({
--- 		l = vim.o.background == "dark" and 87 or 10,
--- 		c = 2,
--- 		h = math.random(0, 360),
--- 	}, "hex"),
--- 	n_hues = 8,
--- 	saturation = vim.o.background == "dark" and "medium" or "high",
--- 	accent = "fg",
--- })
---
--- vim.g.colors_name = "randomhue"
---
--- local kitty_pid = os.getenv("KITTY_PID")
--- if kitty_pid ~= nil and kitty_pid ~= "" then -- transparent bg on kitty
--- 	vim.cmd([[
---      highlight Normal guibg=none
---      highlight NonText guibg=none
---      highlight Normal ctermbg=none
---      highlight NonText ctermbg=none
---    ]])
--- end
+math.randomseed(utils.get_seed_from_string(vim.fn.getcwd()))
+require("mini.hues").setup({
+	background = require("mini.colors").convert({
+		l = vim.o.background == "dark" and 12 or 85,
+		c = 3,
+		h = math.random(180, 360),
+	}, "hex"),
+	foreground = require("mini.colors").convert({
+		l = vim.o.background == "dark" and 87 or 10,
+		c = 2,
+		h = math.random(0, 360),
+	}, "hex"),
+	n_hues = 8,
+	saturation = vim.o.background == "dark" and "medium" or "high",
+	accent = "fg",
+})
+
+vim.g.colors_name = "randomhue"
+
+local kitty_pid = os.getenv("KITTY_PID")
+if kitty_pid ~= nil and kitty_pid ~= "" then -- transparent bg on kitty
+	vim.api.nvim_set_hl(0, "Normal", { update = true, bg = "none", ctermbg = "none" })
+	vim.api.nvim_set_hl(0, "NonText", { update = true, bg = "none", ctermbg="none" })
+end
 
 --- MINI INDENTSCOPE ---
 local mini_indentscope = require("mini.indentscope")
