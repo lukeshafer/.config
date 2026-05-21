@@ -68,6 +68,7 @@ function common-explain() {
   cd -
 }
 
-alias klogin="echo $KIRO_START_URL | pbcopy && kiro-cli login"
-
+#alias klogin="echo $KIRO_START_URL | pbcopy && kiro-cli login"
+alias klogin="kiro-cli login --license pro --identity-provider $KIRO_START_URL --region us-east-2 --use-device-flow"
+alias kcli="kiro-cli"
 # zprof

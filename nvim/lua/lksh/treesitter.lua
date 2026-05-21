@@ -1,4 +1,4 @@
-local M = {}
+local Treesitter = {}
 
 ---@class TreeSitterParser
 ---@field url string
@@ -16,36 +16,6 @@ local parser_info = {
 
 parser_info.tsx = parser_info.typescript
 
----@param filetype string
-function M.install(filetype)
-	-- get parser url
-	-- git clone to location
-	--    vim.api.stdpath('data').."/tree-sitter-repos"..repo-name
-	-- in the repo run cli commands
-	--    tree-sitter generate
-	--    tree-sitter build
-	-- identify parser, either *.so or *.dylib (depending on OS)
-	-- then move to location
-	--    vim.api.stdpath('data').."/site/parser/"
-	-- can copy scm queries from repo
-	--  or use the ones in nvim-treesiter repo for the time being
-	--    vim.api.stdpath('data').."/site/queries/"..lang
-
-	local info = parser_info[filetype]
-	if info == nil then
-		return
-	end
-
-	local data_path = vim.fn.stdpath("data")
-	local ts_repo_path = data_path .. "/tree-sitter-repos"
-
-	vim.system({ "mkdir", "-p", ts_repo_path }):wait()
-
-	vim.system({ "git", "clone", info.url }, {
-		cwd = ts_repo_path,
-	}):wait()
-end
-
 local function highlight(bufnr, lang)
 	if not vim.treesitter.language.add(lang) then
 		return vim.notify(
@@ -57,7 +27,7 @@ local function highlight(bufnr, lang)
 	vim.treesitter.start(bufnr, lang)
 end
 
-function M.init()
+function Treesitter.init()
 	vim.api.nvim_create_autocmd("FileType", {
 		callback = function(args)
 			if vim.bo.buftype ~= "" then
@@ -65,7 +35,7 @@ function M.init()
 			end
 
 			local ft = vim.bo.filetype
-			local treesitter = require("nvim-treesitter")
+			local ts_parsers = require("lksh.ts-parsers")
 
 			-- vim.opt_local.foldmethod = "expr"
 			-- vim.opt_local.foldexpr = "v:lua.vim.treesitter.foldexpr()"
@@ -92,16 +62,17 @@ function M.init()
 				return
 			end
 
-			if vim.list_contains(treesitter.get_installed(), ft) then
+			if vim.list_contains(ts_parsers.get_installed(), ft) then
 				highlight(args.buf, ft)
-			elseif vim.list_contains(treesitter.get_available(), ft) then
-				treesitter.install(ft):await(function()
+			elseif vim.list_contains(ts_parsers.get_available(), ft) then
+				ts_parsers.install(ft, function()
 					highlight(args.buf, ft)
 				end)
 			end
 		end,
 	})
+
+  require("lksh.ts-parsers").create_commands()
 end
 
-LukeTS = M
-return M
+return Treesitter

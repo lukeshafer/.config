@@ -18,6 +18,7 @@ oil.setup({
 	delete_to_trash = true,
 	win_options = {
 		number = false,
+    signcolumn = "yes:2",
 	},
 	keymaps = {
 		["<C-q>"] = { "actions.close", mode = "n" },
@@ -29,9 +30,11 @@ oil.setup({
 	},
 })
 
+require("oil-git-status").setup({})
+
 keys.set_map("n", "<leader>e", function()
 	oil.open_float(nil, { preview = { vertical = true } })
 end)
 keys.set_map("n", "<leader>E", function()
-	oil.open_float(vim.api.nvim_buf_get_name(0))
+	oil.open()
 end)
