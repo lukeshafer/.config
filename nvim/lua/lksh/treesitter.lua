@@ -21,13 +21,13 @@ function TS.init()
 			local ft = vim.bo.filetype
 			local ts = require("lksh.ts-parsers")
 
-			-- vim.opt_local.foldmethod = "expr"
-			-- vim.opt_local.foldexpr = "v:lua.vim.treesitter.foldexpr()"
-			-- vim.opt_local.foldlevel = 1
+			vim.opt_local.foldmethod = "expr"
+			vim.opt_local.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+			vim.opt_local.foldlevel = 1
 
-			-- if not vim.tbl_contains({ "python", "html", "yaml", "markdown" }, ft) then
-			-- 	vim.bo.indentexpr = "v:lua.require('nvim-treesitter').indentexpr()"
-			-- end
+			if not vim.tbl_contains({ "python", "html", "yaml", "markdown" }, ft) then
+				vim.bo.indentexpr = "v:lua.require('nvim-treesitter').indentexpr()"
+			end
 
 			if vim.fn.executable("tree-sitter") ~= 1 then
 				vim.notify(
@@ -36,10 +36,6 @@ function TS.init()
 					{ title = "TreeSitter" }
 				)
 				return false
-			end
-
-			if ft == "p8" then
-				ft = "lua"
 			end
 
 			if not vim.treesitter.language.get_lang(ft) then

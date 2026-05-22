@@ -9,15 +9,16 @@ local Plugins = {}
 
 function Plugins.init()
 	vim.pack.add({
-		utils.plugin("nvim-mini/mini.nvim"),
 		utils.plugin("stevearc/oil.nvim"),
-		utils.plugin("stevearc/conform.nvim"),
-		utils.plugin("williamboman/mason.nvim"),
+		utils.plugin("nvim-mini/mini.nvim"),
 		utils.plugin("neovim/nvim-lspconfig"),
-		utils.plugin("nvim-treesitter/nvim-treesitter"),
+		utils.plugin("stevearc/conform.nvim"),
+		utils.plugin("mfussenegger/nvim-lint"),
 		utils.plugin("windwp/nvim-ts-autotag"),
-		utils.plugin("nvim-treesitter/nvim-treesitter-context"),
+		utils.plugin("williamboman/mason.nvim"),
+		utils.plugin("nvim-treesitter/nvim-treesitter"),
 		utils.plugin("refractalize/oil-git-status.nvim"),
+		utils.plugin("nvim-treesitter/nvim-treesitter-context"),
 	})
 end
 
