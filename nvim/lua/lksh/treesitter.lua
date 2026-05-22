@@ -1,22 +1,6 @@
-local Treesitter = {}
+local TS = {}
 
----@class TreeSitterParser
----@field url string
----@field branch string?
-
----@type table<string, TreeSitterParser?>
-local parser_info = {
-	javascript = {
-		url = "https://github.com/tree-sitter/tree-sitter-javascript",
-	},
-	typescript = {
-		url = "https://github.com/tree-sitter/tree-sitter-typescript",
-	},
-}
-
-parser_info.tsx = parser_info.typescript
-
-local function highlight(bufnr, lang)
+function TS.highlight(bufnr, lang)
 	if not vim.treesitter.language.add(lang) then
 		return vim.notify(
 			string.format("Treesitter cannot load parser for language: %s", lang),
@@ -27,7 +11,7 @@ local function highlight(bufnr, lang)
 	vim.treesitter.start(bufnr, lang)
 end
 
-function Treesitter.init()
+function TS.init()
 	vim.api.nvim_create_autocmd("FileType", {
 		callback = function(args)
 			if vim.bo.buftype ~= "" then
@@ -35,7 +19,7 @@ function Treesitter.init()
 			end
 
 			local ft = vim.bo.filetype
-			local ts_parsers = require("lksh.ts-parsers")
+			local ts = require("lksh.ts-parsers")
 
 			-- vim.opt_local.foldmethod = "expr"
 			-- vim.opt_local.foldexpr = "v:lua.vim.treesitter.foldexpr()"
@@ -62,17 +46,17 @@ function Treesitter.init()
 				return
 			end
 
-			if vim.list_contains(ts_parsers.get_installed(), ft) then
-				highlight(args.buf, ft)
-			elseif vim.list_contains(ts_parsers.get_available(), ft) then
-				ts_parsers.install(ft, function()
-					highlight(args.buf, ft)
+			if vim.list_contains(ts.get_installed(), ft) then
+				TS.highlight(args.buf, ft)
+			elseif vim.list_contains(ts.get_available(), ft) then
+				ts.install(ft, function()
+					TS.highlight(args.buf, ft)
 				end)
 			end
 		end,
 	})
 
-  require("lksh.ts-parsers").create_commands()
+	-- require("lksh.ts-parsers").create_commands()
 end
 
-return Treesitter
+return TS

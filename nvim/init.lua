@@ -3,8 +3,6 @@ if vim.g.vscode then
 	return
 end
 
-require("lksh.time-shit")
-
 -- Editor Settings
 vim.o.tabstop = 2
 vim.o.shiftwidth = 2
@@ -53,5 +51,5 @@ require("lksh.commands").init()
 require("lksh.plugins").init()
 require("lksh.lsp").init()
 require("lksh.statusline").init()
-require("lksh.treesitter").init()
+-- require("lksh.treesitter").init()
 require("lksh.tabline").init()

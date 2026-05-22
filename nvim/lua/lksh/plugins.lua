@@ -14,7 +14,7 @@ function Plugins.init()
 		utils.plugin("stevearc/conform.nvim"),
 		utils.plugin("williamboman/mason.nvim"),
 		utils.plugin("neovim/nvim-lspconfig"),
-		--utils.plugin("nvim-treesitter/nvim-treesitter"),
+		utils.plugin("nvim-treesitter/nvim-treesitter"),
 		utils.plugin("windwp/nvim-ts-autotag"),
 		utils.plugin("nvim-treesitter/nvim-treesitter-context"),
 		utils.plugin("refractalize/oil-git-status.nvim"),

@@ -220,4 +220,5 @@ function TSParsers.create_commands()
 	end, {})
 end
 
+LTS=TSParsers
 return TSParsers
