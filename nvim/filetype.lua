@@ -1,4 +1,7 @@
 vim.filetype.add({
+  pattern = {
+    [".*%.asl%.json"] = "asl",
+  },
   extension = {
     astro = "astro",
     postcss = "css",
@@ -16,3 +19,6 @@ vim.filetype.add({
     ["jsconfig.json"] = "jsonc",
   },
 })
+
+vim.treesitter.language.register("json", "asl")
+vim.treesitter.language.register("lua", "p8")

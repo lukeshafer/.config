@@ -19,8 +19,21 @@ local accent="white"
   local right_sep=" "
 # fi
 
+function zle-line-init zle-keymap-select {
+  VI_MODE="${${KEYMAP/vicmd/ }/(main|viins)/ }"
+  if [[ $KEYMAP == vicmd ]]; then
+    printf '\e[2 q'  # block cursor
+  else
+    printf '\e[6 q'  # beam cursor
+  fi
+  zle reset-prompt
+}
+
+zle -N zle-line-init
+zle -N zle-keymap-select
+
 PROMPT="
-%F{black}%K{$main} %~ %K{default}%F{$main}$left_sep%K{default} \$(git_prompt_info)%{$reset_color%}
+%F{black}%K{$main} \${VI_MODE} %~ %K{default}%F{$main}$left_sep%K{default} \$(git_prompt_info)%{$reset_color%}
 %F{$main}%n@%B%m%b%F{default}%K{default} %F{$accent}%(!.#.»)%F{default}%K{default} "
 
 RPROMPT="%(?..%{$fg[red]%}%? ↵%{$reset_color%}) %F{$accent}%t"

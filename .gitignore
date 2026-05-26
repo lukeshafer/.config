@@ -18,6 +18,7 @@
 !git/
 !ranger/
 !waybar/
+!.archive/
 tmux/plugins/
 packer_compiled.lua
 # !.oh-my-zsh/
