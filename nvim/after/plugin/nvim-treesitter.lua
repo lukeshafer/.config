@@ -38,19 +38,16 @@ vim.api.nvim_create_autocmd("FileType", {
 			return false
 		end
 
-		if ft == "p8" then
-			ft = "lua"
-		end
-
-		if not vim.treesitter.language.get_lang(ft) then
+		local lang = vim.treesitter.language.get_lang(ft)
+		if not lang then
 			return
 		end
 
-		if vim.list_contains(ts.get_installed(), ft) then
-			highlight(args.buf, ft)
-		elseif vim.list_contains(ts.get_available(), ft) then
-        ts.install(ft):await(function()
-					highlight(args.buf, ft)
+		if vim.list_contains(ts.get_installed(), lang) then
+			highlight(args.buf, lang)
+		elseif vim.list_contains(ts.get_available(), lang) then
+        ts.install(lang):await(function()
+					highlight(args.buf, lang)
 				end)
 		end
 	end,

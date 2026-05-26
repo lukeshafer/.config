@@ -13,6 +13,7 @@ conform.setup({
 		tsx = utils.js_formatter,
 		astro = utils.js_formatter,
 		json = { "fixjson" },
+		asl = { "fixjson" },
 		soql = { "sleek" },
 		markdown = { "cbfmt" },
 	},

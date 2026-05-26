@@ -60,7 +60,7 @@ function Keymaps.init()
 	vim.keymap.set("v", ">", ">gv")
 	vim.keymap.set("v", "<", "<gv")
 
-	vim.keymap.set("v", "<leader>s", "<Cmd>LSSortList<cr>")
+	-- vim.keymap.set("v", "<leader>s", "<Cmd>LSSortList<cr>")
 
 	-- nvim terminal mappings
 	-- Escape gets out of insert (in terminal)
