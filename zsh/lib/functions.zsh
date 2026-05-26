@@ -1,9 +1,3 @@
-function zsh_stats() {
-  fc -l 1 \
-    | awk '{ CMD[$2]++; count++; } END { for (a in CMD) print CMD[a] " " CMD[a]*100/count "% " a }' \
-    | grep -v "./" | sort -nr | head -n 20 | column -c3 -s " " -t | nl
-}
-
 function open_command() {
   local open_cmd
 
@@ -32,38 +26,6 @@ function open_command() {
   fi
 
   ${=open_cmd} "$@" &>/dev/null
-}
-
-function mkcd() {
-  mkdir -p $@ && cd ${@:$#}
-}
-
-#
-# Set variable "$1" to default value "$2" if "$1" is not yet defined.
-#
-# Arguments:
-#    1. name - The variable to set
-#    2. val  - The default value
-# Return value:
-#    0 if the variable exists, 3 if it was set
-#
-function default() {
-    (( $+parameters[$1] )) && return 0
-    typeset -g "$1"="$2"   && return 3
-}
-
-#
-# Set environment variable "$1" to default value "$2" if "$1" is not yet defined.
-#
-# Arguments:
-#    1. name - The env variable to set
-#    2. val  - The default value
-# Return value:
-#    0 if the env variable exists, 3 if it was set
-#
-function env_default() {
-    [[ ${parameters[$1]} = *-export* ]] && return 0
-    export "$1=$2" && return 3
 }
 
 # URL-encode a string
@@ -104,7 +66,7 @@ function omz_urlencode_old() {
   local str="$in_str"
 
   # URLs must use UTF-8 encoding; convert str to UTF-8 if required
-  local encoding=$langinfo[CODESET]
+  local encoding=${langinfo[CODESET]:-UTF-8}
   local safe_encodings
   safe_encodings=(UTF-8 utf8 US-ASCII)
   if [[ -z ${safe_encodings[(r)$encoding]} ]]; then
@@ -154,7 +116,7 @@ function omz_urlencode_old() {
   echo -E "$url_str"
 }
 
-alias urlencode='node -e "console.log(encodeURIComponent(process.argv[1]))"'
+function urlencode() { omz_urlencode_old -P "$@"; }
 
 # URL-decode a string
 #
