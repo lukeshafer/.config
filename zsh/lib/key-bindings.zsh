@@ -17,10 +17,14 @@ fi
 
 # Use vi key bindings
 bindkey -v
+bindkey '^A' beginning-of-line
+bindkey '^E' end-of-line
 
 # Start typing + [Up-Arrow] - fuzzy find history forward
 autoload -U up-line-or-beginning-search
 zle -N up-line-or-beginning-search
+
+bindkey -M viins "^K" up-line-or-beginning-search
 
 bindkey -M emacs "^[[A" up-line-or-beginning-search
 bindkey -M viins "^[[A" up-line-or-beginning-search
@@ -34,6 +38,8 @@ fi
 # Start typing + [Down-Arrow] - fuzzy find history backward
 autoload -U down-line-or-beginning-search
 zle -N down-line-or-beginning-search
+
+bindkey -M viins "^J" down-line-or-beginning-search
 
 bindkey -M emacs "^[[B" down-line-or-beginning-search
 bindkey -M viins "^[[B" down-line-or-beginning-search

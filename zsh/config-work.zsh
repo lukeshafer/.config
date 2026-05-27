@@ -7,21 +7,21 @@ export PC_CONTEXT="work"
 export GITLAB_HOST="https://code.osu.edu/"
 export GLAMOUR_STYLE="dark"
 
-# export NVM_DIR="$HOME/.nvm"
-# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
 export NVM_DIR="$HOME/.nvm"
-# Lazy-load nvm
-_load_nvm() {
-  unset -f nvm node npm npx _load_nvm
-  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
-}
-nvm() { _load_nvm; nvm "$@"; }
-node() { _load_nvm; node "$@"; }
-npm() { _load_nvm; npm "$@"; }
-npx() { _load_nvm; npx "$@"; }
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# export NVM_DIR="$HOME/.nvm"
+# # Lazy-load nvm
+# _load_nvm() {
+#   unset -f nvm node npm npx _load_nvm
+#   [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+#   [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+# }
+# nvm() { _load_nvm; nvm "$@"; }
+# node() { _load_nvm; node "$@"; }
+# npm() { _load_nvm; npm "$@"; }
+# npx() { _load_nvm; npx "$@"; }
 
 
 export PATH="/opt/homebrew/opt/openjdk11/bin:$PATH"
