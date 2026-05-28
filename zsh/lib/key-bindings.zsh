@@ -16,15 +16,17 @@ if (( ${+terminfo[smkx]} )) && (( ${+terminfo[rmkx]} )); then
 fi
 
 # Use vi key bindings
-bindkey -v
-bindkey '^A' beginning-of-line
-bindkey '^E' end-of-line
+bindkey -e
+# bindkey '^A' beginning-of-line
+# bindkey '^E' end-of-line
 
 # Start typing + [Up-Arrow] - fuzzy find history forward
 autoload -U up-line-or-beginning-search
 zle -N up-line-or-beginning-search
 
+bindkey -M emacs "^K" up-line-or-beginning-search
 bindkey -M viins "^K" up-line-or-beginning-search
+# no viins since k already is mapped there
 
 bindkey -M emacs "^[[A" up-line-or-beginning-search
 bindkey -M viins "^[[A" up-line-or-beginning-search

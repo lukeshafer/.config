@@ -19,7 +19,12 @@ function Plugins.init()
 		utils.plugin("nvim-treesitter/nvim-treesitter"),
 		utils.plugin("refractalize/oil-git-status.nvim"),
 		utils.plugin("nvim-treesitter/nvim-treesitter-context"),
+		-- utils.plugin("nvim-treesitter/nvim-treesitter-textobjects"),
 	})
+
+  -- Removed plugins I may miss
+  -- "https://github.com/uga-rosa/ccc.nvim", -- color picker
+  -- "https://github.com/hat0uma/csvview.nvim",
 end
 
 return Plugins

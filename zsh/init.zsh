@@ -1,9 +1,6 @@
 # zmodload zsh/zprof # uncomment to profile performance
 
-# Path to your oh-my-zsh installation.
 export ZSH="$HOME/.config/zsh"
-# Customization path
-# export ZSH_CUSTOM="$HOME/.config/zsh"
 export ZSH_CACHE_DIR="$HOME/.cache/zsh"
 
 ZSH_THEME="lksh"

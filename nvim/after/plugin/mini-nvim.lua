@@ -4,10 +4,14 @@ local keys = require("lksh.keymaps")
 require("mini.notify").setup({})
 require("mini.colors").setup({})
 require("mini.cursorword").setup({})
-require("mini.git").setup({})
 require("mini.icons").setup({})
 require("mini.pairs").setup({})
 require("mini.surround").setup({})
+require("mini.git").setup({
+	command = {
+		split = "vertical",
+	},
+})
 
 local mini_extra = require("mini.extra")
 mini_extra.setup()
@@ -72,7 +76,7 @@ require("mini.hues").setup({
 	background = mini_colors.convert({ l = bg_l, c = 2, h = math.random(180, 360) }, "hex"),
 	foreground = mini_colors.convert({ l = fg_l, c = 1, h = math.random(0, 360) }, "hex"),
 	n_hues = 8,
-	saturation = sat
+	saturation = sat,
 })
 
 vim.g.colors_name = "randomhue"
@@ -108,7 +112,7 @@ mini_diff.setup({
 })
 
 vim.api.nvim_set_hl(0, "MiniDiffSignChange", { link = "diffFile" })
-keys.set_map("n", "<leader>g", function()
+keys.set_map("n", "<leader>gd", function()
 	mini_diff.toggle_overlay(0)
 end)
 
