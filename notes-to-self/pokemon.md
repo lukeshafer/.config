@@ -43,6 +43,9 @@ Lots of fire type -- water or rock
         - beware Kingambit
     - Anti charizard?
 
+### Support
+-
+
 
 ## Defensive holes:
 - Sneasler Dire Claw OHKO
@@ -64,6 +67,8 @@ Lots of fire type -- water or rock
     - Note: mega sol weather ball is full power fire even in rain
 - Flying / Ice are less common, steel does help here
 
+Sun teams could have a few of those guys
+
 STEEL TYPE OPTIONS:
 - Corviknight
     - Bulky, physical, 
@@ -71,8 +76,6 @@ STEEL TYPE OPTIONS:
     - not weak to fighting if they call the switch
 - Archaludon
     - Pairs well with rain AND against it
-    - Steel + Dragon core
-- Hisuian Goodra
     - Steel + Dragon core
 - Aegislash
     - Anti-sneasler: poison+fighting do nothing
@@ -85,17 +88,20 @@ STEEL TYPE OPTIONS:
 Meganium w Attacking moves using Mega Sol
 Meganium needs speed control - 1 tr 1 tw
 
-Possible Trick Room setters:
+## Possible Trick Room setters:
 - Farigiraf
     - Psychic good v poison
-    - 
+    - no fake out
 - Armarouge
+    - Fire
 - Mimikyu
+    - Good and bulky
+    - No fake out (except kanga)
 - Hattarene
 - Meowstic
 - Chandalure
 
-Possible Tailwind Setters:
+## Possible Tailwind Setters:
 - Aerodactyl
     - good against 'zard
     - fast
@@ -109,7 +115,7 @@ Possible Tailwind Setters:
 - Noivern?
 - Corviknight
 
-Threatening Opponents to Meganium:
+## Threatening Opponents to Meganium:
 - Charizard Y
   - Faster, might KO (need to calc)
   - Meganium can't OHKO it

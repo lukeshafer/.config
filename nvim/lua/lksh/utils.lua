@@ -1,9 +1,9 @@
 local M = {}
 
-if os.getenv("PC_CONTEXT") then
-	M.js_formatter = {}
-else
+if os.getenv("PC_CONTEXT") == "personal" then
 	M.js_formatter = { "prettier" }
+else
+	M.js_formatter = {}
 end
 
 ---@param text string
