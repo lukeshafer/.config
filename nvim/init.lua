@@ -52,7 +52,7 @@ LKSH = {
   Plugins = require("lksh.plugins"),
   LSP = require("lksh.lsp"),
   Statusline = require("lksh.statusline"),
-  Treesitter = require("lksh.treesitter"),
+  --Treesitter = require("lksh.treesitter"),
   Tabline = require("lksh.tabline"),
   Utils = utils,
 }
