@@ -1,143 +1,145 @@
-source "$HOME/.config/.zshrc.base"
+export ZSH="$HOME/.config/zsh"
+echo "Point your .zshrc to '$ZSH/init.zsh'"
+source "$ZSH/init.zsh"
 
-export PATH="$HOME/.local/bin:$PATH"
-export N_PREFIX="$HOME/.local"
-
-# User configuration
-# set display configuration
-#if [ -n "$DISPLAY" ]
-#then
-	#xrandr --output HDMI-1 --rotate left --left-of HDMI-2
-	#feh --bg-fill /home/luke/Pictures/wallpapers/eberhard-grossgasteiger-pBgnT4KH8d4-unsplash.jpg --bg-fill /home/luke/Pictures/wallpapers/luca-micheli-ruWkmt3nU58-unsplash.jpg
-	#xset r rate 200 60
-#fi
-
-# set environment variables for npm
-NPM_PACKAGES="${HOME}/.npm-packages"
-NODE_PATH="$NPM_PACKAGES/lib/node_modules:$NODE_PATH"
-PATH="$NPM_PACKAGES/bin:$PATH"
-# Unset manpath so we can inherit from /etc/manpath via the `manpath`
-# command
-unset MANPATH # delete if you already modified MANPATH elsewhere in your config
-MANPATH="$NPM_PACKAGES/share/man:$(manpath)"
-
-# set bun paths
-export BUN_INSTALL="/home/luke/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
-export PATH="$PATH:/usr/local/go/bin"
-export AUR_PAGER="nvim"
-
-# set path for mcrcon
-export PATH="$PATH:/opt/minecraft/tools/mcrcon"
-
-# set path for any scripts we want on the path
-export PATH="$PATH:/home/luke/.path"
-
-export DENO_INSTALL="/home/luke/.deno"
-export PATH="$DENO_INSTALL/bin:$PATH"
-
-export RANGER_LOAD_DEFAULT_RC=FALSE
-
-# port checking stuff
-function cprt() {
-	sudo lsof -i -P -n | grep ":$1" | grep LISTEN
-}
-
-function unzilp {
-	ARG_NAME=$(echo $1 | cut -d '.' -f 1)
-	unzip -q $1 -d ./$ARG_NAME
-	rm $1
-	CUR_DIR=$(pwd)
-	echo "unzipped ./$1 to $CUR_DIR/$ARG_NAME/"
-}
-
-alias zrc="nvim ~/.config/.zshrc.personal && source ~/.zshrc"
-
-alias caddyconfig='sudoedit /etc/caddy/Caddyfile'
-alias caddyrestart='sudo systemctl restart caddy'
-alias caddyreload='caddy reload --config /etc/caddy/Caddyfile'
-alias ced='caddyconfig && caddyreload'
-alias cadhtml='nvim /etc/caddy/index.html'
-alias cadcss='nvim /etc/caddy/style.css'
-alias cadlog='sudo systemctl status caddy'
-
-alias dnsedit='sudoedit /etc/hosts'
-alias dnsrestart='sudo systemctl restart dnsmasq'
-alias dns='dnsedit && dnsrestart'
-
-alias reload_shell='exec $SHELL'
-alias rconfig='source ~/.zshrc'
-alias brc='nvim ~/.bashrc && rconfig'
-alias bls='nvim ~/.bash_aliases && rconfig'
-alias lsbls='cat ~/.bash_aliases'
-alias data='cd /mnt/data'
-alias vrc='nvim ~/.vimrc'
-alias nvrc='nvim ~/.config/nvim/'
-
-alias sshedit='nvim ~/.ssh/authorized_keys'
-
-alias ports='sudo lsof -i -P -n | grep LISTEN'
-
-alias dcu='sudo docker compose up -d'
-alias dcd='sudo docker compose down'
-alias dcr='sudo docker compose restart'
-alias dcl='sudo docker compose logs -f'
-alias dce='nvim ./docker-compose.yml'
-alias start='pnpm start'
-
-#alias docker-compose="echo use docker compose"
-
-alias tmr="tmux source-file ~/.config/tmux/tmux.conf"
-alias tmc="nvim ~/.config/tmux/tmux.conf && tmr"
-
-# enable/disable lightdm (display manager for desktop environment)
-alias gui="sudo systemctl start lightdm.service"
-alias ngui="sudo systemctl stop lightdm.service"
-alias rgui="sudo systemctl restart lightdm.service"
-
-# pnpm
-export PNPM_HOME="/home/luke/.local/share/pnpm"
-export PATH="$PNPM_HOME:$PATH"
-# pnpm end
+# export PATH="$HOME/.local/bin:$PATH"
+# export N_PREFIX="$HOME/.local"
 #
-# go path
-export PATH="$PATH:$HOME/go/bin"
-
-# Fuzzy find
-# fd - cd to selected directory
-fd() {
-  local dir
-  dir=$(find ${1:-.} -path '*/\.*' -prune \
-                  -o -type d -print 2> /dev/null | fzf +m) &&
-  cd "$dir"
-}
-
-# fp - cd to project with git repo
-fp() {
-  local dir
-  dir=$(find repos bots -type d -name '.git' | sed -r 's|/[^/]+$||' |sort -u \
-                   | fzf +m) &&
-  clear &&
-  cd "$dir"
-}
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-alias tm="tmux new-session -A -s $USER"
-
-alias ghnew="gh repo create --source=. --remote=origin --public && git push --set-upstream origin main"
-alias gm-devtoqa="gch qa && gm dev && gp && gch dev"
-
-# bun completions
-[ -s "/home/luke/.bun/_bun" ] && source "/home/luke/.bun/_bun"
-
-alias ec2connect='ssh -i "~/.ssh/keys/Macbook Pro.pem" ubuntu@ec2-3-142-246-64.us-east-2.compute.amazonaws.com'
-
-alias vi="nvim"
-
-alias lsconfig="cd ~/.config && nvim && cd -"
-
-alias open="open_command"
-
-# alias mcstartserver="java -Xmx1G -Xms1G -jar paper.jar --nogui"
-# alias mcrefreshplugin="cp /home/luke/Code/minecraft-dev/*/target/*-SNAPSHOT.jar /home/luke/Code/minecraft-dev/server/plugins"
+# # User configuration
+# # set display configuration
+# #if [ -n "$DISPLAY" ]
+# #then
+# 	#xrandr --output HDMI-1 --rotate left --left-of HDMI-2
+# 	#feh --bg-fill /home/luke/Pictures/wallpapers/eberhard-grossgasteiger-pBgnT4KH8d4-unsplash.jpg --bg-fill /home/luke/Pictures/wallpapers/luca-micheli-ruWkmt3nU58-unsplash.jpg
+# 	#xset r rate 200 60
+# #fi
+#
+# # set environment variables for npm
+# NPM_PACKAGES="${HOME}/.npm-packages"
+# NODE_PATH="$NPM_PACKAGES/lib/node_modules:$NODE_PATH"
+# PATH="$NPM_PACKAGES/bin:$PATH"
+# # Unset manpath so we can inherit from /etc/manpath via the `manpath`
+# # command
+# unset MANPATH # delete if you already modified MANPATH elsewhere in your config
+# MANPATH="$NPM_PACKAGES/share/man:$(manpath)"
+#
+# # set bun paths
+# export BUN_INSTALL="/home/luke/.bun"
+# export PATH="$BUN_INSTALL/bin:$PATH"
+# export PATH="$PATH:/usr/local/go/bin"
+# export AUR_PAGER="nvim"
+#
+# # set path for mcrcon
+# export PATH="$PATH:/opt/minecraft/tools/mcrcon"
+#
+# # set path for any scripts we want on the path
+# export PATH="$PATH:/home/luke/.path"
+#
+# export DENO_INSTALL="/home/luke/.deno"
+# export PATH="$DENO_INSTALL/bin:$PATH"
+#
+# export RANGER_LOAD_DEFAULT_RC=FALSE
+#
+# # port checking stuff
+# function cprt() {
+# 	sudo lsof -i -P -n | grep ":$1" | grep LISTEN
+# }
+#
+# function unzilp {
+# 	ARG_NAME=$(echo $1 | cut -d '.' -f 1)
+# 	unzip -q $1 -d ./$ARG_NAME
+# 	rm $1
+# 	CUR_DIR=$(pwd)
+# 	echo "unzipped ./$1 to $CUR_DIR/$ARG_NAME/"
+# }
+#
+# alias zrc="nvim ~/.config/.zshrc.personal && source ~/.zshrc"
+#
+# alias caddyconfig='sudoedit /etc/caddy/Caddyfile'
+# alias caddyrestart='sudo systemctl restart caddy'
+# alias caddyreload='caddy reload --config /etc/caddy/Caddyfile'
+# alias ced='caddyconfig && caddyreload'
+# alias cadhtml='nvim /etc/caddy/index.html'
+# alias cadcss='nvim /etc/caddy/style.css'
+# alias cadlog='sudo systemctl status caddy'
+#
+# alias dnsedit='sudoedit /etc/hosts'
+# alias dnsrestart='sudo systemctl restart dnsmasq'
+# alias dns='dnsedit && dnsrestart'
+#
+# alias reload_shell='exec $SHELL'
+# alias rconfig='source ~/.zshrc'
+# alias brc='nvim ~/.bashrc && rconfig'
+# alias bls='nvim ~/.bash_aliases && rconfig'
+# alias lsbls='cat ~/.bash_aliases'
+# alias data='cd /mnt/data'
+# alias vrc='nvim ~/.vimrc'
+# alias nvrc='nvim ~/.config/nvim/'
+#
+# alias sshedit='nvim ~/.ssh/authorized_keys'
+#
+# alias ports='sudo lsof -i -P -n | grep LISTEN'
+#
+# alias dcu='sudo docker compose up -d'
+# alias dcd='sudo docker compose down'
+# alias dcr='sudo docker compose restart'
+# alias dcl='sudo docker compose logs -f'
+# alias dce='nvim ./docker-compose.yml'
+# alias start='pnpm start'
+#
+# #alias docker-compose="echo use docker compose"
+#
+# alias tmr="tmux source-file ~/.config/tmux/tmux.conf"
+# alias tmc="nvim ~/.config/tmux/tmux.conf && tmr"
+#
+# # enable/disable lightdm (display manager for desktop environment)
+# alias gui="sudo systemctl start lightdm.service"
+# alias ngui="sudo systemctl stop lightdm.service"
+# alias rgui="sudo systemctl restart lightdm.service"
+#
+# # pnpm
+# export PNPM_HOME="/home/luke/.local/share/pnpm"
+# export PATH="$PNPM_HOME:$PATH"
+# # pnpm end
+# #
+# # go path
+# export PATH="$PATH:$HOME/go/bin"
+#
+# # Fuzzy find
+# # fd - cd to selected directory
+# fd() {
+#   local dir
+#   dir=$(find ${1:-.} -path '*/\.*' -prune \
+#                   -o -type d -print 2> /dev/null | fzf +m) &&
+#   cd "$dir"
+# }
+#
+# # fp - cd to project with git repo
+# fp() {
+#   local dir
+#   dir=$(find repos bots -type d -name '.git' | sed -r 's|/[^/]+$||' |sort -u \
+#                    | fzf +m) &&
+#   clear &&
+#   cd "$dir"
+# }
+#
+# [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+#
+# alias tm="tmux new-session -A -s $USER"
+#
+# alias ghnew="gh repo create --source=. --remote=origin --public && git push --set-upstream origin main"
+# alias gm-devtoqa="gch qa && gm dev && gp && gch dev"
+#
+# # bun completions
+# [ -s "/home/luke/.bun/_bun" ] && source "/home/luke/.bun/_bun"
+#
+# alias ec2connect='ssh -i "~/.ssh/keys/Macbook Pro.pem" ubuntu@ec2-3-142-246-64.us-east-2.compute.amazonaws.com'
+#
+# alias vi="nvim"
+#
+# alias lsconfig="cd ~/.config && nvim && cd -"
+#
+# alias open="open_command"
+#
+# # alias mcstartserver="java -Xmx1G -Xms1G -jar paper.jar --nogui"
+# # alias mcrefreshplugin="cp /home/luke/Code/minecraft-dev/*/target/*-SNAPSHOT.jar /home/luke/Code/minecraft-dev/server/plugins"

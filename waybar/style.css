@@ -1,9 +1,15 @@
  /* @import url("file:///etc/xdg/waybar/style.css"); */
 
  * {
-   font-family: 'IosevkaTerm Nerd Font', monospace;
+   font-family: 
+     'Arimo Nerd Font', 
+     'Tinos Nerd Font', 
+     'AurulentSansM Nerd Font', 
+     'IosevkaTerm Nerd Font', 
+     'Ubuntu Nerd Font', 
+     monospace;
    font-weight: 500;
-   font-size: 13px;
+   font-size: 14px;
  }
 
  window#waybar {

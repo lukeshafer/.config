@@ -3,8 +3,6 @@ if vim.g.vscode then
   return
 end
 
-require("lksh.time-shit")
-
 -- Editor Settings
 vim.o.tabstop = 2
 vim.o.shiftwidth = 2
@@ -19,7 +17,7 @@ vim.o.cursorline = true
 vim.o.splitright = true
 vim.opt.diffopt:append({ "iwhiteall" })
 vim.opt.shortmess:append("I")
-
+vim.o.ignorecase = true
 
 -- vim.o.statuscolumn = "%s%C%l"
 
@@ -64,5 +62,4 @@ LKSH.Cmds.init()
 LKSH.Plugins.init()
 LKSH.LSP.init()
 LKSH.Statusline.init()
-LKSH.Treesitter.init()
 LKSH.Tabline.init()
