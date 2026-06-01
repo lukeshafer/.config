@@ -7,6 +7,17 @@ end
 
 local Plugins = {}
 
+function Plugins.clean_inactive()
+  ---@type vim.pack.PlugData[]
+  local inactive = vim.tbl_filter(function (p)
+    return not p.active
+  end, vim.pack.get(nil, {info=false}))
+
+  if #inactive > 0 then
+    vim.pack.del(inactive)
+  end
+end
+
 function Plugins.init()
 	vim.pack.add({
 		utils.plugin("nvim-mini/mini.nvim"),

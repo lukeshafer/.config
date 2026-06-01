@@ -1,6 +1,6 @@
 if vim.g.vscode then
-	require("lksh.vsc-config")
-	return
+  require("lksh.vsc-config")
+  return
 end
 
 require("lksh.time-shit")
@@ -30,28 +30,39 @@ vim.o.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 vim.o.foldlevelstart = 1
 vim.o.foldtext = ""
 vim.opt.fillchars = {
-	-- fold = "󰇘",
-	foldopen = "󰅀",
-	foldclose = "󰅂",
-	foldinner = " ",
-	-- foldsep = " ",
+  -- fold = "󰇘",
+  foldopen = "󰅀",
+  foldclose = "󰅂",
+  foldinner = " ",
+  -- foldsep = " ",
 }
 
 local utils = require("lksh.utils")
 if utils.IS_WINDOWS then
-	vim.o.backupdir = utils.HOME_DIR .. "\\.vim\\backup"
-	vim.o.dir = utils.HOME_DIR .. "\\.vim\\swapfiles"
+  vim.o.backupdir = utils.HOME_DIR .. "\\.vim\\backup"
+  vim.o.dir = utils.HOME_DIR .. "\\.vim\\swapfiles"
 else
-	vim.o.backupdir = utils.HOME_DIR .. "/.vim/backup"
-	vim.o.dir = utils.HOME_DIR .. "/.vim/swapfiles"
+  vim.o.backupdir = utils.HOME_DIR .. "/.vim/backup"
+  vim.o.dir = utils.HOME_DIR .. "/.vim/swapfiles"
 end
 
 vim.g.mapleader = " "
 
-require("lksh.keymaps").init()
-require("lksh.commands").init()
-require("lksh.plugins").init()
-require("lksh.lsp").init()
-require("lksh.statusline").init()
-require("lksh.treesitter").init()
-require("lksh.tabline").init()
+LKSH = {
+  Keys = require("lksh.keymaps"),
+  Cmds = require("lksh.commands"),
+  Plugins = require("lksh.plugins"),
+  LSP = require("lksh.lsp"),
+  Statusline = require("lksh.statusline"),
+  Treesitter = require("lksh.treesitter"),
+  Tabline = require("lksh.tabline"),
+  Utils = utils,
+}
+
+LKSH.Keys.init()
+LKSH.Cmds.init()
+LKSH.Plugins.init()
+LKSH.LSP.init()
+LKSH.Statusline.init()
+LKSH.Treesitter.init()
+LKSH.Tabline.init()
