@@ -24,11 +24,6 @@ function Keymaps.init()
 	Keymaps.set_map("n", "<C-j>", ":m +1<CR>")
 	-- ESC also clears highlighting
 	Keymaps.set_map("n", "<leader><Esc>", ":noh<cr>")
-	-- SPACE Up/Down/Left/Right moves to other window
-	Keymaps.set_map("n", "<leader>k", "<C-w>k")
-	Keymaps.set_map("n", "<leader>j", "<C-w>j")
-	Keymaps.set_map("n", "<leader>h", "<C-w>h")
-	Keymaps.set_map("n", "<leader>l", "<C-w>l")
 	-- x deletes character but does not put in clipboard"
 	Keymaps.set_map("n", "x", '"_x')
 	Keymaps.set_map("n", "<leader>x", ":bprevious|bdelete #<cr>")
@@ -44,7 +39,7 @@ function Keymaps.init()
 	-- Keymaps.set_map("n", "<Tab>", "<cmd>tabnext<cr>")
 	-- Keymaps.set_map("n", "<S-Tab>", "<cmd>tabprevious<cr>")
 	-- Leader+T opens terminal in pane
-	-- map("n", "<leader>t", ":belowright 15sp|term<cr>") -- WIP for no plugin
+	-- Keymaps.set_map("n", "<leader>t", ":belowright 15sp|term<cr>") -- WIP for no plugin
 	Keymaps.set_map("n", "<leader>t", "<cmd>horiz term<cr>")
 	Keymaps.set_map("n", "<leader>T", "<cmd>vert term<cr>")
 
@@ -57,15 +52,15 @@ function Keymaps.init()
 
 	--------VISUAL MODE---------
 	-- Indenting keeps previous highlight
-	vim.keymap.set("v", ">", ">gv")
-	vim.keymap.set("v", "<", "<gv")
+	Keymaps.set_map("v", ">", ">gv")
+	Keymaps.set_map("v", "<", "<gv")
 
-	-- vim.keymap.set("v", "<leader>s", "<Cmd>LSSortList<cr>")
-	vim.keymap.set({ "v", "n" }, "<leader>gb", "<Cmd>LSBlame<cr>")
+	-- Keymaps.set_map("v", "<leader>s", "<Cmd>LSSortList<cr>")
+	Keymaps.set_map({ "v", "n" }, "<leader>gb", "<Cmd>LSBlame<cr>")
 
 	-- nvim terminal mappings
 	-- Escape gets out of insert (in terminal)
-	vim.keymap.set("t", "<Esc>", "<C-\\><C-n>")
+	Keymaps.set_map("t", "<Esc>", "<C-\\><C-n>")
 end
 
 return Keymaps

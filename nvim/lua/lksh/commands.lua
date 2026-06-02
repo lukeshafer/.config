@@ -20,12 +20,21 @@ function Commands.init()
 
 		table.sort(lines)
 		vim.api.nvim_buf_set_lines(buf, row1 - 1, row2, false, lines)
-	end, { range = true })
+	end, { range = true, desc = "Sort selected lines alphabetically" })
 
 	vim.api.nvim_create_user_command("LSRestart", function()
+		vim.api.nvim_exec_autocmds("User", { pattern = "LSRestartPre" })
 		local session_path = vim.fn.stdpath("state") .. "/lsrestart-session.vim"
 		vim.cmd("mksession! " .. session_path .. " | restart source " .. session_path)
-	end, {})
+	end, { desc = "Restart Neovim, preserving session" })
+
+	-- Fire LSRestartPost after session restore on startup
+	local session_path = vim.fn.stdpath("state") .. "/lsrestart-session.vim"
+	if vim.fn.filereadable(session_path) == 1 then
+		vim.defer_fn(function()
+			vim.api.nvim_exec_autocmds("User", { pattern = "LSRestartPost" })
+		end, 100)
+	end
 
 	vim.api.nvim_create_user_command("LSBlame", function(opts)
 		local l1, l2
@@ -38,7 +47,7 @@ function Commands.init()
 		end
 		local filename = vim.api.nvim_buf_get_name(0)
 		vim.cmd("Git blame -L " .. l1 .. "," .. l2 .. " " .. filename)
-	end, { range = true })
+	end, { range = true, desc = "Git blame for current or selected lines" })
 end
 
 return Commands

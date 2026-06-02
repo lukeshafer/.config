@@ -4,7 +4,6 @@ function Tabline.init()
 	vim.opt.tabline = "%!v:lua.require('lksh.tabline').render()"
 
 	vim.api.nvim_create_user_command("LSTablineSetTitle", function(opts)
-		-- require("lksh.utils").print_table(opts)
 		Tabline.set_title(opts.fargs[1])
 	end, { nargs = 1 })
 
