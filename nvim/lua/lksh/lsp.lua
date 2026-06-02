@@ -14,7 +14,7 @@ function LSP.init()
 		"bashls",
 	})
 
-	utils.run_in_context("work", function()
+	utils.use_in_context("work", function()
 		-- vim.lsp.enable({
 			-- "ts_ls",
 		-- })
@@ -30,12 +30,17 @@ function LSP.init()
 		})
 	end)
 
-	utils.run_in_context("desktop-wsl", function()
+	utils.use_in_context("desktop-wsl", function()
 		vim.lsp.config.gdscript = { cmd = { "godot-wsl-lsp" } }
 	end)
 
 	vim.api.nvim_create_autocmd("LspAttach", {
 		callback = function(ev)
+			local client = vim.lsp.get_client_by_id(ev.data.client_id)
+			if client and client:supports_method("textDocument/inlayHint") then
+				vim.lsp.inlay_hint.enable(true, { bufnr = ev.buf })
+			end
+
 			local opts = { noremap = true, silent = true, buffer = ev.buf }
 			vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
 			vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)

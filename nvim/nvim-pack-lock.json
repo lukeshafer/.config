@@ -1,5 +1,9 @@
 {
   "plugins": {
+    "agentic.nvim": {
+      "rev": "b6529a4749ee72ba64e40401e4b25d0ef7cdb81e",
+      "src": "https://github.com/carlos-algms/agentic.nvim"
+    },
     "conform.nvim": {
       "rev": "086a40dc7ed8242c03be9f47fbcee68699cc2395",
       "src": "https://github.com/stevearc/conform.nvim"

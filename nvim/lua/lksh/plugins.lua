@@ -1,8 +1,10 @@
-local utils = require("lksh.utils")
-
 if not vim.version.range(">=0.12.0"):has(vim.version()) then
 	vim.notify("Neovim plugins require version 0.12.0 or later.", vim.log.levels.ERROR)
 	return
+end
+
+local function resolve_plug(url)
+	return url:find("://") and url or "https://github.com/" .. url
 end
 
 local Plugins = {}
@@ -20,16 +22,17 @@ end
 
 function Plugins.init()
 	vim.pack.add({
-		utils.plugin("stevearc/oil.nvim"),
-		utils.plugin("nvim-mini/mini.nvim"),
-		utils.plugin("neovim/nvim-lspconfig"),
-		utils.plugin("stevearc/conform.nvim"),
-		utils.plugin("mfussenegger/nvim-lint"),
-		utils.plugin("windwp/nvim-ts-autotag"),
-		utils.plugin("williamboman/mason.nvim"),
-		utils.plugin("nvim-treesitter/nvim-treesitter"),
-		utils.plugin("refractalize/oil-git-status.nvim"),
-		utils.plugin("nvim-treesitter/nvim-treesitter-context"),
+		resolve_plug("stevearc/oil.nvim"),
+		resolve_plug("nvim-mini/mini.nvim"),
+		resolve_plug("neovim/nvim-lspconfig"),
+		resolve_plug("stevearc/conform.nvim"),
+		resolve_plug("mfussenegger/nvim-lint"),
+		resolve_plug("windwp/nvim-ts-autotag"),
+		resolve_plug("williamboman/mason.nvim"),
+		resolve_plug("carlos-algms/agentic.nvim"),
+		resolve_plug("nvim-treesitter/nvim-treesitter"),
+		resolve_plug("refractalize/oil-git-status.nvim"),
+		resolve_plug("nvim-treesitter/nvim-treesitter-context"),
 		-- utils.plugin("nvim-treesitter/nvim-treesitter-textobjects"),
 	})
 

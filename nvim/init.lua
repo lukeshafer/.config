@@ -6,7 +6,6 @@ end
 -- Editor Settings
 vim.o.tabstop = 2
 vim.o.shiftwidth = 2
-vim.o.termguicolors = true
 vim.o.expandtab = true
 vim.o.background = "dark" -- sets light/dark for some colorschemes
 vim.o.number = true
@@ -16,8 +15,9 @@ vim.o.cursorline = true
 -- vim.o.showtabline = 2
 vim.o.splitright = true
 vim.opt.diffopt:append({ "iwhiteall" })
-vim.opt.shortmess:append("I")
 vim.o.ignorecase = true
+
+vim.o.smoothscroll = true
 
 -- vim.o.statuscolumn = "%s%C%l"
 
@@ -35,14 +35,8 @@ vim.opt.fillchars = {
   -- foldsep = " ",
 }
 
-local utils = require("lksh.utils")
-if utils.IS_WINDOWS then
-  vim.o.backupdir = utils.HOME_DIR .. "\\.vim\\backup"
-  vim.o.dir = utils.HOME_DIR .. "\\.vim\\swapfiles"
-else
-  vim.o.backupdir = utils.HOME_DIR .. "/.vim/backup"
-  vim.o.dir = utils.HOME_DIR .. "/.vim/swapfiles"
-end
+vim.o.backupdir = vim.fn.expand("~/.vim/backup")
+vim.o.dir = vim.fn.expand("~/.vim/swapfiles")
 
 vim.g.mapleader = " "
 
@@ -52,9 +46,8 @@ LKSH = {
   Plugins = require("lksh.plugins"),
   LSP = require("lksh.lsp"),
   Statusline = require("lksh.statusline"),
-  --Treesitter = require("lksh.treesitter"),
   Tabline = require("lksh.tabline"),
-  Utils = utils,
+  Utils = require("lksh.utils"),
 }
 
 LKSH.Keys.init()
