@@ -125,8 +125,7 @@ function resolve_ssh_client_host() {
   fi
   local client_ip="${SSH_CONNECTION%% *}"
   local host
-  host="$(dig +short -x "$client_ip" 2>/dev/null | sed 's/\.$//')"
-  [[ -z $host ]] && host="$(host "$client_ip" 2>/dev/null | sed -n 's/.* pointer \(.*\)\.$/\1/p')"
+  host="$(getent hosts "$client_ip" 2>/dev/null | awk '{print $2}')"
   export SSH_CLIENT_HOST="${host:-$client_ip}"
 }
 
