@@ -33,8 +33,8 @@ local accent="white"
 # zle -N zle-keymap-select
 
 function ssh_prompt_info() {
-  if [[ -n $SSH_CLIENT_HOST ]]; then
-    echo "%F{$accent}󰣀 $SSH_CLIENT_HOST %f"
+  if [[ -n $SSH_CONNECTION ]]; then
+    echo "%F{$accent}󰣀 $HOST %f"
   fi
 }
 
