@@ -9,6 +9,7 @@ ZSH_THEME="lksh"
 source $ZSH/init-lib.zsh
 
 source $ZSH/hostnames.zsh
+resolve_ssh_client_host
 export PC_CONTEXT=$(idhost)
 export KEYTIMEOUT=1
 

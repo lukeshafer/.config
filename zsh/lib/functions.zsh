@@ -118,6 +118,18 @@ function omz_urlencode_old() {
 
 function urlencode() { omz_urlencode_old -P "$@"; }
 
+function resolve_ssh_client_host() {
+  if [[ -z $SSH_CONNECTION ]]; then
+    unset SSH_CLIENT_HOST
+    return
+  fi
+  local client_ip="${SSH_CONNECTION%% *}"
+  local host
+  host="$(dig +short -x "$client_ip" 2>/dev/null | sed 's/\.$//')"
+  [[ -z $host ]] && host="$(host "$client_ip" 2>/dev/null | sed -n 's/.* pointer \(.*\)\.$/\1/p')"
+  export SSH_CLIENT_HOST="${host:-$client_ip}"
+}
+
 # URL-decode a string
 #
 # Decodes a RFC 2396 URL-encoded (%-escaped) string.
