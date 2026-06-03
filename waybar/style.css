@@ -64,9 +64,8 @@
 
  .modules-right>widget>* {
    color: #ffffff;
-   border-radius: 10px;
-   padding: 3px 8px;
-   margin: 1px;
+   padding: 3px 4px;
+   /* margin: 1px; */
    /* border-right: 3px solid rgba(100, 114, 125, 0.5); */
    /* border-left: 3px solid rgba(100, 114, 125, 0.2); */
    /* background-color: rgba(0, 0, 0, 0.4); */
@@ -75,6 +74,15 @@
  #window,
  #workspaces {
    margin: 0 4px;
+ }
+
+ #memory,
+ #cpu,
+ #temperature {
+   /* font-size: 12px; */
+   color: #999999;
+   padding: 2px;
+   font-family: 'IosevkaTerm Nerd Font';
  }
 
  /* If workspaces is the leftmost module, omit left margin */

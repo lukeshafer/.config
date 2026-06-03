@@ -1,17 +1,19 @@
-local utils = require("lksh.utils")
 local keys = require("lksh.keymaps")
+local utils = require("lksh.utils")
 local conform = require("conform")
+
+local js_formatter = utils.use_in_context("personal", { "prettier" }, {})
 
 conform.setup({
 	formatters_by_ft = {
 		lua = { "stylua" },
-		javascript = utils.js_formatter,
-		typescript = utils.js_formatter,
-		javascriptreact = utils.js_formatter,
-		typescriptreact = utils.js_formatter,
-		jsx = utils.js_formatter,
-		tsx = utils.js_formatter,
-		astro = utils.js_formatter,
+		javascript = js_formatter,
+		typescript = js_formatter,
+		javascriptreact = js_formatter,
+		typescriptreact = js_formatter,
+		jsx = js_formatter,
+		tsx = js_formatter,
+		astro = js_formatter,
 		json = { "fixjson" },
 		asl = { "fixjson" },
 		soql = { "sleek" },

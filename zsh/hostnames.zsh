@@ -1,7 +1,7 @@
 typeset -A hostnames=(
   K4L7X4FWFW "work"
   lukelaptop "personal"
-  grombert-crombert "personal"
+  gombertcrombert "personal"
 )
 
 function idhost() {
