@@ -55,6 +55,9 @@ function Keymaps.init()
 
 	Keymaps.set_map("n", "<leader>c", "<cmd>colorscheme randomhue<cr>")
 
+	Keymaps.set_map("n", "n", "nzz")
+	Keymaps.set_map("n", "N", "Nzz")
+
 	--------VISUAL MODE---------
 	-- Indenting keeps previous highlight
 	vim.keymap.set("v", ">", ">gv")
