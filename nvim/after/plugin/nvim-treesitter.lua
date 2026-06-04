@@ -1,4 +1,5 @@
-local nvim_ts = require("nvim-treesitter")
+local ok, nvim_ts = pcall(require, "nvim-treesitter")
+if not ok then return end
 nvim_ts.install({})
 
 local function highlight(bufnr, lang)

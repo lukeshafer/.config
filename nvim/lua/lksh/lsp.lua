@@ -16,7 +16,7 @@ function LSP.init()
 
 	utils.use_in_context("work", function()
 		-- vim.lsp.enable({
-			-- "ts_ls",
+		-- "ts_ls",
 		-- })
 	end, function()
 		-- NOT NEEDED AT WORK
@@ -41,11 +41,11 @@ function LSP.init()
 				vim.lsp.inlay_hint.enable(true, { bufnr = ev.buf })
 			end
 
-			local opts = { noremap = true, silent = true, buffer = ev.buf }
-			vim.keymap.set("n", "gd", vim.lsp.buf.definition, vim.tbl_extend("force", opts, { desc = "Go to definition" }))
-			vim.keymap.set("n", "gD", vim.lsp.buf.declaration, vim.tbl_extend("force", opts, { desc = "Go to declaration" }))
-			vim.keymap.set("n", "gl", vim.diagnostic.open_float, vim.tbl_extend("force", opts, { desc = "Show diagnostic float" }))
-			vim.keymap.set("n", "K", vim.lsp.buf.hover, vim.tbl_extend("force", opts, { desc = "Hover documentation" }))
+			local opts = { buffer = ev.buf }
+			vim.keymap.set("n", "gd", vim.lsp.buf.definition, { buffer = ev.buf, desc = "Go to definition" })
+			vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { buffer = ev.buf, desc = "Go to declaration" })
+			vim.keymap.set("n", "gl", vim.diagnostic.open_float, { buffer = ev.buf, desc = "Show diagnostic float" })
+			vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = ev.buf, desc = "Hover documentation" })
 		end,
 	})
 

@@ -1,5 +1,6 @@
 local utils = require("lksh.utils")
-local agentic = require("agentic")
+local ok, agentic = pcall(require, "agentic")
+if not ok then return end
 
 utils.use_in_context("work", function()
 	agentic.setup({

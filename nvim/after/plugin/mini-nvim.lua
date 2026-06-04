@@ -11,6 +11,9 @@
 -- 	return value
 -- end
 
+local ok, _ = pcall(require, "mini.notify")
+if not ok then return end
+
 require("mini.notify").setup({})
 require("mini.colors").setup({})
 require("mini.cursorword").setup({})

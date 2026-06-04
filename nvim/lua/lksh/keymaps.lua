@@ -6,10 +6,14 @@ function Keymaps.init()
 	vim.keymap.set("n", "<C-k>", ":m -2<CR>", { desc = "Move line up" })
 	vim.keymap.set("n", "<C-Down>", ":m +1<CR>", { desc = "Move line down" })
 	vim.keymap.set("n", "<C-j>", ":m +1<CR>", { desc = "Move line down" })
-	-- ESC also clears highlighting
-	vim.keymap.set("n", "<leader><Esc>", function()
-		vim.notify("Use <C-l>")
-	end, { desc = "Clear search highlight" })
+
+	vim.keymap.set(
+		"n",
+		"<leader><Esc>",
+		"<cmd>lua vim.notify('Luke, use <C-l>',vim.log.levels.WARN)<cr>",
+		{ desc = "Break bad habits" }
+	)
+
 	-- use <C-l>
 	-- x deletes character but does not put in clipboard"
 	vim.keymap.set("n", "x", '"_x', { desc = "Delete char (no yank)" })
@@ -18,10 +22,9 @@ function Keymaps.init()
 	-- Semicolon is also Colon
 	vim.keymap.set("n", ";", ":", { desc = "Enter command mode" })
 	-- Leader+Y copies to system clipboard
-	vim.keymap.set({"n","v"}, "<leader>y", '"+y', { desc = "Yank to system clipboard" })
+	vim.keymap.set({ "n", "v" }, "<leader>y", '"+y', { desc = "Yank to system clipboard" })
 	-- vim.keymap.set("v", "<leader>y", '"+y', { desc = "Yank to system clipboard" })
 	vim.keymap.set("n", "<leader>s", ":Inspect<cr>", { desc = "Inspect highlight group" })
-	vim.keymap.set("n", "ZR", "<cmd>LSRestart<cr>", { desc = "Restart Neovim and restore session" })
 	vim.keymap.set("n", "<leader>lf", "<cmd>%lua<cr>", { desc = "Execute buffer as lua" })
 	vim.keymap.set("n", "<C-u>", "<C-u>zz", { desc = "Half-page up and center" })
 	vim.keymap.set("n", "<C-d>", "<C-d>zz", { desc = "Half-page down and center" })

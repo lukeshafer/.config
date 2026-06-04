@@ -1,5 +1,6 @@
 local utils = require("lksh.utils")
-local conform = require("conform")
+local ok, conform = pcall(require, "conform")
+if not ok then return end
 
 local js_formatter = utils.use_in_context("personal", { "prettier" }, {})
 

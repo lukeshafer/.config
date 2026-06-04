@@ -35,6 +35,7 @@ function Commands.init()
 			vim.api.nvim_exec_autocmds("User", { pattern = "LSRestartPost" })
 		end, 100)
 	end
+	vim.keymap.set("n", "ZR", "<cmd>LSRestart<cr>", { desc = "Restart Neovim and restore session" })
 
 	vim.api.nvim_create_user_command("LSBlame", function(opts)
 		local l1, l2
