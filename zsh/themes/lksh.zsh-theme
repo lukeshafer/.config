@@ -5,9 +5,32 @@
 
 # %F{black}\${(l.\$COLUMNS..-.)}%{$reset_color%}
 
-local colors=("blue" "cyan" "magenta" "green" "yellow" "red")
-local color_index="$(($RANDOM % ${#colors[@]} + 1))"
-local main="103"
+# local colors=("blue" "cyan" "magenta" "green" "yellow" "red")
+# local color_index="$(($RANDOM % ${#colors[@]} + 1))"
+
+case "$HOST" in
+  snerver)
+    local main="29"
+    local accent="36"
+    ;;
+  lukelaptop)
+    local main="103"
+    local accent="105"
+    ;;
+  gombertcrombert)
+    local main="68"
+    local accent="69"
+    ;;
+  K4L7X4FWFW)
+    local main="174"
+    local accent="204"
+    ;;
+  *)
+    local main="203"
+    local accent="205"
+    ;;
+esac
+
 local dark="236"
 local light="231"
 
@@ -22,22 +45,9 @@ local light="231"
 #           
 #    
 
-# function zle-line-init zle-keymap-select {
-#   VI_MODE="${${KEYMAP/vicmd/ }/(main|viins)/ }"
-#   if [[ $KEYMAP == vicmd ]]; then
-#     printf '\e[2 q'  # block cursor
-#   else
-#     printf '\e[6 q'  # beam cursor
-#   fi
-#   zle reset-prompt
-# }
-#
-# zle -N zle-line-init
-# zle -N zle-keymap-select
-
 function ssh_prompt_info() {
   if [[ -n $SSH_CONNECTION ]]; then
-    echo "@%F{43}%B$HOST%b"
+    echo "%F{250}@%F{$accent}%B$HOST%b"
   fi
 }
 
@@ -46,7 +56,7 @@ function pwd_prompt() {
 }
 
 function user_prompt() {
-  echo "%F{105}%n%f"
+  echo "%F{$accent}%n%f"
 }
 
 PROMPT="
