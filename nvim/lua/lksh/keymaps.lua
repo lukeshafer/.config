@@ -1,69 +1,56 @@
 local Keymaps = {}
 
----@param modes string|string[]
----@param lhs string
----@param rhs string|function
----@param opts? vim.keymap.set.Opts
-function Keymaps.set_map(modes, lhs, rhs, opts)
-	opts = opts or {}
-	if opts.noremap == nil then
-		opts.noremap = true
-	end
-	if opts.silent == nil then
-		opts.silent = true
-	end
-
-	vim.keymap.set(modes, lhs, rhs, opts)
-end
-
 function Keymaps.init()
 	-- CTRL Up/Down moves lines up/down
-	Keymaps.set_map("n", "<C-Up>", ":m -2<CR>")
-	Keymaps.set_map("n", "<C-k>", ":m -2<CR>")
-	Keymaps.set_map("n", "<C-Down>", ":m +1<CR>")
-	Keymaps.set_map("n", "<C-j>", ":m +1<CR>")
+	vim.keymap.set("n", "<C-Up>", ":m -2<CR>")
+	vim.keymap.set("n", "<C-k>", ":m -2<CR>")
+	vim.keymap.set("n", "<C-Down>", ":m +1<CR>")
+	vim.keymap.set("n", "<C-j>", ":m +1<CR>")
 	-- ESC also clears highlighting
-	Keymaps.set_map("n", "<leader><Esc>", ":noh<cr>")
+	vim.keymap.set("n", "<leader><Esc>", ":noh<cr>")
 	-- x deletes character but does not put in clipboard"
-	Keymaps.set_map("n", "x", '"_x')
-	Keymaps.set_map("n", "<leader>x", ":bprevious|bdelete #<cr>")
-	Keymaps.set_map("n", "<leader>XX", ":bdelete!<cr>")
+	vim.keymap.set("n", "x", '"_x')
+	vim.keymap.set("n", "<leader>x", ":bprevious|bdelete #<cr>")
+	vim.keymap.set("n", "<leader>XX", ":bdelete!<cr>")
 	-- Semicolon is also Colon
-	Keymaps.set_map("n", ";", ":")
+	vim.keymap.set("n", ";", ":")
 	-- Leader+Y copies to system clipboard
-	Keymaps.set_map("n", "<leader>y", '"+y')
-	Keymaps.set_map("v", "<leader>y", '"+y')
-	Keymaps.set_map("n", "<leader>s", ":Inspect<cr>")
-	Keymaps.set_map("n", "ZR", "<cmd>LSRestart<cr>")
+	vim.keymap.set("n", "<leader>y", '"+y')
+	vim.keymap.set("v", "<leader>y", '"+y')
+	vim.keymap.set("n", "<leader>s", ":Inspect<cr>")
+	vim.keymap.set("n", "ZR", "<cmd>LSRestart<cr>")
+	vim.keymap.set("n", "<leader>lf", "<cmd>%lua<cr>")
+	vim.keymap.set("n", "<C-u>", "<C-u>zz")
+	vim.keymap.set("n", "<C-d>", "<C-d>zz")
 
-	-- Keymaps.set_map("n", "<Tab>", "<cmd>tabnext<cr>")
-	-- Keymaps.set_map("n", "<S-Tab>", "<cmd>tabprevious<cr>")
+	-- vim.keymap.set("n", "<Tab>", "<cmd>tabnext<cr>")
+	-- vim.keymap.set("n", "<S-Tab>", "<cmd>tabprevious<cr>")
 	-- Leader+T opens terminal in pane
-	-- Keymaps.set_map("n", "<leader>t", ":belowright 15sp|term<cr>") -- WIP for no plugin
-	Keymaps.set_map("n", "<leader>t", "<cmd>horiz term<cr>")
-	Keymaps.set_map("n", "<leader>T", "<cmd>vert term<cr>")
+	-- vim.keymap.set("n", "<leader>t", ":belowright 15sp|term<cr>") -- WIP for no plugin
+	vim.keymap.set("n", "<leader>t", "<cmd>horiz term<cr>")
+	vim.keymap.set("n", "<leader>T", "<cmd>vert term<cr>")
 
-	Keymaps.set_map("n", "<leader>d", function()
+	vim.keymap.set("n", "<leader>d", function()
 		vim.diagnostic.open_float({ source = true })
 	end)
-	Keymaps.set_map("n", "<leader>q", vim.diagnostic.setloclist)
+	vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist)
 
-	Keymaps.set_map("n", "<leader>c", "<cmd>colorscheme randomhue<cr>")
+	vim.keymap.set("n", "<leader>c", "<cmd>colorscheme randomhue<cr>")
 
-	Keymaps.set_map("n", "n", "nzz")
-	Keymaps.set_map("n", "N", "Nzz")
+	vim.keymap.set("n", "n", "nzz")
+	vim.keymap.set("n", "N", "Nzz")
 
 	--------VISUAL MODE---------
 	-- Indenting keeps previous highlight
-	Keymaps.set_map("v", ">", ">gv")
-	Keymaps.set_map("v", "<", "<gv")
+	vim.keymap.set("v", ">", ">gv")
+	vim.keymap.set("v", "<", "<gv")
 
-	-- Keymaps.set_map("v", "<leader>s", "<Cmd>LSSortList<cr>")
-	Keymaps.set_map({ "v", "n" }, "<leader>gb", "<Cmd>LSBlame<cr>")
+	-- vim.keymap.set("v", "<leader>s", "<Cmd>LSSortList<cr>")
+	vim.keymap.set({ "v", "n" }, "<leader>gb", "<Cmd>LSBlame<cr>")
 
 	-- nvim terminal mappings
 	-- Escape gets out of insert (in terminal)
-	Keymaps.set_map("t", "<Esc>", "<C-\\><C-n>")
+	vim.keymap.set("t", "<Esc>", "<C-\\><C-n>")
 end
 
 return Keymaps

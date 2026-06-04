@@ -2,12 +2,10 @@ local Tabline = {}
 
 function Tabline.init()
 	vim.opt.tabline = "%!v:lua.require('lksh.tabline').render()"
-
 	vim.api.nvim_create_user_command("LSTablineSetTitle", function(opts)
 		Tabline.set_title(opts.fargs[1])
 	end, { nargs = 1 })
-
-	require("lksh.keymaps").set_map("n", "<leader>n", ":LSTablineSetTitle ")
+	vim.keymap.set("n", "<leader>n", ":LSTablineSetTitle ")
 end
 
 ---comment
@@ -84,7 +82,7 @@ function Tabline.render()
 			tabline_table,
 			table.concat({
 				highlight,
-        " ",
+				" ",
 				"%" .. index .. "T",
 				index .. " ",
 				title,

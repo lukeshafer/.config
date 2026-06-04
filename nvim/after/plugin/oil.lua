@@ -1,5 +1,3 @@
-local keys = require("lksh.keymaps")
-
 local oil = require("oil")
 oil.setup({
 	columns = {
@@ -32,9 +30,9 @@ oil.setup({
 
 require("oil-git-status").setup({})
 
-keys.set_map("n", "<leader>e", function()
+vim.keymap.set("n", "<leader>e", function()
 	oil.open_float(nil, { preview = { vertical = true } })
 end)
-keys.set_map("n", "<leader>E", function()
+vim.keymap.set("n", "<leader>E", function()
 	oil.open()
 end)

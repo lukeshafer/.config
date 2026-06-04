@@ -1,4 +1,3 @@
-local keys = require("lksh.keymaps")
 local utils = require("lksh.utils")
 local conform = require("conform")
 
@@ -21,6 +20,6 @@ conform.setup({
 	},
 })
 
-keys.set_map("n", "<leader>f", function()
+vim.keymap.set("n", "<leader>f", function()
 	conform.format({ timeout_ms = 2000, lsp_fallback = true })
 end)

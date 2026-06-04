@@ -1,4 +1,3 @@
-local keys = require("lksh.keymaps")
 local utils = require("lksh.utils")
 local agentic = require("agentic")
 
@@ -63,6 +62,16 @@ utils.use_in_context("work", function()
 		end,
 	})
 
+	vim.api.nvim_create_autocmd("FileType", {
+		group = vim.api.nvim_create_augroup("AgenticCleanup", { clear = false }),
+		pattern = "AgenticChat",
+		callback = function(args)
+			if vim.treesitter.language.add("markdown") then
+				vim.treesitter.start(args.buf, "markdown")
+			end
+		end,
+	})
+
 	-- Hook into LSRestart to preserve agentic session across restarts
 	local agentic_id_path = vim.fn.stdpath("state") .. "/lsrestart-agentic-id"
 	local SessionRegistry = require("agentic.session_registry")
@@ -107,8 +116,8 @@ utils.use_in_context("work", function()
 		end,
 	})
 
-	keys.set_map({ "n", "v" }, "<leader>at", agentic.toggle, { desc = "Toggle agent chat" })
-	keys.set_map({ "n" }, "<leader>ar", function()
+	vim.keymap.set({ "n", "v" }, "<leader>at", agentic.toggle, { desc = "Toggle agent chat" })
+	vim.keymap.set({ "n" }, "<leader>ar", function()
 		local session_dir = vim.fn.expand("~/.kiro/sessions/cli")
 		local files = vim.fn.glob(session_dir .. "/*.json", false, true)
 		if #files == 0 then
@@ -152,20 +161,20 @@ utils.use_in_context("work", function()
 			end
 		end)
 	end, { desc = "Restore agent session" })
-	keys.set_map({ "n", "v" }, "<leader>an", agentic.new_session, { desc = "New agent session" })
-	keys.set_map(
+	vim.keymap.set({ "n", "v" }, "<leader>an", agentic.new_session, { desc = "New agent session" })
+	vim.keymap.set(
 		{ "n", "v" },
 		"<leader>ac",
 		agentic.add_selection_or_file_to_context,
 		{ desc = "Add file or selection to agent context" }
 	)
-	keys.set_map(
+	vim.keymap.set(
 		{ "n", "v" },
 		"<leader>ad",
 		agentic.add_current_line_diagnostics,
 		{ desc = "Add current line diagnostics to agent context" }
 	)
-	keys.set_map(
+	vim.keymap.set(
 		{ "n", "v" },
 		"<leader>aD",
 		agentic.add_current_line_diagnostics,

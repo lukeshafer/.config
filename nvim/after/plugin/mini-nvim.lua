@@ -1,17 +1,15 @@
-local keys = require("lksh.keymaps")
-
----@param text string
-local function get_seed_from_string(text)
-	local value = 0
-	local prev = 3
-	local MAX = 1000
-	for c in text:gmatch(".") do
-		local b = c:byte()
-		value = math.fmod(b * (value + prev * b), MAX)
-		prev = b
-	end
-	return value
-end
+-- ---@param text string
+-- local function get_seed_from_string(text)
+-- 	local value = 0
+-- 	local prev = 3
+-- 	local MAX = 1000
+-- 	for c in text:gmatch(".") do
+-- 		local b = c:byte()
+-- 		value = math.fmod(b * (value + prev * b), MAX)
+-- 		prev = b
+-- 	end
+-- 	return value
+-- end
 
 require("mini.notify").setup({})
 require("mini.colors").setup({})
@@ -32,12 +30,12 @@ local mini_colors = require("mini.colors")
 mini_colors.setup({})
 
 --- MINI HUES ---
-math.randomseed(get_seed_from_string(vim.fn.getcwd()))
+-- math.randomseed(get_seed_from_string(vim.fn.getcwd()))
 
 local bg_l, fg_l, sat
 if vim.o.background == "dark" then
-	bg_l = 12
-	fg_l = 87
+	bg_l = 5
+	fg_l = 91
 	sat = "medium"
 else
 	bg_l = 85
@@ -45,20 +43,31 @@ else
 	sat = "high"
 end
 
+-- require("mini.hues").setup({
+-- 	background = MiniColors.convert({ l = bg_l, c = 2, h = math.random(180, 360) }, "hex"),
+-- 	foreground = MiniColors.convert({ l = fg_l, c = 1, h = math.random(0, 360) }, "hex"),
+-- 	n_hues = 8,
+-- 	saturation = sat,
+-- })
 require("mini.hues").setup({
-	background = mini_colors.convert({ l = bg_l, c = 2, h = math.random(180, 360) }, "hex"),
-	foreground = mini_colors.convert({ l = fg_l, c = 1, h = math.random(0, 360) }, "hex"),
+	background = MiniColors.convert({
+		l = bg_l,
+		c = 5,
+		h = 315,
+	}, "hex"),
+	foreground = MiniColors.convert({
+		l = fg_l,
+		c = 2,
+		h = 199,
+	}, "hex"),
 	n_hues = 8,
 	saturation = sat,
 })
 
-vim.g.colors_name = "randomhue"
+vim.g.colors_name = "lukehue"
 
-local kitty_pid = os.getenv("KITTY_PID")
-if kitty_pid ~= nil and kitty_pid ~= "" then -- transparent bg on kitty
-	vim.api.nvim_set_hl(0, "Normal", { update = true, bg = "none", ctermbg = "none" })
-	vim.api.nvim_set_hl(0, "NonText", { update = true, bg = "none", ctermbg = "none" })
-end
+vim.api.nvim_set_hl(0, "Normal", { update = true, bg = "none", ctermbg = "none" })
+vim.api.nvim_set_hl(0, "NonText", { update = true, bg = "none", ctermbg = "none" })
 
 --- MINI INDENTSCOPE ---
 local mini_indentscope = require("mini.indentscope")
@@ -85,7 +94,7 @@ mini_diff.setup({
 })
 
 vim.api.nvim_set_hl(0, "MiniDiffSignChange", { link = "diffFile" })
-keys.set_map("n", "<leader>gd", function()
+vim.keymap.set("n", "<leader>gd", function()
 	mini_diff.toggle_overlay(0)
 end)
 
@@ -99,11 +108,11 @@ vim.keymap.set("i", "<S-Tab>", [[pumvisible() ? "\<C-p>" : "\<S-Tab>"]], { expr 
 local mini_pick = require("mini.pick")
 mini_pick.setup({})
 
-keys.set_map("n", "ff", mini_pick.builtin.files)
-keys.set_map("n", "fg", mini_pick.builtin.grep_live)
-keys.set_map("n", "fb", mini_pick.builtin.buffers)
-keys.set_map("n", "fh", mini_pick.builtin.help)
-keys.set_map("n", "fm", mini_extra.pickers.manpages)
+vim.keymap.set("n", "ff", mini_pick.builtin.files)
+vim.keymap.set("n", "fg", mini_pick.builtin.grep_live)
+vim.keymap.set("n", "fb", mini_pick.builtin.buffers)
+vim.keymap.set("n", "fh", mini_pick.builtin.help)
+vim.keymap.set("n", "fm", mini_extra.pickers.manpages)
 
 --- MINI HIPATTERNS ---
 local mini_hipatterns = require("mini.hipatterns")
@@ -133,4 +142,4 @@ mini_map.setup({
 	},
 })
 
-keys.set_map("n", "<leader>m", mini_map.toggle)
+vim.keymap.set("n", "<leader>m", mini_map.toggle)
