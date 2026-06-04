@@ -6,3 +6,6 @@
     rebase = false
 
 
+[user]
+	email = lukealanshafer@gmail.com
+	name = Luke Shafer
