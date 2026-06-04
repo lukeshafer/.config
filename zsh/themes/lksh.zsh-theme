@@ -7,8 +7,10 @@
 
 local colors=("blue" "cyan" "magenta" "green" "yellow" "red")
 local color_index="$(($RANDOM % ${#colors[@]} + 1))"
-local main="magenta"
-local accent="116"
+local main="104"
+local accent="43"
+local dark="236"
+local light="231"
 
 # iTerm renders the   characters differently
 # if [[ -n "$ITERM_PROFILE" ]] then
@@ -36,19 +38,23 @@ local accent="116"
 
 function ssh_prompt_info() {
   if [[ -n $SSH_CONNECTION ]]; then
-    echo "%F{34}%K{default} %B󱘖 $HOST %F{$main}$right_sep%b"
+    echo "@%F{43}%B$HOST%b"
   fi
 }
 
 function pwd_prompt() {
-  echo "%F{black}%K{$main} %~ "
+  echo "%F{$dark}%K{$main} %B%~%b "
+}
+
+function user_prompt() {
+  echo "%F{33}%n%f"
 }
 
 PROMPT="
-\$(ssh_prompt_info)\$(pwd_prompt)%K{default}%F{$main}$left_sep%K{default} \$(git_prompt_info)%{$reset_color%}
-%F{$main}%n%F{default}%K{default} %F{white}%(!.#.»)%F{default}%K{default} "
+\$(pwd_prompt)%K{default}%F{$main}$left_sep%K{default} \$(git_prompt_info)%{$reset_color%}
+%k\$(user_prompt)\$(ssh_prompt_info) %F{$light}%(!.#.»)%F{default}%K{default} "
 
-RPROMPT="%(?..%{$fg[red]%}%? ↵%{$reset_color%}) %F{white}%t"
+RPROMPT="%(?..%{$fg[red]%}%? ↵%{$reset_color%}) %F{$light}%t"
 
 # useful chars:  
 #            »
