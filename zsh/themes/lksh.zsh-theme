@@ -34,12 +34,12 @@ local accent="white"
 
 function ssh_prompt_info() {
   if [[ -n $SSH_CONNECTION ]]; then
-    echo "%F{$accent}󰣀 $HOST %f"
+    echo "%B󰣀 $HOST: %b"
   fi
 }
 
 PROMPT="
-%F{black}%K{$main} %~ %K{default}%F{$main}$left_sep%K{default} \$(ssh_prompt_info)\$(git_prompt_info)%{$reset_color%}
+%F{black}%K{$main} \$(ssh_prompt_info)%~ %K{default}%F{$main}$left_sep%K{default} \$(git_prompt_info)%{$reset_color%}
 %F{$main}%n@%B%m%b%F{default}%K{default} %F{$accent}%(!.#.»)%F{default}%K{default} "
 
 RPROMPT="%(?..%{$fg[red]%}%? ↵%{$reset_color%}) %F{$accent}%t"
