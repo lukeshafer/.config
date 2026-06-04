@@ -27,12 +27,12 @@ local plugins = {
 require("lazy").setup(plugins)
 
 local map_opts = { noremap = true, silent = true }
-vim.keymap.set("n", "<C-Up>", ":m -2<CR>", map_opts)
-vim.keymap.set("n", "<C-k>", ":m -2<CR>", map_opts)
-vim.keymap.set("n", "<C-Down>", ":m +1<CR>", map_opts)
-vim.keymap.set("n", "<C-j>", ":m +1<CR>", map_opts)
-vim.keymap.set("n", ";", ":", map_opts)
-vim.keymap.set("v", ">", ">gv", map_opts)
-vim.keymap.set("v", "<", "<gv", map_opts)
+vim.keymap.set("n", "<C-Up>", ":m -2<CR>", vim.tbl_extend("force", map_opts, { desc = "Move line up" }))
+vim.keymap.set("n", "<C-k>", ":m -2<CR>", vim.tbl_extend("force", map_opts, { desc = "Move line up" }))
+vim.keymap.set("n", "<C-Down>", ":m +1<CR>", vim.tbl_extend("force", map_opts, { desc = "Move line down" }))
+vim.keymap.set("n", "<C-j>", ":m +1<CR>", vim.tbl_extend("force", map_opts, { desc = "Move line down" }))
+vim.keymap.set("n", ";", ":", vim.tbl_extend("force", map_opts, { desc = "Enter command mode" }))
+vim.keymap.set("v", ">", ">gv", vim.tbl_extend("force", map_opts, { desc = "Indent and reselect" }))
+vim.keymap.set("v", "<", "<gv", vim.tbl_extend("force", map_opts, { desc = "Dedent and reselect" }))
 
-vim.keymap.set("n", "<leader><Esc>", ":noh<cr>", map_opts)
+vim.keymap.set("n", "<leader><Esc>", ":noh<cr>", vim.tbl_extend("force", map_opts, { desc = "Clear search highlight" }))

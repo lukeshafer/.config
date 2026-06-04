@@ -22,4 +22,4 @@ conform.setup({
 
 vim.keymap.set("n", "<leader>f", function()
 	conform.format({ timeout_ms = 2000, lsp_fallback = true })
-end)
+end, { desc = "Format buffer" })

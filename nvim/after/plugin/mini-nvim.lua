@@ -96,23 +96,23 @@ mini_diff.setup({
 vim.api.nvim_set_hl(0, "MiniDiffSignChange", { link = "diffFile" })
 vim.keymap.set("n", "<leader>gd", function()
 	mini_diff.toggle_overlay(0)
-end)
+end, { desc = "Toggle git diff overlay" })
 
 --- MINI COMPLETION ---
 require("mini.completion").setup({})
 
-vim.keymap.set("i", "<Tab>", [[pumvisible() ? "\<C-n>" : "\<Tab>"]], { expr = true })
-vim.keymap.set("i", "<S-Tab>", [[pumvisible() ? "\<C-p>" : "\<S-Tab>"]], { expr = true })
+vim.keymap.set("i", "<Tab>", [[pumvisible() ? "\<C-n>" : "\<Tab>"]], { expr = true, desc = "Next completion or Tab" })
+vim.keymap.set("i", "<S-Tab>", [[pumvisible() ? "\<C-p>" : "\<S-Tab>"]], { expr = true, desc = "Prev completion or S-Tab" })
 
 --- MINI PICK ---
 local mini_pick = require("mini.pick")
 mini_pick.setup({})
 
-vim.keymap.set("n", "ff", mini_pick.builtin.files)
-vim.keymap.set("n", "fg", mini_pick.builtin.grep_live)
-vim.keymap.set("n", "fb", mini_pick.builtin.buffers)
-vim.keymap.set("n", "fh", mini_pick.builtin.help)
-vim.keymap.set("n", "fm", mini_extra.pickers.manpages)
+vim.keymap.set("n", "ff", mini_pick.builtin.files, { desc = "mini.pick Find files" })
+vim.keymap.set("n", "fg", mini_pick.builtin.grep_live, { desc = "mini.pick Live grep" })
+vim.keymap.set("n", "fb", mini_pick.builtin.buffers, { desc = "mini.pick Find buffers" })
+vim.keymap.set("n", "fh", mini_pick.builtin.help, { desc = "mini.pick Find help tags" })
+vim.keymap.set("n", "fm", mini_extra.pickers.manpages, { desc = "mini.pick Find man pages" })
 
 --- MINI HIPATTERNS ---
 local mini_hipatterns = require("mini.hipatterns")
@@ -142,4 +142,4 @@ mini_map.setup({
 	},
 })
 
-vim.keymap.set("n", "<leader>m", mini_map.toggle)
+vim.keymap.set("n", "<leader>m", mini_map.toggle, { desc = "mini.map Toggle minimap" })

@@ -5,7 +5,7 @@ function Tabline.init()
 	vim.api.nvim_create_user_command("LSTablineSetTitle", function(opts)
 		Tabline.set_title(opts.fargs[1])
 	end, { nargs = 1 })
-	vim.keymap.set("n", "<leader>n", ":LSTablineSetTitle ")
+	vim.keymap.set("n", "<leader>n", ":LSTablineSetTitle ", { desc = "Set tab title" })
 end
 
 ---comment

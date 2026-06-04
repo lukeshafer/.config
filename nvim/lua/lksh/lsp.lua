@@ -42,10 +42,10 @@ function LSP.init()
 			end
 
 			local opts = { noremap = true, silent = true, buffer = ev.buf }
-			vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-			vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
-			vim.keymap.set("n", "gl", vim.diagnostic.open_float, opts)
-			vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+			vim.keymap.set("n", "gd", vim.lsp.buf.definition, vim.tbl_extend("force", opts, { desc = "Go to definition" }))
+			vim.keymap.set("n", "gD", vim.lsp.buf.declaration, vim.tbl_extend("force", opts, { desc = "Go to declaration" }))
+			vim.keymap.set("n", "gl", vim.diagnostic.open_float, vim.tbl_extend("force", opts, { desc = "Show diagnostic float" }))
+			vim.keymap.set("n", "K", vim.lsp.buf.hover, vim.tbl_extend("force", opts, { desc = "Hover documentation" }))
 		end,
 	})
 
