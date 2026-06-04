@@ -7,8 +7,7 @@
 
 local colors=("blue" "cyan" "magenta" "green" "yellow" "red")
 local color_index="$(($RANDOM % ${#colors[@]} + 1))"
-local main="104"
-local accent="43"
+local main="103"
 local dark="236"
 local light="231"
 
@@ -43,15 +42,15 @@ function ssh_prompt_info() {
 }
 
 function pwd_prompt() {
-  echo "%F{$dark}%K{$main} %B%~%b "
+  echo "%F{$dark}%K{$main} %B%~%b %k%F{$main}$left_sep"
 }
 
 function user_prompt() {
-  echo "%F{33}%n%f"
+  echo "%F{105}%n%f"
 }
 
 PROMPT="
-\$(pwd_prompt)%K{default}%F{$main}$left_sep%K{default} \$(git_prompt_info)%{$reset_color%}
+\$(pwd_prompt) \$(git_prompt_info)%{$reset_color%}
 %k\$(user_prompt)\$(ssh_prompt_info) %F{$light}%(!.#.»)%F{default}%K{default} "
 
 RPROMPT="%(?..%{$fg[red]%}%? ↵%{$reset_color%}) %F{$light}%t"
