@@ -9,6 +9,8 @@ PATH="$NPM_PACKAGES/bin:$PATH"
 unset MANPATH # delete if you already modified MANPATH elsewhere in your config
 MANPATH="$NPM_PACKAGES/share/man:$(manpath)"
 
+alias snerv="ssh snerver"
+
 export AUR_PAGER="nvim"
 
 # set bun paths
@@ -122,6 +124,8 @@ alias gm-devtoqa="gch qa && gm dev && gp && gch dev"
 # alias lsconfig="cd ~/.config && nvim && cd -"
 
 alias open="open_command"
+
+function aia() { opencode run "$*"; }
 
 # alias mcstartserver="java -Xmx1G -Xms1G -jar paper.jar --nogui"
 # alias mcrefreshplugin="cp /home/luke/Code/minecraft-dev/*/target/*-SNAPSHOT.jar /home/luke/Code/minecraft-dev/server/plugins"
