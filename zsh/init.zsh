@@ -16,7 +16,7 @@ export KEYTIMEOUT=1
 # Common config
 export EDITOR="nvim" # Preferred editor for local and remote sessions
 export MANPAGER='nvim +Man!'
-export LESS="FRrX"
+export LESS="RrX"
 
 export PATH="$HOME/.local/bin:$PATH"
 

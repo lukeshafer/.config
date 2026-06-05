@@ -17,6 +17,7 @@ vim.filetype.add({
     ["APIJenkinsfile"] = "groovy",
     ["tsconfig.json"] = "jsonc",
     ["jsconfig.json"] = "jsonc",
+    ["Caddyfile"] = "caddy",
   },
 })
 
