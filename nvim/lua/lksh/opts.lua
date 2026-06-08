@@ -15,6 +15,8 @@ function Opts.init()
 	vim.opt.diffopt:append({ "iwhiteall" })
 	vim.o.ignorecase = true
 
+	vim.opt.shortmess:append("I")
+
 	vim.o.smoothscroll = true
 
 	-- vim.o.statuscolumn = "%s%C%l"
