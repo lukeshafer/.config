@@ -41,7 +41,7 @@ function Keymaps.init()
 	end, { desc = "Show diagnostic float with source" })
 	vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Send diagnostics to loclist" })
 
-	vim.keymap.set("n", "<leader>c", "<cmd>colorscheme randomhue<cr>", { desc = "Randomize colorscheme" })
+	-- vim.keymap.set("n", "<leader>c", "<cmd>colorscheme randomhue<cr>", { desc = "Randomize colorscheme" })
 
 	vim.keymap.set("n", "n", "nzz", { desc = "Next search result and center" })
 	vim.keymap.set("n", "N", "Nzz", { desc = "Prev search result and center" })
