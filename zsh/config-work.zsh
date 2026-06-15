@@ -30,8 +30,6 @@ export PATH="/opt/homebrew/opt/openjdk11/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 export DOCKER_HOST="unix:/$HOME/.docker/run/docker.sock"
 
-alias zrc="nvim $HOME/.config/.zshrc.work && source $HOME/.zshrc"
-
 # Custom sam aliases
 alias sb="sam build --config-env ls"
 alias sd="sam deploy --config-env ls --profile dev-crmi"
@@ -76,3 +74,6 @@ function common-explain() {
 alias klogin="kiro-cli login --license pro --identity-provider $KIRO_START_URL --region us-east-2 --use-device-flow"
 alias kcli="kiro-cli"
 # zprof
+
+alias today="date \"+%m-%d.md\" "
+alias notes="nvim ~/repos/notes/$(today)"

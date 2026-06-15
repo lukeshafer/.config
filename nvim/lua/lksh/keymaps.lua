@@ -7,12 +7,12 @@ function Keymaps.init()
 	vim.keymap.set("n", "<C-Down>", ":m +1<CR>", { desc = "Move line down" })
 	vim.keymap.set("n", "<C-j>", ":m +1<CR>", { desc = "Move line down" })
 
-	vim.keymap.set(
-		"n",
-		"<leader><Esc>",
-		"<cmd>lua vim.notify('Luke, use <C-l>',vim.log.levels.WARN)<cr>",
-		{ desc = "Break bad habits" }
-	)
+	-- vim.keymap.set(
+	-- 	"n",
+	-- 	"<leader><Esc>",
+	-- 	"<cmd>lua vim.notify('Luke, use <C-l>',vim.log.levels.WARN)<cr>",
+	-- 	{ desc = "Break bad habits" }
+	-- )
 
 	-- use <C-l>
 	-- x deletes character but does not put in clipboard"
