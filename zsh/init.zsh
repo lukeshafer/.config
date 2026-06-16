@@ -53,6 +53,9 @@ function mkcd() {
 
 alias c256='for i in {0..255}; do printf "\e[48;5;%sm %3s \e[0m" $i $i; [ $((($i+1)%16)) -eq 0 ] && echo; done'
 
+alias jsonf='clippaste | node -e "console.log(JSON.stringify(JSON.parse(require(\"fs\").readFileSync(\"/dev/stdin\",\"utf8\")), null, 2))"'
+alias jsons='clippaste | node -e "console.log(JSON.stringify(JSON.parse(require(\"fs\").readFileSync(\"/dev/stdin\",\"utf8\"))))"'
+
 export DISABLE_TELEMETRY=1
 export DO_NOT_TRACK=1
 

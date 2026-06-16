@@ -1,5 +1,7 @@
 local ok, oil = pcall(require, "oil")
-if not ok then return end
+if not ok then
+	return
+end
 oil.setup({
 	columns = {
 		"icon",
@@ -17,7 +19,7 @@ oil.setup({
 	delete_to_trash = true,
 	win_options = {
 		number = false,
-    signcolumn = "yes:2",
+		signcolumn = "yes:2",
 	},
 	keymaps = {
 		["<C-q>"] = { "actions.close", mode = "n" },
@@ -32,8 +34,8 @@ oil.setup({
 require("oil-git-status").setup({})
 
 vim.keymap.set("n", "<leader>e", function()
-	oil.open_float(nil, { preview = { vertical = true } })
-end, { desc = "Open oil file explorer in floating window" })
-vim.keymap.set("n", "<leader>E", function()
 	oil.open()
 end, { desc = "Open oil file explorer in buffer" })
+vim.keymap.set("n", "<leader>E", function()
+	oil.open_float(nil, { preview = { vertical = true } })
+end, { desc = "Open oil file explorer in floating window" })
