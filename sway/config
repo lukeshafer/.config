@@ -24,13 +24,15 @@ output * {
   bg ~/.config/wallpapers/pinkflowers.png fill
 }
 
-# left benq monitor
-output "BNQ BenQ GL2460 6CG00909SL0" pos 0 0
+set $display_l "BNQ BenQ GL2460 6CG00909SL0"
+set $display_r "BNQ BenQ GL2460 6CG01060SL0"
 
-# right benq monitor
-output "BNQ BenQ GL2460 6CG01060SL0" pos 1920 0
+bindsym --no-repeat $mod+p output $display_l toggle
+bindsym --no-repeat $mod+shift+p output $display_r toggle
 
-bindsym $mod+p output "BNQ BenQ GL2460 6CG00909SL0" toggle
+output $display_l pos 0 0
+output $display_r pos 1920 0
+
 # bindsym $mod+Shift+q kill
 
 # gaps horizontal 3
@@ -81,6 +83,7 @@ bindsym $mod+Return exec $term
 bindsym $mod+Shift+q kill
 
 bindsym $mod+Shift+b exec $browser
+bindsym $mod+Shift+d exec discord
 
 # Start your launcher
 bindsym $mod+d exec $menu
@@ -229,8 +232,6 @@ mode "resize" {
 bar {
     swaybar_command waybar
 }
-
-
 
 # Window
 default_border pixel
