@@ -46,12 +46,6 @@ else
 	sat = "high"
 end
 
--- require("mini.hues").setup({
--- 	background = MiniColors.convert({ l = bg_l, c = 2, h = math.random(180, 360) }, "hex"),
--- 	foreground = MiniColors.convert({ l = fg_l, c = 1, h = math.random(0, 360) }, "hex"),
--- 	n_hues = 8,
--- 	saturation = sat,
--- })
 require("mini.hues").setup({
 	background = MiniColors.convert({
 		l = bg_l,

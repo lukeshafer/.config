@@ -36,12 +36,6 @@ function LSP.init()
 
 	vim.api.nvim_create_autocmd("LspAttach", {
 		callback = function(ev)
-			local client = vim.lsp.get_client_by_id(ev.data.client_id)
-			if client and client:supports_method("textDocument/inlayHint") then
-				vim.lsp.inlay_hint.enable(true, { bufnr = ev.buf })
-			end
-
-			local opts = { buffer = ev.buf }
 			vim.keymap.set("n", "gd", vim.lsp.buf.definition, { buffer = ev.buf, desc = "Go to definition" })
 			vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { buffer = ev.buf, desc = "Go to declaration" })
 			vim.keymap.set("n", "gl", vim.diagnostic.open_float, { buffer = ev.buf, desc = "Show diagnostic float" })

@@ -64,12 +64,10 @@ lint.linters.asl = {
 	end,
 }
 
-utils.use_in_context("work", function()
-	lint.linters_by_ft = {
-		yaml = { "cfn_lint" },
-		asl = { "asl" },
-	}
-end)
+lint.linters_by_ft = utils.use_in_context("work", {
+	yaml = { "cfn_lint" },
+	asl = { "asl" },
+}, {})
 
 vim.api.nvim_create_autocmd({ "BufWritePost", "BufWinEnter", "TextChanged" }, {
 	callback = function()
