@@ -76,4 +76,7 @@ alias kcli="kiro-cli"
 # zprof
 
 alias today="date \"+%m-%d.md\" "
-alias notes="nvim ~/repos/notes/$(today)"
+
+function notes() {
+  nvim "~/repos/notes/$(today)"
+}
