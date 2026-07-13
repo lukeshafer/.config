@@ -11,7 +11,7 @@ swaymsg -m -t subscribe '["workspace"]' 2>/dev/null | while read -r line; do
                          | .nodes[], .floating_nodes[]] | length')
                 if [ "$empty" -eq 0 ]; then
                     touch "$state_file"
-                    tofi-drun < /dev/null
+                    fuzzel < /dev/null
                     rm -f "$state_file"
                 fi
             fi
