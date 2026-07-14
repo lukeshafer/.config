@@ -13,7 +13,7 @@ function Opts.init()
 	-- vim.o.showtabline = 2
 	vim.o.splitright = true
 	vim.opt.diffopt:append({ "iwhiteall" })
-	vim.o.ignorecase = true
+	-- vim.o.ignorecase = true
 
 	vim.opt.shortmess:append("I")
 

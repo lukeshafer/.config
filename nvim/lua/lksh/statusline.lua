@@ -129,13 +129,10 @@ local function not_nil(v)
 end
 
 function Statusline.active()
-	-- local ft = vim.bo.filetype
-	-- local lineinfo = ft == "alpha"
-	--   and ""
-	--   or "%l:%c"
-
+	vim.api.nvim_set_hl(0, "StatusLine", { update = true, bg = "none", ctermbg = "none" })
+	vim.api.nvim_set_hl(0, "NonText", { update = true, bg = "none", ctermbg = "none" })
 	return table.concat(vim.tbl_filter(not_nil, {
-		"%#StatusLine#",
+		"%#StatusLineNC#",
 		modes[vim.api.nvim_get_mode().mode],
 		"%#StatusLine#",
 		filepath(),

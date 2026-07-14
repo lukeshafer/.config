@@ -16,8 +16,10 @@ set $right l
 # Your preferred terminal emulator
 set $term kitty
 # Your preferred application launcher
-set $menu wmenu-run
+set $menu fuzzel
 set $browser firefox
+
+exec ~/.config/sway/empty-launcher.sh
 
 ### Output configuration
 output * {
@@ -29,6 +31,7 @@ set $display_r "BNQ BenQ GL2460 6CG01060SL0"
 
 bindsym --no-repeat $mod+p output $display_l toggle
 bindsym --no-repeat $mod+shift+p output $display_r toggle
+bindsym --no-repeat $mod+shift+t input type:touch events toggle
 
 output $display_l pos 0 0
 output $display_r pos 1920 0
