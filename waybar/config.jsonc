@@ -39,6 +39,8 @@
       // "default": ""
     },
     "window-rewrite": {
+      // to find the class, run:
+      //  swaymsg -t get_tree
       "class<firefox>": "󰈹 ",
       "class<kitty>": " ",
       "class<chromium>": " ",
@@ -46,6 +48,8 @@
       "class<spotify>": " ",
       "class<pico8>": "p8",
       "class<dolphin>": " ",
+      "class<steam>": " ",
+      "class<com.obsproject.Studio>": "󱜠 ",
     }
   },
   "sway/mode": {
