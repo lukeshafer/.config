@@ -1,3 +1,26 @@
+# Key Bindings Summary
+# ────────────────────────────────────────────────────────
+# Key               Action
+# ────────────────────────────────────────────────────────
+# Ctrl-K / Up       History search backward (prefix match)
+# Ctrl-J / Down     History search forward (prefix match)
+# Ctrl-R            Incremental history search
+# Home              Beginning of line
+# End               End of line
+# Ctrl-Left         Move backward one word
+# Ctrl-Right        Move forward one word
+# Ctrl-Delete       Delete forward word
+# Backspace         Delete backward char
+# Delete            Delete forward char
+# Shift-Tab         Reverse through completion menu
+# Space             Magic space (expands !! and !$ inline)
+# Esc-w             Kill region (cursor to mark)
+# Esc-l             Run `ls`
+# Esc-m             Copy previous shell word
+# Ctrl-x Ctrl-e    Edit command line in $EDITOR
+# ────────────────────────────────────────────────────────
+#
+# Docs:
 # http://zsh.sourceforge.net/Doc/Release/Zsh-Line-Editor.html
 # http://zsh.sourceforge.net/Doc/Release/Zsh-Line-Editor.html#Zle-Builtins
 # http://zsh.sourceforge.net/Doc/Release/Zsh-Line-Editor.html#Standard-Widgets
@@ -15,10 +38,8 @@ if (( ${+terminfo[smkx]} )) && (( ${+terminfo[rmkx]} )); then
   zle -N zle-line-finish
 fi
 
-# Use vi key bindings
+# Use emacs key bindings
 bindkey -e
-# bindkey '^A' beginning-of-line
-# bindkey '^E' end-of-line
 
 # Start typing + [Up-Arrow] - fuzzy find history forward
 autoload -U up-line-or-beginning-search
@@ -26,7 +47,6 @@ zle -N up-line-or-beginning-search
 
 bindkey -M emacs "^K" up-line-or-beginning-search
 bindkey -M viins "^K" up-line-or-beginning-search
-# no viins since k already is mapped there
 
 bindkey -M emacs "^[[A" up-line-or-beginning-search
 bindkey -M viins "^[[A" up-line-or-beginning-search
@@ -41,6 +61,7 @@ fi
 autoload -U down-line-or-beginning-search
 zle -N down-line-or-beginning-search
 
+bindkey -M emacs "^J" down-line-or-beginning-search
 bindkey -M viins "^J" down-line-or-beginning-search
 
 bindkey -M emacs "^[[B" down-line-or-beginning-search

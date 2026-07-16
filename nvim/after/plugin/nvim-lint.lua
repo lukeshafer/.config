@@ -65,12 +65,37 @@ lint.linters.asl = {
 }
 
 lint.linters_by_ft = utils.use_in_context("work", {
-	yaml = { "cfn_lint" },
 	asl = { "asl" },
 }, {})
 
+local function is_cfn_template(bufnr)
+	local name = vim.api.nvim_buf_get_name(bufnr)
+
+	-- Check if file is named template.yaml or is within a templates/ directory
+	if name:match("/templates/") or name:match("/template%.yaml$") or name:match("/template%.yml$") then
+		return true
+	end
+
+	-- Check if file contains AWSTemplateFormatVersion at the top level
+	local lines = vim.api.nvim_buf_get_lines(bufnr, 0, 30, false)
+	for _, line in ipairs(lines) do
+		if line:match("^AWSTemplateFormatVersion") then
+			return true
+		end
+	end
+
+	return false
+end
+
 vim.api.nvim_create_autocmd({ "BufWritePost", "BufWinEnter", "TextChanged" }, {
 	callback = function()
-		lint.try_lint()
+		local bufnr = vim.api.nvim_get_current_buf()
+		local ft = vim.bo[bufnr].filetype
+
+		if ft == "yaml" and is_cfn_template(bufnr) then
+			lint.try_lint({ "cfn_lint" })
+		else
+			lint.try_lint()
+		end
 	end,
 })
