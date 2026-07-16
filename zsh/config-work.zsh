@@ -46,8 +46,11 @@ alias mrdraft='glab mr create -b dev -f -y --draft'
 alias mrm='glab mr merge'
 
 alias awslogin="aws sts get-caller-identity --profile dev-crmi"
-alias awslogout="rm ~/.aws/saml-credentials"
+# alias awslogout="rm ~/.aws/saml-credentials"
 alias awsreset="awslogout && awslogin"
+
+alias awslogin-qa="aws sts get-caller-identity --profile qa-crmi"
+alias awslogin-prod="aws sts get-caller-identity --profile prod-crmi"
 
 alias install-handlers="cd ./src/lambda/handlers/ && (find . -maxdepth 2 -name package.json -execdir npm i \;) && cd -"
 alias install-lib="cd ./src/lambda/lib/ && npm i && cd -"
