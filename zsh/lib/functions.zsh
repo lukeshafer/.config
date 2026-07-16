@@ -28,31 +28,20 @@ function open_command() {
   ${=open_cmd} "$@" &>/dev/null
 }
 
-# URL-encode a string
-#
-# Encodes a string using RFC 2396 URL-encoding (%-escaped).
-# See: https://www.ietf.org/rfc/rfc2396.txt
+# URL-encode a string (RFC 2396)
 #
 # By default, reserved characters and unreserved "mark" characters are
-# not escaped by this function. This allows the common usage of passing
-# an entire URL in, and encoding just special characters in it, with
-# the expectation that reserved and mark characters are used appropriately.
-# The -r and -m options turn on escaping of the reserved and mark characters,
-# respectively, which allows arbitrary strings to be fully escaped for
-# embedding inside URLs, where reserved characters might be misinterpreted.
-#
-# Prints the encoded string on stdout.
-# Returns nonzero if encoding failed.
+# not escaped. This allows passing an entire URL and encoding just the
+# special characters in it.
 #
 # Usage:
-#  omz_urlencode [-r] [-m] [-P] <string> [<string> ...]
+#   urlencode [-r] [-m] [-P] <string> [<string> ...]
 #
-#    -r causes reserved characters (;/?:@&=+$,) to be escaped
+#   -r  escape reserved characters (;/?:@&=+$,)
+#   -m  escape "mark" characters (_.!~*''()-)
+#   -P  encode spaces as '+' instead of '%20' (default is %20)
 #
-#    -m causes "mark" characters (_.!~*''()-) to be escaped
-#
-#    -P causes spaces to be encoded as '%20' instead of '+'
-function omz_urlencode_old() {
+function urlencode() {
   emulate -L zsh
   setopt norematchpcre
 
@@ -62,7 +51,7 @@ function omz_urlencode_old() {
   local in_str="$@"
   local url_str=""
   local spaces_as_plus
-  if [[ -z $opts[(r)-P] ]]; then spaces_as_plus=1; fi
+  if [[ -n $opts[(r)-P] ]]; then spaces_as_plus=1; fi
   local str="$in_str"
 
   # URLs must use UTF-8 encoding; convert str to UTF-8 if required
@@ -78,8 +67,6 @@ function omz_urlencode_old() {
   fi
 
   # Use LC_CTYPE=C to process text byte-by-byte
-  # Note that this doesn't work in Termux, as it only has UTF-8 locale.
-  # Characters will be processed as UTF-8, which is fine for URLs.
   local i byte ord LC_ALL=C
   export LC_ALL
   local reserved=';/?:@&=+$,'
@@ -94,8 +81,6 @@ function omz_urlencode_old() {
   fi
   dont_escape+="]"
 
-  # Implemented to use a single printf call and avoid subshells in the loop,
-  # for performance (primarily on Windows).
   local url_str=""
   for (( i = 1; i <= ${#str}; ++i )); do
     byte="$str[i]"
@@ -105,7 +90,6 @@ function omz_urlencode_old() {
       if [[ "$byte" == " " && -n $spaces_as_plus ]]; then
         url_str+="+"
       elif [[ "$PREFIX" = *com.termux* ]]; then
-        # Termux does not have non-UTF8 locales, so just send the UTF-8 character directly
         url_str+="$byte"
       else
         ord=$(( [##16] #byte ))
@@ -116,8 +100,6 @@ function omz_urlencode_old() {
   echo -E "$url_str"
 }
 
-function urlencode() { omz_urlencode_old -P "$@"; }
-
 function resolve_ssh_client_host() {
   if [[ -z $SSH_CONNECTION ]]; then
     unset SSH_CLIENT_HOST
@@ -127,50 +109,4 @@ function resolve_ssh_client_host() {
   local host
   host="$(getent hosts "$client_ip" 2>/dev/null | awk '{print $2}')"
   export SSH_CLIENT_HOST="${host:-$client_ip}"
-}
-
-# URL-decode a string
-#
-# Decodes a RFC 2396 URL-encoded (%-escaped) string.
-# This decodes the '+' and '%' escapes in the input string, and leaves
-# other characters unchanged. Does not enforce that the input is a
-# valid URL-encoded string. This is a convenience to allow callers to
-# pass in a full URL or similar strings and decode them for human
-# presentation.
-#
-# Outputs the encoded string on stdout.
-# Returns nonzero if encoding failed.
-#
-# Usage:
-#   omz_urldecode <urlstring>  - prints decoded string followed by a newline
-function omz_urldecode {
-  emulate -L zsh
-  local encoded_url=$1
-
-  # Work bytewise, since URLs escape UTF-8 octets
-  local caller_encoding=$langinfo[CODESET]
-  local LC_ALL=C
-  export LC_ALL
-
-  # Change + back to ' '
-  local tmp=${encoded_url:gs/+/ /}
-  # Protect other escapes to pass through the printf unchanged
-  tmp=${tmp:gs/\\/\\\\/}
-  # Handle %-escapes by turning them into `\xXX` printf escapes
-  tmp=${tmp:gs/%/\\x/}
-  local decoded="$(printf -- "$tmp")"
-
-  # Now we have a UTF-8 encoded string in the variable. We need to re-encode
-  # it if caller is in a non-UTF-8 locale.
-  local -a safe_encodings
-  safe_encodings=(UTF-8 utf8 US-ASCII)
-  if [[ -z ${safe_encodings[(r)$caller_encoding]} ]]; then
-    decoded=$(echo -E "$decoded" | iconv -f UTF-8 -t $caller_encoding)
-    if [[ $? != 0 ]]; then
-      echo "Error converting string from UTF-8 to $caller_encoding" >&2
-      return 1
-    fi
-  fi
-
-  echo -E "$decoded"
 }
