@@ -1,0 +1,83 @@
+#compdef crmi-project
+#
+# Zsh completion for crmi-project
+#
+# Install: symlink or copy to a directory in your $fpath, e.g.:
+#   mkdir -p ~/.zsh/completions
+#   ln -s ~/repos/scripts/work/_crmi-project ~/.zsh/completions/_crmi-project
+#
+# Then add to .zshrc (before compinit):
+#   fpath=(~/.zsh/completions $fpath)
+
+_crmi_project_repos() {
+  local crmi_dir="$HOME/repos/crmi"
+  local repos=()
+
+  if [[ -d "$crmi_dir" ]]; then
+    for dir in "$crmi_dir"/*(N/); do
+      [[ -d "$dir/.git" ]] && repos+=("$(basename "$dir")")
+    done
+  fi
+
+  compadd -a repos
+}
+
+_crmi_project_names() {
+  local projects_dir="$HOME/repos/projects"
+  local names=()
+
+  if [[ -d "$projects_dir" ]]; then
+    for dir in "$projects_dir"/*(N/); do
+      names+=("$(basename "$dir")")
+    done
+  fi
+
+  compadd -a names
+}
+
+_crmi-project() {
+  local -a commands
+  commands=(
+    'create:Create a new project with one or more repo worktrees'
+    'add:Add a repo worktree to an existing project'
+    'remove:Remove a project and all its worktrees'
+    'list:List all projects'
+    'status:Show worktree details for a project'
+  )
+
+  if (( CURRENT == 2 )); then
+    _describe 'command' commands
+    return
+  fi
+
+  local command="${words[2]}"
+
+  case "$command" in
+    create)
+      if (( CURRENT == 3 )); then
+        _message 'project name'
+      else
+        _crmi_project_repos
+      fi
+      ;;
+    add)
+      if (( CURRENT == 3 )); then
+        _crmi_project_names
+      elif (( CURRENT == 4 )); then
+        _crmi_project_repos
+      fi
+      ;;
+    remove)
+      if (( CURRENT == 3 )); then
+        _crmi_project_names
+      fi
+      ;;
+    status)
+      if (( CURRENT == 3 )); then
+        _crmi_project_names
+      fi
+      ;;
+  esac
+}
+
+_crmi-project "$@"

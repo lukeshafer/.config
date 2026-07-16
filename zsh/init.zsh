@@ -5,12 +5,14 @@ export ZSH_CACHE_DIR="$HOME/.cache/zsh"
 
 ZSH_THEME="lksh"
 
+# Resolve PC_CONTEXT early (needed for completions fpath in init-lib)
+source $ZSH/hostnames.zsh
+export PC_CONTEXT=$(idhost)
+
 # run lib startup
 source $ZSH/init-lib.zsh
 
-source $ZSH/hostnames.zsh
 resolve_ssh_client_host
-export PC_CONTEXT=$(idhost)
 export KEYTIMEOUT=1
 
 # Common config

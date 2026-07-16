@@ -2,8 +2,8 @@
 mkdir -p "$ZSH_CACHE_DIR/completions"
 (( ${fpath[(Ie)$ZSH_CACHE_DIR/completions]} )) || fpath=("$ZSH_CACHE_DIR/completions" $fpath)
 
-# add a function path
-fpath=($ZSH/{functions,completions} $fpath)
+# add a function path (context-specific + shared completions)
+fpath=($ZSH/completions/$PC_CONTEXT(N) $ZSH/completions/shared(N) $ZSH/{functions,completions} $fpath)
 
 # Load all stock functions (from $fpath files) called below.
 autoload -U compaudit compinit zrecompile
