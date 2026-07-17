@@ -1,0 +1,114 @@
+syntax on
+filetype plugin indent on
+
+" ============ Neovim-equivalent defaults ============
+set autoindent
+set autoread
+set backspace=indent,eol,start
+set belloff=all
+set complete-=i
+set display=lastline
+set encoding=utf-8
+set formatoptions=tcqj
+set hidden
+set history=10000
+set hlsearch
+set incsearch
+set langnoremap
+set nolangremap
+set laststatus=2
+set listchars=tab:>\ ,trail:-,nbsp:+
+set nrformats=bin,hex
+set ruler
+set sessionoptions+=unix,slash
+set showcmd
+set sidescroll=1
+set smarttab
+set nostartofline
+set tabpagemax=50
+set tags=./tags;,tags
+set ttimeout
+set ttimeoutlen=50
+set ttyfast
+set wildmenu
+set wildoptions=pum
+
+" ============ Options ============
+set tabstop=2
+set shiftwidth=2
+set expandtab
+set background=dark
+set number
+set mouse=a
+set cursorline
+set splitright
+set diffopt+=iwhiteall
+set nowrap
+set shortmess+=I
+set foldenable
+set foldcolumn=1
+set foldmethod=indent
+set foldlevelstart=1
+set foldtext=
+
+color retrobox
+
+" set fillchars=foldopen:▾,foldclose:▸,fold:\ 
+
+set backupdir=~/.vim/backup
+set directory=~/.vim/swapfiles
+
+let mapleader = " "
+let g:netrw_liststyle = 3
+
+" ============ Neovim default mappings ============
+" Y yanks to end of line (like D and C)
+nnoremap Y y$
+" & repeats last :s with flags
+nnoremap & :&&<CR>
+" <C-L> clears search highlight
+nnoremap <C-L> :nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>
+
+" ============ Keymaps ============
+
+" Move lines up/down
+nnoremap <C-Up> :m -2<CR>
+nnoremap <C-k> :m -2<CR>
+nnoremap <C-Down> :m +1<CR>
+nnoremap <C-j> :m +1<CR>
+
+" x deletes character without yanking
+nnoremap x "_x
+
+" Close buffer
+nnoremap <leader>x :bprevious\|bdelete #<CR>
+nnoremap <leader>XX :bdelete!<CR>
+
+" Semicolon enters command mode
+nnoremap ; :
+
+" Leader+y copies to system clipboard
+nnoremap <leader>y "+y
+vnoremap <leader>y "+y
+
+" Half-page up/down and center
+nnoremap <C-u> <C-u>zz
+nnoremap <C-d> <C-d>zz
+
+" Terminal (horizontal/vertical)
+nnoremap <leader>t :belowright terminal<CR>
+nnoremap <leader>T :vertical terminal<CR>
+
+" Search result and center
+nnoremap n nzz
+nnoremap N Nzz
+
+" Netrw explorer
+nnoremap <leader>e :Explore<CR>
+
+" Visual mode: indent/dedent keeps selection
+vnoremap > >gv
+vnoremap < <gv
+
+" Terminal: Escape exits terminal mode
+tnoremap <Esc> <C-\><C-n>
