@@ -26,18 +26,22 @@ alias sd-qa="sam deploy --config-env qa --profile qa-crmi"
 alias sbd-qa="(sb-qa && sd-qa && say \"QA deployment successful\") || say \"QA deployment failed\""
 
 # --- AWS ---
-alias awslogin="aws sts get-caller-identity --profile dev-crmi"
-alias awslogin-qa="aws sts get-caller-identity --profile qa-crmi"
-alias awslogin-prod="aws sts get-caller-identity --profile prod-crmi"
+complete -C '/usr/local/bin/aws_completer' aws
+
+alias _awslogin="aws sts get-caller-identity"
+alias awslogin-dev="_awslogin --profile dev-crmi | cat"
+alias awslogin-qa="_awslogin --profile qa-crmi | cat"
+alias awslogin-prod="_awslogin --profile prod-crmi | cat"
+alias awslogin-all="awslogin-dev && awslogin-qa && awslogin-prod"
 
 # --- CRMI project helpers ---
 alias npm-i-handlers="cd ./src/lambda/handlers/ && (find . -maxdepth 2 -name package.json -execdir npm i \;) && cd -"
 alias npm-i-lib="cd ./src/lambda/lib/ && npm i && cd -"
-alias npm-i-all="install-handlers && install-lib"
+alias npm-i-all="npm-i-handlers && npm-i-lib"
 
 alias npm-u-handlers="cd ./src/lambda/handlers/ && (find . -maxdepth 2 -name package.json -execdir npm up \;) && cd -"
 alias npm-u-lib="cd ./src/lambda/lib/ && npm up && cd -"
-alias npm-u-all="update-handlers && update-lib"
+alias npm-u-all="npm-u-handlers && npm-u-lib"
 
 function common-explain() {
   if [ -z "$1" ]; then
