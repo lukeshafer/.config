@@ -5,6 +5,7 @@ export DOCKER_HOST="unix:/$HOME/.docker/run/docker.sock"
 
 # --- PATH ---
 export PATH="/opt/homebrew/opt/openjdk11/bin:$PATH"
+export PATH="$HOME/repos/scripts/path:$PATH"
 
 # --- Node (nvm) ---
 export NVM_DIR="$HOME/.nvm"
