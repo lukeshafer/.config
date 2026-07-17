@@ -8,6 +8,7 @@ tmux/plugins/
 !.tmux.conf*
 !.zsh*
 !README.md
+!fuzzel/
 !git/
 !kitty/
 !neovim-plugin-replacement.md
