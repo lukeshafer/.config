@@ -25,6 +25,7 @@ function Plugins.init()
 		resolve_plug("stevearc/oil.nvim"),
 		resolve_plug("nvim-mini/mini.nvim"),
 		resolve_plug("neovim/nvim-lspconfig"),
+		resolve_plug("OXY2DEV/markview.nvim"),
 		resolve_plug("stevearc/conform.nvim"),
 		resolve_plug("mfussenegger/nvim-lint"),
 		resolve_plug("windwp/nvim-ts-autotag"),

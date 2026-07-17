@@ -124,19 +124,19 @@ mini_hipatterns.setup({
 })
 
 --- MINI MAP ---
-local mini_map = require("mini.map")
-
-mini_map.setup({
-	window = { width = 4 },
-	integrations = {
-		mini_map.gen_integration.builtin_search(),
-		mini_map.gen_integration.diagnostic({
-			error = "DiagnosticFloatingError",
-			warn = "DiagnosticFloatingWarn",
-			info = "DiagnosticFloatingInfo",
-			hint = "DiagnosticFloatingHint",
-		}),
-	},
-})
-
-vim.keymap.set("n", "<leader>m", mini_map.toggle, { desc = "mini.map Toggle minimap" })
+-- local mini_map = require("mini.map")
+--
+-- mini_map.setup({
+-- 	window = { width = 4 },
+-- 	integrations = {
+-- 		mini_map.gen_integration.builtin_search(),
+-- 		mini_map.gen_integration.diagnostic({
+-- 			error = "DiagnosticFloatingError",
+-- 			warn = "DiagnosticFloatingWarn",
+-- 			info = "DiagnosticFloatingInfo",
+-- 			hint = "DiagnosticFloatingHint",
+-- 		}),
+-- 	},
+-- })
+--
+-- vim.keymap.set("n", "<leader>m", mini_map.toggle, { desc = "mini.map Toggle minimap" })

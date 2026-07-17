@@ -78,45 +78,45 @@ vim.api.nvim_create_autocmd("FileType", {
 local agentic_id_path = vim.fn.stdpath("state") .. "/lsrestart-agentic-id"
 local SessionRegistry = require("agentic.session_registry")
 
-vim.api.nvim_create_autocmd("User", {
-	pattern = "LSRestartPre",
-	callback = function()
-		local session = SessionRegistry.get_session_for_tab_page(nil)
-		if session and session.session_id then
-			vim.fn.writefile({ session.session_id }, agentic_id_path)
-		else
-			vim.fn.delete(agentic_id_path)
-		end
-
-		for _, buf in ipairs(vim.api.nvim_list_bufs()) do
-			if vim.bo[buf].filetype:match("^Agentic") then
-				vim.api.nvim_buf_delete(buf, { force = true })
-			end
-		end
-	end,
-})
-
-vim.api.nvim_create_autocmd("User", {
-	pattern = "LSRestartPost",
-	callback = function()
-		if vim.fn.filereadable(agentic_id_path) == 0 then
-			return
-		end
-		local lines = vim.fn.readfile(agentic_id_path)
-		if #lines > 0 and lines[1] ~= "" then
-			local saved_id = lines[1]
-			vim.fn.delete(agentic_id_path)
-			-- Wait for the auto-created session to finish initializing,
-			-- then replace it with the restored session to avoid a race.
-			SessionRegistry.get_session_for_tab_page(nil, function(session)
-				session:on_session_ready(function(ready_session)
-					ready_session:load_acp_session(saved_id, nil, nil)
-					ready_session.widget:show()
-				end)
-			end)
-		end
-	end,
-})
+-- vim.api.nvim_create_autocmd("User", {
+-- 	pattern = "LSRestartPre",
+-- 	callback = function()
+-- 		local session = SessionRegistry.get_session_for_tab_page(nil)
+-- 		if session and session.session_id then
+-- 			vim.fn.writefile({ session.session_id }, agentic_id_path)
+-- 		else
+-- 			vim.fn.delete(agentic_id_path)
+-- 		end
+--
+-- 		for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+-- 			if vim.bo[buf].filetype:match("^Agentic") then
+-- 				vim.api.nvim_buf_delete(buf, { force = true })
+-- 			end
+-- 		end
+-- 	end,
+-- })
+--
+-- vim.api.nvim_create_autocmd("User", {
+-- 	pattern = "LSRestartPost",
+-- 	callback = function()
+-- 		if vim.fn.filereadable(agentic_id_path) == 0 then
+-- 			return
+-- 		end
+-- 		local lines = vim.fn.readfile(agentic_id_path)
+-- 		if #lines > 0 and lines[1] ~= "" then
+-- 			local saved_id = lines[1]
+-- 			vim.fn.delete(agentic_id_path)
+-- 			-- Wait for the auto-created session to finish initializing,
+-- 			-- then replace it with the restored session to avoid a race.
+-- 			SessionRegistry.get_session_for_tab_page(nil, function(session)
+-- 				session:on_session_ready(function(ready_session)
+-- 					ready_session:load_acp_session(saved_id, nil, nil)
+-- 					ready_session.widget:show()
+-- 				end)
+-- 			end)
+-- 		end
+-- 	end,
+-- })
 
 vim.keymap.set({ "n", "v" }, "<leader>at", agentic.toggle, { desc = "Toggle agent chat" })
 vim.keymap.set({ "n" }, "<leader>ar", function()
