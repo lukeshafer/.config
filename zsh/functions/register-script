@@ -1,0 +1,187 @@
+# register-script: Make a script executable, ensure shebang, symlink into ~/.local/bin/
+# Usage: register-script <path-to-script>
+#        register-script -D|--delete <script-path|symlink-path|command-name>
+
+emulate -L zsh
+setopt err_return pipe_fail
+
+zmodload zsh/stat
+
+local LOCAL_BIN="$HOME/.local/bin"
+
+# --- Shebang defaults by extension ---
+local -A SHEBANG_DEFAULTS=(
+  sh    bash
+  bash  bash
+  js    node
+  mjs   node
+  ts    node
+  py    python3
+  rb    ruby
+  zsh   zsh
+)
+
+# --- Helpers ---
+local -a delete help
+
+_rs_die()  { print -P "%F{red}ERROR:%f $1" >&2; return 1 }
+_rs_info() { print -P "%F{blue}::%f $1" }
+_rs_warn() { print -P "%F{yellow}WARNING:%f $1" >&2 }
+
+_rs_usage() {
+  echo "Usage: register-script <path-to-script>"
+  echo "       register-script -D|--delete <script-path|symlink-path|command-name>"
+  echo ""
+  echo "Makes a script executable, ensures it has a shebang,"
+  echo "and symlinks it into ~/.local/bin/ (extension removed)."
+  echo ""
+  echo "Options:"
+  echo "  -D, --delete    Remove a registered script's symlink from ~/.local/bin/"
+  echo "  -h, --help      Show this help"
+}
+
+# --- Parse flags ---
+zparseopts -D -E -- D=delete -delete=delete h=help -help=help
+
+if (( $#help )); then
+  _rs_usage
+  return 0
+fi
+
+(( $#delete )) && {
+  # --- Delete mode ---
+  if [[ $# -lt 1 ]]; then
+    _rs_usage
+    return 1
+  fi
+
+  local TARGET="$1"
+  local LINK_PATH=""
+
+  # Case 1: It's a path to the symlink itself in ~/.local/bin/
+  if [[ -L "$LOCAL_BIN/${TARGET:t}" ]]; then
+    LINK_PATH="$LOCAL_BIN/${TARGET:t}"
+  # Case 2: It's just a command name (no path separators)
+  elif [[ "$TARGET" != */* && -L "$LOCAL_BIN/$TARGET" ]]; then
+    LINK_PATH="$LOCAL_BIN/$TARGET"
+  # Case 3: It's a path to the original script — find the symlink pointing to it
+  elif [[ -f "$TARGET" ]]; then
+    local RESOLVED="${TARGET:A}"
+    local link
+    for link in "$LOCAL_BIN"/*; do
+      [[ -L "$link" ]] || continue
+      if [[ "$(readlink "$link")" == "$RESOLVED" ]]; then
+        LINK_PATH="$link"
+        break
+      fi
+    done
+  fi
+
+  [[ -z "$LINK_PATH" ]] && _rs_die "No symlink found in $LOCAL_BIN for '$TARGET'"
+  [[ -L "$LINK_PATH" ]] || _rs_die "'$LINK_PATH' is not a symlink"
+
+  local LINK_TARGET="$(readlink "$LINK_PATH")"
+  print "Will remove: ${LINK_PATH:t} -> $LINK_TARGET"
+  local CONFIRM
+  read -rq "CONFIRM?Delete this symlink? [y/N]: " || true
+  echo
+  [[ "$CONFIRM" == "y" ]] || { print "Aborted."; return 1 }
+
+  rm "$LINK_PATH"
+  rehash
+  _rs_info "Removed ${LINK_PATH:t} from $LOCAL_BIN"
+  return 0
+}
+
+# --- Register mode ---
+if [[ $# -lt 1 ]]; then
+  _rs_usage
+  return 1
+fi
+
+local SCRIPT_PATH="${1:A}"
+[[ -f "$SCRIPT_PATH" ]] || _rs_die "File not found: $1"
+
+local FILENAME="${SCRIPT_PATH:t}"
+local LINK_NAME="${FILENAME:r}"
+
+# --- Ensure ~/.local/bin exists ---
+if [[ ! -d "$LOCAL_BIN" ]]; then
+  _rs_info "$LOCAL_BIN does not exist. Creating it..."
+  mkdir -p "$LOCAL_BIN"
+fi
+
+# --- Ensure shebang ---
+local FIRST_LINE="$(head -n 1 "$SCRIPT_PATH")"
+
+if [[ "$FIRST_LINE" != \#!* ]]; then
+  _rs_info "No shebang found in $FILENAME"
+
+  local EXT="${FILENAME:e}"
+  local SUGGESTED="${SHEBANG_DEFAULTS[$EXT]:-}"
+  local PROGRAM RESPONSE
+
+  if [[ -n "$SUGGESTED" ]]; then
+    # For .ts files using node, verify Node >= 24 (native TS support)
+    if [[ "$EXT" == "ts" && "$SUGGESTED" == "node" ]]; then
+      if ! command -v node &>/dev/null; then
+        _rs_die "Node is not installed. Node 24+ is required for native .ts execution."
+      fi
+      local NODE_MAJOR="$(node --version | sed 's/^v//' | cut -d. -f1)"
+      if (( NODE_MAJOR < 24 )); then
+        _rs_die "Node $NODE_MAJOR detected. Native .ts execution requires Node 24+. Currently installed: $(node --version)"
+      fi
+    fi
+
+    read -rq "RESPONSE?Add '#!/usr/bin/env $SUGGESTED'? [Y/n]: " || true
+    echo
+    if [[ "$RESPONSE" == "y" ]]; then
+      PROGRAM="$SUGGESTED"
+    else
+      read -r "PROGRAM?Enter alternative program name (blank to cancel): "
+      [[ -z "$PROGRAM" ]] && { print "Cancelled."; return 1 }
+    fi
+  else
+    read -r "PROGRAM?No default for .$EXT. Enter program name (e.g. node, python3): "
+    [[ -z "$PROGRAM" ]] && { print "No program specified."; return 1 }
+  fi
+
+  # Verify the program exists
+  if ! command -v "$PROGRAM" &>/dev/null; then
+    _rs_warn "'$PROGRAM' not found on this system."
+    local CONFIRM
+    read -rq "CONFIRM?Proceed anyway? [y/N]: " || true
+    echo
+    [[ "$CONFIRM" == "y" ]] || { print "Aborted."; return 1 }
+  fi
+
+  local SHEBANG="#!/usr/bin/env $PROGRAM"
+  _rs_info "Adding shebang: $SHEBANG"
+  local TMPFILE="$(mktemp)"
+  { echo "$SHEBANG"; cat "$SCRIPT_PATH" } > "$TMPFILE"
+  mv "$TMPFILE" "$SCRIPT_PATH"
+fi
+
+# --- Make executable ---
+local -A file_stat
+zstat -H file_stat "$SCRIPT_PATH"
+if (( ! (file_stat[mode] & 0100) )); then
+  _rs_info "Making $FILENAME executable"
+  chmod +x "$SCRIPT_PATH"
+fi
+
+# --- Create symlink ---
+local LINK_PATH="$LOCAL_BIN/$LINK_NAME"
+
+if [[ -e "$LINK_PATH" || -L "$LINK_PATH" ]]; then
+  local OVERWRITE
+  read -rq "OVERWRITE?Symlink '$LINK_NAME' already exists in $LOCAL_BIN. Overwrite? [y/N]: " || true
+  echo
+  [[ "$OVERWRITE" == "y" ]] || { print "Aborted."; return 1 }
+  rm "$LINK_PATH"
+fi
+
+ln -s "$SCRIPT_PATH" "$LINK_PATH"
+rehash
+_rs_info "Symlinked: $LINK_NAME -> $SCRIPT_PATH"
+_rs_info "Done. '$LINK_NAME' is ready to use."

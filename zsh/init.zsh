@@ -12,6 +12,10 @@ export PC_CONTEXT=$(idhost)
 # --- Completion fpath ---
 fpath=($ZSH/completions/$PC_CONTEXT(N) $ZSH/completions/shared(N) $ZSH/completions $fpath)
 
+# --- Autoloaded functions ---
+fpath=($ZSH/functions $fpath)
+autoload -Uz $ZSH/functions/*(.:t)
+
 mkdir -p "$ZSH_CACHE_DIR/completions"
 (( ${fpath[(Ie)$ZSH_CACHE_DIR/completions]} )) || fpath=("$ZSH_CACHE_DIR/completions" $fpath)
 
