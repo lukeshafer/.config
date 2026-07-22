@@ -20,6 +20,12 @@ set $menu fuzzel
 set $browser firefox
 
 exec ~/.config/sway/empty-launcher.sh
+exec wl-paste --watch clipman store
+
+exec_always {
+    export QT_QPA_PLATFORMTHEME=qt6ct
+    export QT_STYLE_OVERRIDE=breeze
+}
 
 ### Output configuration
 output * {
@@ -87,6 +93,7 @@ bindsym $mod+Shift+q kill
 
 bindsym $mod+Shift+b exec $browser
 bindsym $mod+Shift+d exec discord
+bindsym $mod+Shift+s exec grim -g "$(slurp -d)" - | wl-copy
 
 # Start your launcher
 bindsym $mod+d exec $menu

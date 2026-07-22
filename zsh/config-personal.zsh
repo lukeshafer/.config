@@ -103,3 +103,6 @@ function aia() { opencode run "$*"; }
 
 # --- Bun completions ---
 [ -s "/home/luke/.bun/_bun" ] && source "/home/luke/.bun/_bun"
+
+# --- Package Management ---
+alias sync-packages="sudo pacman -S --needed - < ~/.config/packages/pacman-packages.txt"
