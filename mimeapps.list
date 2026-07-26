@@ -49,3 +49,4 @@ application/x-7z-compressed=pcmanfm-qt.desktop
 application/x-rar=pcmanfm-qt.desktop
 application/x-compressed-tar=pcmanfm-qt.desktop
 application/x-tarz=pcmanfm-qt.desktop
+x-scheme-handler/discord=vesktop.desktop

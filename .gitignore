@@ -11,6 +11,7 @@ tmux/plugins/
 !environment.d/
 !fuzzel/
 !git/
+!greetd.toml
 !kitty/
 !mimeapps.list
 !neovim-plugin-replacement.md

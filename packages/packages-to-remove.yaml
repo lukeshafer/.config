@@ -1,15 +1,21 @@
 # Packages to remove - reviewed cleanup list
 # Total: ~100 packages
-# Run: sudo pacman -Rns $(cat ~/.config/packages/packages-to-remove.txt | grep -v '^#' | grep -v '^$' | tr '\n' ' ')
+# Run: sudo pacman -Rns $(cat ~/.config/packages/packages-to-remove.yaml | grep -v '^#' | grep -v '^$' | tr '\n' ' ')
 
 # KDE/Plasma (not needed - using Sway only)
+bluedevil
+kde-cli-tools
+kdegraphics-thumbnailers
 discover
 drkonqi
 ffmpegthumbs
 flatpak-kcm
 kactivitymanagerd
 kde-gtk-config
+kio-admin
 kdecoration
+konsole
+krita
 kdenetwork-filesharing
 kdeplasma-addons
 kgamma
@@ -118,3 +124,36 @@ ttf-ubuntu-mono-nerd
 grub-customizer
 xclip
 wacomtablet
+lazygit
+oxygen
+oxygen-sounds
+adobe-source-sans-fonts
+bemenu
+adobe-source-serif-fonts
+adobe-source-code-pro-fonts
+bun
+drawing
+gedit
+gradle
+helix
+jdk17-openjdk
+kcalc
+kimageformats
+krfb
+kwayland-integration
+kvantum
+maven
+nethack
+noto-fonts-cjk
+noto-fonts-extra
+nwg-drawer
+oxygen5
+plasma5-integration
+superfile
+umu-launcher
+vesktop
+wiki-tui
+wikiman
+wmenu
+wofi
+xorg-server
