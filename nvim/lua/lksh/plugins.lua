@@ -10,19 +10,27 @@ end
 local Plugins = {}
 
 function Plugins.clean_inactive()
-  ---@type vim.pack.PlugData[]
-  local inactive = vim.tbl_filter(function (p)
-    return not p.active
-  end, vim.pack.get(nil, {info=false}))
+	---@type vim.pack.PlugData[]
+	local inactive = vim.tbl_filter(function(p)
+		return not p.active
+	end, vim.pack.get(nil, { info = false }))
 
-  if #inactive > 0 then
-    vim.pack.del(inactive)
-  end
+	if #inactive > 0 then
+		local f = inactive[0]
+		vim.pack.del(vim.tbl_map(
+			---@param plugin vim.pack.PlugData
+			function(plugin)
+				return plugin.spec.name
+			end,
+			inactive
+		))
+	end
 end
 
 function Plugins.init()
 	vim.pack.add({
 		resolve_plug("stevearc/oil.nvim"),
+		resolve_plug("uga-rosa/ccc.nvim"),
 		resolve_plug("nvim-mini/mini.nvim"),
 		resolve_plug("neovim/nvim-lspconfig"),
 		resolve_plug("OXY2DEV/markview.nvim"),
@@ -37,9 +45,9 @@ function Plugins.init()
 		-- utils.plugin("nvim-treesitter/nvim-treesitter-textobjects"),
 	})
 
-  -- Removed plugins I may miss
-  -- "https://github.com/uga-rosa/ccc.nvim", -- color picker
-  -- "https://github.com/hat0uma/csvview.nvim",
+	-- Removed plugins I may miss
+	-- "https://github.com/uga-rosa/ccc.nvim", -- color picker
+	-- "https://github.com/hat0uma/csvview.nvim",
 end
 
 return Plugins
