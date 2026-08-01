@@ -1,6 +1,6 @@
 # Packages to remove - reviewed cleanup list
 # Total: ~100 packages
-# Run: sudo pacman -Rns $(cat ~/.config/packages/packages-to-remove.yaml | grep -v '^#' | grep -v '^$' | tr '\n' ' ')
+# Run: sudo pacman -Rs $(cat ~/.config/packages/packages-to-remove.yaml | grep -v '^#' | grep -v '^$' | tr '\n' ' ')
 
 # KDE/Plasma (not needed - using Sway only)
 bluedevil

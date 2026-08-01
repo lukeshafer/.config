@@ -18,9 +18,11 @@ tmux/plugins/
 !notes-to-self/
 !nvim-lite/
 !nvim/
+!opencode/opencode.jsonc
 !packages/
 !qmk/
 !qt6ct/
+!qt5ct/
 !ranger/
 !sway/
 !tmux/
