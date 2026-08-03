@@ -14,7 +14,7 @@ function Opts.init()
 	vim.o.splitright = true
 	vim.opt.diffopt:append({ "iwhiteall" })
 	-- vim.o.ignorecase = true
-  vim.o.wrap = false
+  vim.o.wrap = true
 
 	vim.opt.shortmess:append("I")
 
