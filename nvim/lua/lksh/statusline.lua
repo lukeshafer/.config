@@ -1,41 +1,88 @@
 -- Statusline Modules
 
--- local component_separators = { left = "", right = "" }
--- local section_separators = { left = "", right = "" }
+-- local mode_icons = {
+-- 	-- normal = "%#MiniStatuslineModeNormal#  %#WhichKeyFloat#",
+-- 	-- visual = "%#MiniStatuslineModeVisual# 󰗧 %#DiagnosticFloatingOk#",
+-- 	-- insert = "%#MiniHipatternsTodo#  %#DiagnosticFloatingInfo#",
+-- 	-- command = "%#MiniStatuslineModeCommand#  %#DiagnosticFloatingWarn#",
+-- 	normal = "%#StatusLine# ",
+-- 	visual = "%#Cursor#󰗧 ",
+-- 	insert = "%#DiffText# ",
+-- 	command = "%#IncSearch# ",
+-- }
 
-local mode_icons = {
-	-- normal = "%#MiniStatuslineModeNormal#  %#WhichKeyFloat#",
-	-- visual = "%#MiniStatuslineModeVisual# 󰗧 %#DiagnosticFloatingOk#",
-	-- insert = "%#MiniHipatternsTodo#  %#DiagnosticFloatingInfo#",
-	-- command = "%#MiniStatuslineModeCommand#  %#DiagnosticFloatingWarn#",
-	normal = "%#StatusLine#   ",
-	visual = "%#Cursor# 󰗧  ",
-	insert = "%#DiffText#   ",
-	command = "%#IncSearch#   ",
+local mode_info = {
+	normal = {
+		hl = "%#LKSHStatusNormal#",
+		hl_inv = "%#LKSHStatusNormalInv#",
+		sym = " ",
+	},
+	visual = {
+		hl = "%#LKSHStatusVisual#",
+		hl_inv = "%#LKSHStatusVisualInv#",
+		sym = "󰗧 ",
+	},
+	insert = {
+		hl = "%#LKSHStatusInsert#",
+		hl_inv = "%#LKSHStatusInsertInv#",
+		sym = " ",
+	},
+	command = {
+		hl = "%#LKSHStatusCommand#",
+		hl_inv = "%#LKSHStatusCommandInv#",
+		sym = " ",
+	},
 }
 
-local modes = {
-	["n"] = mode_icons.normal,
-	["nt"] = mode_icons.normal,
-	["no"] = mode_icons.normal,
-	["v"] = mode_icons.visual,
-	["V"] = mode_icons.visual,
-	[""] = mode_icons.visual,
-	["s"] = mode_icons.visual,
-	["S"] = mode_icons.visual,
-	[""] = mode_icons.visual,
-	["i"] = mode_icons.insert,
-	["ic"] = mode_icons.insert,
-	["R"] = mode_icons.insert,
-	["Rv"] = mode_icons.insert,
-	["c"] = mode_icons.command,
-	["cv"] = mode_icons.command,
-	["ce"] = mode_icons.command,
-	["r"] = "PROMPT",
-	["rm"] = "MOAR",
-	["r?"] = "CONFIRM",
-	["!"] = mode_icons.command,
-	["t"] = mode_icons.command,
+local pl = {
+	hrd_r = "",
+	hrd_l = "",
+	sft_r = "",
+	sft_l = "",
+	rnd_r = "",
+	rnd_l = "",
+	btm_angle_r = "",
+	btm_angle_l = "",
+	top_angle_r = "",
+	top_angle_l = "",
+	thin_angle_r = "",
+	thin_angle_l = "",
+	flame_r = "",
+	flame_l = "",
+	thin_flame_r = "",
+	thin_flame_l = "",
+	pxl_sm_r = "",
+	pxl_sm_l = "",
+	pxl_lg_r = "",
+	pxl_lg_l = "",
+	honeycomb_hrd = "",
+	honeycomb_sft = "",
+	trapezoid_r = "",
+	trapezoid_l = "",
+}
+
+local mode_map = {
+	["n"] = "normal",
+	["nt"] = "normal",
+	["no"] = "normal",
+	["v"] = "visual",
+	["V"] = "visual",
+	[""] = "visual",
+	["s"] = "visual",
+	["S"] = "visual",
+	[""] = "visual",
+	["i"] = "insert",
+	["ic"] = "insert",
+	["R"] = "insert",
+	["Rv"] = "insert",
+	["c"] = "command",
+	["cv"] = "command",
+	["ce"] = "command",
+	["r"] = "command",
+	["rm"] = "command",
+	["r?"] = "command",
+	["!"] = "command",
+	["t"] = "command",
 }
 
 local function filepath()
@@ -87,7 +134,16 @@ local function lsp()
 		info = " %#MoreMsg# " .. count["info"]
 	end
 
-	return errors .. warnings .. hints .. info .. "%#StatusLine#"
+	return table.concat({
+		"%#StatusLine#",
+		errors,
+		warnings,
+		hints,
+		info,
+		"%#StatusLine#",
+	})
+
+	-- return errors .. warnings .. hints .. info .. "%#StatusLine#"
 end
 
 local git = function()
@@ -128,17 +184,31 @@ local function not_nil(v)
 	return v and true or false
 end
 
+local function mode()
+	local m_info = mode_info[mode_map[vim.api.nvim_get_mode().mode]]
+
+	return table.concat({
+		m_info.hl_inv,
+		pl.rnd_l,
+		m_info.hl,
+		m_info.sym,
+		m_info.hl_inv,
+		pl.rnd_r,
+		"%#StatusLine#",
+	})
+end
+
+local GAP = " %m"
+
 function Statusline.active()
-	-- vim.api.nvim_set_hl(0, "StatusLine", { update = true, bg = "none", ctermbg = "none" })
+	vim.api.nvim_set_hl(0, "StatusLine", { update = true, bg = "none", ctermbg = "none" })
 	-- vim.api.nvim_set_hl(0, "NonText", { update = true, bg = "none", ctermbg = "none" })
 	return table.concat(vim.tbl_filter(not_nil, {
-		"%#StatusLineNC#",
-		modes[vim.api.nvim_get_mode().mode],
-		"%#StatusLine#",
+		mode(),
 		filepath(),
 		filename(),
 		git(),
-		" %m%#StatusLine#",
+		GAP,
 		lsp(),
 		"%=%#StatusLine#",
 		vim.bo.filetype,
@@ -154,7 +224,31 @@ function Statusline.inactive()
 	})
 end
 
+local colors = {
+	normal = "#20364f",
+	insert = "#d8eced",
+	visual = "#f7d0f7",
+	command = "#f7e6d0",
+}
+
+local function init_highlight_groups()
+	-- local ns_id = vim.api.nvim_create_namespace("")
+
+	vim.api.nvim_set_hl(0, "LKSHStatusNormal", { update = true, fg = "fg", bg = colors.normal })
+	vim.api.nvim_set_hl(0, "LKSHStatusNormalInv", { update = true, fg = colors.normal, bg = "bg" })
+
+	vim.api.nvim_set_hl(0, "LKSHStatusInsert", { update = true, fg = "black", bg = colors.insert })
+	vim.api.nvim_set_hl(0, "LKSHStatusInsertInv", { update = true, fg = colors.insert, bg = "bg" })
+
+	vim.api.nvim_set_hl(0, "LKSHStatusVisual", { update = true, fg = "black", bg = colors.visual })
+	vim.api.nvim_set_hl(0, "LKSHStatusVisualInv", { update = true, fg = colors.visual, bg = "bg" })
+
+	vim.api.nvim_set_hl(0, "LKSHStatusCommand", { update = true, fg = "black", bg = colors.command })
+	vim.api.nvim_set_hl(0, "LKSHStatusCommandInv", { update = true, fg = colors.command, bg = "bg" })
+end
+
 function Statusline.init()
+	init_highlight_groups()
 	local group = vim.api.nvim_create_augroup("Statusline", {})
 	vim.api.nvim_create_autocmd({ "WinEnter", "BufEnter" }, {
 		group = group,

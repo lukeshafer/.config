@@ -34,6 +34,15 @@ function Opts.init()
 		foldinner = " ",
 	}
 
+	vim.api.nvim_create_autocmd("BufReadPost", {
+		callback = function()
+			if vim.api.nvim_buf_line_count(0) > 10000 then
+				vim.wo.foldenable = false
+				vim.wo.foldmethod = "manual"
+			end
+		end,
+	})
+
 	vim.o.backupdir = vim.fn.expand("~/.vim/backup")
 	vim.o.dir = vim.fn.expand("~/.vim/swapfiles")
 

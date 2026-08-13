@@ -11,6 +11,7 @@ tmux/plugins/
 !environment.d/
 !fuzzel/
 !git/
+!glyphs.md
 !greetd.toml
 !kitty/
 !mimeapps.list

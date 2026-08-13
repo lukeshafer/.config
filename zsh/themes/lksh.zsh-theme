@@ -3,10 +3,7 @@
 # Author: Luke Shafer
 # URL: http://lukeshafer.com/
 
-# %F{black}\${(l.\$COLUMNS..-.)}%{$reset_color%}
-
-# local colors=("blue" "cyan" "magenta" "green" "yellow" "red")
-# local color_index="$(($RANDOM % ${#colors[@]} + 1))"
+# view colors with command `c256` in zsh
 
 case "$HOST" in
   snerver)
@@ -33,17 +30,15 @@ esac
 
 local dark="236"
 local light="231"
+local git_bg="25"
 
-# iTerm renders the   characters differently
-# if [[ -n "$ITERM_PROFILE" ]] then
-#   local left_sep=" "
-#   local right_sep=" "
-# else
-  local left_sep=""
-  local right_sep=""
-# fi
-#           
-#    
+# if iTerm renders the   characters at double width
+# uncheck Settings > Profile > Text > Text Rendering > Use built-in Powerline glyphs
+#
+# Some Powerline glyphs for copying
+#               
+local left_sep=""
+local right_sep=""
 
 function ssh_prompt_info() {
   if [[ -n $SSH_CONNECTION ]]; then
@@ -52,25 +47,44 @@ function ssh_prompt_info() {
 }
 
 function pwd_prompt() {
-  echo "%F{$dark}%K{$main} %B%~%b %k%F{$main}$left_sep"
+  echo "%F{$dark}%K{$main} %B%~%b %k%F{$main}$right_sep"
 }
 
 function user_prompt() {
   echo "%F{$accent}%n%f"
 }
 
+# git settings
+ZSH_THEME_GIT_PROMPT_PREFIX="%F{green}  %F{195}"
+ZSH_THEME_GIT_PROMPT_CLEAN=""
+ZSH_THEME_GIT_PROMPT_DIRTY="%F{yellow}*%F{default}"
+ZSH_THEME_GIT_PROMPT_SUFFIX=" %F{default}"
+function git_prompt() {
+  if [[ -n $(git_prompt_info) ]]; then
+    echo " %F{$git_bg}$left_sep%K{$git_bg}$(git_prompt_info)%K{default}%F{$git_bg}$right_sep"
+  else 
+    echo ""
+  fi
+
+}
+
 PROMPT="
-\$(pwd_prompt) \$(git_prompt_info)%{$reset_color%}
+\$(pwd_prompt) \$(git_prompt)%{$reset_color%}
 %k\$(user_prompt)\$(ssh_prompt_info) %F{$light}%(!.#.»)%F{default}%K{default} "
 
 RPROMPT="%(?..%{$fg[red]%}%? ↵%{$reset_color%}) %F{$light}%t"
 
-# useful chars:  
-#            »
-
-# git settings
-ZSH_THEME_GIT_PROMPT_PREFIX="%F{green} 󰊢 %F{cyan}"
-ZSH_THEME_GIT_PROMPT_CLEAN=""
-ZSH_THEME_GIT_PROMPT_DIRTY="%F{yellow}*%F{default}"
-ZSH_THEME_GIT_PROMPT_SUFFIX=" %F{default}"
+#
+# Powerline Symbols
+# Hard separators:  
+# Soft separators:  
+# Round separators:  
+# Hard bottom angle separators:  
+# Hard top angle separators:  
+# Thin angle separators:    
+# Flame separators:   
+# Thin flame separators:   
+# Pixelated separators:        
+#
+# Other useful chars:   »
 
