@@ -11,97 +11,95 @@
 -- 	command = "%#IncSearch# ",
 -- }
 
-local mode_info = {
-	normal = {
-		hl = "%#LKSHStatusNormal#",
-		hl_inv = "%#LKSHStatusNormalInv#",
-		sym = " ",
-	},
-	visual = {
-		hl = "%#LKSHStatusVisual#",
-		hl_inv = "%#LKSHStatusVisualInv#",
-		sym = "󰗧 ",
-	},
-	insert = {
-		hl = "%#LKSHStatusInsert#",
-		hl_inv = "%#LKSHStatusInsertInv#",
-		sym = " ",
-	},
-	command = {
-		hl = "%#LKSHStatusCommand#",
-		hl_inv = "%#LKSHStatusCommandInv#",
-		sym = " ",
-	},
+local mode_icons = {
+	Normal = " ",
+	Visual = "󰗧 ",
+	Insert = " ",
+	Command = " ",
 }
 
 local pl = {
-	hrd_r = "",
-	hrd_l = "",
-	sft_r = "",
-	sft_l = "",
-	rnd_r = "",
-	rnd_l = "",
-	btm_angle_r = "",
-	btm_angle_l = "",
-	top_angle_r = "",
-	top_angle_l = "",
-	thin_angle_r = "",
-	thin_angle_l = "",
-	flame_r = "",
-	flame_l = "",
-	thin_flame_r = "",
-	thin_flame_l = "",
-	pxl_sm_r = "",
-	pxl_sm_l = "",
-	pxl_lg_r = "",
-	pxl_lg_l = "",
-	honeycomb_hrd = "",
-	honeycomb_sft = "",
-	trapezoid_r = "",
-	trapezoid_l = "",
+	hard = { "", "" },
+	soft = { "", "" },
+	round = { "", "" },
+	btm_angle = { "", "" },
+	top_angle = { "", "" },
+	thin_angle = { "", "" },
+	flame = { "", "" },
+	thin_flame = { "", "" },
+	pixel_sm = { "", "" },
+	pixel_lg = { "", "" },
+	honeycomb_hrd = { "" },
+	honeycomb_sft = { "" },
+	trapezoid = { "", "" },
 }
 
 local mode_map = {
-	["n"] = "normal",
-	["nt"] = "normal",
-	["no"] = "normal",
-	["v"] = "visual",
-	["V"] = "visual",
-	[""] = "visual",
-	["s"] = "visual",
-	["S"] = "visual",
-	[""] = "visual",
-	["i"] = "insert",
-	["ic"] = "insert",
-	["R"] = "insert",
-	["Rv"] = "insert",
-	["c"] = "command",
-	["cv"] = "command",
-	["ce"] = "command",
-	["r"] = "command",
-	["rm"] = "command",
-	["r?"] = "command",
-	["!"] = "command",
-	["t"] = "command",
+	["n"] = "Normal",
+	["nt"] = "Normal",
+	["no"] = "Normal",
+	["v"] = "Visual",
+	["V"] = "Visual",
+	[""] = "Visual",
+	["s"] = "Visual",
+	["S"] = "Visual",
+	[""] = "Visual",
+	["i"] = "Insert",
+	["ic"] = "Insert",
+	["R"] = "Insert",
+	["Rv"] = "Insert",
+	["c"] = "Command",
+	["cv"] = "Command",
+	["ce"] = "Command",
+	["r"] = "Command",
+	["rm"] = "Command",
+	["r?"] = "Command",
+	["!"] = "Command",
+	["t"] = "Command",
 }
 
+---@param name string
+---@param contents string
+---@param border string? "round" by default
+local function blob(name, contents, border)
+	local hl = string.format("%%#LKSHStatus%s#", name)
+	local inv = string.format("%%#LKSHStatus%sInv#", name)
+	local sep = pl[border] or pl.round
+
+	return table.concat({
+    " ",
+		inv,
+		sep[2] or "",
+		hl,
+		contents,
+		inv,
+		sep[1],
+		"%#StatusLine#",
+	})
+end
+
 local function filepath()
-	local fpath = vim.fn.fnamemodify(vim.fn.expand("%"), ":~:.:h")
+	-- local fpath = vim.fn.fnamemodify(vim.fn.expand("%"), ":~:.:h")
+	local fpath = vim.fn.expand("%")
 
 	if fpath == "" or fpath == "." then
 		return " "
 	end
 
-	return string.format(" %%<%s/", fpath)
+	return blob("Filepath", string.format(" %%<%s ", fpath))
+	--
+	-- return table.concat({
+	-- 	string.format(" %%<%s ", fpath),
+	-- })
 end
 
-local function filename()
-	local fname = vim.fn.expand("%:t")
-	if fname == "" then
-		return ""
-	end
-	return fname .. " "
-end
+-- local function filename()
+-- 	local fname = vim.fn.expand("%:t")
+-- 	if fname == "" then
+-- 		return ""
+-- 	end
+-- 	return fname .. " "
+-- end
 
 local function lsp()
 	local count = {}
@@ -185,17 +183,8 @@ local function not_nil(v)
 end
 
 local function mode()
-	local m_info = mode_info[mode_map[vim.api.nvim_get_mode().mode]]
-
-	return table.concat({
-		m_info.hl_inv,
-		pl.rnd_l,
-		m_info.hl,
-		m_info.sym,
-		m_info.hl_inv,
-		pl.rnd_r,
-		"%#StatusLine#",
-	})
+	local mode_name = mode_map[vim.api.nvim_get_mode().mode]
+	return blob(mode_name, mode_icons[mode_name])
 end
 
 local GAP = " %m"
@@ -206,7 +195,7 @@ function Statusline.active()
 	return table.concat(vim.tbl_filter(not_nil, {
 		mode(),
 		filepath(),
-		filename(),
+		-- filename(),
 		git(),
 		GAP,
 		lsp(),
@@ -224,27 +213,38 @@ function Statusline.inactive()
 	})
 end
 
-local colors = {
-	normal = "#20364f",
-	insert = "#d8eced",
-	visual = "#f7d0f7",
-	command = "#f7e6d0",
-}
+---comment
+---@param name string
+---@param bg string
+---@param opts vim.api.keyset.highlight?
+local function set_statusline_hl(name, bg, opts)
+	local hl_name = string.format("LKSHStatus%s", name)
+
+	vim.api.nvim_set_hl(
+		0,
+		hl_name,
+		vim.tbl_extend("force", opts or {}, {
+			update = true,
+			bg = bg,
+		})
+	)
+	vim.api.nvim_set_hl(
+		0,
+		hl_name .. "Inv",
+		vim.tbl_extend("force", opts or {}, {
+			update = true,
+			fg = bg,
+			bg = "bg",
+		})
+	)
+end
 
 local function init_highlight_groups()
-	-- local ns_id = vim.api.nvim_create_namespace("")
-
-	vim.api.nvim_set_hl(0, "LKSHStatusNormal", { update = true, fg = "fg", bg = colors.normal })
-	vim.api.nvim_set_hl(0, "LKSHStatusNormalInv", { update = true, fg = colors.normal, bg = "bg" })
-
-	vim.api.nvim_set_hl(0, "LKSHStatusInsert", { update = true, fg = "black", bg = colors.insert })
-	vim.api.nvim_set_hl(0, "LKSHStatusInsertInv", { update = true, fg = colors.insert, bg = "bg" })
-
-	vim.api.nvim_set_hl(0, "LKSHStatusVisual", { update = true, fg = "black", bg = colors.visual })
-	vim.api.nvim_set_hl(0, "LKSHStatusVisualInv", { update = true, fg = colors.visual, bg = "bg" })
-
-	vim.api.nvim_set_hl(0, "LKSHStatusCommand", { update = true, fg = "black", bg = colors.command })
-	vim.api.nvim_set_hl(0, "LKSHStatusCommandInv", { update = true, fg = colors.command, bg = "bg" })
+	set_statusline_hl("Normal", "#20364f")
+	set_statusline_hl("Insert", "#d8eced", { fg = "black" })
+	set_statusline_hl("Visual", "#f7d0f7", { fg = "black" })
+	set_statusline_hl("Command", "#f4d3a8", { fg = "black" })
+	set_statusline_hl("Filepath", "#8376e0", { bold = true })
 end
 
 function Statusline.init()
