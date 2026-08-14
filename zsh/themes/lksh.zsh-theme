@@ -30,7 +30,7 @@ esac
 
 local dark="236"
 local light="231"
-local git_bg="25"
+local git_bg="24"
 
 # if iTerm renders the   characters at double width
 # uncheck Settings > Profile > Text > Text Rendering > Use built-in Powerline glyphs

@@ -11,9 +11,11 @@
 -- 	command = "%#IncSearch# ",
 -- }
 
+local c256 = require("lksh.utils").c256
+
 local mode_icons = {
 	Normal = " ",
-	Visual = "󰗧 ",
+	Visual = "󰒉 ",
 	Insert = " ",
 	Command = " ",
 }
@@ -58,6 +60,10 @@ local mode_map = {
 	["t"] = "Command",
 }
 
+local function use_hl(name)
+	return string.format("%%#LKSHStatus%s#", name)
+end
+
 ---@param name string
 ---@param contents string
 ---@param border string? "round" by default
@@ -67,7 +73,7 @@ local function blob(name, contents, border)
 	local sep = pl[border] or pl.round
 
 	return table.concat({
-    " ",
+		" ",
 		inv,
 		sep[2] or "",
 		hl,
@@ -79,18 +85,7 @@ local function blob(name, contents, border)
 end
 
 local function filepath()
-	-- local fpath = vim.fn.fnamemodify(vim.fn.expand("%"), ":~:.:h")
-	local fpath = vim.fn.expand("%")
-
-	if fpath == "" or fpath == "." then
-		return " "
-	end
-
-	return blob("Filepath", string.format(" %%<%s ", fpath))
-	--
-	-- return table.concat({
-	-- 	string.format(" %%<%s ", fpath),
-	-- })
+	return blob("Filepath", " %<%f %m")
 end
 
 -- local function filename()
@@ -144,36 +139,36 @@ local function lsp()
 	-- return errors .. warnings .. hints .. info .. "%#StatusLine#"
 end
 
-local git = function()
+local function git()
 	if not vim.b.minidiff_summary or not vim.b.minigit_summary then
 		return ""
 	end
 
 	local added = ""
 	if (vim.b.minidiff_summary.add or 0) > 0 then
-		added = string.format(" %%#OkMsg#+%i", vim.b.minidiff_summary.add)
+		added = string.format(" %s+%i", use_hl("GitAdd"), vim.b.minidiff_summary.add)
 	end
 
 	local changed = ""
 	if (vim.b.minidiff_summary.change or 0) > 0 then
-		changed = string.format(" %%#WarningMsg#~%i", vim.b.minidiff_summary.change)
+		changed = string.format(" %s~%i", use_hl("GitChange"), vim.b.minidiff_summary.change)
 	end
 
 	local deleted = ""
 	if (vim.b.minidiff_summary.delete or 0) > 0 then
-		deleted = string.format(" %%#ErrorMsg#-%i", vim.b.minidiff_summary.delete)
+		deleted = string.format(" %s-%i", use_hl("GitDelete"), vim.b.minidiff_summary.delete)
 	end
 
 	local result = table.concat({
-		"( ",
+		"  ",
 		vim.b.minigit_summary.head_name,
 		added,
 		changed,
 		deleted,
-		"%#StatusLine#)",
+		" ",
 	})
 
-	return result
+	return blob("Git", result)
 end
 
 local Statusline = {}
@@ -187,17 +182,14 @@ local function mode()
 	return blob(mode_name, mode_icons[mode_name])
 end
 
-local GAP = " %m"
-
 function Statusline.active()
 	vim.api.nvim_set_hl(0, "StatusLine", { update = true, bg = "none", ctermbg = "none" })
 	-- vim.api.nvim_set_hl(0, "NonText", { update = true, bg = "none", ctermbg = "none" })
+
 	return table.concat(vim.tbl_filter(not_nil, {
 		mode(),
 		filepath(),
-		-- filename(),
 		git(),
-		GAP,
 		lsp(),
 		"%=%#StatusLine#",
 		vim.bo.filetype,
@@ -207,9 +199,8 @@ end
 
 function Statusline.inactive()
 	return table.concat({
-		"%#StatusLineNC#",
-		-- modes[vim.api.nvim_get_mode().mode],
-		" %F %m ",
+		blob("Inactive", mode_icons.Normal),
+		blob("Inactive", " %F %m"),
 	})
 end
 
@@ -239,16 +230,31 @@ local function set_statusline_hl(name, bg, opts)
 	)
 end
 
-local function init_highlight_groups()
-	set_statusline_hl("Normal", "#20364f")
-	set_statusline_hl("Insert", "#d8eced", { fg = "black" })
-	set_statusline_hl("Visual", "#f7d0f7", { fg = "black" })
-	set_statusline_hl("Command", "#f4d3a8", { fg = "black" })
-	set_statusline_hl("Filepath", "#8376e0", { bold = true })
-end
-
 function Statusline.init()
-	init_highlight_groups()
+	local host_color = ({
+		snerver = 29,
+		lukelaptop = 103,
+		gombertcrombert = 68,
+		K4L7X4FWFW = 174,
+	})[vim.fn.hostname()] or 203
+
+	local dark = c256(236)
+	local light = c256(231)
+
+	set_statusline_hl("Normal", c256(239), { fg = light })
+	set_statusline_hl("Insert", c256(12), { fg = "black" })
+	set_statusline_hl("Visual", c256(225), { fg = "black" })
+	set_statusline_hl("Command", c256(223), { fg = "black" })
+	set_statusline_hl("Filepath", c256(host_color), { bold = true, fg = dark })
+
+  set_statusline_hl("Inactive", c256(235))
+
+	local git_color = c256(24)
+	set_statusline_hl("Git", git_color, { fg = light })
+	set_statusline_hl("GitAdd", git_color, { fg = "lightgreen" })
+	set_statusline_hl("GitChange", git_color, { fg = "lightyellow" })
+	set_statusline_hl("GitDelete", git_color, { fg = "lightred" })
+
 	local group = vim.api.nvim_create_augroup("Statusline", {})
 	vim.api.nvim_create_autocmd({ "WinEnter", "BufEnter" }, {
 		group = group,

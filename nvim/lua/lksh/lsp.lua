@@ -8,22 +8,22 @@ function LSP.init()
 		"jsonls",
 		"lua_ls",
 		-- "ts_ls",
-		-- "tsgo",
+		"tsgo",
 		"yamlls",
 		"emmet_language_server",
 		"bashls",
 	})
 
 	utils.use_in_context("work", function()
-		vim.lsp.enable({
-			"ts_ls",
-		})
+		-- vim.lsp.enable({
+			-- "ts_ls",
+		-- })
 	end, function()
 		-- NOT NEEDED AT WORK
 		vim.lsp.enable({
 			"astro",
 			"cssls",
-			"tsgo",
+			-- "tsgo",
 			-- "emmet_ls",
 			"tailwindcss",
 			"pico8_ls",
