@@ -1,16 +1,5 @@
 -- Statusline Modules
 
--- local mode_icons = {
--- 	-- normal = "%#MiniStatuslineModeNormal#  %#WhichKeyFloat#",
--- 	-- visual = "%#MiniStatuslineModeVisual# 󰗧 %#DiagnosticFloatingOk#",
--- 	-- insert = "%#MiniHipatternsTodo#  %#DiagnosticFloatingInfo#",
--- 	-- command = "%#MiniStatuslineModeCommand#  %#DiagnosticFloatingWarn#",
--- 	normal = "%#StatusLine# ",
--- 	visual = "%#Cursor#󰗧 ",
--- 	insert = "%#DiffText# ",
--- 	command = "%#IncSearch# ",
--- }
-
 local c256 = require("lksh.utils").c256
 
 local mode_icons = {
@@ -68,6 +57,10 @@ end
 ---@param contents string
 ---@param border string? "round" by default
 local function blob(name, contents, border)
+	if #contents == 0 then
+		return ""
+	end
+
 	local hl = string.format("%%#LKSHStatus%s#", name)
 	local inv = string.format("%%#LKSHStatus%sInv#", name)
 	local sep = pl[border] or pl.round
@@ -85,16 +78,9 @@ local function blob(name, contents, border)
 end
 
 local function filepath()
-	return blob("Filepath", " %<%f %m")
+	return blob("Filepath", " %<%f %m")
 end
 
--- local function filename()
--- 	local fname = vim.fn.expand("%:t")
--- 	if fname == "" then
--- 		return ""
--- 	end
--- 	return fname .. " "
--- end
 
 local function lsp()
 	local count = {}
@@ -115,28 +101,27 @@ local function lsp()
 	local info = ""
 
 	if count["errors"] ~= 0 then
-		errors = " %#ErrorMsg# " .. count["errors"]
+		errors = string.format(" %s %i ", use_hl("LSPError"), count["errors"])
 	end
 	if count["warnings"] ~= 0 then
-		warnings = " %#WarningMsg# " .. count["warnings"]
+		warnings = string.format(" %s %i ", use_hl("LSPWarning"), count["warnings"])
 	end
 	if count["hints"] ~= 0 then
-		hints = " %#ModeMsg# " .. count["hints"]
+		hints = string.format(" %s %i ", use_hl("LSPHint"), count["hints"])
 	end
 	if count["info"] ~= 0 then
-		info = " %#MoreMsg# " .. count["info"]
+		info = string.format(" %s %i ", use_hl("LSPInfo"), count["info"])
 	end
 
-	return table.concat({
-		"%#StatusLine#",
-		errors,
-		warnings,
-		hints,
-		info,
-		"%#StatusLine#",
-	})
-
-	-- return errors .. warnings .. hints .. info .. "%#StatusLine#"
+	return blob(
+		"LSP",
+		table.concat({
+			errors,
+			warnings,
+			hints,
+			info,
+		})
+	)
 end
 
 local function git()
@@ -160,7 +145,7 @@ local function git()
 	end
 
 	local result = table.concat({
-		"  ",
+		"  ",
 		vim.b.minigit_summary.head_name,
 		added,
 		changed,
@@ -247,13 +232,20 @@ function Statusline.init()
 	set_statusline_hl("Command", c256(223), { fg = "black" })
 	set_statusline_hl("Filepath", c256(host_color), { bold = true, fg = dark })
 
-  set_statusline_hl("Inactive", c256(235))
+	set_statusline_hl("Inactive", c256(235))
 
 	local git_color = c256(24)
 	set_statusline_hl("Git", git_color, { fg = light })
 	set_statusline_hl("GitAdd", git_color, { fg = "lightgreen" })
 	set_statusline_hl("GitChange", git_color, { fg = "lightyellow" })
 	set_statusline_hl("GitDelete", git_color, { fg = "lightred" })
+
+	local lsp_color = c256(53)
+	set_statusline_hl("LSP", lsp_color, { fg = light })
+	set_statusline_hl("LSPError", lsp_color, { fg = "lightred", bold=true })
+	set_statusline_hl("LSPWarning", lsp_color, { fg = "yellow", bold=true })
+	set_statusline_hl("LSPHint", lsp_color, { fg = "lightgreen", bold=true })
+	set_statusline_hl("LSPInfo", lsp_color, { fg = "lightblue", bold=true })
 
 	local group = vim.api.nvim_create_augroup("Statusline", {})
 	vim.api.nvim_create_autocmd({ "WinEnter", "BufEnter" }, {
