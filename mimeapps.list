@@ -36,17 +36,17 @@ video/*=mpv.desktop
 audio/*=mpv.desktop
 
 # File manager / directories
-inode/directory=pcmanfm-qt.desktop
+inode/directory=dolphin.desktop
 
 # Archives
-application/zip=pcmanfm-qt.desktop
-application/x-tar=pcmanfm-qt.desktop
-application/gzip=pcmanfm-qt.desktop
-application/x-bzip=pcmanfm-qt.desktop
-application/x-bzip2=pcmanfm-qt.desktop
-application/x-xz=pcmanfm-qt.desktop
-application/x-7z-compressed=pcmanfm-qt.desktop
-application/x-rar=pcmanfm-qt.desktop
-application/x-compressed-tar=pcmanfm-qt.desktop
-application/x-tarz=pcmanfm-qt.desktop
-x-scheme-handler/discord=vesktop.desktop
+application/zip=file-roller.desktop
+application/x-tar=file-roller.desktop
+application/gzip=file-roller.desktop
+application/x-bzip=file-roller.desktop
+application/x-bzip2=file-roller.desktop
+application/x-xz=file-roller.desktop
+application/x-7z-compressed=file-roller.desktop
+application/x-rar=file-roller.desktop
+application/x-compressed-tar=file-roller.desktop
+application/x-tarz=file-roller.desktop
+x-scheme-handler/discord=discord.desktop
