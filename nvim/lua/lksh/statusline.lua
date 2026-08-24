@@ -145,7 +145,7 @@ local function git()
 	end
 
 	local result = table.concat({
-		"  ",
+		" ",
 		vim.b.minigit_summary.head_name,
 		added,
 		changed,

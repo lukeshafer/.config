@@ -55,7 +55,7 @@ function user_prompt() {
 }
 
 # git settings
-ZSH_THEME_GIT_PROMPT_PREFIX="%F{green}  %F{195}"
+ZSH_THEME_GIT_PROMPT_PREFIX="%F{green}  %F{195}"
 ZSH_THEME_GIT_PROMPT_CLEAN=""
 ZSH_THEME_GIT_PROMPT_DIRTY="%F{yellow}*%F{default}"
 ZSH_THEME_GIT_PROMPT_SUFFIX=" %F{default}"
