@@ -47,7 +47,7 @@ function ssh_prompt_info() {
 }
 
 function pwd_prompt() {
-  echo "%F{$dark}%K{$main} %B%~%b %k%F{$main}$right_sep"
+  echo "%F{$dark}%K{$main} %B%~%b%k%F{$main}$right_sep"
 }
 
 function user_prompt() {
@@ -55,10 +55,10 @@ function user_prompt() {
 }
 
 # git settings
-ZSH_THEME_GIT_PROMPT_PREFIX="%F{green}  %F{195}"
+ZSH_THEME_GIT_PROMPT_PREFIX="%F{green} %F{195}"
 ZSH_THEME_GIT_PROMPT_CLEAN=""
 ZSH_THEME_GIT_PROMPT_DIRTY="%F{yellow}*%F{default}"
-ZSH_THEME_GIT_PROMPT_SUFFIX=" %F{default}"
+ZSH_THEME_GIT_PROMPT_SUFFIX="%F{default}"
 function git_prompt() {
   if [[ -n $(git_prompt_info) ]]; then
     echo " %F{$git_bg}$left_sep%K{$git_bg}$(git_prompt_info)%K{default}%F{$git_bg}$right_sep"
