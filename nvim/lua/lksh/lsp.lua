@@ -8,7 +8,7 @@ function LSP.init()
 		"jsonls",
 		"lua_ls",
 		-- "ts_ls",
-		"tsgo",
+		"tsc",
 		"yamlls",
 		"emmet_language_server",
 		"bashls",
