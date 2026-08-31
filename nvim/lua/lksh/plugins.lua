@@ -16,7 +16,6 @@ function Plugins.clean_inactive()
 	end, vim.pack.get(nil, { info = false }))
 
 	if #inactive > 0 then
-		local f = inactive[0]
 		vim.pack.del(vim.tbl_map(
 			---@param plugin vim.pack.PlugData
 			function(plugin)
@@ -33,6 +32,7 @@ function Plugins.init()
 		resolve_plug("uga-rosa/ccc.nvim"),
 		resolve_plug("nvim-mini/mini.nvim"),
 		resolve_plug("neovim/nvim-lspconfig"),
+		resolve_plug("OXY2DEV/markview.nvim"),
 		resolve_plug("stevearc/conform.nvim"),
 		resolve_plug("mfussenegger/nvim-lint"),
 		resolve_plug("windwp/nvim-ts-autotag"),
