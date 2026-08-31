@@ -36,7 +36,7 @@ video/*=mpv.desktop
 audio/*=mpv.desktop
 
 # File manager / directories
-inode/directory=dolphin.desktop
+inode/directory=thunar.desktop
 
 # Archives
 application/zip=file-roller.desktop

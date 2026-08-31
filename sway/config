@@ -95,6 +95,7 @@ bindsym $mod+Shift+q kill
 
 bindsym $mod+Shift+b exec $browser
 bindsym $mod+Shift+d exec discord
+bindsym $mod+Shift+f exec thunar
 bindsym $mod+Shift+s exec grim -g "$(slurp -d)" - | wl-copy
 
 # Start your launcher
