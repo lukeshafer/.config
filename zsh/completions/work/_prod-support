@@ -1,0 +1,40 @@
+#compdef prod-support
+#
+# Zsh completion for prod-support
+#
+# Install: symlink or copy to a directory in your $fpath, e.g.:
+#   ln -s ~/repos/scripts/work/_prod-support ~/.config/zsh/completions/work/_prod-support
+#
+# Then ensure that dir is in fpath (before compinit) in .zshrc.
+
+_prod-support() {
+  local -a commands
+  commands=(
+    'run:Run the daily prod check (alerts + agent analysis)'
+    'review:Resume the most recent daily check session for follow-up'
+    'chat:Start a new prod-support investigation session'
+    'usage:Show automation credit usage for the current month'
+  )
+
+  if (( CURRENT == 2 )); then
+    _describe 'command' commands
+    return
+  fi
+
+  local command="${words[2]}"
+
+  case "$command" in
+    run)
+      # run accepts --from/--to (dates) and --dry-run
+      _arguments \
+        '--from[Start date (YYYY-MM-DD)]:date:' \
+        '--to[End date (YYYY-MM-DD)]:date:' \
+        '--dry-run[Run alerts only, skip agent invocation]'
+      ;;
+    review|chat|usage)
+      # No further arguments
+      ;;
+  esac
+}
+
+_prod-support "$@"
