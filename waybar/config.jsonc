@@ -97,7 +97,7 @@
       "activated": " ",
       "deactivated": " "
     },
-    "timeout": 60,
+    "timeout": 360,
   },
   "tray": {
     // "icon-size": 21,

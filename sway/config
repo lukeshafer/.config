@@ -19,7 +19,7 @@ set $term kitty
 set $menu fuzzel
 set $browser firefox
 
-exec ~/.config/sway/empty-launcher.sh
+# exec ~/.config/sway/empty-launcher.sh
 exec wl-paste --watch clipman store
 
 exec_always {
