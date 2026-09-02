@@ -35,9 +35,6 @@
     "all-outputs": true,
     "warp-on-scroll": false,
     "format": "<span size='smaller'><span foreground='#999999'>{name} </span>{windows}</span>",
-    "format-icons": {
-      // "default": ""
-    },
     "window-rewrite": {
       // to find the class, run:
       //  swaymsg -t get_tree
@@ -49,8 +46,24 @@
       "class<pico8>": "p8",
       "class<thunar>": " ",
       "class<steam>": " ",
+      "class<filezilla>": " ",
       "class<com.obsproject.Studio>": "󱜠 ",
-    }
+      "class<org.qbittorrent.qBittorrent>": "qb",
+      "class<org.kde.gwenview>": " ",
+      "class<org.kde.dolphin>": " ",
+      "class<org.kde.ark>": "󰛫 ",
+      "class<org.gnome.FileRoller>": "󰛫 ",
+      "class<libreoffice-base>": " ",
+      "class<libreoffice-calc>": " ",
+      "class<libreoffice-draw>": " ",
+      "class<libreoffice-impress>": " ",
+      "class<libreoffice-math>": " ",
+      "class<libreoffice-writer>": " ",
+      "minecraft": "󰍳 ",
+      "class<mpv>": " ",
+      "class<flameshot>": " ",
+    },
+    "window-rewrite-default": "󰘔 "
   },
   "sway/mode": {
     "format": "<span style=\"italic\">{}</span>"

@@ -140,6 +140,10 @@ bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. 
 #
 # Workspaces:
 #
+    # Default workspaces
+    workspace 1 output $display_l
+    workspace 2 output $display_r
+
     # Switch to workspace
     bindsym $mod+1 workspace number 1
     bindsym $mod+2 workspace number 2
