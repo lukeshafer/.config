@@ -106,3 +106,6 @@ function aia() { opencode run "$*"; }
 
 # --- Package Management ---
 alias sync-packages="sudo pacman -S --needed - < ~/.config/packages/pacman-packages.txt"
+
+# --- AWS ---
+complete -C '/usr/bin/aws_completer' aws
