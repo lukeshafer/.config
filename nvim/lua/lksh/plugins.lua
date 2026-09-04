@@ -32,6 +32,7 @@ function Plugins.init()
 		resolve_plug("uga-rosa/ccc.nvim"),
     resolve_plug("folke/zen-mode.nvim"),
 		resolve_plug("nvim-mini/mini.nvim"),
+    resolve_plug("hat0uma/csvview.nvim"),
 		resolve_plug("neovim/nvim-lspconfig"),
 		resolve_plug("OXY2DEV/markview.nvim"),
 		resolve_plug("stevearc/conform.nvim"),

@@ -1,5 +1,10 @@
+local ok, zen_mode = pcall(require, "zen-mode")
+if not ok then
+	return
+end
+
 vim.keymap.set("n", "<leader>z", function()
-	require("zen-mode").toggle({
+	zen_mode.toggle({
 		window = {
 			backdrop = 0.5, -- shade the backdrop of the Zen window. Set to 1 to keep the same as Normal
 			-- height and width can be:

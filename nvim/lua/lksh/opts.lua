@@ -16,6 +16,7 @@ function Opts.init()
 	-- vim.o.ignorecase = true
   vim.o.wrap = true
   vim.o.linebreak = true
+  vim.o.guicursor = "n-v-c:block,i-ci-ve:ver25,r-cr-o:hor20,a:blinkon0"
 
 	vim.opt.shortmess:append("I")
 
