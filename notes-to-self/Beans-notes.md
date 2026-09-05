@@ -1,4 +1,10 @@
 # 1. Beans
+(before title card)
+today is an exciting day 
+i think yoy all can consider yourselves pretty lucky
+im revealing my life's greatest work
+a theory i call...
+Beans
 (not those ones)
 
 ## 2. What are beans?
