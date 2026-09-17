@@ -20,7 +20,7 @@ vim.keymap.set("n", "<leader>z", function()
 				number = false, -- disable number column
 				relativenumber = false, -- disable relative numbers
 				cursorline = false, -- disable cursorline
-				guicursor = "n-v-c:hor25",
+				-- guicursor = "n-v-c:hor25",
 				-- cursorcolumn = false, -- disable cursor column
 				foldcolumn = "0", -- disable fold column
 				-- list = false, -- disable whitespace characters
