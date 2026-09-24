@@ -134,7 +134,7 @@ local function lsp()
 end
 
 local function git()
-	if not vim.b.minidiff_summary or not vim.b.minigit_summary then
+	if not vim.b.minidiff_summary or not vim.b.minigit_summary or not vim.b.minigit_summary.head_name then
 		return ""
 	end
 
@@ -179,7 +179,7 @@ local function filetype()
 	local ft = vim.bo.filetype
 	local icon, hl = require("mini.icons").get("filetype", ft)
 
-  return string.format("%%#%s# %s %s %%#StatusLine#", hl, icon, ft)
+	return string.format("%%#%s# %s %s %%#StatusLine#", hl, icon, ft)
 end
 
 function Statusline.active()
