@@ -17,7 +17,7 @@ conform.setup({
 		json = { "fixjson" },
 		asl = { "fixjson" },
 		soql = { "sleek" },
-		markdown = { "cbfmt" },
+		-- markdown = { "rumdl" },
 	},
 })
 

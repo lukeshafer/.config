@@ -12,6 +12,7 @@ function LSP.init()
 		"yamlls",
 		"emmet_language_server",
 		"bashls",
+    "rumdl"
 	})
 
 	utils.use_in_context("work", function()
