@@ -3,21 +3,37 @@ local utils = require("lksh.utils")
 local LSP = {}
 
 function LSP.init()
+	vim.lsp.config("oxfmt", {
+		cmd = {
+			vim.fn.expand("~/.local/share/nvim/mason/packages/oxfmt/node_modules/oxfmt/bin/oxfmt"),
+			"--lsp",
+			-- "--config",
+			-- vim.fn.expand("~/.config/.oxfmtrc.json"),
+			-- "--disable-nested-config",
+		},
+		init_options = {
+			["fmt.configPath"] = vim.fn.expand("~/.config/.oxfmtrc.json"),
+			["fmt.disableNestedConfig"] = true,
+		},
+	})
+
 	vim.lsp.enable({
 		"html",
 		"jsonls",
 		"lua_ls",
+		"stylua",
 		-- "ts_ls",
 		"tsc",
 		"yamlls",
 		"emmet_language_server",
 		"bashls",
-    "rumdl"
+		"rumdl",
+		"oxfmt",
 	})
 
 	utils.use_in_context("work", function()
 		-- vim.lsp.enable({
-			-- "ts_ls",
+		-- "ts_ls",
 		-- })
 	end, function()
 		-- NOT NEEDED AT WORK
