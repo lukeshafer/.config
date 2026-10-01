@@ -48,7 +48,7 @@ function common-explain() {
     echo "Usage: common-explain <package-name>"
     return 1
   fi
-  cd $HOME/repos/crmi/common/src/lambda/layers/crmi-common-lambda-layer/nodejs
+  cd $HOME/repos/crmi/crmi-common/src/lambda/layers/crmi-common-lambda-layer/nodejs
   npm explain $1
   cd -
 }
