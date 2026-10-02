@@ -56,6 +56,8 @@ function common-explain() {
 # --- Kiro ---
 alias klogin="kiro-cli login --license pro --identity-provider $KIRO_START_URL --region us-east-2 --use-device-flow"
 alias kcli="kiro-cli"
+alias kiro="kiro-cli"
+command -v k &>/dev/null || alias k='kiro-cli'
 
 # --- Notes ---
 alias today="date \"+%m-%d.md\""
