@@ -8,7 +8,6 @@ function LSP.init()
 		"jsonls",
 		"lua_ls",
 		"stylua",
-		-- "ts_ls",
 		"tsc",
 		"yamlls",
 		"emmet_language_server",
@@ -21,26 +20,10 @@ function LSP.init()
 		-- "ts_ls",
 		-- })
 	end, function()
-		-- Below config isn't working anyways
-		-- vim.lsp.config("oxfmt", {
-		-- 	cmd = {
-		-- 		vim.fn.expand("~/.local/share/nvim/mason/packages/oxfmt/node_modules/oxfmt/bin/oxfmt"),
-		-- 		"--lsp",
-		-- 		-- "--config",
-		-- 		-- vim.fn.expand("~/.config/.oxfmtrc.json"),
-		-- 		-- "--disable-nested-config",
-		-- 	},
-		-- 	init_options = {
-		-- 		["fmt.configPath"] = vim.fn.expand("~/.config/.oxfmtrc.json"),
-		-- 		["fmt.disableNestedConfig"] = true,
-		-- 	},
-		-- })
 		-- NOT NEEDED AT WORK
 		vim.lsp.enable({
 			"astro",
 			"cssls",
-			-- "tsgo",
-			-- "emmet_ls",
 			"tailwindcss",
 			"pico8_ls",
 			"oxfmt",
