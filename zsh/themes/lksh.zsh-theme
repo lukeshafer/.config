@@ -68,8 +68,17 @@ function git_prompt() {
 
 }
 
+local tmux_bg="9"
+function tmux_prompt() {
+  if [[ -n $TMUX ]]; then
+    echo " %F{$tmux_bg}$left_sep%K{$tmux_bg}%F{default}TMUX $(tmux display-message -p 'W#I:P#P')%K{default}%F{$tmux_bg}$right_sep"
+  else
+    echo ""
+  fi
+}
+
 PROMPT="
-\$(pwd_prompt) \$(git_prompt)%{$reset_color%}
+\$(pwd_prompt) \$(git_prompt)\$(tmux_prompt)%{$reset_color%}
 %k\$(user_prompt)\$(ssh_prompt_info) %F{$light}%(!.#.»)%F{default}%K{default} "
 
 RPROMPT="%(?..%{$fg[red]%}%? ↵%{$reset_color%}) %F{$light}%t"

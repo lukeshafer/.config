@@ -13,7 +13,8 @@ function Opts.init()
 	-- vim.o.showtabline = 2
 	vim.o.splitright = true
 	vim.opt.diffopt:append({ "iwhiteall" })
-	-- vim.o.ignorecase = true
+	vim.o.ignorecase = true
+	vim.o.smartcase = true
   vim.o.wrap = true
   vim.o.linebreak = true
   vim.o.guicursor = "n-v-c:block,i-ci-ve:ver25,r-cr-o:hor20,a:blinkon0"

@@ -12,7 +12,9 @@
 -- end
 
 local ok, _ = pcall(require, "mini.notify")
-if not ok then return end
+if not ok then
+	return
+end
 
 require("mini.notify").setup({})
 require("mini.colors").setup({})
@@ -99,14 +101,23 @@ end, { desc = "Toggle git diff overlay" })
 require("mini.completion").setup({})
 
 vim.keymap.set("i", "<Tab>", [[pumvisible() ? "\<C-n>" : "\<Tab>"]], { expr = true, desc = "Next completion or Tab" })
-vim.keymap.set("i", "<S-Tab>", [[pumvisible() ? "\<C-p>" : "\<S-Tab>"]], { expr = true, desc = "Prev completion or S-Tab" })
+vim.keymap.set(
+	"i",
+	"<S-Tab>",
+	[[pumvisible() ? "\<C-p>" : "\<S-Tab>"]],
+	{ expr = true, desc = "Prev completion or S-Tab" }
+)
 
 --- MINI PICK ---
 local mini_pick = require("mini.pick")
 mini_pick.setup({})
 
 vim.keymap.set("n", "ff", mini_pick.builtin.files, { desc = "mini.pick Find files" })
-vim.keymap.set("n", "fg", mini_pick.builtin.grep_live, { desc = "mini.pick Live grep" })
+
+vim.keymap.set("n", "fg", function()
+	mini_pick.builtin.grep_live({ globs = { "!package-lock.json", "!pnpm-lock.yaml" } })
+end, { desc = "mini.pick Live grep" })
+
 vim.keymap.set("n", "fb", mini_pick.builtin.buffers, { desc = "mini.pick Find buffers" })
 vim.keymap.set("n", "fh", mini_pick.builtin.help, { desc = "mini.pick Find help tags" })
 vim.keymap.set("n", "fm", mini_extra.pickers.manpages, { desc = "mini.pick Find man pages" })
